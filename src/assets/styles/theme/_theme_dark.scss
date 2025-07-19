@@ -1,0 +1,39 @@
+// ======================
+// 现代化紫色暗色主题
+// ======================
+
+/* 主色系 - 保持品牌一致性 */
+$color-primary: #7c4dff;        // 主品牌色保持相同
+$color-primary-light: #9a76ff;   // 暗色模式下的浅变体（降低亮度）
+$color-primary-dark: #5e35b1;    // 暗色模式专用深紫 (#Material Design Purple 800)
+
+/* 次色系 - 调整饱和度 */
+$color-secondary: #ff4081;      // 次品牌色保持相同
+$color-secondary-light: #ff6b9d; // 暗色下浅变体（微调亮度）
+$color-secondary-dark: #ad1457;  // 深变体调整为酒红 (#Material Design Pink 900)
+
+/* 背景色 - 深色基底 */
+$color-background: #121212;     // 深色背景基底 (#Material Dark BG)
+$color-surface: #1e1e1e;        // 表面色 (8% 白度)
+
+/* 文字颜色 - 浅色反转 */
+$color-text-primary: rgba(255, 255, 255, 0.87);  // 主要文字 (87% 白)
+$color-text-secondary: rgba(255, 255, 255, 0.6); // 次要文字 (60% 白)
+$color-text-disabled: rgba(255, 255, 255, 0.38); // 禁用文字 (38% 白)
+$color-text-on-primary: #ffffff; // 主色上的文字保持纯白
+
+/* 边框颜色 - 深色适配 */
+$color-border: rgba(255, 255, 255, 0.12);      // 浅色边框 (12% 白)
+$color-border-light: rgba(255, 255, 255, 0.08); // 更浅边框 (8% 白)
+$color-border-dark: rgba(255, 255, 255, 0.24);  // 强调边框 (24% 白)
+
+/* 阴影颜色 - 深色增强 */
+$color-shadow: rgba(0, 0, 0, 0.4);       // 常规阴影 (40% 黑)
+$color-shadow-light: rgba(0, 0, 0, 0.3);  // 浅阴影 (30% 黑)
+$color-shadow-dark: rgba(0, 0, 0, 0.6);   // 深阴影 (60% 黑)
+
+/* 功能色 - 暗色适配 */
+$color-accent: #00e5ff;         // 点缀色保持鲜艳
+$color-success: #00c853;        // 成功色微调亮度
+$color-warning: #ffab00;        // 警告色保持相同
+$color-error: #ff5252;          // 错误色改为柔红 (#Material Design Red A200)

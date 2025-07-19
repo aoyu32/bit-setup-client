@@ -1,0 +1,422 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.header {
+    width: 100%;
+    height: $header-height;
+    background-color: $color-bg;
+    box-shadow: $shadow-md;
+    @include flex-center
+}
+
+.header-container {
+    width: $header-width;
+    height: 100%;
+    display: flex;
+    padding: 10px 0;
+    gap: 50px;
+
+    // .logo {
+    //     width: 72px;
+    //     height: 100%;
+    //     @include flex-center;
+
+    //     a {
+    //         width: 100%;
+    //         height: 100%;
+    //     }
+    // }
+
+    // .logo img {
+    //     width: 100%;
+    //     height: 100%;
+    // }
+
+    .trigger {
+        display: none;
+    }
+
+    .nav {
+        width: calc(#{$nav-item-width} * #{$nav-item-num});
+        height: 100%;
+        flex: 0 0 auto;
+        position: relative;
+
+        .nav-drop-down {
+            display: none;
+            height: auto;
+            position: absolute;
+            top: 65px;
+            background-color: $color-bg;
+            box-shadow: $shadow-md;
+            border-radius: 10px;
+            left: 0;
+            padding: 10px;
+
+            li {
+                padding: 10px;
+            }
+        }
+
+        .nav-container {
+            width: 100%;
+            height: 100%;
+            @include flex-center;
+        }
+
+        ul {
+            @include wh-100;
+            @include flex-center;
+            justify-content: space-between;
+
+            li {
+                font-size: 16px;
+                color: $color-text;
+                font-weight: 550;
+                position: relative;
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                    object-fit: contain;
+                    margin-right: 7px;
+                }
+
+                a {
+                    @include wh-100;
+                    @include flex-lc;
+
+                    &.active {
+                        color: $theme-primary;
+
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            bottom: -5px;
+                            left: 0;
+                            width: 100%;
+                            height: 2px;
+                            background: $theme-primary;
+                            transform: scaleX(1);
+                        }
+
+                        i {
+                            color: $theme-primary;
+                        }
+                    }
+                }
+
+                i {
+                    font-size: 20px;
+                    color: $theme-primary;
+                    margin-right: 7px;
+                }
+
+                &::after {
+                    content: "";
+                    width: 100%;
+                    bottom: -5px;
+                    left: 0;
+                    position: absolute;
+                    border: 1px solid $theme-primary;
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover::after {
+                    transform: scaleX(1);
+                }
+            }
+        }
+    }
+
+    .search {
+        height: 100%;
+        width: 400px;
+        @include flex-rc;
+        margin-left: auto;
+    }
+
+    .search-trigger {
+        display: none;
+        width: 50%;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+
+        .search-icon {
+            width: 100%;
+            height: 40px;
+            @include flex-rc;
+
+            i {
+                font-size: 20px;
+                color: $theme-primary;
+            }
+        }
+    }
+
+    .profile {
+        width: auto;
+        height: 100%;
+
+        .profile-container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 15px;
+
+            // A币样式
+            .coin {
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                padding: 5px 10px;
+                border-radius: 16px;
+                background-color: rgba($theme-primary, 0.1);
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background-color: rgba($theme-primary, 0.2);
+                }
+
+                span {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: $theme-primary;
+                }
+
+                .coin-icon {
+                    width: 18px;
+                    height: 18px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                    }
+                }
+
+                .coin-tooltip {
+                    position: absolute;
+                    top: 100%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    padding: 4px 8px;
+                    background-color: $color-bg-dark;
+                    color: white;
+                    border-radius: 4px;
+                    font-size: 12px;
+                    white-space: nowrap;
+                    box-shadow: $shadow-sm;
+                    z-index: 10;
+                }
+            }
+
+            // VIP样式
+            .vip {
+                height: 24px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+
+                img {
+                    height: 100%;
+                    width: auto;
+                }
+            }
+
+            // 用户信息
+            .user-info {
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 5px 10px 5px 5px;
+                border-radius: 20px;
+                background-color: rgba($theme-primary-light, 0.1);
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background-color: rgba($theme-primary-light, 0.2);
+                }
+
+                .avatar {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    border: 2px solid $theme-primary-light;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                .username {
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: $color-text;
+                    max-width: 80px;
+                    @include text-ellipsis;
+                }
+
+                .icon-arrow-down {
+                    font-size: 12px;
+                    color: $color-text-light;
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover .icon-arrow-down {
+                    transform: rotate(180deg);
+                }
+
+                // 用户菜单
+                .user-menu {
+                    position: absolute;
+                    top: 100%;
+                    right: 0;
+                    width: 160px;
+                    background-color: $color-bg;
+                    border-radius: 8px;
+                    box-shadow: $shadow-md;
+                    padding: 8px 0;
+                    z-index: 100;
+
+                    ul {
+                        list-style: none;
+
+                        li {
+                            padding: 8px 16px;
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            font-size: 14px;
+                            color: $color-text;
+                            transition: all 0.2s ease;
+
+                            &:hover {
+                                background-color: $theme-primary-light;
+                                color: white;
+                            }
+
+                            .iconfont {
+                                font-size: 16px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:1265px) {
+    .header {
+        .header-container {
+            position: relative; // 为下拉菜单提供定位上下文
+            gap: 15px;
+
+            .trigger {
+                height: 40px;
+                width: 40px;
+                @include flex-center;
+                flex: 1;
+
+                .iconfont {
+                    @include wh-100;
+                    @include flex-center;
+                    font-size: 20px;
+                    color: $theme-secondary;
+                    line-height: 100%;
+                }
+
+                i {
+                    @include wh-100;
+                    display: inline;
+                    line-height: 100%;
+                }
+            }
+
+            .nav {
+                width: auto;
+
+                .nav-container {
+                    ul {
+                        .nav-item {
+                            display: none;
+                        }
+                    }
+
+                    .nav-drop-down {
+                        display: block;
+                        user-select: none;
+
+                        li {
+                            border-radius: 8px;
+                            transition: background-color 0.3s ease;
+
+                            a {
+                                &.active {
+                                    color: $theme-primary;
+
+                                    &::after {
+                                        display: none;
+                                    }
+
+                                    i {
+                                        color: $theme-primary;
+                                    }
+                                }
+                            }
+
+                            &::after {
+                                display: none;
+                            }
+
+                            &:hover {
+                                background-color: rgba($theme-primary, 0.1);
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            .profile {
+                .username {
+                    display: none;
+                }
+
+                .user-info {
+                    padding: 0;
+                }
+            }
+
+            .search {
+                display: none;
+            }
+
+            .search-trigger {
+                display: flex;
+            }
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .header {
+        .header-container {
+            width: 90%;
+        }
+    }
+}

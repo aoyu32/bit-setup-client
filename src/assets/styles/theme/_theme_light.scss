@@ -1,0 +1,39 @@
+// ======================
+// 现代化紫色浅色主题
+// ======================
+
+/* 主色系 - 柔和紫罗兰系列 */
+$color-primary: #7c4dff;        // 主品牌色 - 现代感紫罗兰色 (#Material Design Purple A400)
+$color-primary-light: #b388ff;  // 浅变体 - 薰衣草紫 (#Material Design Purple A200)
+$color-primary-dark: #651fff;   // 深变体 - 深紫罗兰 (#Material Design Purple A700)
+
+/* 次色系 - 互补粉紫色 */
+$color-secondary: #ff4081;      // 次品牌色 - 活力粉紫 (#Material Design Pink A400)
+$color-secondary-light: #ff79b0; // 浅变体 - 柔和粉紫
+$color-secondary-dark: #c60055;  // 深变体 - 深品红
+
+/* 背景色 - 极简灰白 */
+$color-background: #f8f9fa;      // 背景基底 - 略带紫色的暖白
+$color-surface: #ffffff;         // 组件背景 - 纯白保证可读性
+
+/* 文字颜色 - 高对比度 */
+$color-text-primary: #212529;    // 主要文字 - 深炭灰 (WCAG AAA 对比度)
+$color-text-secondary: #495057;  // 次要文字 - 中灰色
+$color-text-disabled: #adb5bd;   // 禁用状态 - 浅灰色
+$color-text-on-primary: #ffffff; // 主色上的文字 - 纯白
+
+/* 边框颜色 - 精致灰紫 */
+$color-border: #e0d6ff;         // 常规边框 - 浅紫灰色
+$color-border-light: #f1eaff;    // 浅色边框 - 几乎白的淡紫
+$color-border-dark: #c7b2ff;     // 深色边框 - 明显的紫灰色
+
+/* 阴影颜色 - 紫色基调 */
+$color-shadow: rgba(124, 77, 255, 0.15);      // 常规阴影 - 带紫色调的阴影
+$color-shadow-light: rgba(124, 77, 255, 0.08); // 浅阴影 - 微妙紫色氛围
+$color-shadow-dark: rgba(124, 77, 255, 0.25);  // 深阴影 - 强调紫色投影
+
+/* 新增现代化点缀色 */
+$color-accent: #00e5ff;         // 点缀色 - 荧光蓝紫 (#Material Design Cyan A400)
+$color-success: #00c853;        // 成功色 - 绿松石 (#Material Design Green A700)
+$color-warning: #ffab00;        // 警告色 - 琥珀黄 (#Material Design Amber A700)
+$color-error: #ff1744;          // 错误色 - 玫红色 (#Material Design Red A400)
