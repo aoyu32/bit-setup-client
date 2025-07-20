@@ -13,6 +13,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
+          @use "sass:color"; 
           @use "@/assets/styles/common/_variables.scss" as *;
           @use "@/assets/styles/common/_mixins.scss" as *;
           @use "@/assets/styles/theme/_theme.scss" as *; 

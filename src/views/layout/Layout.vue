@@ -18,13 +18,15 @@ import Footer from '@/components/common/Footer.vue'
 header{
     width: 100%;
     position: fixed;
+    z-index: 100;
 }
 main {
-    width: $header-width;
+    max-width: $header-width;
     height: 100%;
     margin: 0 auto;
     background-color: aliceblue;
     padding-top: $header-height;
+    
 }
 
 @media (max-width:768px) {

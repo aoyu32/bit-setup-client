@@ -29,29 +29,29 @@ ul {
 
 input,
 textarea,
-select,
-button {
-  /* 清除内外边距 */
-  margin: 0;
-  padding: 0;
+button
+{
+/* 清除内外边距 */
+margin: 0;
+padding: 0;
 
-  /* 清除边框和轮廓线 */
-  border: none;
-  outline: none;
+/* 清除边框和轮廓线 */
+border: none;
+outline: none;
 
-  /* 清除背景色 */
-  background: none;
+/* 清除背景色 */
+background: none;
 
-  /* 清除默认字体样式 */
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
+/* 清除默认字体样式 */
+font-family: inherit;
+font-size: inherit;
+color: inherit;
 
-  /* 清除其他默认样式 */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+/* 清除其他默认样式 */
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
 
-  /* 清除圆角（如果需要） */
-  border-radius: 0;
+/* 清除圆角（如果需要） */
+border-radius: 0;
 }

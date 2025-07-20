@@ -1,13 +1,10 @@
 <template>
     <div class="header">
         <div class="header-container">
-            <!-- <div class="logo">
-                <router-link to="/index"><img :src="logoUrl" alt=""></router-link>
-            </div> -->
             <div class="nav">
                 <div class="nav-container">
                     <ul>
-                        <li>
+                        <li @click="activeNavItem(0)">
                             <router-link :to="navItems[0].route">
                                 <img :src="navItems[0].icon" alt="">
                                 {{ navItems[0].name }}
