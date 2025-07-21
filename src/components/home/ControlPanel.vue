@@ -50,7 +50,7 @@
 import { ref } from 'vue'
 const actionList = ref([
     {
-        icon: 'icon-tixing',
+        icon: 'icon-xiaoxi',
         name: '系统通知',
         route: '/notice'
     },

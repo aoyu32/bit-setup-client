@@ -14,7 +14,7 @@
     flex-direction: column;
 }
 
-@mixin flex-fct{
+@mixin flex-fct {
     display: flex;
     align-items: start;
     flex-direction: column;
@@ -56,3 +56,4 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
