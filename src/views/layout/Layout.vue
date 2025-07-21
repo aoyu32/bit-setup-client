@@ -24,7 +24,7 @@ main {
     max-width: $header-width;
     height: 100%;
     margin: 0 auto;
-    background-color: aliceblue;
+    // background-color: aliceblue;
     padding-top: $header-height;
     
 }

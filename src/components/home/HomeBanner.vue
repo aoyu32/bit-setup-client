@@ -154,13 +154,12 @@ const handleToNext = () => {
 <style scoped lang="scss">
 .home-banner {
     @include wh-100;
-    background-color: #fff;
 
     .carousel {
         @include wh-100;
         position: relative;
         overflow: hidden;
-        border-radius: 6px;
+        border-radius: $border-radius;
 
         .carousel-inner {
             @include wh-100;
