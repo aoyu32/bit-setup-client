@@ -1,4 +1,4 @@
-@mixin flex-center {
+@mixin flex-c {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,7 @@
 }
 
 @mixin flex-fcc {
-    @include flex-center;
+    @include flex-c;
     flex-direction: column;
 }
 
@@ -57,3 +57,8 @@
     text-overflow: ellipsis;
 }
 
+@mixin grid-layout($column, $column-width, $gap: 20px) {
+    display: grid;
+    grid-template-columns: repeat($column, $column-width);
+    gap: $gap;
+}

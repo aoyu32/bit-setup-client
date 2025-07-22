@@ -230,7 +230,7 @@ const handleToNext = () => {
             position: absolute;
             bottom: 0px;
             right: 0px;
-            @include flex-center;
+            @include flex-c;
             gap: 10px;
 
             span {

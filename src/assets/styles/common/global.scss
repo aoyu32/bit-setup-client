@@ -29,29 +29,59 @@ ul {
 
 input,
 textarea,
-button
-{
-/* 清除内外边距 */
-margin: 0;
-padding: 0;
+button {
+  /* 清除内外边距 */
+  margin: 0;
+  padding: 0;
 
-/* 清除边框和轮廓线 */
-border: none;
-outline: none;
+  /* 清除边框和轮廓线 */
+  border: none;
+  outline: none;
 
-/* 清除背景色 */
-background: none;
+  /* 清除背景色 */
+  background: none;
 
-/* 清除默认字体样式 */
-font-family: inherit;
-font-size: inherit;
-color: inherit;
+  /* 清除默认字体样式 */
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 
-/* 清除其他默认样式 */
--webkit-appearance: none;
--moz-appearance: none;
-appearance: none;
+  /* 清除其他默认样式 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 
-/* 清除圆角（如果需要） */
-border-radius: 0;
+  /* 清除圆角（如果需要） */
+  border-radius: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $color-gray;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $color-light;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+  -webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:vertical,
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: $theme-secondary-light;
+  -webkit-border-radius: 6px;
+}
+
+/* 设置滚动条在hover状态下的样式 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: $theme-primary-dark;
 }

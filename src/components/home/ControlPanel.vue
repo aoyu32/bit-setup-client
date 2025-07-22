@@ -202,7 +202,7 @@ const modes = ref([
                 color: color.adjust($theme-secondary, $lightness: 0%);
 
                 span {
-                    @include flex-center;
+                    @include flex-c;
                 }
 
                 .select-value .iconfont {

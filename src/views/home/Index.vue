@@ -86,7 +86,7 @@ import cardAppList from '../../utils/data';
             color: $theme-secondary;
             gap: 5px;
             span {
-                @include flex-center;
+                @include flex-c;
                 .iconfont {
                     font-size: 24px
                 }
