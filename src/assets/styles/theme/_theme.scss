@@ -1,18 +1,17 @@
 // ======================
-// 主题颜色变量（紫色系）
+// 主题颜色变量（蓝色系）
 // ======================
 
-// 主色系（紫色）
-// 导入 Sass 颜色模块
+// 主色系（蓝色）
 @use "sass:color";
 
-// 主色系（紫色）
-$theme-primary: #8a2be2; // 紫罗兰色
-$theme-primary-light: color.adjust($theme-primary, $lightness: 10%); // 浅紫色
-$theme-primary-dark: color.adjust($theme-primary, $lightness: -10%); // 深紫色
+// 主色系（使用指定的 HSL 蓝色）
+$theme-primary: hsl(212, 79%, 69%); // 指定的主蓝色
+$theme-primary-light: color.adjust($theme-primary, $lightness: 10%); // 浅蓝色
+$theme-primary-dark: color.adjust($theme-primary, $lightness: -10%); // 深蓝色
 
-// 次色系（粉紫色）
-$theme-secondary: #da70d6; // 兰花紫
+// 次色系（互补的蓝绿色）
+$theme-secondary: hsl(187, 79%, 69%); // 蓝绿色
 $theme-secondary-light: color.adjust($theme-secondary, $lightness: 10%);
 $theme-secondary-dark: color.adjust($theme-secondary, $lightness: -10%);
 
