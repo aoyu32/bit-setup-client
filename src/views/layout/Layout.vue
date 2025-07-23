@@ -15,24 +15,28 @@ import Footer from '@/components/common/Footer.vue'
 
 </script>
 <style lang="scss" scoped>
-header{
+header {
     width: 100%;
     position: fixed;
+    top: 0;
+    left: 0;
     z-index: 100;
 }
+
 main {
     max-width: $header-width;
-    height: 100%;
-    margin: 0 auto;
-    // background-color: aliceblue;
-    padding-top: $header-height;
-    
+    padding: $header-height 0;
+    width: 100%;
+}
+
+footer {
+    width: 100%;
+    height: 100px;
 }
 
 @media (max-width:768px) {
-    main{
+    main {
         width: 90%;
     }
-    
 }
 </style>

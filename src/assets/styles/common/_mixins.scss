@@ -1,9 +1,3 @@
-@mixin flex-c {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 @mixin wh-100 {
     width: 100%;
     height: 100%;
@@ -13,6 +7,13 @@
     @include flex-c;
     flex-direction: column;
 }
+
+@mixin flex-c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 @mixin flex-fct {
     display: flex;
@@ -52,7 +53,7 @@
 
 // 文字溢出显示省略号
 @mixin text-ellipsis {
-    white-space: nowrap;
+    w-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -61,4 +62,11 @@
     display: grid;
     grid-template-columns: repeat($column, $column-width);
     gap: $gap;
+}
+
+// 渐变背景
+// 用法: @include gradient-bg($color-primary, $brand-primary-light, to right);
+// 适用于创建从一个颜色到另一个颜色的渐变背景
+@mixin gradient-color($start-color, $end-color, $direction: to right) {
+    background: linear-gradient($direction, $start-color, $end-color);
 }

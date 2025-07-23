@@ -1,39 +1,44 @@
+
 // ======================
-// 现代化紫色暗色主题
+// 主题颜色变量（蓝色系）
 // ======================
 
-/* 主色系 - 保持品牌一致性 */
-$color-primary: #7c4dff;        // 主品牌色保持相同
-$color-primary-light: #9a76ff;   // 暗色模式下的浅变体（降低亮度）
-$color-primary-dark: #5e35b1;    // 暗色模式专用深紫 (#Material Design Purple 800)
+// 主色系（蓝色）
+@use "sass:color";
 
-/* 次色系 - 调整饱和度 */
-$color-secondary: #ff4081;      // 次品牌色保持相同
-$color-secondary-light: #ff6b9d; // 暗色下浅变体（微调亮度）
-$color-secondary-dark: #ad1457;  // 深变体调整为酒红 (#Material Design Pink 900)
+// 主色系（使用指定的 HSL 蓝色）
+$theme-primary: hsl(212, 79%, 69%); // 指定的主蓝色
+$theme-primary-light: color.adjust($theme-primary, $lightness: 10%); // 浅蓝色
+$theme-primary-dark: color.adjust($theme-primary, $lightness: -10%); // 深蓝色
 
-/* 背景色 - 深色基底 */
-$color-background: #121212;     // 深色背景基底 (#Material Dark BG)
-$color-surface: #1e1e1e;        // 表面色 (8% 白度)
+// 次色系（互补的蓝绿色）
+$theme-secondary: hsl(187, 79%, 69%); // 蓝绿色
+$theme-secondary-light: color.adjust($theme-secondary, $lightness: 10%);
+$theme-secondary-dark: color.adjust($theme-secondary, $lightness: -10%);
 
-/* 文字颜色 - 浅色反转 */
-$color-text-primary: rgba(255, 255, 255, 0.87);  // 主要文字 (87% 白)
-$color-text-secondary: rgba(255, 255, 255, 0.6); // 次要文字 (60% 白)
-$color-text-disabled: rgba(255, 255, 255, 0.38); // 禁用文字 (38% 白)
-$color-text-on-primary: #ffffff; // 主色上的文字保持纯白
+// ======================
+// 以下所有变量保持原样
+// ======================
 
-/* 边框颜色 - 深色适配 */
-$color-border: rgba(255, 255, 255, 0.12);      // 浅色边框 (12% 白)
-$color-border-light: rgba(255, 255, 255, 0.08); // 更浅边框 (8% 白)
-$color-border-dark: rgba(255, 255, 255, 0.24);  // 强调边框 (24% 白)
+$color-light: #ffffff;
+$color-dark: #000000;
+$color-gray: #333333;
 
-/* 阴影颜色 - 深色增强 */
-$color-shadow: rgba(0, 0, 0, 0.4);       // 常规阴影 (40% 黑)
-$color-shadow-light: rgba(0, 0, 0, 0.3);  // 浅阴影 (30% 黑)
-$color-shadow-dark: rgba(0, 0, 0, 0.6);   // 深阴影 (60% 黑)
+// 阴影颜色
+$color-shadow: rgba(0, 0, 0, 0.1); // 默认阴影（浅）
+$color-shadow-dark: rgba(0, 0, 0, 0.2); // 深阴影
+$color-shadow-light: rgba(0, 0, 0, 0.05); // 浅阴影
 
-/* 功能色 - 暗色适配 */
-$color-accent: #00e5ff;         // 点缀色保持鲜艳
-$color-success: #00c853;        // 成功色微调亮度
-$color-warning: #ffab00;        // 警告色保持相同
-$color-error: #ff5252;          // 错误色改为柔红 (#Material Design Red A200)
+// 白色阴影（用于深色背景）
+$color-shadow-white: rgba(255, 255, 255, 0.1);
+$color-shadow-white-dark: rgba(255, 255, 255, 0.2);
+
+// 阴影预设
+$shadow-sm: 0 1px 2px $color-shadow-light; // 小阴影
+$shadow-md: 0 4px 6px $color-shadow; // 中阴影
+$shadow-lg: 0 10px 15px $color-shadow-dark; // 大阴影
+$shadow-xl: 0 20px 25px $color-shadow-dark; // 超大阴影
+
+// 白色阴影预设
+$shadow-white-sm: 0 1px 2px $color-shadow-white;
+$shadow-white-md: 0 4px 6px $color-shadow-white-dark;

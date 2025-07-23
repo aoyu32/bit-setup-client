@@ -1,39 +1,350 @@
-// ======================
-// 现代化紫色浅色主题
-// ======================
+// =============================================================================
+// 全局颜色管理系统 (Global Color Management System)
+// =============================================================================
+// 这个文件定义了整个应用程序的颜色系统，包括基础颜色、语义化映射、工具函数和混合器
+// 通过统一的颜色管理，确保UI视觉一致性，并支持主题切换功能
+// 使用时通过导入此文件，可以访问所有颜色变量、函数和混合器
 
-/* 主色系 - 柔和紫罗兰系列 */
-$color-primary: #7c4dff;        // 主品牌色 - 现代感紫罗兰色 (#Material Design Purple A400)
-$color-primary-light: #b388ff;  // 浅变体 - 薰衣草紫 (#Material Design Purple A200)
-$color-primary-dark: #651fff;   // 深变体 - 深紫罗兰 (#Material Design Purple A700)
+// -----------------------------------------------------------------------------
+// 1. 基础颜色定义 (Base Colors)
+// -----------------------------------------------------------------------------
+// 这部分定义了所有原始颜色值，作为整个系统的基础
+// 不建议在组件中直接使用这些基础颜色，而是使用下面的语义化颜色映射
 
-/* 次色系 - 互补粉紫色 */
-$color-secondary: #ff4081;      // 次品牌色 - 活力粉紫 (#Material Design Pink A400)
-$color-secondary-light: #ff79b0; // 浅变体 - 柔和粉紫
-$color-secondary-dark: #c60055;  // 深变体 - 深品红
+// 主品牌色 (Primary Brand Colors)
+// 用于品牌标识、主要按钮、重点突出元素等
+$brand-primary: #1677ff;           // 标准品牌蓝，用于主按钮、链接等
+$brand-primary-light: #4096ff;     // 较浅品牌蓝，用于悬停状态
+$brand-primary-lighter: #69b1ff;   // 更浅品牌蓝，用于次要元素
+$brand-primary-lightest: #bae0ff;  // 最浅品牌蓝，用于背景、禁用状态
+$brand-primary-dark: #0958d9;      // 较深品牌蓝，用于激活状态
+$brand-primary-darker: #003eb3;    // 更深品牌蓝，用于边框、重点元素
+$brand-primary-darkest: #002c8c;   // 最深品牌蓝，用于特殊强调
 
-/* 背景色 - 极简灰白 */
-$color-background: #f8f9fa;      // 背景基底 - 略带紫色的暖白
-$color-surface: #ffffff;         // 组件背景 - 纯白保证可读性
+// 辅助品牌色 (Secondary Brand Colors)
+// 用于次要按钮、标签、辅助元素等
+$brand-secondary: #722ed1;           // 标准紫色，用于次要按钮、标签等
+$brand-secondary-light: #9254de;     // 较浅紫色，用于悬停状态
+$brand-secondary-lighter: #b37feb;   // 更浅紫色，用于次要元素
+$brand-secondary-lightest: #efdbff;  // 最浅紫色，用于背景、禁用状态
+$brand-secondary-dark: #531dab;      // 较深紫色，用于激活状态
+$brand-secondary-darker: #391085;    // 更深紫色，用于边框、重点元素
+$brand-secondary-darkest: #22075e;   // 最深紫色，用于特殊强调
 
-/* 文字颜色 - 高对比度 */
-$color-text-primary: #212529;    // 主要文字 - 深炭灰 (WCAG AAA 对比度)
-$color-text-secondary: #495057;  // 次要文字 - 中灰色
-$color-text-disabled: #adb5bd;   // 禁用状态 - 浅灰色
-$color-text-on-primary: #ffffff; // 主色上的文字 - 纯白
+// 中性色 (Neutral Colors)
+// 用于文本、背景、边框等基础UI元素
+$neutral-white: #ffffff;      // 纯白色，用于主背景、文本反色
+$neutral-gray-50: #fafafa;    // 最浅灰色，用于页面背景
+$neutral-gray-100: #f5f5f5;   // 浅灰色，用于分割背景、次要背景
+$neutral-gray-200: #f0f0f0;   // 浅灰色，用于禁用背景、表格条纹
+$neutral-gray-300: #d9d9d9;   // 中浅灰色，用于边框、分割线
+$neutral-gray-400: #bfbfbf;   // 中灰色，用于禁用文本、图标
+$neutral-gray-500: #8c8c8c;   // 中灰色，用于次要文本、说明文字
+$neutral-gray-600: #595959;   // 中深灰色，用于次要文本
+$neutral-gray-700: #434343;   // 深灰色，用于正文文本
+$neutral-gray-800: #262626;   // 更深灰色，用于标题文本
+$neutral-gray-900: #1f1f1f;   // 最深灰色，用于强调文本、暗色背景
+$neutral-black: #000000;      // 纯黑色，用于特殊强调文本
 
-/* 边框颜色 - 精致灰紫 */
-$color-border: #e0d6ff;         // 常规边框 - 浅紫灰色
-$color-border-light: #f1eaff;    // 浅色边框 - 几乎白的淡紫
-$color-border-dark: #c7b2ff;     // 深色边框 - 明显的紫灰色
+// 功能色 (Functional Colors)
+// 用于表示不同状态和反馈的颜色
 
-/* 阴影颜色 - 紫色基调 */
-$color-shadow: rgba(124, 77, 255, 0.15);      // 常规阴影 - 带紫色调的阴影
-$color-shadow-light: rgba(124, 77, 255, 0.08); // 浅阴影 - 微妙紫色氛围
-$color-shadow-dark: rgba(124, 77, 255, 0.25);  // 深阴影 - 强调紫色投影
+// 成功色系 - 用于成功状态、完成操作、积极反馈
+$success-color: #52c41a;       // 标准绿色，用于成功状态、完成图标
+$success-light: #73d13d;       // 较浅绿色，用于悬停状态
+$success-lighter: #95de64;     // 更浅绿色，用于次要元素
+$success-lightest: #f6ffed;    // 最浅绿色，用于成功状态背景
+$success-dark: #389e0d;        // 较深绿色，用于激活状态
+$success-darker: #237804;      // 更深绿色，用于边框、重点元素
 
-/* 新增现代化点缀色 */
-$color-accent: #00e5ff;         // 点缀色 - 荧光蓝紫 (#Material Design Cyan A400)
-$color-success: #00c853;        // 成功色 - 绿松石 (#Material Design Green A700)
-$color-warning: #ffab00;        // 警告色 - 琥珀黄 (#Material Design Amber A700)
-$color-error: #ff1744;          // 错误色 - 玫红色 (#Material Design Red A400)
+// 警告色系 - 用于警告状态、需要注意的操作、提示信息
+$warning-color: #faad14;       // 标准黄色，用于警告状态、提示图标
+$warning-light: #ffc53d;       // 较浅黄色，用于悬停状态
+$warning-lighter: #ffd666;     // 更浅黄色，用于次要元素
+$warning-lightest: #fffbe6;    // 最浅黄色，用于警告状态背景
+$warning-dark: #d48806;        // 较深黄色，用于激活状态
+$warning-darker: #ad6800;      // 更深黄色，用于边框、重点元素
+
+// 错误色系 - 用于错误状态、危险操作、负面反馈
+$error-color: #ff4d4f;         // 标准红色，用于错误状态、删除按钮
+$error-light: #ff7875;         // 较浅红色，用于悬停状态
+$error-lighter: #ffa39e;       // 更浅红色，用于次要元素
+$error-lightest: #fff2f0;      // 最浅红色，用于错误状态背景
+$error-dark: #cf1322;          // 较深红色，用于激活状态
+$error-darker: #a8071a;        // 更深红色，用于边框、重点元素
+
+// 信息色系 - 用于中性信息、通知、一般反馈
+$info-color: #1890ff;          // 标准蓝色，用于信息状态、通知图标
+$info-light: #40a9ff;          // 较浅蓝色，用于悬停状态
+$info-lighter: #69c0ff;        // 更浅蓝色，用于次要元素
+$info-lightest: #e6f7ff;       // 最浅蓝色，用于信息状态背景
+$info-dark: #096dd9;           // 较深蓝色，用于激活状态
+$info-darker: #0050b3;         // 更深蓝色，用于边框、重点元素
+
+// -----------------------------------------------------------------------------
+// 2. 语义化颜色映射 (Semantic Color Mapping)
+// -----------------------------------------------------------------------------
+// 这部分将基础颜色映射到具有语义的变量名
+// 在组件开发中，应优先使用这些语义化变量，而非直接使用基础颜色
+// 使用!default标记允许在其他文件中覆盖这些默认值
+
+// 主色调 (Primary Colors)
+// 用于主要交互元素和重点内容
+$color-primary: $brand-primary !default;             // 主色，用于主按钮、链接、重点元素
+$color-primary-hover: $brand-primary-light !default; // 主色悬停状态，用于交互反馈
+$color-primary-active: $brand-primary-dark !default; // 主色激活状态，用于点击反馈
+$color-primary-disabled: $brand-primary-lightest !default; // 主色禁用状态，用于不可用元素
+
+// 次要色调 (Secondary Colors)
+// 用于次要交互元素和辅助内容
+$color-secondary: $brand-secondary !default;             // 次要色，用于次要按钮、标签
+$color-secondary-hover: $brand-secondary-light !default; // 次要色悬停状态
+$color-secondary-active: $brand-secondary-dark !default; // 次要色激活状态
+
+// 文本颜色 (Text Colors)
+// 用于各种文本内容的颜色定义
+$text-color-primary: $neutral-gray-800 !default;   // 主要文本颜色，用于标题、正文
+$text-color-secondary: $neutral-gray-600 !default; // 次要文本颜色，用于描述、说明
+$text-color-tertiary: $neutral-gray-500 !default;  // 第三级文本颜色，用于辅助信息
+$text-color-disabled: $neutral-gray-400 !default;  // 禁用文本颜色，用于不可用内容
+$text-color-inverse: $neutral-white !default;      // 反色文本，用于深色背景上的文字
+$text-color-link: $color-primary !default;         // 链接文本颜色，用于可点击文本
+$text-color-link-hover: $color-primary-hover !default; // 链接悬停颜色
+
+// 背景颜色 (Background Colors)
+// 用于各种容器和区域的背景色
+$bg-color-primary: $neutral-white !default;     // 主要背景色，用于卡片、弹窗等
+$bg-color-secondary: $neutral-gray-100 !default; // 次要背景色，用于页面背景、分组区域
+$bg-color-disabled: $neutral-gray-200 !default; // 禁用背景色，用于不可用元素
+$bg-color-dark: $neutral-gray-800 !default;     // 深色背景，用于反色设计元素
+$bg-color-light:$neutral-gray-50 !default;     //浅色背景，用于反色设计元素
+
+// 边框颜色 (Border Colors)
+// 用于各种边框、分割线和轮廓
+$border-color-primary: $neutral-gray-300 !default;   // 主要边框色，用于输入框、卡片边框
+$border-color-secondary: $neutral-gray-200 !default; // 次要边框色，用于表格边框、分割线
+$border-color-light: $neutral-gray-100 !default;     // 浅色边框，用于次要分割线
+$border-color-focus: $color-primary !default;        // 聚焦边框色，用于输入框聚焦状态
+
+// 阴影颜色 (Shadow Colors)
+// 用于各种阴影效果，提升UI层次感
+$shadow-color-light: rgba($neutral-black, 0.04) !default;  // 浅阴影，用于卡片、按钮等
+$shadow-color-medium: rgba($neutral-black, 0.08) !default; // 中等阴影，用于悬浮元素
+$shadow-color-dark: rgba($neutral-black, 0.16) !default;   // 深阴影，用于模态框、抽屉等
+
+// 状态颜色 (Status Colors)
+// 用于表示不同状态和反馈的颜色
+$color-success: $success-color !default; // 成功状态色，用于成功提示、完成操作
+$color-warning: $warning-color !default; // 警告状态色，用于警告提示、需注意操作
+$color-error: $error-color !default;     // 错误状态色，用于错误提示、危险操作
+$color-info: $info-color !default;       // 信息状态色，用于一般信息提示、通知
+
+// -----------------------------------------------------------------------------
+// 3. 主题变量映射 (Theme Variable Mapping)
+// -----------------------------------------------------------------------------
+// 这部分创建了颜色映射表，便于通过函数动态获取颜色值
+// 适用于需要根据参数动态选择颜色的场景
+
+// 主题颜色映射表
+// 用于通过theme-color函数获取颜色值
+$theme-colors: (
+  'primary': $color-primary,    // 主色调，用于主要元素
+  'secondary': $color-secondary, // 次要色调，用于辅助元素
+  'success': $color-success,    // 成功色调，用于积极反馈
+  'warning': $color-warning,    // 警告色调，用于注意提示
+  'error': $color-error,        // 错误色调，用于负面反馈
+  'info': $color-info,          // 信息色调，用于中性通知
+  'light': $neutral-gray-100,   // 浅色调，用于浅色背景
+  'dark': $neutral-gray-800,    // 深色调，用于深色背景
+  'white': $neutral-white,      // 白色，用于纯白元素
+  'black': $neutral-black       // 黑色，用于纯黑元素
+) !default;
+
+// 文本颜色映射表
+// 用于通过text-color函数获取文本颜色值
+$text-colors: (
+  'primary': $text-color-primary,     // 主要文本色
+  'secondary': $text-color-secondary, // 次要文本色
+  'tertiary': $text-color-tertiary,   // 第三级文本色
+  'disabled': $text-color-disabled,   // 禁用文本色
+  'inverse': $text-color-inverse,     // 反色文本色
+  'link': $text-color-link,           // 链接文本色
+  'success': $color-success,          // 成功状态文本色
+  'warning': $color-warning,          // 警告状态文本色
+  'error': $color-error,              // 错误状态文本色
+  'info': $color-info                 // 信息状态文本色
+) !default;
+
+// 背景颜色映射表
+// 用于通过bg-color函数获取背景颜色值
+$bg-colors: (
+  'primary': $bg-color-primary,       // 主要背景色
+  'secondary': $bg-color-secondary,   // 次要背景色
+  'disabled': $bg-color-disabled,     // 禁用背景色
+  'dark': $bg-color-dark,             // 深色背景色
+  'light':$bg-color-light,          //浅色背景色
+  'success': $success-lightest,       // 成功状态背景色
+  'warning': $warning-lightest,       // 警告状态背景色
+  'error': $error-lightest,           // 错误状态背景色
+  'info': $info-lightest              // 信息状态背景色
+) !default;
+
+
+$shadow-colors:(
+    's':$shadow-color-light,
+    'm':$shadow-color-medium,
+    'l':$shadow-color-dark
+) !default;
+// -----------------------------------------------------------------------------
+// 4. 工具函数 (Utility Functions)
+// -----------------------------------------------------------------------------
+// 这部分定义了颜色相关的工具函数，便于在SCSS中动态操作颜色
+
+// 获取主题颜色
+// 用法: theme-color('primary')
+@function theme-color($key) {
+  @if map-has-key($theme-colors, $key) {
+    @return map-get($theme-colors, $key);
+  }
+  @warn "Unknown theme color: #{$key}";
+  @return null;
+}
+
+// 获取文本颜色
+// 用法: text-color('primary')
+@function text-color($key) {
+  @if map-has-key($text-colors, $key) {
+    @return map-get($text-colors, $key);
+  }
+  @warn "Unknown text color: #{$key}";
+  @return null;
+}
+
+// 获取背景颜色
+// 用法: bg-color('primary')
+@function bg-color($key) {
+  @if map-has-key($bg-colors, $key) {
+    @return map-get($bg-colors, $key);
+  }
+  @warn "Unknown background color: #{$key}";
+  @return null;
+}
+
+// 颜色透明度调整
+// 用法: alpha($color-primary, 0.5)
+@function alpha($color, $opacity) {
+  @return rgba($color, $opacity);
+}
+
+// 颜色明度调整 - 使颜色变亮
+// 用法: lighten-color($color-primary, 10%)
+@function lighten-color($color, $percentage) {
+  @return lighten($color, $percentage);
+}
+
+// 颜色明度调整 - 使颜色变暗
+// 用法: darken-color($color-primary, 10%)
+@function darken-color($color, $percentage) {
+  @return darken($color, $percentage);
+}
+
+// -----------------------------------------------------------------------------
+// 5. 混合器 (Mixins)
+// -----------------------------------------------------------------------------
+// 这部分定义了颜色相关的混合器，便于在组件中快速应用一组样式
+
+// 主题色按钮样式
+// 用法: @include theme-button('primary');
+// 适用于快速创建不同主题色的按钮样式
+@mixin theme-button($color-key) {
+  $color: theme-color($color-key);
+  background-color: $color;
+  border-color: $color;
+  color: $neutral-white;
+  
+  &:hover {
+    background-color: lighten-color($color, 10%);
+    border-color: lighten-color($color, 10%);
+  }
+  
+  &:active {
+    background-color: darken-color($color, 5%);
+    border-color: darken-color($color, 5%);
+  }
+  
+  &:disabled {
+    background-color: alpha($color, 0.5);
+    border-color: alpha($color, 0.5);
+    cursor: not-allowed;
+  }
+}
+
+// 状态颜色文本
+// 用法: @include status-text('success');
+// 适用于快速应用不同状态的文本颜色
+@mixin status-text($status) {
+  @if $status == 'success' {
+    color: $color-success;
+  } @else if $status == 'warning' {
+    color: $color-warning;
+  } @else if $status == 'error' {
+    color: $color-error;
+  } @else if $status == 'info' {
+    color: $color-info;
+  }
+}
+
+// 渐变背景
+// 用法: @include gradient-bg($color-primary, $brand-primary-light, to right);
+// 适用于创建从一个颜色到另一个颜色的渐变背景
+@mixin gradient-bg($start-color, $end-color, $direction: to right) {
+  background: linear-gradient($direction, $start-color, $end-color);
+}
+
+// 主题色渐变
+// 用法: @include primary-gradient(to bottom);
+// 适用于快速创建主题色的渐变背景
+@mixin primary-gradient($direction: to right) {
+  @include gradient-bg($color-primary, $brand-primary-light, $direction);
+}
+
+// -----------------------------------------------------------------------------
+// 7. 工具类 (Utility Classes)
+// -----------------------------------------------------------------------------
+// 这部分定义了可直接在HTML中使用的工具类
+// 通过添加类名快速应用样式，无需编写额外CSS
+
+// 文本颜色工具类
+// 用法: <span class="text-primary">主要文本</span>
+@each $name, $color in $text-colors {
+  .text-#{$name} {
+    color: $color !important;
+  }
+}
+
+// 背景颜色工具类
+// 用法: <div class="bg-primary">主要背景</div>
+@each $name, $color in $bg-colors {
+  .bg-#{$name} {
+    background-color: $color !important;
+  }
+}
+
+// 主题色工具类
+// 用法: 
+// <span class="theme-primary">主题色文本</span>
+// <div class="bg-theme-primary">主题色背景</div>
+// <div class="border-theme-primary">主题色边框</div>
+@each $name, $color in $theme-colors {
+  .theme-#{$name} {
+    color: $color !important;
+  }
+  
+  .bg-theme-#{$name} {
+    background-color: $color !important;
+  }
+  
+  .border-theme-#{$name} {
+    border-color: $color !important;
+  }
+}

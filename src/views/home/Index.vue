@@ -21,7 +21,6 @@
             <div class="app-list-container">
                 <component :is="AppList" />
             </div>
-
         </div>
     </div>
 </template>
@@ -39,7 +38,7 @@ import cardAppList from '../../utils/data';
 </script>
 <style lang="scss" scoped>
 .home {
-    @include wh-100;
+    width: 100%;
 
     .home-top {
         width: 100%;
@@ -50,7 +49,6 @@ import cardAppList from '../../utils/data';
 
         .banner-container {
             width: $home-banner-width;
-
             height: 100%;
         }
 
@@ -59,15 +57,13 @@ import cardAppList from '../../utils/data';
             flex: 1;
             border-radius: $border-radius;
         }
-
-
     }
 
     .home-center {
         width: 100%;
 
         .card-list-container {
-            @include wh-100;
+            width: 100%;
             display: grid;
             gap: 20px;
             grid-template-columns: repeat(3, 1fr);
@@ -75,29 +71,29 @@ import cardAppList from '../../utils/data';
     }
 
     .home-bottom {
-        @include wh-100;
-        height: 1000px;
+        width: 100%;
         padding: 10px 0;
+        margin-bottom: 20px;
 
         .list-lable {
             width: 100%;
             @include flex-lc;
             padding: 10px 0;
-            color: $theme-secondary;
+            color: color('secondary');
             gap: 5px;
+
             span {
                 @include flex-c;
+
                 .iconfont {
                     font-size: 24px
                 }
             }
         }
 
-        .app-list-container{
+        .app-list-container {
             width: 100%;
         }
-
-        
     }
 }
 </style>

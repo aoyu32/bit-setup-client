@@ -124,5 +124,5 @@ const activeNavItem = (index) => {
 
 </script>
 <style scoped lang="scss">
-@use "@/assets/styles/layout/header.scss" as *;
+@use "@/assets/styles/layout/_header.scss" as *;
 </style>

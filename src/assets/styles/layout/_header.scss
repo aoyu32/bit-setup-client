@@ -3,8 +3,8 @@
 .header {
     width: 100%;
     height: $header-height;
-    background-color: color.scale($color-light, $lightness: 20%);
-    box-shadow: $shadow-md;
+    background-color: color(bw);
+    box-shadow: shadow(m);
     @include flex-c
 }
 
@@ -14,22 +14,6 @@
     display: flex;
     padding: 10px 0;
     gap: 50px;
-
-    // .logo {
-    //     width: 72px;
-    //     height: 100%;
-    //     @include flex-c;
-
-    //     a {
-    //         width: 100%;
-    //         height: 100%;
-    //     }
-    // }
-
-    // .logo img {
-    //     width: 100%;
-    //     height: 100%;
-    // }
 
     .trigger {
         display: none;
@@ -47,8 +31,8 @@
             z-index: 100;
             position: absolute;
             top: 65px;
-            background-color: color.scale($color-light, $lightness: 20%);
-            box-shadow: $shadow-md;
+            background-color: color(g50);
+            box-shadow:shadow(m);
             border-radius: 10px;
             left: 0;
             padding: 10px;
@@ -71,7 +55,7 @@
 
             li {
                 font-size: 16px;
-                color: $color-dark;
+                color: color(g800);
                 font-weight: 550;
                 position: relative;
 
@@ -87,7 +71,7 @@
                     @include flex-lc;
 
                     &.active {
-                        color: $theme-primary;
+                        color: color('p');
 
                         &::after {
                             content: "";
@@ -96,19 +80,19 @@
                             left: 0;
                             width: 100%;
                             height: 2px;
-                            background: $theme-primary;
+                            background: color('p');
                             transform: scaleX(1);
                         }
 
                         i {
-                            color: $theme-primary;
+                            color: color('p');
                         }
                     }
                 }
 
                 i {
                     font-size: 20px;
-                    color: $theme-primary;
+                    color: color('p');
                     margin-right: 7px;
                 }
 
@@ -118,7 +102,7 @@
                     bottom: -5px;
                     left: 0;
                     position: absolute;
-                    border: 1px solid $theme-primary;
+                    border: 1px solid color('p');
                     transform: scaleX(0);
                     transform-origin: left;
                     transition: transform 0.3s ease;
@@ -152,7 +136,7 @@
 
             i {
                 font-size: 20px;
-                color: $theme-primary;
+                color: color('p');
             }
         }
     }
@@ -176,18 +160,18 @@
                 gap: 5px;
                 padding: 5px 10px;
                 border-radius: 16px;
-                background-color: rgba($theme-primary, 0.1);
+                background-color: color(p-light,0.5);
                 cursor: pointer;
                 transition: all 0.3s ease;
 
                 &:hover {
-                    background-color: rgba($theme-primary, 0.2);
+                    background-color: color(p-lighter);
                 }
 
                 span {
                     font-size: 14px;
                     font-weight: 600;
-                    color: $theme-primary;
+                    color: color(p);
                 }
 
                 .coin-icon {
@@ -207,12 +191,12 @@
                     left: 50%;
                     transform: translateX(-50%);
                     padding: 4px 8px;
-                    background-color: $color-dark;
-                    color: $color-light;
+                    background-color: color(g900);
+                    color: color(bw);
                     border-radius: 4px;
                     font-size: 12px;
                     white-space: nowrap;
-                    box-shadow: $shadow-sm;
+                    box-shadow: shadow(m);
                     z-index: 10;
                 }
             }
@@ -241,12 +225,12 @@
                 gap: 8px;
                 padding: 5px 10px 5px 5px;
                 border-radius: 20px;
-                background-color: rgba($theme-primary-light, 0.1);
+                background-color: color(p,0.6);
                 cursor: pointer;
                 transition: all 0.3s ease;
 
                 &:hover {
-                    background-color: rgba($theme-primary-light, 0.2);
+                    background-color: color(p);
                 }
 
                 .avatar {
@@ -254,7 +238,7 @@
                     height: 32px;
                     border-radius: 50%;
                     overflow: hidden;
-                    border: 2px solid $theme-primary-light;
+                    border: 2px solid color(p-light);
 
                     img {
                         width: 100%;
@@ -266,14 +250,14 @@
                 .username {
                     font-size: 14px;
                     font-weight: 500;
-                    color: $color-light;
+                    color: color(bw);
                     max-width: 80px;
                     @include text-ellipsis;
                 }
 
                 .icon-arrow-down {
                     font-size: 12px;
-                    color: $color-light;
+                    color: color(bw);
                     transition: transform 0.3s ease;
                 }
 
@@ -287,9 +271,9 @@
                     top: 100%;
                     right: 0;
                     width: 160px;
-                    background-color: $color-light;
+                    background-color: color('white');
                     border-radius: 8px;
-                    box-shadow: $shadow-md;
+                    box-shadow: shadow('m');
                     padding: 8px 0;
                     z-index: 100;
 
@@ -302,12 +286,12 @@
                             align-items: center;
                             gap: 8px;
                             font-size: 14px;
-                            color: $color-light;
+                            color: color('g700');
                             transition: all 0.2s ease;
 
                             &:hover {
-                                background-color: $theme-primary-light;
-                                color: $color-light;
+                                background-color: color('p-light');
+                                color: color('white');
                             }
 
                             .iconfont {
@@ -337,7 +321,7 @@
                     @include wh-100;
                     @include flex-c;
                     font-size: 20px;
-                    color: $theme-secondary;
+                    color: color('secondary');
                     line-height: 100%;
                 }
 
@@ -368,14 +352,14 @@
 
                             a {
                                 &.active {
-                                    color: $theme-primary;
+                                    color: color('p');
 
                                     &::after {
                                         display: none;
                                     }
 
                                     i {
-                                        color: $theme-primary;
+                                        color: color('p');
                                     }
                                 }
                             }
@@ -385,7 +369,7 @@
                             }
 
                             &:hover {
-                                background-color: rgba($theme-primary, 0.1);
+                                background-color: rgba(color('p'), 0.1);
                             }
 
                         }
