@@ -7,7 +7,7 @@
         @include wh(100p);
         position: relative;
         overflow: hidden;
-        border-radius: $b-r;
+        @include b-r($b-r);
 
         .carousel-inner {
             @include wh(100p);
@@ -22,6 +22,7 @@
             img {
                 @include wh(100p);
                 object-fit: cover;
+                @include b-r($b-r);
             }
 
             &.clone {
@@ -78,7 +79,7 @@
             position: absolute;
             bottom: 0px;
             right: 0px;
-            @include flex(c,c);
+            @include flex(c, c);
             gap: 10px;
 
             span {

@@ -1,0 +1,89 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.home {
+    @include wh;
+
+    .home-top {
+        width: 100%;
+        height: $home-top-height;
+        padding: 10px 0;
+        display: flex;
+        gap: 30px;
+        margin: 10px 0;
+
+
+        .banner-container {
+            width: $home-banner-width;
+            height: 100%;
+        }
+
+        .control-panel-container {
+            @include wh(100p);
+            flex: 1;
+            border-radius: $b-r;
+        }
+    }
+
+    .home-center {
+        width: 100%;
+
+        .card-list-container {
+            width: 100%;
+            @include grid(3, 1fr, 20px)
+        }
+    }
+
+    .home-bottom {
+        width: 100%;
+        padding: 10px 0;
+        margin-bottom: 20px;
+
+        .list-lable {
+            width: 100%;
+            @include flex(c, l);
+            padding: 20px 0;
+            color: color(c-s);
+            gap: 5px;
+
+            span {
+                @include flex(c, c);
+
+                .iconfont {
+                    font-size: 24px
+                }
+            }
+        }
+
+        .app-list-container {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width:1150px) {
+    .home {
+        .home-top {
+            @include wh(100p, 60p);
+            padding: 10px 0;
+            gap: 30px;
+
+            .banner-container {
+                @include wh;
+            }
+
+            .control-panel-container {
+                display: none;
+            }
+        }
+
+        .home-center {
+            width: 100%;
+
+            .card-list-container {
+                width: 100%;
+                @include grid(1, 1fr, 20px)
+            }
+        }
+
+    }
+}

@@ -27,11 +27,13 @@ main {
     max-width: $header-width;
     padding: $header-height 0;
     width: 100%;
+    margin-bottom: 100px;
 }
 
 footer {
     width: 100%;
     height: 100px;
+    @include p-a(b0);
 }
 
 @media (max-width:768px) {
