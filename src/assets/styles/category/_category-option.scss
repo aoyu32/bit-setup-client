@@ -1,0 +1,63 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.category-option {
+    @include wh;
+    background-color: color(c-g);
+    padding: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    @include flex(c, c, c);
+    gap: 10px;
+    @include b-r(6);
+
+    .category-lable,
+    .option-lable {
+        @include wh(120, n);
+        font-size: 14px;
+        font-weight: 550;
+        padding: 5px 0;
+        @include flex(t, l);
+    }
+
+    .category-item,
+    .option-item {
+        @include wh;
+        flex: 1;
+        color: color(c-10,0.1);
+
+        ul {
+            @include flex;
+            gap: 0px;
+            flex-wrap: wrap;
+
+            li {
+                padding: 5px;
+                white-space: nowrap;
+                margin-right: 20px;
+
+                &:hover {
+                    background-color: color(c-p-lighter);
+                }
+            }
+
+        }
+    }
+
+    // 分类
+    .category-wrapper {
+
+        @include wh(100p, n);
+
+        .father-category,
+        .child-category {
+            @include wh;
+            @include flex(l, c);
+        }
+    }
+
+    //筛选选项
+    .option-wrapper {
+        @include wh(100p, n);
+        @include flex(l, c);
+    }
+}
