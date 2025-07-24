@@ -1,54 +1,79 @@
-@mixin wh-100 {
-    width: 100%;
-    height: 100%;
+@use "sass:string";
+
+/// 宽高设置混合器
+/// @param {string|number} $width - 宽度值，如果不需要设置则传递 'n'
+/// @param {string|number} $height - 高度值，如果不需要设置则传递 'n'，如果不传递则使用宽度值
+/// 
+/// 使用说明：
+/// - 不带单位默认是 px
+/// - 百分比使用 p 代替 %，例如：100p 表示 100%
+/// - 其他单位需要带单位，例如：10rem、5vh
+/// - 如果只传第一个参数，则宽高相同
+/// - 如果某个参数为 'n'，则不编译该属性
+/// - 如果需要只设置高度，第一个参数传 'n'
+///
+/// 示例：
+/// @include wh(100);           // width: 100px; height: 100px;
+/// @include wh(100, 200);      // width: 100px; height: 200px;
+/// @include wh(100p, 50p);     // width: 100%; height: 50%;
+/// @include wh(n, 200);        // height: 200px;
+/// @include wh(100, n);        // width: 100px;
+/// @include wh(10rem, 5vh);    // width: 10rem; height: 5vh;
+@mixin wh($width: 100p, $height: null) {
+
+    // 如果只传了一个参数，高度使用宽度值
+    @if $height ==null {
+        $height: $width;
+    }
+
+    // 处理宽度
+    @if $width !='n' and $width !=n {
+        width: _parse-size($width);
+    }
+
+    // 处理高度
+    @if $height !='n' and $height !=n {
+        height: _parse-size($height);
+    }
 }
 
-@mixin flex-fcc {
-    @include flex-c;
-    flex-direction: column;
-}
+/// 解析尺寸值的私有函数
+/// @param {string|number} $size - 尺寸值
+/// @return {string} 处理后的 CSS 值
+@function _parse-size($size) {
+    // 转换为字符串以便处理
+    $size-str: "#{$size}";
 
-@mixin flex-c {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    // 检查是否以 'p' 结尾（百分比）
+    @if string.slice($size-str, -1)=='p' {
+        // 移除末尾的 'p' 并添加 '%'
+        $number: string.slice($size-str, 1, -2);
+        @return #{$number+'%'};
+    }
 
+    // 检查是否是纯数字（没有单位）
+    @if type-of($size)=='number' and unitless($size) {
+        @return #{$size}px;
+    }
 
-@mixin flex-fct {
-    display: flex;
-    align-items: start;
-    flex-direction: column;
-}
+    // 检查字符串是否只包含数字
+    $is-number-only: true;
 
-@mixin flex-jcsb {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    @for $i from 1 through string.length($size-str) {
+        $char: string.slice($size-str, $i, $i);
 
-@mixin flex-rc {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-}
+        @if not ($char >='0' and $char <='9') and $char !='.' {
+            $is-number-only: false;
+        }
+    }
 
-@mixin flex-lc {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-}
+    // 如果是纯数字字符串，添加 px 单位
+    @if $is-number-only {
+        @return #{$size}px;
+    }
 
-@mixin flex-tc {
-    display: flex;
-    align-items: start;
-    justify-content: center;
-}
-
-@mixin flex-bc {
-    display: flex;
-    align-items: end;
-    justify-content: center;
+    // 其他情况直接返回（已包含单位）
+    @return $size;
 }
 
 // 文字溢出显示省略号
@@ -58,15 +83,226 @@
     text-overflow: ellipsis;
 }
 
-@mixin grid-layout($column, $column-width, $gap: 20px) {
+@mixin grid($column, $column-width, $gap: 20px) {
     display: grid;
     grid-template-columns: repeat($column, $column-width);
     gap: $gap;
 }
 
 // 渐变背景
-// 用法: @include gradient-bg($color-primary, $brand-primary-light, to right);
+// 用法: @include gradient-color($color-primary, $brand-primary-light, to right);
 // 适用于创建从一个颜色到另一个颜色的渐变背景
 @mixin gradient-color($start-color, $end-color, $direction: to right) {
     background: linear-gradient($direction, $start-color, $end-color);
+}
+
+@mixin flex($a: n, $j: n, $d: n) {
+    display: flex;
+
+    // align-items 处理 (垂直方向)
+    @if $a ==n {
+        // 不编译
+    }
+
+    @else if $a ==c {
+        align-items: center;
+    }
+
+    @else if $a ==t {
+        // top → flex-start
+        align-items: flex-start;
+    }
+
+    @else if $a ==b {
+        // bottom → flex-end
+        align-items: flex-end;
+    }
+
+    @else if $a ==s {
+        // stretch
+        align-items: stretch;
+    }
+
+    @else if $a ==bs {
+        // baseline
+        align-items: baseline;
+    }
+
+    @else {
+        align-items: $a; // 原生值
+    }
+
+    // justify-content 处理 (水平方向)
+    @if $j ==n {
+        // 不编译
+    }
+
+    @else if $j ==c {
+        justify-content: center;
+    }
+
+    @else if $j ==l {
+        // left → flex-start
+        justify-content: flex-start;
+    }
+
+    @else if $j ==r {
+        // right → flex-end
+        justify-content: flex-end;
+    }
+
+    @else if $j ==s-b {
+        justify-content: space-between;
+    }
+
+    @else if $j ==s-a {
+        justify-content: space-around;
+    }
+
+    @else if $j ==s-e {
+        justify-content: space-evenly;
+    }
+
+    @else {
+        justify-content: $j; // 原生值
+    }
+
+    // flex-direction 处理
+    @if $d ==n {
+        // 不编译
+    }
+
+    @else if $d ==r {
+        flex-direction: row;
+    }
+
+    @else if $d ==rr {
+        flex-direction: row-reverse;
+    }
+
+    @else if $d ==c {
+        flex-direction: column;
+    }
+
+    @else if $d ==cr {
+        flex-direction: column-reverse;
+    }
+
+    @else {
+        flex-direction: $d; // 原生值
+    }
+}
+
+@mixin b-r($top-left: 10, $top-right: null, $bottom-right: null, $bottom-left: null) {
+
+    // 如果只传一个参数，应用到所有角
+    @if $top-right ==null and $bottom-right ==null and $bottom-left ==null {
+        border-radius: if(unitless($top-left), #{$top-left}px, $top-left);
+    }
+
+    // 如果传两个参数，表示对角
+    @else if $bottom-right ==null and $bottom-left ==null {
+        border-radius: if(unitless($top-left), #{$top-left}px, $top-left) if(unitless($top-right), #{$top-right}px, $top-right);
+    }
+
+    // 如果传三个参数
+    @else if $bottom-left ==null {
+        border-radius: if(unitless($top-left), #{$top-left}px, $top-left) if(unitless($top-right), #{$top-right}px, $top-right) if(unitless($bottom-right), #{$bottom-right}px, $bottom-right);
+    }
+
+    // 如果传四个参数
+    @else {
+        border-radius: if(unitless($top-left), #{$top-left}px, $top-left) if(unitless($top-right), #{$top-right}px, $top-right) if(unitless($bottom-right), #{$bottom-right}px, $bottom-right) if(unitless($bottom-left), #{$bottom-left}px, $bottom-left);
+    }
+}
+
+
+@mixin p-a($pos1: null, $pos2: null) {
+    position: absolute;
+
+    // 处理无参数情况 - 居中
+    @if $pos1 ==null and $pos2 ==null {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    @else {
+
+        // 处理第一个参数
+        @if $pos1 !=null {
+            @if string.index($pos1, "t")==1 {
+                $value: string.slice($pos1, 2);
+                top: parse-position-value($value);
+            }
+
+            @else if string.index($pos1, "b")==1 {
+                $value: string.slice($pos1, 2);
+                bottom: parse-position-value($value);
+            }
+        }
+
+        // 处理第二个参数
+        @if $pos2 !=null {
+            @if string.index($pos2, "l")==1 {
+                $value: string.slice($pos2, 2);
+                left: parse-position-value($value);
+            }
+
+            @else if string.index($pos2, "r")==1 {
+                $value: string.slice($pos2, 2);
+                right: parse-position-value($value);
+            }
+        }
+
+        // 如果只有一个参数且是上下，左右居中
+        @if $pos1 !=null and $pos2 ==null {
+            @if string.index($pos1, "t")==1 or string.index($pos1, "b")==1 {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        // 如果只有一个参数且是左右，上下居中
+        @if $pos1 !=null and $pos2 ==null {
+            @if string.index($pos1, "l")==1 or string.index($pos1, "r")==1 {
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        // 如果有两个参数，取消transform
+        @if $pos1 !=null and $pos2 !=null {
+            transform: none;
+        }
+    }
+}
+
+// 辅助函数：解析位置值（新负数规则：0代替负号）
+@function parse-position-value($value) {
+    @if string.index($value, "p") !=null {
+        $percent-index: string.index($value, "p");
+        $num: string.slice($value, 1, $percent-index - 1);
+
+        // 检查是否负数（以0开头）
+        @if string.slice($num, 1, 1)=="0" and string.length($num)>1 {
+            $num: "-" + string.slice($num, 2);
+        }
+
+        @return unquote("#{$num}%");
+    }
+
+    @else {
+
+        // 处理px单位
+        // 检查是否负数（以0开头）
+        @if string.slice($value, 1, 1)=="0" and string.length($value)>1 {
+            $num: "-" + string.slice($value, 2);
+            @return unquote("#{$num}px");
+        }
+
+        @else {
+            @return unquote("#{$value}px");
+        }
+    }
 }

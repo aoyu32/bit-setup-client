@@ -1,11 +1,10 @@
 @use '@/assets/styles/common/main.scss' as *;
-@use "sass:color";
 .header {
     width: 100%;
     height: $header-height;
-    background-color: color(bw);
+    background-color: color(c-g);
     box-shadow: shadow(m);
-    @include flex-c
+    @include flex(c,c)
 }
 
 .header-container {
@@ -31,7 +30,7 @@
             z-index: 100;
             position: absolute;
             top: 65px;
-            background-color: color(g50);
+            background-color: color(c-g0);
             box-shadow:shadow(m);
             border-radius: 10px;
             left: 0;
@@ -45,17 +44,16 @@
         .nav-container {
             width: 100%;
             height: 100%;
-            @include flex-c;
+            @include flex(c,c);
         }
 
         ul {
-            @include wh-100;
-            @include flex-c;
-            justify-content: space-between;
+            @include wh(100p);
+            @include flex(c,s-b);
 
             li {
                 font-size: 16px;
-                color: color(g800);
+                color: color(c-g8);
                 font-weight: 550;
                 position: relative;
 
@@ -67,11 +65,11 @@
                 }
 
                 a {
-                    @include wh-100;
-                    @include flex-lc;
+                    @include wh(100p);
+                    @include flex(c,c);
 
                     &.active {
-                        color: color('p');
+                        color: color(c-p);
 
                         &::after {
                             content: "";
@@ -80,19 +78,19 @@
                             left: 0;
                             width: 100%;
                             height: 2px;
-                            background: color('p');
+                            background: color(c-p);
                             transform: scaleX(1);
                         }
 
                         i {
-                            color: color('p');
+                            color: color(c-p);
                         }
                     }
                 }
 
                 i {
                     font-size: 20px;
-                    color: color('p');
+                    color: color(c-p);
                     margin-right: 7px;
                 }
 
@@ -102,7 +100,7 @@
                     bottom: -5px;
                     left: 0;
                     position: absolute;
-                    border: 1px solid color('p');
+                    border: 1px solid color(c-p);
                     transform: scaleX(0);
                     transform-origin: left;
                     transition: transform 0.3s ease;
@@ -118,7 +116,7 @@
     .search {
         height: 100%;
         width: 400px;
-        @include flex-rc;
+        @include flex(c,l);
         margin-left: auto;
     }
 
@@ -132,11 +130,11 @@
         .search-icon {
             width: 100%;
             height: 40px;
-            @include flex-rc;
+            @include flex(c,r);
 
             i {
                 font-size: 20px;
-                color: color('p');
+                color: color(c-p);
             }
         }
     }
@@ -160,18 +158,18 @@
                 gap: 5px;
                 padding: 5px 10px;
                 border-radius: 16px;
-                background-color: color(p-light,0.5);
+                background-color: color(c-p-light,0.5);
                 cursor: pointer;
                 transition: all 0.3s ease;
 
                 &:hover {
-                    background-color: color(p-lighter);
+                    background-color: color(c-p-lighter);
                 }
 
                 span {
                     font-size: 14px;
                     font-weight: 600;
-                    color: color(p);
+                    color: color(c-p);
                 }
 
                 .coin-icon {
@@ -191,8 +189,8 @@
                     left: 50%;
                     transform: translateX(-50%);
                     padding: 4px 8px;
-                    background-color: color(g900);
-                    color: color(bw);
+                    background-color: color(c-g9);
+                    color: color(c-g);
                     border-radius: 4px;
                     font-size: 12px;
                     white-space: nowrap;
@@ -225,12 +223,12 @@
                 gap: 8px;
                 padding: 5px 10px 5px 5px;
                 border-radius: 20px;
-                background-color: color(p,0.6);
+                background-color: color(c-p,0.6);
                 cursor: pointer;
                 transition: all 0.3s ease;
 
                 &:hover {
-                    background-color: color(p);
+                    background-color: color(c-p);
                 }
 
                 .avatar {
@@ -238,7 +236,7 @@
                     height: 32px;
                     border-radius: 50%;
                     overflow: hidden;
-                    border: 2px solid color(p-light);
+                    border: 2px solid color(c-p-light);
 
                     img {
                         width: 100%;
@@ -250,14 +248,14 @@
                 .username {
                     font-size: 14px;
                     font-weight: 500;
-                    color: color(bw);
+                    color: color(c-g);
                     max-width: 80px;
                     @include text-ellipsis;
                 }
 
                 .icon-arrow-down {
                     font-size: 12px;
-                    color: color(bw);
+                    color: color(c-g);
                     transition: transform 0.3s ease;
                 }
 
@@ -271,9 +269,9 @@
                     top: 100%;
                     right: 0;
                     width: 160px;
-                    background-color: color('white');
+                    background-color: color(c-g);
                     border-radius: 8px;
-                    box-shadow: shadow('m');
+                    box-shadow: shadow(m);
                     padding: 8px 0;
                     z-index: 100;
 
@@ -286,12 +284,12 @@
                             align-items: center;
                             gap: 8px;
                             font-size: 14px;
-                            color: color('g700');
+                            color: color(c-g7);
                             transition: all 0.2s ease;
 
                             &:hover {
-                                background-color: color('p-light');
-                                color: color('white');
+                                background-color: color(c-p-light);
+                                color: color(c-g);
                             }
 
                             .iconfont {
@@ -314,19 +312,19 @@
             .trigger {
                 height: 40px;
                 width: 40px;
-                @include flex-c;
+                @include flex(c,c);
                 flex: 1;
 
                 .iconfont {
-                    @include wh-100;
-                    @include flex-c;
+                    @include wh(100p);
+                    @include flex(c,c);
                     font-size: 20px;
-                    color: color('secondary');
+                    color: color(c-s);
                     line-height: 100%;
                 }
 
                 i {
-                    @include wh-100;
+                    @include wh(100p);
                     display: inline;
                     line-height: 100%;
                 }
@@ -352,14 +350,14 @@
 
                             a {
                                 &.active {
-                                    color: color('p');
+                                    color: color(c-p);
 
                                     &::after {
                                         display: none;
                                     }
 
                                     i {
-                                        color: color('p');
+                                        color: color(c-p);
                                     }
                                 }
                             }
@@ -369,7 +367,7 @@
                             }
 
                             &:hover {
-                                background-color: rgba(color('p'), 0.1);
+                                background-color: rgba(color(c-p), 0.1);
                             }
 
                         }

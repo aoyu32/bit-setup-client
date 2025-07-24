@@ -11,12 +11,12 @@ import appListData from '@/utils/app-data.js'
 <style lang="scss" scoped>
 .app-list {
     width: 100%;
-    @include grid-layout(auto-fill, minmax(200px, 1fr), 70px)
+    @include grid(auto-fill, minmax(200px, 1fr), 70px)
 }
 
 @media (max-width:768px) {
     .app-list {
-        @include grid-layout(auto-fill, minmax(210px, 1fr))
+        @include grid(auto-fill, minmax(210px, 1fr))
     }
 
 }

@@ -1,3 +1,10 @@
+//全局
+
+//字体
+$font-family: 'Arial', sans-serif;
+//圆角
+$b-r: 6px;
+
 // 头部组件
 $header-height: 72px;
 $header-width: 1300px;
@@ -6,8 +13,8 @@ $nav-item-num: 4;
 $nav-item-width: 120px;
 
 $home-top-height: 450px;
-$home-banner-width:860px;
+$home-banner-width: 860px;
 
-$border-radius: 6px;
 
-$font-family: 'Arial', sans-serif;
+$app-card-br: 10px;
+$app-card-w:270px;

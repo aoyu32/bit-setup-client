@@ -53,9 +53,9 @@ import cardAppList from '../../utils/data';
         }
 
         .control-panel-container {
-            @include wh-100;
+            @include wh(100p);
             flex: 1;
-            border-radius: $border-radius;
+            border-radius: $b-r;
         }
     }
 
@@ -64,9 +64,8 @@ import cardAppList from '../../utils/data';
 
         .card-list-container {
             width: 100%;
-            display: grid;
-            gap: 20px;
-            grid-template-columns: repeat(3, 1fr);
+            @include grid(3,1fr,20px)
+
         }
     }
 
@@ -77,13 +76,13 @@ import cardAppList from '../../utils/data';
 
         .list-lable {
             width: 100%;
-            @include flex-lc;
-            padding: 10px 0;
-            color: color('secondary');
+            @include flex(c,l);
+            padding: 20px 0;
+            color: color(c-s);
             gap: 5px;
 
             span {
-                @include flex-c;
+                @include flex(c,c);
 
                 .iconfont {
                     font-size: 24px

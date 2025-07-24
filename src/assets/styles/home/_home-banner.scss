@@ -1,26 +1,26 @@
 @use '@/assets/styles/common/main.scss' as *;
 
 .home-banner {
-    @include wh-100;
+    @include wh(100p);
 
     .carousel {
-        @include wh-100;
+        @include wh(100p);
         position: relative;
         overflow: hidden;
-        border-radius: $border-radius;
+        border-radius: $b-r;
 
         .carousel-inner {
-            @include wh-100;
+            @include wh(100p);
             display: flex;
             transition: transform 0.3s ease-in-out;
         }
 
         .carousel-item {
-            @include wh-100;
+            @include wh(100p);
             flex-shrink: 0;
 
             img {
-                @include wh-100;
+                @include wh(100p);
                 object-fit: cover;
             }
 
@@ -41,7 +41,7 @@
             justify-content: center;
 
             .iconfont {
-                color: color(bw);
+                color: color(c-g);
                 font-size: 20px;
             }
 
@@ -78,26 +78,26 @@
             position: absolute;
             bottom: 0px;
             right: 0px;
-            @include flex-c;
+            @include flex(c,c);
             gap: 10px;
 
             span {
                 width: 7px;
                 height: 7px;
                 border-radius: 50%;
-                background-color: color(bw, 0.5);
+                background-color: color(c-g, 0.5);
                 display: inline-block;
                 cursor: pointer;
                 transition: all 0.3s ease;
 
                 &.active {
-                    background-color: color(bw);
+                    background-color: color(c-g);
                     transform: scale(1.2);
                 }
 
                 &:hover {
                     transform: scale(1.1);
-                    background-color: color(bw);
+                    background-color: color(c-g);
                 }
             }
         }

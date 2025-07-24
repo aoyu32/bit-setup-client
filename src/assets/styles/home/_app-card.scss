@@ -1,370 +1,333 @@
  @use '@/assets/styles/common/main.scss' as *;
-.app-card {
-    height: 270px;
-    background-color: color(g50);
-    border-radius: 10px;
-    position: relative;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-    box-shadow: shadow(m);
-    cursor: pointer;
-    user-select: none;
+
+ .app-card {
+     height: $app-card-w;
+     background-color: color(c-g0);
+     @include b-r(10);
+     position: relative;
+     transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+     box-shadow: shadow(m);
+     cursor: pointer;
+     user-select: none;
 
 
-    .card-content {
-        width: 100%;
-        height: 100%;
-        @include flex-fcc;
-        transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-        border-radius: 10px;
-        transform-style: preserve-3d;
-        overflow: hidden;
+     .card-content {
+         @include wh(100p);
+         @include flex(c, c, c);
+         transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+         @include b-r($app-card-br);
+         transform-style: preserve-3d;
+         overflow: hidden;
 
 
-        .card-draw {
-            width: 45px;
-            height: 45px;
-            position: absolute;
-            z-index: 99;
-            display: flex;
-            align-items: start;
-            justify-content: end;
-            border-radius: 10px;
-            transition: all 0.3s ease-in-out;
+         .card-draw {
+             @include wh(45);
+             position: absolute;
+             z-index: 99;
+             @include b-r($app-card-br);
+             @include flex(t, r);
 
-            button {
-                @include wh-100;
-                width: 30px;
-                height: 30px;
-                border-radius: 10px;
-                color: color(bw);
-                cursor: pointer;
-                margin: 5px;
-
-                &:hover {
-                    transform: scale(1.1);
-                    background-color: color(g50,0.2);
-                }
-            }
-        }
-
-    }
-
-    #card-content-front {
+             button {
+                 @include wh(30);
+                 @include b-r($app-card-br);
+                 color: color(c-g);
+                 cursor: pointer;
+                 margin: 5px;
+                 transition: all 0.2s ease-out;
 
 
-        &:hover {
-            .app-img {
-                transform: perspective(1000px) translateZ(30px) scale(1.05);
-            }
+                 &:hover {
+                     transform: scale(1.1);
+                     background-color: color(c-g1, 0.3);
+                 }
+             }
+         }
 
-            .app-name {
-                transform: perspective(1000px) translateZ(30px);
-            }
+     }
 
-            .app-category {
-                transform: perspective(1000px) translateZ(30px);
-            }
-
-            .app-download {
-                transform: perspective(1000px) translateZ(10px);
-            }
-        }
-
-        .is-flipped {
-
-            .app-img,
-            .app-name,
-            .app-category,
-            .app-download,
-            .app-mark,
-            .iconfont {
-                transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-            }
-        }
-
-        .card-top {
-            @include wh-100;
-            flex: 1;
-            @include flex-c;
-            position: relative;
-            background: color(p-light);
-            border-top-left-radius: 10px; // 顶部左侧圆角                  
-            border-top-right-radius: 10px; // 顶部右侧圆角                     
+     #card-content-front {
 
 
-            .app-img {
-                width: 50px;
-                height: 50px;
-                z-index: 99;
-                transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+         &:hover {
+             .app-img {
+                 transform: perspective(1000px) translateZ(30px) scale(1.05);
+             }
 
-                img {
-                    @include wh-100;
-                    object-fit: contain;
-                }
-            }
+             .app-name {
+                 transform: perspective(1000px) translateZ(30px);
+             }
 
-            &::before {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 70px;
-                background-color: color(g50);
-            }
+             .app-category {
+                 transform: perspective(1000px) translateZ(30px);
+             }
 
-            &::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 70px;
-                background: color(p-light);
-                border-bottom-left-radius: 100px;
-            }
-        }
+             .app-download {
+                 transform: perspective(1000px) translateZ(10px);
+             }
+         }
 
-        .card-bottom {
-            @include wh-100;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            position: relative;
-            background: color(g50);
-            gap: 10px;
-            border-bottom-left-radius: 10px; // 底部左侧圆角                  
-            border-bottom-right-radius: 10px; // 底部右侧圆角                    
+         .is-flipped {
 
-            .app-name {
-                z-index: 99;
-                font-size: 17px;
-                font-weight: 550;
-                padding-top: 20px;
-                color: color(g700);
-                transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-            }
+             .app-img,
+             .app-name,
+             .app-category,
+             .app-download,
+             .app-mark,
+             .iconfont {
+                 transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+             }
+         }
 
-            .app-category {
-                z-index: 89;
-                padding: 5px;
-                font-size: 14px;
-                border-radius: $border-radius;
-                background-color: color(p-lightest);
-                color: color(p-dark);
-                transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-            }
-
-            .app-download {
-                font-size: 12px;
-                color: color(g600);
-                z-index: 99;
-                transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-
-                span {
-                    @include flex-fcc;
-                }
-
-                .iconfont {
-                    font-size: 13px;
-                }
-            }
-
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 70px;
-                background: color(p-light);
-            }
-
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 70px;
-                background-color: color(g50);
-                border-top-right-radius: 70px;
-            }
-        }
-
-        &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50%;
-            height: 100%;
-            z-index: 90;
-            background: rgba(color(p), 0.185);
-            border-bottom-left-radius: 10px; // 底部左侧圆角              
-            border-top-left-radius: 10px; // 顶部左侧圆角    
-        }
-
-        .card-draw {
-            right: 0px;
-            top: 0px;
-
-            button {
-                transform: translateY(-180deg);
-            }
-
-        }
-
-        .mark-wrapper {
-            font-size: 9px;
-            color: color(bw,0.7);
-            @include flex-fcc;
-            z-index: 99;
-            gap: 10px;
-            position: absolute;
-
-            .app-mark {
-                background-color: color(bw,0.2);
-                padding: 2px;
-            }
-        }
-
-        .left-mark {
-            align-items: start;
-            top: 10px;
-            left: 0;
-        }
-
-        .right-mark {
-            align-items: end;
-            top: 50px;
-            right: 0;
-        }
-    }
-
-    #card-content-back {
-        position: relative;
-
-        .card-draw {
-            left: 0;
-            z-index: 100;
-            top: 0;
-        }
-
-        .app-rating {
-            position: absolute;
-            width: 40px;
-            top: 10px;
-            right: 0px;
-            z-index: 99;
-            transform: scaleX(-1);
-            @include flex-c;
-            font-size: 12px;
-            padding: 2px 0;
-            color: color(bw);
-            background: color('error');
-            gap: 3px;
-
-            span {
-                @include flex-c;
-
-                .iconfont {
-                    font-size: 14px
-                }
-            }
+         .card-top {
+             @include wh;
+             flex: 1;
+             @include flex(c, c);
+             position: relative;
+             background: color(c-p-light);
+             @include b-r($app-card-br, $app-card-br);
 
 
-        }
+             .app-img {
+                 @include wh(50);
+                 z-index: 99;
+                 transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
 
-        .card-top {
-            @include wh-100;
-            flex: 1;
-            @include flex-c;
-            position: relative;
-            background: color(p-light);
-            border-top-left-radius: 10px; // 顶部左侧圆角                  
-            border-top-right-radius: 10px; // 顶部右侧圆角                     
+                 img {
+                     @include wh;
+                     object-fit: contain;
+                 }
+             }
 
-            .app-bio {
-                @include wh-100;
-                @include flex-fcc;
-                z-index: 99;
-                padding: 20px 20px;
-                font-size: 14px;
-                text-align: center;
-                transform: scaleX(-1);
-                color: color(bw, 0.9);
-            }
+             &::before {
+                 content: '';
+                 position: absolute;
+                 bottom: 0;
+                 left: 0;
+                 @include p-a(b0, l0);
+                 width: 100%;
+                 height: 70px;
+                 background-color: color(c-g0);
+             }
+
+             &::after {
+                 content: '';
+                 @include p-a(b0, l0);
+                 @include wh(100p, 70);
+                 background: color(c-p-light);
+                 @include b-r(0, 0, 0, 100);
+             }
+         }
+
+         .card-bottom {
+             @include wh;
+             flex: 1;
+             @include flex(c, n, c);
+             position: relative;
+             background: color(c-g0);
+
+             @include b-r(0, 0, $app-card-br, $app-card-br);
+
+             .app-name {
+                 z-index: 99;
+                 font-size: 17px;
+                 font-weight: 550;
+                 padding-top: 20px;
+                 color: color(c-g7);
+                 transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+             }
+
+             .app-category {
+                 z-index: 89;
+                 padding: 5px;
+                 font-size: 14px;
+                 border-radius: $b-r;
+                 background-color: color(p-lightest);
+                 color: color(p-dark);
+                 transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+             }
+
+             .app-download {
+                 font-size: 12px;
+                 color: color(c-g6);
+                 z-index: 99;
+                 transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+
+                 span {
+                     @include flex(c, c, c);
+                 }
+
+                 .iconfont {
+                     font-size: 13px;
+                 }
+             }
+
+             &::before {
+                 content: '';
+                 @include p-a(t0, l0);
+                 @include wh(100p, 70);
+                 background: color(c-p-light);
+             }
+
+             &::after {
+                 content: '';
+                 @include p-a(t0, l0);
+                 background: color(c-p-light);
+                 @include wh(100p, 70);
+                 background-color: color(c-g0);
+                 @include b-r(0, 70, 0, 0);
+             }
+         }
+
+         &::before {
+             content: '';
+             @include p-a(t0, l0);
+             @include wh(50p, 100p);
+             z-index: 90;
+             background: rgba(color(c-p), 0.185);
+             border-bottom-left-radius: 10px; // 底部左侧圆角              
+             border-top-left-radius: 10px; // 顶部左侧圆角    
+             @include b-r(0, $app-card-br)
+         }
+
+         .card-draw {
+             right: 0px;
+             top: 0px;
+             @include p-a(t0, r0);
+
+             button {
+                 transform: translateY(-180deg);
+             }
+
+         }
+
+         .mark-wrapper {
+             font-size: 9px;
+             color: color(c-g, 0.7);
+             @include flex(c, c, c);
+             z-index: 99;
+             gap: 10px;
+             position: absolute;
+
+             .app-mark {
+                 background-color: color(c-g, 0.2);
+                 padding: 2px;
+             }
+         }
+
+         .left-mark {
+             align-items: start;
+             top: 10px;
+             left: 0;
+         }
+
+         .right-mark {
+             align-items: end;
+             top: 50px;
+             right: 0;
+         }
+     }
+
+     #card-content-back {
+         position: relative;
+
+         .card-draw {
+             z-index: 100;
+             @include p-a(t0, l0);
+         }
+
+         .app-rating {
+             position: absolute;
+             @include wh(40, n);
+             @include p-a(t10, r0);
+             z-index: 99;
+             transform: scaleX(-1);
+             @include flex(c, c);
+             font-size: 12px;
+             padding: 2px 0;
+             color: color(c-g);
+             background: color(error);
+             gap: 3px;
+
+             span {
+                 @include flex(c, c);
+
+                 .iconfont {
+                     font-size: 14px
+                 }
+             }
 
 
+         }
+
+         .card-top {
+             @include wh;
+             flex: 1;
+             @include flex(c, c);
+             position: relative;
+             background: color(c-p-light);
+             border-top-left-radius: 10px; // 顶部左侧圆角                  
+             border-top-right-radius: 10px; // 顶部右侧圆角                     
+             @include b-r($app-card-br, $app-card-br, 0, 0);
+
+             .app-bio {
+                 @include wh(100p);
+                 @include flex(c, c);
+                 z-index: 99;
+                 padding: 20px;
+                 font-size: 14px;
+                 text-align: center;
+                 transform: scaleX(-1);
+                 color: color(c-g, 0.9);
+             }
+
+             &::before {
+                 content: '';
+                 @include p-a(b0, l0);
+                 @include wh(100p, 70);
+                 background-color: color(c-g0);
+             }
+
+             &::after {
+                 content: '';
+                 @include p-a(b0, l0);
+                 @include wh(100p, 70);
+                 background: color(c-p-light);
+             }
+         }
+
+         .card-bottom {
+             @include wh(100p);
+             flex: 1;
+             @include flex(c, n, c);
+             position: relative;
+             background: color(c-g0);
+             gap: 10px;
+             border-bottom-left-radius: 10px; // 底部左侧圆角                  
+             border-bottom-right-radius: 10px; // 底部右侧圆角               
+
+             .card-logo {
+                 @include wh(100p);
+                 z-index: 99;
+                 @include flex(c, c);
+                 transform: scaleX(-1);
+             }
 
 
+             &::before {
+                 content: '';
+                 @include p-a(t0, l0);
+                 @include wh(100p, 70);
+                 background: color(c-p-light);
+             }
 
-            &::before {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 70px;
-                background-color: color(g50);
-            }
+             &::after {
+                 content: '';
+                 @include p-a(t0, l0);
+                 @include wh(100p, 70);
+                 background-color: color(c-g0);
+                 @include b-r(70,70,0,0);
+             }
+         }
+     }
 
-            &::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 70px;
-                background: color(p-light);
-            }
-        }
-
-        .card-bottom {
-            @include wh-100;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            position: relative;
-            background: color(g50);
-            gap: 10px;
-            border-bottom-left-radius: 10px; // 底部左侧圆角                  
-            border-bottom-right-radius: 10px; // 底部右侧圆角               
-
-            .card-logo {
-                @include wh-100;
-                z-index: 99;
-                @include flex-c;
-                transform: scaleX(-1);
-            }
-
-
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 70px;
-                background: color(p-light);
-            }
-
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 70px;
-                background-color: color(g50);
-                border-top-right-radius: 70px;
-                border-top-left-radius: 70px;
-            }
-        }
-    }
-
-}
+ }

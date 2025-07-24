@@ -295,9 +295,9 @@ $shadow-colors:(
 }
 
 // 渐变背景
-// 用法: @include gradient-bg($color-primary, $brand-primary-light, to right);
+// 用法: @include gradient-color($color-primary, $brand-primary-light, to right);
 // 适用于创建从一个颜色到另一个颜色的渐变背景
-@mixin gradient-bg($start-color, $end-color, $direction: to right) {
+@mixin gradient-color($start-color, $end-color, $direction: to right) {
   background: linear-gradient($direction, $start-color, $end-color);
 }
 
@@ -305,7 +305,7 @@ $shadow-colors:(
 // 用法: @include primary-gradient(to bottom);
 // 适用于快速创建主题色的渐变背景
 @mixin primary-gradient($direction: to right) {
-  @include gradient-bg($color-primary, $brand-primary-light, $direction);
+  @include gradient-color($color-primary, $brand-primary-light, $direction);
 }
 
 // -----------------------------------------------------------------------------
