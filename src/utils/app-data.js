@@ -81,7 +81,7 @@ const appListData = [
     },
     {
         img: 'https://pc3.gtimg.com/softmgr/logo/48/23761_48_1637209184.png',
-        name: 'WhatsApp',
+        name: '微信',
         category: '社交',
         downloads: 8900,
         bio: '跨平台即时通讯应用，支持端到端加密',

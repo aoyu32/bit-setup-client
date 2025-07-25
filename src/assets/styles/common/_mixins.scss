@@ -77,7 +77,7 @@
 }
 
 // 文字溢出显示省略号
-@mixin text-ellipsis {
+@mixin t-e {
     w-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

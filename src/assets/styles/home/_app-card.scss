@@ -124,6 +124,7 @@
              @include flex(c, n, c);
              position: relative;
              background: color(c-g0);
+             gap: 5px;
 
              @include b-r(0, 0, $app-card-br, $app-card-br);
 
@@ -141,8 +142,8 @@
                  padding: 5px;
                  font-size: 14px;
                  border-radius: $b-r;
-                 background-color: color(p-lightest);
-                 color: color(p-dark);
+                 background-color: color(c-p-lightest);
+                 color: color(c-p-dark);
                  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
              }
 
@@ -264,9 +265,7 @@
              flex: 1;
              @include flex(c, c);
              position: relative;
-             background: color(c-p-light);
-             border-top-left-radius: 10px; // 顶部左侧圆角                  
-             border-top-right-radius: 10px; // 顶部右侧圆角                     
+             background: color(c-p-light);              
              @include b-r($app-card-br, $app-card-br, 0, 0);
 
              .app-bio {

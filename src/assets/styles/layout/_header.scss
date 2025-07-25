@@ -250,7 +250,7 @@
                     font-weight: 500;
                     color: color(c-g);
                     max-width: 80px;
-                    @include text-ellipsis;
+                    @include t-e;
                 }
 
                 .icon-arrow-down {

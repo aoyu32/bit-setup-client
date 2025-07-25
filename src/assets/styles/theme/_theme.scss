@@ -3,7 +3,45 @@
 @use "sass:meta";
 @use "sass:color";
 @use "sass:math";
+// $colors: (
+//     // 主品牌色（改为低饱和蓝灰色系）
+//     c-p: #5a7d9a,
+//     c-p-light: #7d9cb8,
+//     c-p-lighter: #a0b7cf,
+//     c-p-lightest: #e1e9f2,
+//     c-p-dark: #3c5d78,
+//     c-p-darker: #1e3f5a,
+//     c-p-darkest: #0a253c,
 
+//     // 辅助色（改为浅灰色系）
+//     c-s: #8e8e8e,
+//     c-s-light: #a8a8a8,
+//     c-s-lighter: #c5c5c5,
+//     c-s-lightest: #f0f0f0,
+//     c-s-dark: #6b6b6b,
+//     c-s-darker: #4a4a4a,
+//     c-s-darkest: #2d2d2d,
+
+//     // 中性色（白色系为主）
+//     c-g: #ffffff,
+//     c-g0: #fcfcfc,
+//     c-g1: #f8f8f8,
+//     c-g2: #f2f2f2,
+//     c-g3: #e8e8e8,
+//     c-g4: #dddddd,
+//     c-g5: #c2c2c2,
+//     c-g6: #999999,
+//     c-g7: #777777,
+//     c-g8: #555555,
+//     c-g9: #333333,
+//     c-g10: #111111,
+
+//     // 功能色（低饱和度版本）
+//     success: #7bc79a,
+//     warning: #e8c97b,
+//     error: #e8a3a3,
+//     info: #8ab8e8,
+// );
 $colors: (
     // 主品牌色
     c-p: #1677ff,

@@ -105,7 +105,7 @@ const navItems = ref([
 ])
 
 const myCoin = ref(100)
-const isMember = ref(false)
+const isMember = ref(true)
 const username = ref('aoyufdsffdsfsd')
 const avatarUrl = ref('https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=Felix')
 const isShowProfileMenu = ref(false)

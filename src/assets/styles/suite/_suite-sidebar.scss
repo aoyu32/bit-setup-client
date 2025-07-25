@@ -1,0 +1,99 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.suite-sidebar {
+    @include wh;
+    padding: 20px;
+    @include flex(c, n, c);
+    gap: 20px; // 添加间距使三个部分分开
+
+    h3 {
+        color: color(c-p-dark);
+    }
+
+    .header {
+        @include flex(c, s-b);
+        padding-bottom: 10px;
+        border-bottom: 1px solid color(c-s);
+        flex-shrink: 0; // 防止header被压缩
+    }
+
+    .suite-nav {
+        @include wh(100p, n);
+        max-height: 35%;
+        display: flex;
+        flex-direction: column;
+
+        .suite-nav-content {
+            flex: 1;
+            overflow-y: auto;
+
+            .suite-list {
+                padding-top: 15px;
+                font-size: 14px;
+                color: color(c-g10, 0.7);
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+
+                li {
+                    padding: 10px;
+                    background-color: color(c-g2, 0.6);
+
+                    &:hover {
+                        background-color: color(c-p-lightest);
+                    }
+                }
+            }
+        }
+    }
+
+    .my-suite {
+        @include wh(100p, n);
+        max-height: 35%;
+        display: flex;
+        flex-direction: column;
+
+        .my-suite-content {
+            flex: 1;
+            overflow-y: auto;
+
+            .no-my-suite {
+                @include wh;
+                @include flex(c, c);
+                color: color(c-g10, 0.7);
+                font-size: 14px;
+            }
+
+            .suite-list {
+                padding-top: 15px;
+                font-size: 14px;
+                color: color(c-g10, 0.7);
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+
+                li {
+                    padding: 10px;
+                    background-color: color(c-g2, 0.6);
+
+                    &:hover {
+                        background-color: color(c-p-lightest);
+                    }
+                }
+            }
+        }
+    }
+
+    .custom-suite {
+        @include wh(100p, n);
+        
+
+        button {
+            @include wh;
+            padding: 10px 15px;
+            background-color: color(c-p-dark, 0.8);
+            color: color(c-g);
+            @include b-r($b-r);
+        }
+    }
+}
