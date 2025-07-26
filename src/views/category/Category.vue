@@ -15,7 +15,7 @@
                     <ul>
                         <li v-for="(item, index) in sortOption" :key="index">{{ item }}</li>
                         <li>
-                            <Switch />
+                            <AoSwitch />
                         </li>
                     </ul>
                 </div>
@@ -31,7 +31,7 @@
 import { ref } from 'vue'
 import AppList from '@/components/home/AppList.vue';
 import CategoryOption from '@/components/category/CategoryOption.vue';
-import Switch from '@/components/common/Switch.vue';
+import AoSwitch from '@/components/common/AoSwitch.vue';
 const appCount = ref(100)
 
 const sortOption = ref(['评分', '下载量', '上传日期', '名称', '随机'])

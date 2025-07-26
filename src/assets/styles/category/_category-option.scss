@@ -23,7 +23,7 @@
     .option-item {
         @include wh;
         flex: 1;
-        color: color(c-10,0.1);
+        color: color(c-g10,0.6);
 
         ul {
             @include flex;

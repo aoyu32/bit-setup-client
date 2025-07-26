@@ -1,4 +1,6 @@
 @use "sass:string";
+@use "sass:math";
+@use "sass:meta";
 
 /// 宽高设置混合器
 /// @param {string|number} $width - 宽度值，如果不需要设置则传递 'n'
@@ -51,20 +53,37 @@
         @return #{$number+'%'};
     }
 
-    // 检查是否是纯数字（没有单位）
-    @if type-of($size)=='number' and unitless($size) {
+    // 检查是否是纯数字类型（没有单位）
+    @if meta.type-of($size)=='number' and math.is-unitless($size) {
         @return #{$size}px;
     }
 
-    // 检查字符串是否只包含数字
+    // 如果是数字类型但有单位，直接返回
+    @if meta.type-of($size)=='number' {
+        @return $size;
+    }
+
+    // 对于字符串类型，检查是否只包含数字和小数点
     $is-number-only: true;
+    $has-letter: false;
 
     @for $i from 1 through string.length($size-str) {
         $char: string.slice($size-str, $i, $i);
 
-        @if not ($char >='0' and $char <='9') and $char !='.' {
+        // 检查是否包含字母（表示有单位）
+        @if ($char >='a' and $char <='z') or ($char >='A' and $char <='Z') {
+            $has-letter: true;
+        }
+
+        // 检查是否只包含数字和小数点
+        @if not (($char >='0' and $char <='9') or $char =='.') {
             $is-number-only: false;
         }
+    }
+
+    // 如果包含字母，说明已经有单位，直接返回
+    @if $has-letter {
+        @return $size;
     }
 
     // 如果是纯数字字符串，添加 px 单位
@@ -72,13 +91,14 @@
         @return #{$size}px;
     }
 
-    // 其他情况直接返回（已包含单位）
+    // 其他情况直接返回
     @return $size;
 }
 
+
 // 文字溢出显示省略号
 @mixin t-e {
-    w-space: nowrap;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -197,22 +217,22 @@
 
     // 如果只传一个参数，应用到所有角
     @if $top-right ==null and $bottom-right ==null and $bottom-left ==null {
-        border-radius: if(unitless($top-left), #{$top-left}px, $top-left);
+        border-radius: if(math.is-unitless($top-left), #{$top-left}px, $top-left);
     }
 
     // 如果传两个参数，表示对角
     @else if $bottom-right ==null and $bottom-left ==null {
-        border-radius: if(unitless($top-left), #{$top-left}px, $top-left) if(unitless($top-right), #{$top-right}px, $top-right);
+        border-radius: if(math.is-unitless($top-left), #{$top-left}px, $top-left) if(math.is-unitless($top-right), #{$top-right}px, $top-right);
     }
 
     // 如果传三个参数
     @else if $bottom-left ==null {
-        border-radius: if(unitless($top-left), #{$top-left}px, $top-left) if(unitless($top-right), #{$top-right}px, $top-right) if(unitless($bottom-right), #{$bottom-right}px, $bottom-right);
+        border-radius: if(math.is-unitless($top-left), #{$top-left}px, $top-left) if(math.is-unitless($top-right), #{$top-right}px, $top-right) if(math.is-unitless($bottom-right), #{$bottom-right}px, $bottom-right);
     }
 
     // 如果传四个参数
     @else {
-        border-radius: if(unitless($top-left), #{$top-left}px, $top-left) if(unitless($top-right), #{$top-right}px, $top-right) if(unitless($bottom-right), #{$bottom-right}px, $bottom-right) if(unitless($bottom-left), #{$bottom-left}px, $bottom-left);
+        border-radius: if(math.is-unitless($top-left), #{$top-left}px, $top-left) if(math.is-unitless($top-right), #{$top-right}px, $top-right) if(math.is-unitless($bottom-right), #{$bottom-right}px, $bottom-right) if(math.is-unitless($bottom-left), #{$bottom-left}px, $bottom-left);
     }
 }
 
@@ -289,7 +309,7 @@
             $num: "-" + string.slice($num, 2);
         }
 
-        @return unquote("#{$num}%");
+        @return string.unquote("#{$num}%");
     }
 
     @else {
@@ -298,11 +318,11 @@
         // 检查是否负数（以0开头）
         @if string.slice($value, 1, 1)=="0" and string.length($value)>1 {
             $num: "-" + string.slice($value, 2);
-            @return unquote("#{$num}px");
+            @return string.unquote("#{$num}px");
         }
 
         @else {
-            @return unquote("#{$value}px");
+            @return string.unquote("#{$value}px");
         }
     }
 }

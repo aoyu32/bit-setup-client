@@ -1,26 +1,31 @@
 <template>
     <div class="suite">
         <div class="suite-left">
-            <div class="custom-suite-container">
-
+            <div class="custom-suite-container" v-if="showCustom">
+                <CustomSuite @close="showCustom = false" />
             </div>
             <div class="suite-list-container">
-                <SuiteCard :contentPosition="index % 2 === 0 ? true : false" :suiteData="item"
+                <SuiteCard :contentPosition="index % 2 !== 0 ? true : false" :suiteData="item"
                     v-for="(item, index) in suiteData" :key="index" />
             </div>
         </div>
         <div class="suite-right">
             <div class="my-suite-container">
-                <SuiteSidebar :suiteList="suiteData"/>
+                <SuiteSidebar :suiteList="suiteData" @showCustom="showCustom = true" />
             </div>
         </div>
 
     </div>
 </template>
 <script setup>
+import { ref } from 'vue'
 import SuiteCard from '@/components/suite/SuiteCard.vue';
 import suiteData from '../../utils/suite-data';
 import SuiteSidebar from '@/components/suite/SuiteSidebar.vue';
+import CustomSuite from '@/components/suite/CustomSuite.vue';
+
+const showCustom = ref(true)
+
 </script>
 <style lang="scss" scoped>
 .suite {
@@ -28,15 +33,19 @@ import SuiteSidebar from '@/components/suite/SuiteSidebar.vue';
     padding: 20px 0;
     @include flex;
     gap: 20px;
+    position: relative;
 
     .suite-left {
+
         // @include wh(90p, 100p);
-        overflow-y: auto; // 允许左侧内容滚动
+        // overflow-y: auto; // 允许左侧内容滚动
         flex: 4;
+
 
         .suite-list-container {
             @include flex(l, n, c);
             gap: 20px;
+            margin-top: 20px;
         }
     }
 
@@ -45,13 +54,11 @@ import SuiteSidebar from '@/components/suite/SuiteSidebar.vue';
         flex: 1;
         position: sticky;
         top: $header-height;
-        align-self: flex-start; // 防止被拉伸
-
         height: 100vh;
+
         .my-suite-container {
-            @include wh;
+            @include wh(100p, 100vh);
             background-color: color(c-g);
-            height: 100vh;
             overflow-y: auto; // 如果内容很多，允许右侧内部滚动
         }
     }

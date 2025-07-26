@@ -64,6 +64,10 @@ button {
   border-radius: 0;
 }
 
+button,a,li{
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

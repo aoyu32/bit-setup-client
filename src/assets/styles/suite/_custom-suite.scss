@@ -1,12 +1,13 @@
 @use '@/assets/styles/common/main.scss' as *;
 
-.suite-card {
+.custom-suite {
+
     @include wh(100p, n);
     @include flex(l, c, c);
     padding: 20px;
     background-color: color(c-g);
 
-    .suite-card-header {
+    .custom-suite-header {
         @include flex(c, s-b);
         padding-bottom: 10px;
         border-bottom: 1px solid color(c-s);
@@ -16,17 +17,20 @@
             font-weight: 600;
         }
 
-        .suite-edit {
+        .suite-icons {
+            @include flex;
+            gap: 20px;
             color: color(c-p);
 
             .iconfont {
                 font-size: 17px;
             }
 
+
         }
     }
 
-    .suite-card-content {
+    .custom-suite-content {
         @include flex;
         padding: 20px 0;
         gap: 20px;
@@ -152,23 +156,9 @@
 
 
         }
+
+
     }
-
-    .suite-button {
-        @include flex(c, c, c);
-        padding: 20px;
-        gap: 15px;
-        padding-bottom: 0;
-
-        button {
-            @include wh;
-            padding: 10px 15px;
-            background-color: color(c-p-lighter);
-            @include b-r($b-r);
-            color: color(c-g);
-        }
-    }
-
 
     .suite-content-right {
         @include flex(n, n, c);
@@ -176,16 +166,21 @@
     }
 
     .suite-apps {
-        @include grid(auto-fit, minmax(90px, 1fr));
+        // @include grid(auto-fit, minmax(90px, 1fr));
+        @include flex(l, n);
+        flex-wrap: wrap;
+
         gap: 40px;
         background-color: color(c-g2);
-        padding: 10px;
+        padding: 10px 10px;
 
         .suite-app-item {
             @include flex(c, c, c);
             color: color(c-g8, 0.6);
             padding: 20px 0;
             gap: 7px;
+            min-width: 114px;
+            min-height: 130px;
             background-color: color(c-g0);
             box-shadow: shadow(l);
             @include b-r($b-r);
@@ -213,6 +208,99 @@
         }
     }
 
+    .app-selector {
+        @include wh;
+        background-color: color(c-g1);
+        margin-top: 10px;
+        padding: 10px;
+        @include flex(c, c, c);
+
+        .app-selector-header{
+            @include wh(100p,n);
+            @include flex(c,s-b);
+            padding-bottom: 10px;
+            h4{
+                font-size: 15px;
+                font-weight: 300;
+            }
+        }
+
+        .selectors {
+            @include wh(100p,n);
+            @include flex(c, l);
+            gap: 10px;
+            margin-bottom: 10px;
+
+        }
+
+        .left-selector {
+            flex: 1;
+        }
+
+        .right-selector {
+            flex: 1;
+        }
+
+        .options {
+            @include wh;
+            min-height: 400px;
+            max-height: 500px;
+            overflow-y: auto;
+            @include grid(auto-fill, minmax(90px, 1fr));
+            padding: 10px;
+            box-shadow: shadow(l);
+            background-color: color(c-g);
+            //   scrollbar-width: none; 
+            .suite-app-item {
+                @include flex(c, c, c);
+                color: color(c-g8, 0.6);
+                padding: 20px 0;
+                gap: 7px;
+                // min-width: 114px;
+                height: 130px;
+                background-color: color(c-g0);
+                box-shadow: shadow(l);
+                @include b-r($b-r);
+                font-size: 12px;
+
+                img {
+                    @include wh(40);
+                }
+
+                .item-category {
+                    @include b-r($b-r);
+                    padding: 2px 5px;
+                    background-color: color(c-p-lightest)
+                }
+
+                .item-name {
+                    width: 100%;
+                    padding: 0 3px;
+                    text-align: center;
+                    font-size: 12px;
+                    font-weight: 550;
+                    @include t-e;
+                }
+            }
+        }
+
+    }
+
+    .suite-button {
+        @include flex(c, c, c);
+        padding: 20px;
+        gap: 15px;
+        padding-bottom: 0;
+
+        button {
+            @include wh;
+            padding: 10px 15px;
+            background-color: color(c-p-lighter);
+            @include b-r($b-r);
+            color: color(c-g);
+        }
+    }
+
     .suite-description {
         @include wh(100p, 100p);
         padding: 10px;
@@ -222,6 +310,19 @@
         background-color: color(c-g1);
         margin-top: 10px;
         padding-bottom: 0;
+
+        .description-input {
+            @include wh;
+
+            textarea {
+                @include wh(100p, 100p);
+                resize: none;
+                padding-bottom: 10px;
+                overflow-y: hidden;
+                box-sizing: border-box;
+
+            }
+        }
 
     }
 

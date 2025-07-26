@@ -1,6 +1,6 @@
 <template>
   <div 
-    class="sort-switch"
+    class="ao-switch"
     :class="{ 'asc': isAscending, 'desc': !isAscending }"
     @click="toggleSort"
   >
@@ -24,7 +24,7 @@ const toggleSort = () => {
 </script>
 
 <style scoped>
-.sort-switch {
+.ao-switch {
   --switch-height: 25px;
   --switch-padding: 2px;
   --slider-size: calc(var(--switch-height) - 2 * var(--switch-padding));

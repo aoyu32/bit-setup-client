@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="custom-suite">
-        <button>自定义套件</button>
+        <button @click="handleShow">自定义套件</button>
     </div>
 </div>
 </template>
@@ -46,6 +46,11 @@ const mySuiteList = ref([
   { id: 9, name: '机器学习套件', isDefault: false },
   { id: 10, name: '网络安全套件', isDefault: false },
 ]);
+
+const emit = defineEmits(['show-custom'])
+const handleShow =()=>{
+    emit('show-custom')
+}
 </script>
 <style lang="scss" scoped>
 @use '@/assets/styles/suite/_suite-sidebar.scss' as *;
