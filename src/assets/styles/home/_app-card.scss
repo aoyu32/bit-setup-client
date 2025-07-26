@@ -1,8 +1,7 @@
- @use '@/assets/styles/common/main.scss' as *;
+@use '@/assets/styles/common/main.scss' as *;
 
  .app-card {
      height: $app-card-w;
-     background-color: color(c-g0);
      @include b-r(10);
      position: relative;
      transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
@@ -10,6 +9,9 @@
      cursor: pointer;
      user-select: none;
 
+     @include useTheme {
+         background-color: color(c-g0);
+     }
 
      .card-content {
          @include wh(100p);
@@ -18,7 +20,6 @@
          @include b-r($app-card-br);
          transform-style: preserve-3d;
          overflow: hidden;
-
 
          .card-draw {
              @include wh(45);
@@ -30,15 +31,21 @@
              button {
                  @include wh(30);
                  @include b-r($app-card-br);
-                 color: color(c-g);
+
+                 @include useTheme {
+                     color: color(c-g);
+                 }
+
                  cursor: pointer;
                  margin: 5px;
                  transition: all 0.2s ease-out;
 
-
                  &:hover {
                      transform: scale(1.1);
-                     background-color: color(c-g1, 0.3);
+
+                     @include useTheme {
+                         background-color: color(c-g1, 0.3);
+                     }
                  }
              }
          }
@@ -46,7 +53,6 @@
      }
 
      #card-content-front {
-
 
          &:hover {
              .app-img {
@@ -83,9 +89,12 @@
              flex: 1;
              @include flex(c, c);
              position: relative;
-             background: color(c-p-light);
-             @include b-r($app-card-br, $app-card-br);
 
+             @include useTheme {
+                 background: color(c-p-light);
+             }
+
+             @include b-r($app-card-br, $app-card-br);
 
              .app-img {
                  @include wh(50);
@@ -106,14 +115,21 @@
                  @include p-a(b0, l0);
                  width: 100%;
                  height: 70px;
-                 background-color: color(c-g0);
+
+                 @include useTheme {
+                     background-color: color(c-g0);
+                 }
              }
 
              &::after {
                  content: '';
                  @include p-a(b0, l0);
                  @include wh(100p, 70);
-                 background: color(c-p-light);
+
+                 @include useTheme {
+                     background: color(c-p-light);
+                 }
+
                  @include b-r(0, 0, 0, 100);
              }
          }
@@ -123,7 +139,11 @@
              flex: 1;
              @include flex(c, n, c);
              position: relative;
-             background: color(c-g0);
+
+             @include useTheme {
+                 background: color(c-g0);
+             }
+
              gap: 5px;
 
              @include b-r(0, 0, $app-card-br, $app-card-br);
@@ -133,7 +153,11 @@
                  font-size: 17px;
                  font-weight: 550;
                  padding-top: 20px;
-                 color: color(c-g7);
+
+                 @include useTheme {
+                     color: color(c-g7);
+                 }
+
                  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
              }
 
@@ -142,14 +166,22 @@
                  padding: 5px;
                  font-size: 14px;
                  border-radius: $b-r;
-                 background-color: color(c-p-lightest);
-                 color: color(c-p-dark);
+
+                 @include useTheme {
+                     background-color: color(c-p-lightest);
+                     color: color(c-p-dark);
+                 }
+
                  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
              }
 
              .app-download {
                  font-size: 12px;
-                 color: color(c-g6);
+
+                 @include useTheme {
+                     color: color(c-g6);
+                 }
+
                  z-index: 99;
                  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
 
@@ -166,15 +198,22 @@
                  content: '';
                  @include p-a(t0, l0);
                  @include wh(100p, 70);
-                 background: color(c-p-light);
+
+                 @include useTheme {
+                     background: color(c-p-light);
+                 }
              }
 
              &::after {
                  content: '';
                  @include p-a(t0, l0);
-                 background: color(c-p-light);
+
+                 @include useTheme {
+                     background: color(c-p-light);
+                     background-color: color(c-g0);
+                 }
+
                  @include wh(100p, 70);
-                 background-color: color(c-g0);
                  @include b-r(0, 70, 0, 0);
              }
          }
@@ -184,7 +223,11 @@
              @include p-a(t0, l0);
              @include wh(50p, 100p);
              z-index: 90;
-             background: rgba(color(c-p), 0.185);
+
+             @include useTheme {
+                 background: rgba(color(c-p), 0.185);
+             }
+
              border-bottom-left-radius: 10px; // 底部左侧圆角              
              border-top-left-radius: 10px; // 顶部左侧圆角    
              @include b-r(0, $app-card-br)
@@ -203,14 +246,21 @@
 
          .mark-wrapper {
              font-size: 9px;
-             color: color(c-g, 0.7);
+
+             @include useTheme {
+                 color: color(c-g, 0.7);
+             }
+
              @include flex(c, c, c);
              z-index: 99;
              gap: 10px;
              position: absolute;
 
              .app-mark {
-                 background-color: color(c-g, 0.2);
+                 @include useTheme {
+                     background-color: color(c-g, 0.2);
+                 }
+
                  padding: 2px;
              }
          }
@@ -245,8 +295,12 @@
              @include flex(c, c);
              font-size: 12px;
              padding: 2px 0;
-             color: color(c-g);
-             background: color(error);
+
+             @include useTheme {
+                 color: color(c-g);
+                 background: color(error);
+             }
+
              gap: 3px;
 
              span {
@@ -257,7 +311,6 @@
                  }
              }
 
-
          }
 
          .card-top {
@@ -265,7 +318,11 @@
              flex: 1;
              @include flex(c, c);
              position: relative;
-             background: color(c-p-light);              
+
+             @include useTheme {
+                 background: color(c-p-light);
+             }
+
              @include b-r($app-card-br, $app-card-br, 0, 0);
 
              .app-bio {
@@ -276,21 +333,30 @@
                  font-size: 14px;
                  text-align: center;
                  transform: scaleX(-1);
-                 color: color(c-g, 0.9);
+
+                 @include useTheme {
+                     color: color(c-g, 0.9);
+                 }
              }
 
              &::before {
                  content: '';
                  @include p-a(b0, l0);
                  @include wh(100p, 70);
-                 background-color: color(c-g0);
+
+                 @include useTheme {
+                     background-color: color(c-g0);
+                 }
              }
 
              &::after {
                  content: '';
                  @include p-a(b0, l0);
                  @include wh(100p, 70);
-                 background: color(c-p-light);
+
+                 @include useTheme {
+                     background: color(c-p-light);
+                 }
              }
          }
 
@@ -299,7 +365,11 @@
              flex: 1;
              @include flex(c, n, c);
              position: relative;
-             background: color(c-g0);
+
+             @include useTheme {
+                 background: color(c-g0);
+             }
+
              gap: 10px;
              border-bottom-left-radius: 10px; // 底部左侧圆角                  
              border-bottom-right-radius: 10px; // 底部右侧圆角               
@@ -311,20 +381,25 @@
                  transform: scaleX(-1);
              }
 
-
              &::before {
                  content: '';
                  @include p-a(t0, l0);
                  @include wh(100p, 70);
-                 background: color(c-p-light);
+
+                 @include useTheme {
+                     background: color(c-p-light);
+                 }
              }
 
              &::after {
                  content: '';
                  @include p-a(t0, l0);
                  @include wh(100p, 70);
-                 background-color: color(c-g0);
                  @include b-r(70,70,0,0);
+
+                 @include useTheme {
+                     background-color: color(c-g0);
+                 }
              }
          }
      }

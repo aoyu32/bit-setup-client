@@ -4,12 +4,18 @@
     @include wh(100p, n);
     @include flex(l, c, c);
     padding: 20px;
-    background-color: color(c-g);
+
+    @include useTheme {
+        background-color: color(c-g);
+    }
 
     .suite-card-header {
         @include flex(c, s-b);
         padding-bottom: 10px;
-        border-bottom: 1px solid color(c-s);
+
+        @include useTheme {
+            border-bottom: 1px solid color(c-s);
+        }
 
         .suite-name {
             font-size: 17px;
@@ -17,12 +23,13 @@
         }
 
         .suite-edit {
-            color: color(c-p);
+            @include useTheme {
+                color: color(c-p);
+            }
 
             .iconfont {
                 font-size: 17px;
             }
-
         }
     }
 
@@ -44,21 +51,26 @@
         box-shadow: shadow(m);
         @include b-r($b-r);
 
-
         .suite-info-top {
             flex: 1;
             @include b-r($b-r, $b-r, 0, 0);
             @include wh;
             @include flex(c, c, c);
-            background-color: color(c-p-light);
             gap: 10px;
             position: relative;
 
+            @include useTheme {
+                background-color: color(c-p-light);
+            }
+
             .suite-author-avatar {
                 @include wh(54);
-                background-color: color(c-g1);
-                z-index: 99;
                 @include b-r(6);
+                z-index: 99;
+
+                @include useTheme {
+                    background-color: color(c-g1);
+                }
 
                 img {
                     @include wh;
@@ -66,9 +78,12 @@
             }
 
             .suite-author-name {
-                color: color(c-g);
                 font-size: 14px;
                 z-index: 99;
+
+                @include useTheme {
+                    color: color(c-g);
+                }
             }
 
             // // 顶部装饰 - 保留左下角三角形
@@ -97,19 +112,19 @@
             //     background-color: color(c-p-light);
             //     clip-path: polygon(0% 100%, 0 0, 100% 100%);
             // }
-
-
-
         }
 
         .suite-info-bottom {
             flex: 1;
             @include flex(c, t, c);
             @include wh;
-            background-color: color(c-g0);
             position: relative;
             @include b-r(0, 0, $b-r, $b-r);
             gap: 10px;
+
+            @include useTheme {
+                background-color: color(c-g0);
+            }
 
             .base-info {
                 font-size: 12px;
@@ -124,12 +139,14 @@
             .coin {
                 font-size: 12px;
                 padding: 2px 10px;
-                color: color(c-g);
                 @include b-r(10);
-                background-color: color(c-p-lighter);
                 display: flex;
                 gap: 3px;
 
+                @include useTheme {
+                    color: color(c-g);
+                    background-color: color(c-p-lighter);
+                }
             }
 
             // 底部装饰 - 保留右上角三角形
@@ -137,8 +154,11 @@
                 content: '';
                 @include p-a(t01, r0);
                 @include wh(30p, 70);
-                background: color(c-p-light);
                 clip-path: polygon(100% 0, 0 0, 100% 100%);
+
+                @include useTheme {
+                    background: color(c-p-light);
+                }
             }
 
             // 顶部装饰 - 保留左下角三角形
@@ -146,11 +166,12 @@
                 content: '';
                 @include p-a(t01, l0);
                 @include wh(30p, 70);
-                background-color: color(c-p-light);
                 clip-path: polygon(100% 0%, 0 0, 0% 100%);
+
+                @include useTheme {
+                    background-color: color(c-p-light);
+                }
             }
-
-
         }
     }
 
@@ -163,12 +184,14 @@
         button {
             @include wh;
             padding: 10px 15px;
-            background-color: color(c-p-lighter);
             @include b-r($b-r);
-            color: color(c-g);
+
+            @include useTheme {
+                background-color: color(c-p-lighter);
+                color: color(c-g);
+            }
         }
     }
-
 
     .suite-content-right {
         @include flex(n, n, c);
@@ -178,28 +201,35 @@
     .suite-apps {
         @include grid(auto-fit, minmax(90px, 1fr));
         gap: 40px;
-        background-color: color(c-g2);
         padding: 10px;
+
+        @include useTheme {
+            background-color: color(c-g2);
+        }
 
         .suite-app-item {
             @include flex(c, c, c);
-            color: color(c-g8, 0.6);
             padding: 20px 0;
             gap: 7px;
-            background-color: color(c-g0);
-            box-shadow: shadow(l);
             @include b-r($b-r);
             font-size: 12px;
 
+            @include useTheme {
+                color: color(c-g8, 0.6);
+                background-color: color(c-g0);
+            }
+
             img {
                 @include wh(40);
-
             }
 
             .item-category {
                 @include b-r($b-r);
                 padding: 2px 5px;
-                background-color: color(c-p-lightest)
+
+                @include useTheme {
+                    background-color: color(c-p-lightest);
+                }
             }
 
             .item-name {
@@ -217,12 +247,13 @@
         @include wh(100p, 100p);
         padding: 10px;
         min-height: 200px;
-        color: color(c-g8);
         font-size: 13px;
-        background-color: color(c-g1);
         margin-top: 10px;
         padding-bottom: 0;
 
+        @include useTheme {
+            color: color(c-g8);
+            background-color: color(c-g1);
+        }
     }
-
 }

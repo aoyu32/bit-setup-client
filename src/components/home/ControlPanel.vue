@@ -38,8 +38,9 @@
                     <span>浏览模式</span>
                 </div>
                 <div class="modes-wrapper">
-                    <button v-for="(item, index) in modes"><i :class="['iconfont', item.icon]" :key="index"></i><span>{{
-                        item.name
+                    <button v-for="(item, index) in modes" @click="handleChangeTheme"><i
+                            :class="['iconfont', item.icon]" :key="index"></i><span>{{
+                                item.name
                             }}</span></button>
                 </div>
             </div>
@@ -47,7 +48,7 @@
     </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 const actionList = ref([
     {
         icon: 'icon-xiaoxi',
@@ -85,7 +86,16 @@ const modes = ref([
         name: '分类模式'
     }
 ])
+onMounted(() => {
+    currentTheme.value = 'dark'
+    handleChangeTheme()
+})
 
+const currentTheme = ref('light')
+const handleChangeTheme = () => {
+    currentTheme.value = currentTheme.value === 'light' ? 'dark' : 'light'
+    document.documentElement.setAttribute('data-theme', currentTheme.value)
+}
 </script>
 <style scoped lang="scss">
 @use '@/assets/styles/home/_control-panel.scss' as *;

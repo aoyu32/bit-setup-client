@@ -1,5 +1,7 @@
 <template>
-我是智能助手页
+    <div class="assistant">
+        
+    </div>
 </template>
 <script setup>
 </script>

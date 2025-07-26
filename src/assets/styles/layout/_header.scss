@@ -1,10 +1,14 @@
 @use '@/assets/styles/common/main.scss' as *;
+
 .header {
     width: 100%;
     height: $header-height;
-    background-color: color(c-g);
     box-shadow: shadow(m);
-    @include flex(c,c)
+    @include flex(c, c);
+
+    @include useTheme {
+        background-color: color(c-g);
+    }
 }
 
 .header-container {
@@ -30,11 +34,14 @@
             z-index: 100;
             position: absolute;
             top: 65px;
-            background-color: color(c-g0);
-            box-shadow:shadow(m);
             border-radius: 10px;
-            left: 0;
             padding: 10px;
+
+            @include useTheme {
+                background-color: color(c-g0);
+            }
+
+            box-shadow: shadow(m);
 
             li {
                 padding: 10px;
@@ -44,18 +51,21 @@
         .nav-container {
             width: 100%;
             height: 100%;
-            @include flex(c,c);
+            @include flex(c, c);
         }
 
         ul {
             @include wh(100p);
-            @include flex(c,s-b);
+            @include flex(c, s-b);
 
             li {
                 font-size: 16px;
-                color: color(c-g8);
                 font-weight: 550;
                 position: relative;
+
+                @include useTheme {
+                    color: color(c-g7);
+                }
 
                 img {
                     width: 40px;
@@ -66,10 +76,12 @@
 
                 a {
                     @include wh(100p);
-                    @include flex(c,c);
+                    @include flex(c, c);
 
                     &.active {
-                        color: color(c-p);
+                        @include useTheme {
+                            color: color(c-p);
+                        }
 
                         &::after {
                             content: "";
@@ -78,20 +90,28 @@
                             left: 0;
                             width: 100%;
                             height: 2px;
-                            background: color(c-p);
                             transform: scaleX(1);
+
+                            @include useTheme {
+                                background: color(c-p);
+                            }
                         }
 
                         i {
-                            color: color(c-p);
+                            @include useTheme {
+                                color: color(c-p);
+                            }
                         }
                     }
                 }
 
                 i {
                     font-size: 20px;
-                    color: color(c-p);
                     margin-right: 7px;
+
+                    @include useTheme {
+                        color: color(c-g7);
+                    }
                 }
 
                 &::after {
@@ -100,10 +120,13 @@
                     bottom: -5px;
                     left: 0;
                     position: absolute;
-                    border: 1px solid color(c-p);
                     transform: scaleX(0);
                     transform-origin: left;
                     transition: transform 0.3s ease;
+
+                    @include useTheme {
+                        background: color(c-p-light);
+                    }
                 }
 
                 &:hover::after {
@@ -116,7 +139,7 @@
     .search {
         height: 100%;
         width: 400px;
-        @include flex(c,l);
+        @include flex(c, l);
         margin-left: auto;
     }
 
@@ -130,11 +153,14 @@
         .search-icon {
             width: 100%;
             height: 40px;
-            @include flex(c,r);
+            @include flex(c, r);
 
             i {
                 font-size: 20px;
-                color: color(c-p);
+
+                @include useTheme {
+                    color: color(c-p);
+                }
             }
         }
     }
@@ -158,18 +184,26 @@
                 gap: 5px;
                 padding: 5px 10px;
                 border-radius: 16px;
-                background-color: color(c-p-light,0.5);
                 cursor: pointer;
                 transition: all 0.3s ease;
 
+                @include useTheme {
+                    background-color: color(c-p-light, 0.3);
+                }
+
                 &:hover {
-                    background-color: color(c-p-lighter);
+                    @include useTheme {
+                        background-color: color(c-p-light, 0.5);
+                    }
                 }
 
                 span {
                     font-size: 14px;
                     font-weight: 600;
-                    color: color(c-p);
+
+                    @include useTheme {
+                        color: color(c-g9);
+                    }
                 }
 
                 .coin-icon {
@@ -189,13 +223,16 @@
                     left: 50%;
                     transform: translateX(-50%);
                     padding: 4px 8px;
-                    background-color: color(c-g9);
-                    color: color(c-g);
                     border-radius: 4px;
                     font-size: 12px;
                     white-space: nowrap;
                     box-shadow: shadow(m);
                     z-index: 10;
+
+                    @include useTheme {
+                        background-color: color(c-g8);
+                        color: color(c-g0);
+                    }
                 }
             }
 
@@ -223,12 +260,17 @@
                 gap: 8px;
                 padding: 5px 10px 5px 5px;
                 border-radius: 20px;
-                background-color: color(c-p,0.6);
                 cursor: pointer;
                 transition: all 0.3s ease;
 
+                @include useTheme {
+                    background-color: color(c-p, 0.2);
+                }
+
                 &:hover {
-                    background-color: color(c-p);
+                    @include useTheme {
+                        background-color: color(c-p, 0.4);
+                    }
                 }
 
                 .avatar {
@@ -236,7 +278,10 @@
                     height: 32px;
                     border-radius: 50%;
                     overflow: hidden;
-                    border: 2px solid color(c-p-light);
+
+                    @include useTheme {
+                        border: 2px solid color(c-p-lighter);
+                    }
 
                     img {
                         width: 100%;
@@ -248,15 +293,21 @@
                 .username {
                     font-size: 14px;
                     font-weight: 500;
-                    color: color(c-g);
                     max-width: 80px;
                     @include t-e;
+
+                    @include useTheme {
+                        color: color(c-g9);
+                    }
                 }
 
                 .icon-arrow-down {
                     font-size: 12px;
-                    color: color(c-g);
                     transition: transform 0.3s ease;
+
+                    @include useTheme {
+                        color: color(c-g9);
+                    }
                 }
 
                 &:hover .icon-arrow-down {
@@ -269,11 +320,14 @@
                     top: 100%;
                     right: 0;
                     width: 160px;
-                    background-color: color(c-g);
                     border-radius: 8px;
                     box-shadow: shadow(m);
                     padding: 8px 0;
                     z-index: 100;
+
+                    @include useTheme {
+                        background-color: color(c-g0);
+                    }
 
                     ul {
                         list-style: none;
@@ -284,12 +338,17 @@
                             align-items: center;
                             gap: 8px;
                             font-size: 14px;
-                            color: color(c-g7);
                             transition: all 0.2s ease;
 
+                            @include useTheme {
+                                color: color(c-g7);
+                            }
+
                             &:hover {
-                                background-color: color(c-p-light);
-                                color: color(c-g);
+                                @include useTheme {
+                                    background-color: color(c-p-light, 0.2);
+                                    color: color(c-g9);
+                                }
                             }
 
                             .iconfont {
@@ -306,21 +365,24 @@
 @media (max-width:1265px) {
     .header {
         .header-container {
-            position: relative; // 为下拉菜单提供定位上下文
+            position: relative;
             gap: 15px;
 
             .trigger {
                 height: 40px;
                 width: 40px;
-                @include flex(c,c);
+                @include flex(c, c);
                 flex: 1;
 
                 .iconfont {
                     @include wh(100p);
-                    @include flex(c,c);
+                    @include flex(c, c);
                     font-size: 20px;
-                    color: color(c-s);
                     line-height: 100%;
+
+                    @include useTheme {
+                        color: color(c-s);
+                    }
                 }
 
                 i {
@@ -350,14 +412,18 @@
 
                             a {
                                 &.active {
-                                    color: color(c-p);
+                                    @include useTheme {
+                                        color: color(c-p);
+                                    }
 
                                     &::after {
                                         display: none;
                                     }
 
                                     i {
-                                        color: color(c-p);
+                                        @include useTheme {
+                                            color: color(c-p);
+                                        }
                                     }
                                 }
                             }
@@ -367,9 +433,10 @@
                             }
 
                             &:hover {
-                                background-color: rgba(color(c-p), 0.1);
+                                @include useTheme {
+                                    background-color: color(c-p-light, 0.2);
+                                }
                             }
-
                         }
                     }
                 }

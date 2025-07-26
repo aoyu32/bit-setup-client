@@ -7,66 +7,88 @@
     .title {
         width: 100%;
         padding: 8px 10px;
-        border: 1px solid adjust-color(c-p, 15%);
-        border-bottom: 0;
         border-radius: 6px 6px 0px 0px;
         font-size: 14px;
-        background-color: adjust-color(c-p, 30%);
-        color: color(c-p);
         font-weight: 600;
+
+        @include useTheme {
+            border: 1px solid adjust-color(c-p, 15%);
+            border-bottom: 0;
+            background-color: adjust-color(c-p, 30%);
+            color: color(c-p);
+        }
 
         span {
             display: flex;
             @include wh(100p);
-            border-left: 2px solid color(c-p);
             padding-left: 5px;
+
+            @include useTheme {
+                border-left: 2px solid color(c-p);
+            }
         }
     }
 
     .panel-top {
         width: 100%;
-        background-color: color(c-g, 0.3);
+
+        @include useTheme {
+            background-color: color(c-g, 0.3);
+        }
 
         .actions-wrapper {
             width: 100%;
-            border: 1px solid adjust-color(c-p, 15%);
             display: grid;
             gap: 10px;
             padding: 10px 15px;
             grid-template-columns: repeat(2, 1fr);
             border-radius: 0px 0px 6px 6px;
-            @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
+
+            @include useTheme {
+                border: 1px solid adjust-color(c-p, 15%);
+                @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
+            }
         }
 
         .actions {
             .action-item {
                 padding: 20px;
-                border: 1px solid adjust-color(c-p, 20%);
                 border-radius: $b-r;
                 gap: 5px;
                 font-size: 14px;
                 @include flex(c,c);
-                color: color(c-p);
-                @include gradient-color(color(c-g), adjust-color(c-p, 38%), 135deg);
                 box-shadow: shadow(m);
                 transition: all 0.3s ease;
                 text-decoration: none;
 
+                @include useTheme {
+                    border: 1px solid adjust-color(c-p, 20%);
+                    color: color(c-p);
+                    @include gradient-color(color(c-g), adjust-color(c-p, 38%), 135deg);
+                }
+
                 &:hover {
-                    @include gradient-color(adjust-color(c-p, 35%), adjust-color(c-p, 25%), 135deg);
-                    color: color(c-g);
-                    border-color: color(c-p);
+                    @include useTheme {
+                        @include gradient-color(adjust-color(c-p, 35%), adjust-color(c-p, 25%), 135deg);
+                        color: color(c-g);
+                        border-color: color(c-p);
+                    }
                     box-shadow: shadow(m);
                     transform: translateY(-1px);
                 }
 
                 .iconfont {
                     font-size: 20px;
-                    color: adjust-color(c-p, -10%);
+
+                    @include useTheme {
+                        color: adjust-color(c-p, -10%);
+                    }
                 }
 
                 &:hover .iconfont {
-                    color: color(c-g);
+                    @include useTheme {
+                        color: color(c-g);
+                    }
                 }
             }
         }
@@ -74,7 +96,10 @@
 
     .panel-center {
         width: 100%;
-        @include gradient-color(adjust-color(c-g, -2%), adjust-color(c-g, -5%), 135deg);
+
+        @include useTheme {
+            @include gradient-color(adjust-color(c-g, -2%), adjust-color(c-g, -5%), 135deg);
+        }
 
         .themes {
             width: 100%;
@@ -83,32 +108,43 @@
         .themes-wrapper {
             width: 100%;
             padding: 10px 15px;
-            border: 1px solid adjust-color(c-p, 15%);
             border-radius: 0px 0px 6px 6px;
-            @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
-            box-shadow: inset 0 1px 3px shadow(l);
+
+            @include useTheme {
+                border: 1px solid adjust-color(c-p, 15%);
+                @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
+                box-shadow: inset 0 1px 3px shadow(l);
+            }
         }
 
         .theme-select {
             width: 100%;
-            border: 1px solid adjust-color(c-p, 20%);
             padding: 10px;
             border-radius: $b-r;
-            @include gradient-color(color(c-g), adjust-color(c-p, 38%), 135deg);
-            box-shadow: shadow(l);
             cursor: pointer;
             transition: all 0.3s ease;
 
+            @include useTheme {
+                border: 1px solid adjust-color(c-p, 20%);
+                @include gradient-color(color(c-g), adjust-color(c-p, 38%), 135deg);
+                box-shadow: shadow(l);
+            }
+
             &:hover {
-                border-color: color(c-p);
-                box-shadow: shadow(m);
+                @include useTheme {
+                    border-color: color(c-p);
+                    box-shadow: shadow(m);
+                }
             }
 
             .select-header {
                 @include wh(100p);
                 @include flex(c,s-b);
                 font-size: 15px;
-                color: color(c-p);
+
+                @include useTheme {
+                    color: color(c-p);
+                }
 
                 span {
                     @include flex(c,c);
@@ -117,17 +153,24 @@
                 .select-value .iconfont {
                     font-size: 20px;
                     margin-right: 5px;
-                    color: color(c-p);
+
+                    @include useTheme {
+                        color: color(c-p);
+                    }
                 }
 
                 .arrow-icon .iconfont {
-                    color: adjust-color(c-p, -10%);
+                    @include useTheme {
+                        color: adjust-color(c-p, -10%);
+                    }
                     transition: color 0.3s ease;
                 }
             }
 
             &:hover .arrow-icon .iconfont {
-                color: color(c-p);
+                @include useTheme {
+                    color: color(c-p);
+                }
             }
         }
     }
@@ -135,7 +178,10 @@
     .panel-bottom {
         width: 100%;
         border-radius: $b-r;
-        @include gradient-color(adjust-color(c-g, -2%), adjust-color(c-g, -5%), 135deg);
+
+        @include useTheme {
+            @include gradient-color(adjust-color(c-g, -2%), adjust-color(c-g, -5%), 135deg);
+        }
 
         .modes {
             width: 100%;
@@ -145,34 +191,45 @@
                 padding: 10px 15px;
                 display: flex;
                 gap: 10px;
-                border: 1px solid adjust-color(c-p, 15%);
-                @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
+
+                @include useTheme {
+                    border: 1px solid adjust-color(c-p, 15%);
+                    @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
+                }
             }
 
             button {
                 flex: 1;
                 padding: 10px 15px;
-                border: 1px solid adjust-color(c-p, 15%);
                 border-radius: $b-r;
-                @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
-                color: color(c-p);
                 font-weight: 500;
                 cursor: pointer;
                 font-size: 14px;
                 transition: all 0.3s ease;
-                box-shadow: shadow(m);
+
+                @include useTheme {
+                    border: 1px solid adjust-color(c-p, 15%);
+                    @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
+                    color: color(c-p);
+                    box-shadow: shadow(m);
+                }
 
                 &:hover {
-                    @include gradient-color(color(c-p), adjust-color(c-p, -10%), 135deg);
-                    color: color(c-g);
-                    border-color: adjust-color(c-p, -15%);
-                    box-shadow: shadow(m);
+                    @include useTheme {
+                        @include gradient-color(color(c-p), adjust-color(c-p, -10%), 135deg);
+                        color: color(c-g);
+                        border-color: adjust-color(c-p, -15%);
+                        box-shadow: shadow(m);
+                    }
                     transform: translateY(-1px);
                 }
 
                 &:active {
                     transform: translateY(0);
-                    box-shadow: shadow(m);
+
+                    @include useTheme {
+                        box-shadow: shadow(m);
+                    }
                 }
             }
         }

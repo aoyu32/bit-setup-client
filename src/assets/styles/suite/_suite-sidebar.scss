@@ -7,13 +7,17 @@
     gap: 20px; // 添加间距使三个部分分开
 
     h3 {
-        color: color(c-p-dark);
+        @include useTheme {
+            color: color(c-p-dark);
+        }
     }
 
     .header {
         @include flex(c, s-b);
         padding-bottom: 10px;
-        border-bottom: 1px solid color(c-s);
+        @include useTheme {
+            border-bottom: 1px solid color(c-s);
+        }
         flex-shrink: 0; // 防止header被压缩
     }
 
@@ -30,17 +34,23 @@
             .suite-list {
                 padding-top: 15px;
                 font-size: 14px;
-                color: color(c-g10, 0.7);
+                @include useTheme {
+                    color: color(c-g10, 0.7);
+                }
                 display: flex;
                 flex-direction: column;
                 gap: 15px;
 
                 li {
                     padding: 10px;
-                    background-color: color(c-g2, 0.6);
+                    @include useTheme {
+                        background-color: color(c-g2, 0.6);
+                    }
 
                     &:hover {
-                        background-color: color(c-p-lightest);
+                        @include useTheme {
+                            background-color: color(c-p-lightest);
+                        }
                     }
                 }
             }
@@ -60,24 +70,32 @@
             .no-my-suite {
                 @include wh;
                 @include flex(c, c);
-                color: color(c-g10, 0.7);
+                @include useTheme {
+                    color: color(c-g10, 0.7);
+                }
                 font-size: 14px;
             }
 
             .suite-list {
                 padding-top: 15px;
                 font-size: 14px;
-                color: color(c-g10, 0.7);
+                @include useTheme {
+                    color: color(c-g10, 0.7);
+                }
                 display: flex;
                 flex-direction: column;
                 gap: 15px;
 
                 li {
                     padding: 10px;
-                    background-color: color(c-g2, 0.6);
+                    @include useTheme {
+                        background-color: color(c-g2, 0.6);
+                    }
 
                     &:hover {
-                        background-color: color(c-p-lightest);
+                        @include useTheme {
+                            background-color: color(c-p-lightest);
+                        }
                     }
                 }
             }
@@ -91,8 +109,10 @@
         button {
             @include wh;
             padding: 10px 15px;
-            background-color: color(c-p-dark, 0.8);
-            color: color(c-g);
+            @include useTheme {
+                background-color: color(c-p-dark, 0.8);
+                color: color(c-g);
+            }
             @include b-r($b-r);
         }
     }

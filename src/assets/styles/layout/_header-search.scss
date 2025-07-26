@@ -14,15 +14,19 @@
             height: 40px;
             @include flex(c, c);
 
-            border: 1px solid color(c-g3);
+            @include useTheme {
+                border: 1px solid color(c-g3);
+                background-color: color(c-g);
+            }
             border-radius: 8px;
-            background-color: color(c-g);
             transition: all 0.3s;
             box-sizing: border-box;
             overflow: hidden;
 
             &.focus {
-                border-color: color(c-p, 0.2); // B站粉色
+                @include useTheme {
+                    border-color: color(c-p, 0.2);
+                }
             }
 
             input {
@@ -32,11 +36,16 @@
                 border: none;
                 outline: none;
                 font-size: 14px;
-                color: #222;
+
+                @include useTheme {
+                    color: color(c-g9);
+                }
                 background: transparent;
 
                 &::placeholder {
-                    color: #999;
+                    @include useTheme {
+                        color: color(c-g5);
+                    }
                 }
             }
 
@@ -45,11 +54,16 @@
                 height: 100%;
                 @include flex(c, c);
                 cursor: pointer;
-                color: #999;
+
+                @include useTheme {
+                    color: color(c-g5);
+                }
                 transition: all 0.3s;
 
                 &:hover {
-                    color: #fb7299;
+                    @include useTheme {
+                        color: color(c-p);
+                    }
                 }
             }
         }
@@ -59,9 +73,11 @@
             top: 50px;
             left: 0;
             width: 100%;
-            background-color: #fff;
+            @include useTheme {
+                background-color: color(c-g);
+                box-shadow: shadow(m);
+            }
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             z-index: 100;
             max-height: 400px;
             overflow-y: auto;
@@ -70,15 +86,22 @@
                 @include flex(c, s-b);
                 padding: 10px 15px;
                 font-size: 14px;
-                color: color(c-g5);
-                border-bottom: 1px solid color(c-g2);
+
+                @include useTheme {
+                    color: color(c-g5);
+                    border-bottom: 1px solid color(c-g2);
+                }
 
                 .clear-history {
-                    color: color(c-s);
+                    @include useTheme {
+                        color: color(c-s);
+                    }
                     cursor: pointer;
 
                     &:hover {
-                        opacity: 0.8;
+                        @include useTheme {
+                            opacity: 0.8;
+                        }
                     }
                 }
             }
@@ -92,22 +115,30 @@
                 li {
                     padding: 10px 15px;
                     font-size: 14px;
-                    color: #222;
+
+                    @include useTheme {
+                        color: color(c-g9);
+                    }
                     cursor: pointer;
-                    @include flex(c,s-b);
-                 
+                    @include flex(c, s-b);
 
                     &:hover {
-                        background-color: color(c-g1);
+                        @include useTheme {
+                            background-color: color(c-g1);
+                        }
                     }
 
                     .delete-item {
-                        color: color(c-g5);
+                        @include useTheme {
+                            color: color(c-g5);
+                        }
                         font-size: 18px;
                         padding: 0 5px;
 
                         &:hover {
-                            color: color(c-s);
+                            @include useTheme {
+                                color: color(c-s);
+                            }
                         }
                     }
                 }
@@ -116,7 +147,10 @@
             .no-result {
                 padding: 15px;
                 text-align: center;
-                color: colro(c-g5);
+
+                @include useTheme {
+                    color: color(c-g5);
+                }
                 font-size: 14px;
             }
         }

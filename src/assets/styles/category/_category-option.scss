@@ -2,13 +2,16 @@
 
 .category-option {
     @include wh;
-    background-color: color(c-g);
     padding: 20px;
     font-size: 14px;
     cursor: pointer;
     @include flex(c, c, c);
     gap: 10px;
     @include b-r(6);
+
+    @include useTheme {
+        background-color: color(c-g);
+    }
 
     .category-lable,
     .option-lable {
@@ -23,7 +26,10 @@
     .option-item {
         @include wh;
         flex: 1;
-        color: color(c-g10,0.6);
+
+        @include useTheme {
+            color: color(c-g10,0.6);
+        }
 
         ul {
             @include flex;
@@ -36,16 +42,16 @@
                 margin-right: 20px;
 
                 &:hover {
-                    background-color: color(c-p-lighter);
+                    @include useTheme {
+                        background-color: color(c-p-lighter);
+                    }
                 }
             }
-
         }
     }
 
     // 分类
     .category-wrapper {
-
         @include wh(100p, n);
 
         .father-category,
