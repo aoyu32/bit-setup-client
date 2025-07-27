@@ -42,7 +42,7 @@
             justify-content: center;
 
             .iconfont {
-                @include useTheme {
+                @include c-t {
                     color: color(c-g);
                 }
                 font-size: 20px;
@@ -92,12 +92,12 @@
                 cursor: pointer;
                 transition: all 0.3s ease;
 
-                @include useTheme {
+                @include c-t {
                     background-color: color(c-g, 0.5);
                 }
 
                 &.active {
-                    @include useTheme {
+                    @include c-t {
                         background-color: color(c-g);
                     }
                     transform: scale(1.2);
@@ -106,7 +106,7 @@
                 &:hover {
                     transform: scale(1.1);
 
-                    @include useTheme {
+                    @include c-t {
                         background-color: color(c-g);
                     }
                 }

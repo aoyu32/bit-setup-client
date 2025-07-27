@@ -43,7 +43,7 @@
             padding: 20px 0;
             gap: 5px;
 
-            @include useTheme {
+            @include c-t {
                 color: color(c-s);
             }
 

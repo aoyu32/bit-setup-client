@@ -7,7 +7,7 @@
     gap: 20px; // 添加间距使三个部分分开
 
     h3 {
-        @include useTheme {
+        @include c-t {
             color: color(c-p-dark);
         }
     }
@@ -15,7 +15,7 @@
     .header {
         @include flex(c, s-b);
         padding-bottom: 10px;
-        @include useTheme {
+        @include c-t {
             border-bottom: 1px solid color(c-s);
         }
         flex-shrink: 0; // 防止header被压缩
@@ -34,7 +34,7 @@
             .suite-list {
                 padding-top: 15px;
                 font-size: 14px;
-                @include useTheme {
+                @include c-t {
                     color: color(c-g10, 0.7);
                 }
                 display: flex;
@@ -43,12 +43,12 @@
 
                 li {
                     padding: 10px;
-                    @include useTheme {
+                    @include c-t {
                         background-color: color(c-g2, 0.6);
                     }
 
                     &:hover {
-                        @include useTheme {
+                        @include c-t {
                             background-color: color(c-p-lightest);
                         }
                     }
@@ -70,7 +70,7 @@
             .no-my-suite {
                 @include wh;
                 @include flex(c, c);
-                @include useTheme {
+                @include c-t {
                     color: color(c-g10, 0.7);
                 }
                 font-size: 14px;
@@ -79,7 +79,7 @@
             .suite-list {
                 padding-top: 15px;
                 font-size: 14px;
-                @include useTheme {
+                @include c-t {
                     color: color(c-g10, 0.7);
                 }
                 display: flex;
@@ -88,12 +88,12 @@
 
                 li {
                     padding: 10px;
-                    @include useTheme {
+                    @include c-t {
                         background-color: color(c-g2, 0.6);
                     }
 
                     &:hover {
-                        @include useTheme {
+                        @include c-t {
                             background-color: color(c-p-lightest);
                         }
                     }
@@ -109,7 +109,7 @@
         button {
             @include wh;
             padding: 10px 15px;
-            @include useTheme {
+            @include c-t {
                 background-color: color(c-p-dark, 0.8);
                 color: color(c-g);
             }

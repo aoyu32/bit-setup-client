@@ -1,0 +1,251 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.ai-sidebar {
+    @include wh(250, 100vh);
+    @include flex(n, n, c);
+    background-color: antiquewhite;
+    gap: 20px;
+
+    @include c-t {
+        background-color: color(c-g0);
+        color: color(c-g9);
+    }
+
+    .ai-sidebar-wrapper {
+        @include wh;
+        @include flex(n, n, c);
+        gap: 20px;
+    }
+
+    .sidebar-header {
+        @include flex(c, s-b);
+        padding: 15px 15px 0 15px;
+
+        .ai-name {
+            @include flex(l, c);
+            font-size: 13px;
+            font-weight: 550;
+
+            @include c-t {
+                color: color(c-s-dark);
+            }
+
+            gap: 5px;
+
+            span {
+                @include flex(c, c);
+            }
+
+            .iconfont {
+                font-size: 20px;
+                font-weight: 600;
+            }
+        }
+    }
+
+
+    .new-chat {
+
+        padding: 0 15px;
+
+
+        button {
+            @include wh;
+            padding: 9px 0;
+            @include b-r($b-r);
+            font-size: 12px;
+            @include flex(c, c);
+
+            @include c-t {
+                border: 1px solid color(c-g3, 0.5);
+                background-color: color(c-s-light, 0.2);
+                color: color(c-g8);
+            }
+
+
+
+
+            .iconfont {
+                margin-right: 6px;
+                font-size: 14px;
+            }
+
+        }
+
+    }
+
+    .history-chat {
+        @include wh(100p, 70vh);
+
+        @include flex(l, t, c);
+
+
+        @include c-t {
+            color: color(c-7);
+        }
+
+        .history-lable {
+            margin-bottom: 10px;
+            font-size: 12px;
+            padding: 0 20px;
+            flex-shrink: 0;
+
+            .iconfont {
+                font-size: 14px;
+                margin-right: 5px;
+            }
+        }
+
+        .history-list {
+            @include flex(n, n, c);
+            @include wh;
+            overflow-y: hidden;
+            padding: 0 20px;
+            min-height: 0;
+            
+
+            // 关键：始终允许滚动，但隐藏滚动条
+            overflow-y: auto;
+
+            // 默认隐藏滚动条
+            &::-webkit-scrollbar {
+                width: 0px;
+                position: absolute;
+                background: transparent;
+            }
+
+            // 滚动时显示滚动条
+            &.show-scrollbar::-webkit-scrollbar {
+                width: 6px;
+            }
+
+
+            // &:hover {
+            //     overflow-y: auto;
+            // }
+
+            .history-item {
+                @include flex(c, s-b);
+                font-size: 13px;
+                padding: 12px 15px;
+                gap: 10px;
+                @include b-r($b-r);
+                cursor: pointer;
+
+                .item-content {
+                    flex: 1;
+                    @include t-e;
+
+                    input {
+                        @include wh;
+                        border: 1px solid color(c-s-light);
+                        padding: 5px;
+                        display: none;
+                        font-size: 13px;
+                        @include b-r($b-r);
+
+                    }
+                }
+
+                .item-more {
+                    display: none;
+                    padding: 0px;
+
+                    span {
+                        @include flex(c, c);
+                    }
+
+                    &:hover {
+                        @include c-t {
+                            color: color(c-s-darker);
+                        }
+                    }
+                }
+
+                &:hover {
+                    @include c-t {
+                        background-color: color(c-s-light, 0.2);
+                    }
+
+                    .item-more {
+                        display: flex;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+
+    .fold-nav {
+        @include wh;
+        @include flex(c, t, c);
+        gap: 40px;
+
+        .ai-logo {
+            margin-top: 25px;
+            cursor: pointer;
+
+            .iconfont {
+                font-size: 25px;
+                font-weight: 600;
+
+                @include c-t {
+                    color: color(c-s-dark);
+                }
+            }
+        }
+
+        .unfold-btn,
+        .new-chat {
+            cursor: pointer;
+
+            .iconfont {
+                font-size: 20px;
+            }
+        }
+
+
+    }
+
+    .more-menu {
+        @include p-a(t0, r070);
+        @include flex(l, c, c);
+        padding: 10px 5px;
+        gap: 5px;
+
+        @include c-t {
+            background-color: color(c-g9, 0.9);
+            color: color(c-g5);
+        }
+
+        @include b-r($b-r);
+
+        .menu-item {
+            padding: 7px 10px;
+            @include b-r($b-r, $b-r);
+            @include flex(c, l);
+            cursor: pointer;
+            gap: 5px;
+            font-size: 14px;
+
+            .iconfont {
+                font-size: 16px;
+            }
+
+            &:hover {
+                @include c-t {
+                    background-color: color(c-g10);
+                }
+            }
+        }
+
+
+
+
+    }
+
+
+
+}

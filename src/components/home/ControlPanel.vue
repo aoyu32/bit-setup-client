@@ -87,8 +87,8 @@ const modes = ref([
     }
 ])
 onMounted(() => {
-    currentTheme.value = 'dark'
-    handleChangeTheme()
+    // currentTheme.value = 'dark'
+    // handleChangeTheme()
 })
 
 const currentTheme = ref('light')

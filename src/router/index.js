@@ -3,7 +3,7 @@ import Index from '@/views/home/Index.vue'
 import Category from '@/views/category/Category.vue'
 import Suite from '@/views/suite/Suite.vue'
 import Community from '@/views/community/Community.vue'
-import Assistant from '@/views/assistant/Assistant.vue'
+import ai from '@/views/ai/ai.vue'
 import Layout from '@/views/layout/Layout.vue'
 
 
@@ -29,8 +29,8 @@ const router = createRouter({
                     component: Suite
                 },
                 {
-                    path: '/assistant',
-                    component: Assistant
+                    path: '/ai',
+                    component: ai
                 },
                 {
                     path: '/community',

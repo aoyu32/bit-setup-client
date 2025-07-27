@@ -58,7 +58,11 @@ const showCustom = ref(true)
 
         .my-suite-container {
             @include wh(100p, 100vh);
-            background-color: color(c-g);
+
+            @include c-t {
+                background-color: color(c-g);
+            }
+
             overflow-y: auto; // 如果内容很多，允许右侧内部滚动
         }
     }

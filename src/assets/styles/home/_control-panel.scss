@@ -2,7 +2,10 @@
 
 .control-panel {
     @include wh(100p);
-    @include flex(c,s-b,c);
+    @include flex(c, s-b, c);
+    box-shadow: shadow(l);
+    @include b-r($b-r);
+    padding: 10px;
 
     .title {
         width: 100%;
@@ -11,11 +14,11 @@
         font-size: 14px;
         font-weight: 600;
 
-        @include useTheme {
-            border: 1px solid adjust-color(c-p, 15%);
+        @include c-t {
+            // border: 1px solid adjust-color(c-g1, 15%);
             border-bottom: 0;
-            background-color: adjust-color(c-p, 30%);
-            color: color(c-p);
+            // background-color: adjust-color(c-g1, 20%);
+            color: color(c-g10, 0.5);
         }
 
         span {
@@ -23,7 +26,7 @@
             @include wh(100p);
             padding-left: 5px;
 
-            @include useTheme {
+            @include c-t {
                 border-left: 2px solid color(c-p);
             }
         }
@@ -32,7 +35,7 @@
     .panel-top {
         width: 100%;
 
-        @include useTheme {
+        @include c-t {
             background-color: color(c-g, 0.3);
         }
 
@@ -44,9 +47,9 @@
             grid-template-columns: repeat(2, 1fr);
             border-radius: 0px 0px 6px 6px;
 
-            @include useTheme {
-                border: 1px solid adjust-color(c-p, 15%);
-                @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
+            @include c-t {
+                border: 1px solid adjust-color(c-g1, 15%);
+                // @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
             }
         }
 
@@ -56,23 +59,24 @@
                 border-radius: $b-r;
                 gap: 5px;
                 font-size: 14px;
-                @include flex(c,c);
-                box-shadow: shadow(m);
+                @include flex(c, c);
+                box-shadow: shadow(l);
                 transition: all 0.3s ease;
                 text-decoration: none;
 
-                @include useTheme {
-                    border: 1px solid adjust-color(c-p, 20%);
-                    color: color(c-p);
-                    @include gradient-color(color(c-g), adjust-color(c-p, 38%), 135deg);
+                @include c-t {
+                    border: 1px solid adjust-color(c-g, 20%);
+                    color: color(c-s);
+                    // @include gradient-color(color(c-g), adjust-color(c-p, 38%), 135deg);
                 }
 
                 &:hover {
-                    @include useTheme {
-                        @include gradient-color(adjust-color(c-p, 35%), adjust-color(c-p, 25%), 135deg);
-                        color: color(c-g);
+                    @include c-t {
+                        // @include gradient-color(adjust-color(c-p, 35%), adjust-color(c-p, 25%), 135deg);
+                        color: color(c-p);
                         border-color: color(c-p);
                     }
+
                     box-shadow: shadow(m);
                     transform: translateY(-1px);
                 }
@@ -80,14 +84,14 @@
                 .iconfont {
                     font-size: 20px;
 
-                    @include useTheme {
-                        color: adjust-color(c-p, -10%);
+                    @include c-t {
+                        color: adjust-color(c-p-dark, -10%);
                     }
                 }
 
                 &:hover .iconfont {
-                    @include useTheme {
-                        color: color(c-g);
+                    @include c-t {
+                        color: color(c-p);
                     }
                 }
             }
@@ -97,8 +101,8 @@
     .panel-center {
         width: 100%;
 
-        @include useTheme {
-            @include gradient-color(adjust-color(c-g, -2%), adjust-color(c-g, -5%), 135deg);
+        @include c-t {
+            // @include gradient-color(adjust-color(c-g, -2%), adjust-color(c-g, -5%), 135deg);
         }
 
         .themes {
@@ -110,9 +114,9 @@
             padding: 10px 15px;
             border-radius: 0px 0px 6px 6px;
 
-            @include useTheme {
-                border: 1px solid adjust-color(c-p, 15%);
-                @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
+            @include c-t {
+                border: 1px solid adjust-color(c-g1, 15%);
+                // @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
                 box-shadow: inset 0 1px 3px shadow(l);
             }
         }
@@ -124,14 +128,14 @@
             cursor: pointer;
             transition: all 0.3s ease;
 
-            @include useTheme {
-                border: 1px solid adjust-color(c-p, 20%);
-                @include gradient-color(color(c-g), adjust-color(c-p, 38%), 135deg);
+            @include c-t {
+                border: 1px solid adjust-color(c-g, 20%);
+                // @include gradient-color(color(c-g), adjust-color(c-p, 38%), 135deg);
                 box-shadow: shadow(l);
             }
 
             &:hover {
-                @include useTheme {
+                @include c-t {
                     border-color: color(c-p);
                     box-shadow: shadow(m);
                 }
@@ -139,36 +143,37 @@
 
             .select-header {
                 @include wh(100p);
-                @include flex(c,s-b);
+                @include flex(c, s-b);
                 font-size: 15px;
 
-                @include useTheme {
-                    color: color(c-p);
+                @include c-t {
+                    color: color(c-s);
                 }
 
                 span {
-                    @include flex(c,c);
+                    @include flex(c, c);
                 }
 
                 .select-value .iconfont {
                     font-size: 20px;
                     margin-right: 5px;
 
-                    @include useTheme {
-                        color: color(c-p);
+                    @include c-t {
+                        color: color(c-p-dark);
                     }
                 }
 
                 .arrow-icon .iconfont {
-                    @include useTheme {
+                    @include c-t {
                         color: adjust-color(c-p, -10%);
                     }
+
                     transition: color 0.3s ease;
                 }
             }
 
             &:hover .arrow-icon .iconfont {
-                @include useTheme {
+                @include c-t {
                     color: color(c-p);
                 }
             }
@@ -179,8 +184,8 @@
         width: 100%;
         border-radius: $b-r;
 
-        @include useTheme {
-            @include gradient-color(adjust-color(c-g, -2%), adjust-color(c-g, -5%), 135deg);
+        @include c-t {
+            // @include gradient-color(adjust-color(c-g, -2%), adjust-color(c-g, -5%), 135deg);
         }
 
         .modes {
@@ -192,9 +197,9 @@
                 display: flex;
                 gap: 10px;
 
-                @include useTheme {
-                    border: 1px solid adjust-color(c-p, 15%);
-                    @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
+                @include c-t {
+                    border: 1px solid adjust-color(c-g1, 15%);
+                    // @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
                 }
             }
 
@@ -207,27 +212,28 @@
                 font-size: 14px;
                 transition: all 0.3s ease;
 
-                @include useTheme {
-                    border: 1px solid adjust-color(c-p, 15%);
-                    @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
-                    color: color(c-p);
-                    box-shadow: shadow(m);
+                @include c-t {
+                    border: 1px solid adjust-color(c-g, 15%);
+                    // @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
+                    color: color(c-s);
+                    box-shadow: shadow(l);
                 }
 
                 &:hover {
-                    @include useTheme {
-                        @include gradient-color(color(c-p), adjust-color(c-p, -10%), 135deg);
-                        color: color(c-g);
+                    @include c-t {
+                        // @include gradient-color(color(c-p), adjust-color(c-p, -10%), 135deg);
+                        color: color(c-p-dark);
                         border-color: adjust-color(c-p, -15%);
                         box-shadow: shadow(m);
                     }
+
                     transform: translateY(-1px);
                 }
 
                 &:active {
                     transform: translateY(0);
 
-                    @include useTheme {
+                    @include c-t {
                         box-shadow: shadow(m);
                     }
                 }

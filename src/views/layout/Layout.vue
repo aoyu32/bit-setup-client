@@ -2,21 +2,26 @@
     <header>
         <Header></Header>
     </header>
-    <main>
+    <main :class="{ main: $route.path === '/ai' }">
         <router-view />
     </main>
-    <footer>
+    <footer v-if="$route.path !== '/ai'">
         <Footer></Footer>
     </footer>
 </template>
 <script setup>
+import { ref, computed,onMounted } from 'vue'
 import Header from '@/components/common/Header.vue';
 import Footer from '@/components/common/Footer.vue'
+onMounted(()=>{
+    document.documentElement.setAttribute('data-theme','light')
+})
+
 
 </script>
 <style lang="scss" scoped>
 header {
-    width: 100%;
+    @include wh(100p,$header-height);
     position: fixed;
     top: 0;
     left: 0;
@@ -25,14 +30,18 @@ header {
 
 main {
     max-width: $header-width;
-    padding: $header-height 0;
+    margin-top: $header-height;
     width: 100%;
-    margin-bottom: 100px;
+    height: 100%;
+    margin-bottom: 250px;
+}
+
+.main {
+    margin-bottom: 0;
 }
 
 footer {
-    width: 100%;
-    height: 100px;
+    @include wh(100p, n);
     @include p-a(b0);
 }
 

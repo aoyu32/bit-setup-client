@@ -14,7 +14,7 @@
             height: 40px;
             @include flex(c, c);
 
-            @include useTheme {
+            @include c-t {
                 border: 1px solid color(c-g3);
                 background-color: color(c-g);
             }
@@ -24,7 +24,7 @@
             overflow: hidden;
 
             &.focus {
-                @include useTheme {
+                @include c-t {
                     border-color: color(c-p, 0.2);
                 }
             }
@@ -37,13 +37,13 @@
                 outline: none;
                 font-size: 14px;
 
-                @include useTheme {
+                @include c-t {
                     color: color(c-g9);
                 }
                 background: transparent;
 
                 &::placeholder {
-                    @include useTheme {
+                    @include c-t {
                         color: color(c-g5);
                     }
                 }
@@ -55,13 +55,13 @@
                 @include flex(c, c);
                 cursor: pointer;
 
-                @include useTheme {
+                @include c-t {
                     color: color(c-g5);
                 }
                 transition: all 0.3s;
 
                 &:hover {
-                    @include useTheme {
+                    @include c-t {
                         color: color(c-p);
                     }
                 }
@@ -73,7 +73,7 @@
             top: 50px;
             left: 0;
             width: 100%;
-            @include useTheme {
+            @include c-t {
                 background-color: color(c-g);
                 box-shadow: shadow(m);
             }
@@ -87,19 +87,19 @@
                 padding: 10px 15px;
                 font-size: 14px;
 
-                @include useTheme {
+                @include c-t {
                     color: color(c-g5);
                     border-bottom: 1px solid color(c-g2);
                 }
 
                 .clear-history {
-                    @include useTheme {
+                    @include c-t {
                         color: color(c-s);
                     }
                     cursor: pointer;
 
                     &:hover {
-                        @include useTheme {
+                        @include c-t {
                             opacity: 0.8;
                         }
                     }
@@ -116,27 +116,27 @@
                     padding: 10px 15px;
                     font-size: 14px;
 
-                    @include useTheme {
+                    @include c-t {
                         color: color(c-g9);
                     }
                     cursor: pointer;
                     @include flex(c, s-b);
 
                     &:hover {
-                        @include useTheme {
+                        @include c-t {
                             background-color: color(c-g1);
                         }
                     }
 
                     .delete-item {
-                        @include useTheme {
+                        @include c-t {
                             color: color(c-g5);
                         }
                         font-size: 18px;
                         padding: 0 5px;
 
                         &:hover {
-                            @include useTheme {
+                            @include c-t {
                                 color: color(c-s);
                             }
                         }
@@ -148,7 +148,7 @@
                 padding: 15px;
                 text-align: center;
 
-                @include useTheme {
+                @include c-t {
                     color: color(c-g5);
                 }
                 font-size: 14px;

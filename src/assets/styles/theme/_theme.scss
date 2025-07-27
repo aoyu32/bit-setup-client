@@ -3,168 +3,90 @@
 @use "sass:meta";
 @use "sass:color";
 @use "sass:math";
-// $colors: (
-//     // 主品牌色（改为低饱和蓝灰色系）
-//     c-p: #5a7d9a,
-//     c-p-light: #7d9cb8,
-//     c-p-lighter: #a0b7cf,
-//     c-p-lightest: #e1e9f2,
-//     c-p-dark: #3c5d78,
-//     c-p-darker: #1e3f5a,
-//     c-p-darkest: #0a253c,
-
-//     // 辅助色（改为浅灰色系）
-//     c-s: #8e8e8e,
-//     c-s-light: #a8a8a8,
-//     c-s-lighter: #c5c5c5,
-//     c-s-lightest: #f0f0f0,
-//     c-s-dark: #6b6b6b,
-//     c-s-darker: #4a4a4a,
-//     c-s-darkest: #2d2d2d,
-
-//     // 中性色（白色系为主）
-//     c-g: #ffffff,
-//     c-g0: #fcfcfc,
-//     c-g1: #f8f8f8,
-//     c-g2: #f2f2f2,
-//     c-g3: #e8e8e8,
-//     c-g4: #dddddd,
-//     c-g5: #c2c2c2,
-//     c-g6: #999999,
-//     c-g7: #777777,
-//     c-g8: #555555,
-//     c-g9: #333333,
-//     c-g10: #111111,
-
-//     // 功能色（低饱和度版本）
-//     success: #7bc79a,
-//     warning: #e8c97b,
-//     error: #e8a3a3,
-//     info: #8ab8e8,
-// );
-// $colors: (
-//     // 主品牌色
-//     c-p: #1677ff,
-//     c-p-light: #4096ff,
-//     c-p-lighter: #69b1ff,
-//     c-p-lightest: #bae0ff,
-//     c-p-dark: #0958d9,
-//     c-p-darker: #003eb3,
-//     c-p-darkest: #002c8c,
-
-//     // 辅助品牌色
-//     c-s: #722ed1,
-//     c-s-light: #9254de,
-//     c-s-lighter: #b37feb,
-//     c-s-lightest: #efdbff,
-//     c-s-dark: #531dab,
-//     c-s-darker: #391085,
-//     c-s-darkest: #22075e,
-
-//     // 中性色
-//     c-g: #ffffff,
-//     c-g0: #fafafa,
-//     c-g1: #f5f5f5,
-//     c-g2: #f0f0f0,
-//     c-g3: #d9d9d9,
-//     c-g4: #bfbfbf,
-//     c-g5: #8c8c8c,
-//     c-g6: #595959,
-//     c-g7: #434343,
-//     c-g8: #262626,
-//     c-g9: #1f1f1f,
-//     c-g10: #000000,
-
-//     // 功能色
-//     success: #52c41a,
-//     warning: #faad14,
-//     error: #ff4d4f,
-//     info: #1890ff,
-
-// );
 
 $theme: (
-    light:( // 主品牌色
-        c-p: #1677ff,
-        c-p-light: #4096ff,
-        c-p-lighter: #69b1ff,
-        c-p-lightest: #bae0ff,
-        c-p-dark: #0958d9,
-        c-p-darker: #003eb3,
-        c-p-darkest: #002c8c,
+    light:(
+        // 主品牌色 (Primary - changed to teal)
+        c-p: #008080,
+        c-p-light: #00a3a3,
+        c-p-lighter: #00cccc,
+        c-p-lightest: #b2f5f5,
+        c-p-dark: #006666,
+        c-p-darker: #004d4d,
+        c-p-darkest: #003333,
 
-        // 辅助品牌色
-        c-s: #722ed1,
-        c-s-light: #9254de,
-        c-s-lighter: #b37feb,
-        c-s-lightest: #efdbff,
-        c-s-dark: #531dab,
-        c-s-darker: #391085,
-        c-s-darkest: #22075e,
+        // 辅助品牌色 (Secondary - changed to coral)
+        c-s: #ff6b6b,
+        c-s-light: #ff8e8e,
+        c-s-lighter: #ffb3b3,
+        c-s-lightest: #ffe5e5,
+        c-s-dark: #e05555,
+        c-s-darker: #c23e3e,
+        c-s-darkest: #a32929,
 
-        // 中性色
+        // 中性色 (Greys - kept similar but adjusted slightly)
         c-g: #ffffff,
-        c-g0: #fafafa,
-        c-g1: #f5f5f5,
-        c-g2: #f0f0f0,
-        c-g3: #d9d9d9,
-        c-g4: #bfbfbf,
-        c-g5: #8c8c8c,
-        c-g6: #595959,
-        c-g7: #434343,
-        c-g8: #262626,
-        c-g9: #1f1f1f,
+        c-g0: #f8f9fa,
+        c-g1: #e9ecef,
+        c-g2: #dee2e6,
+        c-g3: #ced4da,
+        c-g4: #adb5bd,
+        c-g5: #6c757d,
+        c-g6: #495057,
+        c-g7: #343a40,
+        c-g8: #212529,
+        c-g9: #1a1e21,
         c-g10: #000000,
 
         // 功能色
-        success: #52c41a,
-        warning: #faad14,
-        error: #ff4d4f,
-        info: #1890ff,
-
+        success: #28a745,  // Green
+        warning: #ffc107,  // Yellow
+        error: #dc3545,    // Red
+        info: #17a2b8,    // Cyan
     ),
-    dark:( // 主品牌色（改为低饱和蓝灰色系）
-        c-p: #5a7d9a,
-        c-p-light: #7d9cb8,
-        c-p-lighter: #a0b7cf,
-        c-p-lightest: #e1e9f2,
-        c-p-dark: #3c5d78,
-        c-p-darker: #1e3f5a,
-        c-p-darkest: #0a253c,
+    dark: (
+        // 主品牌色 (Darker teal)
+        c-p: #004d4d,
+        c-p-light: #006666,
+        c-p-lighter: #008080,
+        c-p-lightest: #00b3b3,
+        c-p-dark: #003333,
+        c-p-darker: #001a1a,
+        c-p-darkest: #000d0d,
 
-        // 辅助色（改为浅灰色系）
-        c-s: #8e8e8e,
-        c-s-light: #a8a8a8,
-        c-s-lighter: #c5c5c5,
-        c-s-lightest: #f0f0f0,
-        c-s-dark: #6b6b6b,
-        c-s-darker: #4a4a4a,
-        c-s-darkest: #2d2d2d,
+        // 辅助品牌色 (Darker coral)
+        c-s: #b33e3e,
+        c-s-light: #cc4d4d,
+        c-s-lighter: #e55c5c,
+        c-s-lightest: #ff8080,
+        c-s-dark: #992e2e,
+        c-s-darker: #801f1f,
+        c-s-darkest: #661414,
 
-        // 中性色（白色系为主）
-        c-g: #000000,
-        c-g0: #fcfcfc,
-        c-g1: #f8f8f8,
-        c-g2: #f2f2f2,
-        c-g3: #e8e8e8,
-        c-g4: #dddddd,
-        c-g5: #c2c2c2,
-        c-g6: #999999,
-        c-g7: #777777,
-        c-g8: #555555,
-        c-g9: #333333,
-        c-g10: #111111,
+        // 中性色 (Dark theme greys)
+        c-g: #121212,
+        c-g0: #1e1e1e,
+        c-g1: #252525,
+        c-g2: #2e2e2e,
+        c-g3: #3d3d3d,
+        c-g4: #525252,
+        c-g5: #6e6e6e,
+        c-g6: #8e8e8e,
+        c-g7: #b3b3b3,
+        c-g8: #d9d9d9,
+        c-g9: #e8e8e8,
+        c-g10: #ffffff,
 
-        // 功能色（低饱和度版本）
-        success: #7bc79a,
-        warning: #e8c97b,
-        error: #e8a3a3,
-        info: #8ab8e8,
+        // 功能色
+        success: #218838,  // Darker green
+        warning: #e0a800,  // Darker yellow
+        error: #c82333,    // Darker red
+        info: #138496,    // Darker cyan
     )
 );
 $currentTheme : light;
 
-@mixin useTheme() {
+@mixin c-t() {
     @each $key, $value in $theme {
         $currentTheme : $key !global;
 

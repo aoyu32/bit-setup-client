@@ -7,7 +7,7 @@
     box-shadow: shadow(s);
     transition: all 0.3s ease;
 
-    @include useTheme {
+    @include c-t {
         background: color(c-g);
         border: 1px solid color(c-g2);
     }
@@ -15,7 +15,7 @@
     &:hover {
         box-shadow: shadow(l);
 
-        @include useTheme {
+        @include c-t {
             border-color: color(c-g3);
         }
     }
@@ -24,7 +24,7 @@
         padding: 22px 26px 18px;
         @include flex(c, s-b);
 
-        @include useTheme {
+        @include c-t {
             @include gradient-color(c-g, c-g0, to right);
             border-bottom: 1px solid color(c-g1);
         }
@@ -38,7 +38,7 @@
                 font-weight: 700;
                 letter-spacing: -0.02em;
 
-                @include useTheme {
+                @include c-t {
                     color: color(c-g9);
                 }
             }
@@ -58,7 +58,7 @@
             min-width: 28px;
             text-align: center;
 
-            @include useTheme {
+            @include c-t {
                 @include gradient-color(c-p-lightest, c-p-lighter, 135deg);
                 color: color(c-p-dark);
                 border: 1px solid color(c-p, 0.2);
@@ -81,7 +81,7 @@
             position: relative;
 
             &:not(:last-child) {
-                @include useTheme {
+                @include c-t {
                     border-bottom-color: color(c-g0);
                 }
             }
@@ -97,13 +97,13 @@
                 border-radius: 0 4px 4px 0;
                 transition: width 0.2s ease;
 
-                @include useTheme {
+                @include c-t {
                     @include gradient-color(c-p, c-p-light, 135deg);
                 }
             }
 
             &:hover {
-                @include useTheme {
+                @include c-t {
                     background: color(c-p, 0.02);
                     border-bottom-color: color(c-p, 0.1);
                 }
@@ -118,7 +118,7 @@
                 }
 
                 .item-title {
-                    @include useTheme {
+                    @include c-t {
                         color: color(c-p-dark);
                     }
                 }
@@ -127,7 +127,7 @@
                     opacity: 1;
                     transform: translateX(0);
 
-                    @include useTheme {
+                    @include c-t {
                         color: color(c-p);
                     }
                 }
@@ -136,7 +136,7 @@
             &:active {
                 transform: scale(0.99);
 
-                @include useTheme {
+                @include c-t {
                     background: color(c-p, 0.04);
                 }
             }
@@ -155,7 +155,7 @@
                     flex-shrink: 0;
                     margin-right: 16px;
 
-                    @include useTheme {
+                    @include c-t {
                         background: color(c-g0);
                     }
 
@@ -172,7 +172,7 @@
                         transform: scale(0.95);
                         transition: all 0.2s ease;
 
-                        @include useTheme {
+                        @include c-t {
                             border: 2px solid color(c-p);
                         }
                     }
@@ -190,7 +190,7 @@
                         transition: color 0.2s ease;
                         @include t-e;
 
-                        @include useTheme {
+                        @include c-t {
                             color: color(c-g7);
                         }
                     }
@@ -201,7 +201,7 @@
                         line-height: 1.4;
                         @include t-e;
 
-                        @include useTheme {
+                        @include c-t {
                             color: color(c-g5);
                         }
                     }
@@ -220,12 +220,12 @@
                     transform: translateX(4px);
                     transition: all 0.2s ease;
 
-                    @include useTheme {
+                    @include c-t {
                         color: color(c-g3);
                     }
 
                     &:hover {
-                        @include useTheme {
+                        @include c-t {
                             background: color(c-p, 0.1);
                         }
                     }
@@ -241,7 +241,7 @@
             font-size: 15px;
             font-weight: 500;
 
-            @include useTheme {
+            @include c-t {
                 color: color(c-g4);
             }
         }

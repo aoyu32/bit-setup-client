@@ -95,7 +95,7 @@ const navItems = ref([
     {
         icon: 'icon-shejizhinengzhushou',
         name: '智能AI',
-        route: '/assistant'
+        route: '/ai'
     },
     {
         icon: 'icon-shouye-wifi',

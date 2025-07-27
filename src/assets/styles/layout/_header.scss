@@ -6,7 +6,7 @@
     box-shadow: shadow(m);
     @include flex(c, c);
 
-    @include useTheme {
+    @include c-t {
         background-color: color(c-g);
     }
 }
@@ -37,7 +37,7 @@
             border-radius: 10px;
             padding: 10px;
 
-            @include useTheme {
+            @include c-t {
                 background-color: color(c-g0);
             }
 
@@ -63,7 +63,7 @@
                 font-weight: 550;
                 position: relative;
 
-                @include useTheme {
+                @include c-t {
                     color: color(c-g7);
                 }
 
@@ -79,7 +79,7 @@
                     @include flex(c, c);
 
                     &.active {
-                        @include useTheme {
+                        @include c-t {
                             color: color(c-p);
                         }
 
@@ -92,13 +92,13 @@
                             height: 2px;
                             transform: scaleX(1);
 
-                            @include useTheme {
+                            @include c-t {
                                 background: color(c-p);
                             }
                         }
 
                         i {
-                            @include useTheme {
+                            @include c-t {
                                 color: color(c-p);
                             }
                         }
@@ -109,7 +109,7 @@
                     font-size: 20px;
                     margin-right: 7px;
 
-                    @include useTheme {
+                    @include c-t {
                         color: color(c-g7);
                     }
                 }
@@ -124,7 +124,7 @@
                     transform-origin: left;
                     transition: transform 0.3s ease;
 
-                    @include useTheme {
+                    @include c-t {
                         background: color(c-p-light);
                     }
                 }
@@ -158,7 +158,7 @@
             i {
                 font-size: 20px;
 
-                @include useTheme {
+                @include c-t {
                     color: color(c-p);
                 }
             }
@@ -187,12 +187,12 @@
                 cursor: pointer;
                 transition: all 0.3s ease;
 
-                @include useTheme {
+                @include c-t {
                     background-color: color(c-p-light, 0.3);
                 }
 
                 &:hover {
-                    @include useTheme {
+                    @include c-t {
                         background-color: color(c-p-light, 0.5);
                     }
                 }
@@ -201,7 +201,7 @@
                     font-size: 14px;
                     font-weight: 600;
 
-                    @include useTheme {
+                    @include c-t {
                         color: color(c-g9);
                     }
                 }
@@ -229,7 +229,7 @@
                     box-shadow: shadow(m);
                     z-index: 10;
 
-                    @include useTheme {
+                    @include c-t {
                         background-color: color(c-g8);
                         color: color(c-g0);
                     }
@@ -263,12 +263,12 @@
                 cursor: pointer;
                 transition: all 0.3s ease;
 
-                @include useTheme {
+                @include c-t {
                     background-color: color(c-p, 0.2);
                 }
 
                 &:hover {
-                    @include useTheme {
+                    @include c-t {
                         background-color: color(c-p, 0.4);
                     }
                 }
@@ -279,7 +279,7 @@
                     border-radius: 50%;
                     overflow: hidden;
 
-                    @include useTheme {
+                    @include c-t {
                         border: 2px solid color(c-p-lighter);
                     }
 
@@ -296,7 +296,7 @@
                     max-width: 80px;
                     @include t-e;
 
-                    @include useTheme {
+                    @include c-t {
                         color: color(c-g9);
                     }
                 }
@@ -305,7 +305,7 @@
                     font-size: 12px;
                     transition: transform 0.3s ease;
 
-                    @include useTheme {
+                    @include c-t {
                         color: color(c-g9);
                     }
                 }
@@ -325,7 +325,7 @@
                     padding: 8px 0;
                     z-index: 100;
 
-                    @include useTheme {
+                    @include c-t {
                         background-color: color(c-g0);
                     }
 
@@ -340,12 +340,12 @@
                             font-size: 14px;
                             transition: all 0.2s ease;
 
-                            @include useTheme {
+                            @include c-t {
                                 color: color(c-g7);
                             }
 
                             &:hover {
-                                @include useTheme {
+                                @include c-t {
                                     background-color: color(c-p-light, 0.2);
                                     color: color(c-g9);
                                 }
@@ -380,7 +380,7 @@
                     font-size: 20px;
                     line-height: 100%;
 
-                    @include useTheme {
+                    @include c-t {
                         color: color(c-s);
                     }
                 }
@@ -412,7 +412,7 @@
 
                             a {
                                 &.active {
-                                    @include useTheme {
+                                    @include c-t {
                                         color: color(c-p);
                                     }
 
@@ -421,7 +421,7 @@
                                     }
 
                                     i {
-                                        @include useTheme {
+                                        @include c-t {
                                             color: color(c-p);
                                         }
                                     }
@@ -433,7 +433,7 @@
                             }
 
                             &:hover {
-                                @include useTheme {
+                                @include c-t {
                                     background-color: color(c-p-light, 0.2);
                                 }
                             }

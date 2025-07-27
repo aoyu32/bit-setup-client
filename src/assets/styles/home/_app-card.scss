@@ -9,7 +9,7 @@
      cursor: pointer;
      user-select: none;
 
-     @include useTheme {
+     @include c-t {
          background-color: color(c-g0);
      }
 
@@ -32,7 +32,7 @@
                  @include wh(30);
                  @include b-r($app-card-br);
 
-                 @include useTheme {
+                 @include c-t {
                      color: color(c-g);
                  }
 
@@ -43,7 +43,7 @@
                  &:hover {
                      transform: scale(1.1);
 
-                     @include useTheme {
+                     @include c-t {
                          background-color: color(c-g1, 0.3);
                      }
                  }
@@ -90,7 +90,7 @@
              @include flex(c, c);
              position: relative;
 
-             @include useTheme {
+             @include c-t {
                  background: color(c-p-light);
              }
 
@@ -116,7 +116,7 @@
                  width: 100%;
                  height: 70px;
 
-                 @include useTheme {
+                 @include c-t {
                      background-color: color(c-g0);
                  }
              }
@@ -126,7 +126,7 @@
                  @include p-a(b0, l0);
                  @include wh(100p, 70);
 
-                 @include useTheme {
+                 @include c-t {
                      background: color(c-p-light);
                  }
 
@@ -140,7 +140,7 @@
              @include flex(c, n, c);
              position: relative;
 
-             @include useTheme {
+             @include c-t {
                  background: color(c-g0);
              }
 
@@ -154,7 +154,7 @@
                  font-weight: 550;
                  padding-top: 20px;
 
-                 @include useTheme {
+                 @include c-t {
                      color: color(c-g7);
                  }
 
@@ -167,7 +167,7 @@
                  font-size: 14px;
                  border-radius: $b-r;
 
-                 @include useTheme {
+                 @include c-t {
                      background-color: color(c-p-lightest);
                      color: color(c-p-dark);
                  }
@@ -178,7 +178,7 @@
              .app-download {
                  font-size: 12px;
 
-                 @include useTheme {
+                 @include c-t {
                      color: color(c-g6);
                  }
 
@@ -199,7 +199,7 @@
                  @include p-a(t0, l0);
                  @include wh(100p, 70);
 
-                 @include useTheme {
+                 @include c-t {
                      background: color(c-p-light);
                  }
              }
@@ -208,7 +208,7 @@
                  content: '';
                  @include p-a(t0, l0);
 
-                 @include useTheme {
+                 @include c-t {
                      background: color(c-p-light);
                      background-color: color(c-g0);
                  }
@@ -224,7 +224,7 @@
              @include wh(50p, 100p);
              z-index: 90;
 
-             @include useTheme {
+             @include c-t {
                  background: rgba(color(c-p), 0.185);
              }
 
@@ -247,7 +247,7 @@
          .mark-wrapper {
              font-size: 9px;
 
-             @include useTheme {
+             @include c-t {
                  color: color(c-g, 0.7);
              }
 
@@ -257,7 +257,7 @@
              position: absolute;
 
              .app-mark {
-                 @include useTheme {
+                 @include c-t {
                      background-color: color(c-g, 0.2);
                  }
 
@@ -296,7 +296,7 @@
              font-size: 12px;
              padding: 2px 0;
 
-             @include useTheme {
+             @include c-t {
                  color: color(c-g);
                  background: color(error);
              }
@@ -319,7 +319,7 @@
              @include flex(c, c);
              position: relative;
 
-             @include useTheme {
+             @include c-t {
                  background: color(c-p-light);
              }
 
@@ -334,7 +334,7 @@
                  text-align: center;
                  transform: scaleX(-1);
 
-                 @include useTheme {
+                 @include c-t {
                      color: color(c-g, 0.9);
                  }
              }
@@ -344,7 +344,7 @@
                  @include p-a(b0, l0);
                  @include wh(100p, 70);
 
-                 @include useTheme {
+                 @include c-t {
                      background-color: color(c-g0);
                  }
              }
@@ -354,7 +354,7 @@
                  @include p-a(b0, l0);
                  @include wh(100p, 70);
 
-                 @include useTheme {
+                 @include c-t {
                      background: color(c-p-light);
                  }
              }
@@ -366,7 +366,7 @@
              @include flex(c, n, c);
              position: relative;
 
-             @include useTheme {
+             @include c-t {
                  background: color(c-g0);
              }
 
@@ -386,7 +386,7 @@
                  @include p-a(t0, l0);
                  @include wh(100p, 70);
 
-                 @include useTheme {
+                 @include c-t {
                      background: color(c-p-light);
                  }
              }
@@ -397,7 +397,7 @@
                  @include wh(100p, 70);
                  @include b-r(70,70,0,0);
 
-                 @include useTheme {
+                 @include c-t {
                      background-color: color(c-g0);
                  }
              }
