@@ -1,0 +1,27 @@
+@use '@/assets/styles/common/main.scss' as *;
+.ai-message{
+    @include wh;
+
+    .user-ask{
+        @include wh;
+        @include flex(c,r);
+
+        .message-content{
+            padding: 10px 15px;
+            @include c-t{
+                background-color: color(c-s-lighter,0.5);
+                @include b-r($b-r);
+            }
+        }
+    }
+
+    .ai-answer{
+        @include wh;
+        @include flex(c,l);
+
+        .message-content{
+            @include wh;
+        }
+    }
+
+}

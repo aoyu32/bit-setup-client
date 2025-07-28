@@ -1,0 +1,50 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.ai-window {
+    @include wh(100p, 100p);
+    @include flex(c, c, c);
+
+    .window-wrapper {
+        @include wh(100p, n);
+        @include flex(c, c, c);
+        max-width: 800px;
+        margin-bottom: 20px;
+
+        @include c-t {
+            color: color(c-g6, 0.8);
+        }
+
+        .ai-logo {
+            @include wh(100p, n);
+            @include flex(c, c);
+
+            .iconfont {
+                font-size: 60px;
+
+                @include c-t {
+                    color: color(c-s-dark);
+                }
+            }
+        }
+
+        .ai-greet {
+            @include wh(100p, n);
+            font-size: 24px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .ai-introduce {
+            @include wh(100p, n);
+            font-size: 15px;
+            text-align: center;
+        }
+
+
+        .has-message {
+            @include wh;
+            @include flex(n,n,c);
+            gap: 30px;
+        }
+    }
+}

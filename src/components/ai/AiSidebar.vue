@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="new-chat">
-                <button>
+                <button @click="handleNewChat">
                     <i class="iconfont icon-plus"></i>
                     新对话
                 </button>
@@ -65,11 +65,17 @@ import chatHistoryData from '@/utils/chat-history.js'
 const isFoldSidebar = ref(true)
 const aiSidebarRef = ref(null)
 const sidebarWidth = computed(() => { return isFoldSidebar.value ? '250px' : '70px' })
-const emit = defineEmits(['fold-sidebar'])
+const emit = defineEmits(['fold-sidebar','new-chat'])
 const moreMenuRef = ref(null)
 const showMoreMenu = ref(false)
 const showRenameInput = ref(false)
 const currentItemIndex = ref(0)
+
+//创建新对话
+const handleNewChat = () => {
+    emit('new-chat')
+}
+
 //折叠侧边栏按钮点事件
 const handleFoldButton = () => {
     isFoldSidebar.value = !isFoldSidebar.value
