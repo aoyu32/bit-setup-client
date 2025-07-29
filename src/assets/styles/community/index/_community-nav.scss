@@ -1,0 +1,46 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.community-nav {
+    @include wh;
+
+    .nav-wrapper {
+        @include wh;
+        @include flex;
+        padding: 10px 10px;
+        gap: 10px;
+        font-size: 14px;
+
+        @include c-t {
+            background-color: color(c-g);
+            color: color(c-g9, 0.6);
+        }
+    }
+
+    .nav-item {
+        padding: 5px 15px;
+        cursor: pointer;
+
+        &:hover {
+            @include c-t {
+                color: color(c-p-lighter);
+            }
+        }
+    }
+
+    .active {
+        @include b-r($b-r);
+
+        &:hover {
+            @include c-t {
+                color: color(c-g0);
+            }
+        }
+
+
+        @include c-t {
+            background-color: color(c-p-light);
+            color: color(c-g0);
+        }
+    }
+
+}

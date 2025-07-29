@@ -37,5 +37,5 @@ import cardAppList from '../../utils/data';
 
 </script>
 <style lang="scss" scoped>
-@use '@/assets/styles/home/index.scss' as *;
+@use '@/assets/styles/home/home.scss' as *;
 </style>

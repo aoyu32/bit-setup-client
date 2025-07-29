@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Index from '@/views/home/Index.vue'
+import Home from '@/views/home/Home.vue'
 import Category from '@/views/category/Category.vue'
 import Suite from '@/views/suite/Suite.vue'
 import Community from '@/views/community/Community.vue'
+import CommunityPost from '@/views/community/CommunityPost.vue'
 import ai from '@/views/ai/ai.vue'
 import Layout from '@/views/layout/Layout.vue'
+import CommunityIndex from '@/views/community/CommunityIndex.vue'
 
 
 
@@ -14,11 +16,11 @@ const router = createRouter({
         {
             path: '/',
             component: Layout,
-            redirect: '/index',
+            redirect: '/home',
             children: [
                 {
-                    path: '/index',
-                    component: Index,
+                    path: '/home',
+                    component: Home,
                 },
                 {
                     path: '/category',
@@ -34,7 +36,23 @@ const router = createRouter({
                 },
                 {
                     path: '/community',
-                    component: Community
+                    component: Community,
+                    children: [
+                        {
+                            path: '',
+                            component: CommunityIndex,
+                            redirect: '/community/index'
+                        },
+                        {
+                            path: 'index',
+                            component: CommunityIndex
+
+                        },
+                        {
+                            path: 'post',
+                            component: CommunityPost
+                        }
+                    ]
                 }
             ]
         }
