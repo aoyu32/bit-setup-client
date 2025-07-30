@@ -1,0 +1,116 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.stats-card {
+    padding: 20px;
+    box-shadow: shadow(m);
+    gap: 20px;
+    @include flex(n, n, c);
+
+    @include c-t {
+        background-color: color(c-g);
+    }
+
+    .card-top {
+        @include wh;
+        @include flex(c, s-b);
+
+        .info {
+            @include flex(c,c);
+            gap: 5px;
+            .avatar {
+                @include wh(40);
+                @include img($b-r);
+            }
+
+            .level {
+                @include flex(l, n, c);
+                font-size: 10px;
+                span:first-child {
+                    @include b-r(3);
+                    padding: 2px 3px;
+                    @include c-t {
+                        background-color: color(c-g9, 0.1);
+                    }
+                }
+            }
+        }
+
+        .post{
+            @include wh(n,100p);
+            margin-bottom: auto;
+            font-size: 14px;
+            padding: 3px 10px;
+            @include b-r(3);
+            @include c-t{
+                background-color: color(c-p-lighter,0.5);
+                color:color(c-g0);
+            }
+        }
+    }
+
+    .card-bottom {
+        @include wh;
+        @include flex(n, n, c);
+        padding: 10px;
+        gap: 20px;
+
+        .stats {
+            @include grid(2, 1fr);
+            gap: 30px 50px;
+
+            .stats-item {
+                @include flex(c, s-b);
+                font-size: 12px;
+
+                span:first-child {
+                    color: #6b7280;
+                    font-weight: 400;
+                }
+
+                span:last-child {
+                    color: #111827;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .post {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+
+            a {
+                flex: 1;
+                padding: 8px 16px;
+                text-align: center;
+                font-size: 14px;
+                font-weight: 500;
+                text-decoration: none;
+                border-radius: 6px;
+                transition: all 0.2s ease;
+
+                &:first-child {
+                    background: #f9fafb;
+                    color: #374151;
+                    border: 1px solid #e5e7eb;
+
+                    &:hover {
+                        background: #f3f4f6;
+                        border-color: #d1d5db;
+                    }
+                }
+
+                &:last-child {
+                    background: #3b82f6;
+                    color: white;
+                    border: 1px solid #3b82f6;
+
+                    &:hover {
+                        background: #2563eb;
+                        border-color: #2563eb;
+                    }
+                }
+            }
+        }
+    }
+}
