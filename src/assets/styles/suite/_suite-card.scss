@@ -72,9 +72,7 @@
                     background-color: color(c-g1);
                 }
 
-                img {
-                    @include wh;
-                }
+                @include img($b-r);
             }
 
             .suite-author-name {

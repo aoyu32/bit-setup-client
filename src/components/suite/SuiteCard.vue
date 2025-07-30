@@ -15,7 +15,7 @@
                 <div class="suite-info">
                     <div class="suite-info-top">
                         <div class="suite-author-avatar">
-                            <img src="../../assets/logo.svg" alt="">
+                            <img :src="suiteData.avatar" alt="">
                         </div>
                         <div class="suite-author-name">
                             <span>{{ suiteData.author }}</span>
@@ -49,7 +49,7 @@
                 <div class="suite-info">
                     <div class="suite-info-top">
                         <div class="suite-author-avatar">
-                            <img src="../../assets/logo.svg" alt="">
+                            <img :src="suiteData.avatar" alt="">
                         </div>
                         <div class="suite-author-name">
                             <span>{{ suiteData.author }}</span>
