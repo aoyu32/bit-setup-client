@@ -17,6 +17,9 @@
         .info {
             @include flex(c,c);
             gap: 5px;
+            @include c-t{
+                color: color(c-g9);
+            }
             .avatar {
                 @include wh(40);
                 @include img($b-r);
@@ -29,7 +32,8 @@
                     @include b-r(3);
                     padding: 2px 3px;
                     @include c-t {
-                        background-color: color(c-g9, 0.1);
+                        background-color: color(c-g0);
+                        color:color(c-g9);
                     }
                 }
             }
@@ -43,7 +47,7 @@
             @include b-r(3);
             @include c-t{
                 background-color: color(c-p-lighter,0.5);
-                color:color(c-g0);
+                color:color(c-g);
             }
         }
     }
@@ -63,12 +67,16 @@
                 font-size: 12px;
 
                 span:first-child {
-                    color: #6b7280;
                     font-weight: 400;
+                    @include c-t{
+                        color:color(c-g9,0.7);
+                    }
                 }
 
                 span:last-child {
-                    color: #111827;
+                    @include c-t{
+                        color: color(c-g8);
+                    }
                     font-weight: 500;
                 }
             }

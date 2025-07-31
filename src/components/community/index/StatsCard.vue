@@ -16,7 +16,7 @@
         </div>
         <div class="card-bottom">
             <div class="stats">
-                <div class="stats-item"><span>帖子：</span>100</div>
+                <div class="stats-item"><span>帖子：</span><span>100</span></div>
                 <div class="stats-item"><span>获赞：</span><span>230</span></div>
                 <div class="stats-item"><span>浏览：</span><span>2342</span></div>
                 <div class="stats-item"><span>评论：</span><span>324</span></div>

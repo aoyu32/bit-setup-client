@@ -1,0 +1,71 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.ranking-list {
+    @include wh;
+    @include flex(n, c, c);
+    padding: 20px 15px 5px 15px;
+
+    @include c-t {
+        background-color: color(c-g);
+    }
+
+    box-shadow: shadow(m);
+
+    .ranking-header {
+        @include flex(c, s-b);
+
+        .header-left {
+            @include flex(c, n);
+            gap: 5px;
+            font-size: 15px;
+            font-weight: 550;
+            @include c-t{
+                color: color(c-p-lighter);
+            }
+
+            .iconfont {
+                font-size: 17px;
+            }
+        }
+
+        .header-right {
+            font-size: 12px;
+            cursor: pointer;
+            @include c-t {
+                color: color(c-p-lighter);
+            }
+        }
+    }
+
+
+    .ranking-main {
+        @include wh;
+        @include flex(n, n, c);
+        margin-top: 10px;
+
+        .no-data{
+            @include flex(c,c,c);
+            padding: 20px 15px 25px 15px;
+            font-size: 14px;
+        }
+
+        a {
+            @include wh;
+            @include flex(c, s-b);
+            padding: 15px 0px;
+            font-size: 13px;
+            transition: all 0.2s ease-in-out;
+
+            @include c-t {
+                color: color(c-g7);
+            }
+
+            &:hover{
+                @include c-t{
+                    color: color(c-p-lighter);
+                }
+            }
+        }
+    }
+
+}
