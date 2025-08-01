@@ -1,0 +1,101 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.post-form {
+    @include wh(100p, n);
+    padding: 25px 20px 0 20px;
+
+
+    @include c-t {
+        background-color: color(c-g);
+    }
+
+    .form-header {
+
+        @include flex(c, s-b);
+        padding-bottom: 5px;
+
+        .user-info {
+            @include flex(c, c);
+            gap: 12px;
+
+            .avatar {
+                @include wh(40);
+                border-radius: 50%;
+                @include img;
+            }
+
+            .info {
+                @include flex(l, n, c);
+                gap: 5px;
+
+                .name {
+                    @include c-t {
+                        color: color(c-g9);
+                    }
+
+                    span {
+                        font-size: 14px;
+                    }
+                }
+
+                .level {
+                    @include flex(c, c);
+                    gap: 5px;
+
+                    span {
+                        font-size: 10px;
+                        padding: 2px 8px;
+                        @include b-r(3);
+
+                        @include c-t {
+                            colo: color(c-g9);
+                            background-color: color(c-g1);
+                        }
+
+                        &:first-child {
+                            background: #e6f7ff;
+                            color: #1890ff;
+                        }
+
+                        &:nth-child(2) {
+                            background: #fff2e8;
+                            color: #fa8c16;
+                        }
+
+                        &:last-child {
+                            background: #f6ffed;
+                            color: #52c41a;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        .tag {
+            @include flex(c, c);
+            font-size: 13px;
+            border-radius: 16px;
+            gap: 3px;
+
+            @include c-t {
+                color: color(c-g8, 0.6);
+            }
+
+            .iconfont {
+                font-size: 13px;
+            }
+        }
+    }
+
+    .form-main{
+        @include wh;
+        @include flex(n,n,c);
+
+        
+    }
+
+
+}
+
+
