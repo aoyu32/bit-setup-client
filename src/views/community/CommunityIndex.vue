@@ -1,12 +1,14 @@
 <template>
     <div class="community-index">
-        <div class="community-left">
+        <div class="community-left" ref="communityLeftRef" :style="{ minHeight: communityLeftMinHeight }">
             <div class="community-nav-container">
-                <CommunityNav />
+                <CommunityNav @active-item="handleNavActiveItem" />
             </div>
             <div class="post-list-container">
                 <PostList>
-                    <PostCard v-for="(item, index) in postData" :postData="item" :key="index" />
+                    <component v-for="(item, index) in postFilterData" :postData="item" :key="index"
+                        :is="getComponentByTag(item.tag.name)">
+                    </component>
                 </PostList>
             </div>
         </div>
@@ -74,16 +76,15 @@
     </div>
 </template>
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import CommunityNav from '@/components/community/index/CommunityNav.vue';
 import PostList from '@/components/community/index/PostList.vue';
 import PostCard from '@/components/community/index/PostCard.vue';
+import ArticleCard from '@/components/community/index/ArticleCard.vue';
 import postData from '../../utils/post-data';
 import StatsCard from '@/components/community/index/StatsCard.vue';
 import RankingList from '../../components/community/index/RankingList.vue';
 import goodAuthorsList from '../../utils/good-author';
-const hotListContainerRef = ref(null)
-const authorListContainerRef = ref(null)
 const hotPosts = [
     { id: 1, title: '2023安卓应用商店排行榜TOP10', views: 5420 },
     { id: 2, title: '微信多开方法汇总（附防封号指南）', views: 4870 },
@@ -102,8 +103,10 @@ const hotPosts = [
     { id: 15, title: '替代迅雷的8款下载工具对比', views: 1770 },
 ]
 
+const communityLeftRef = ref(null)
 const communityRightRef = ref(null)
 const rightContentWrapperRef = ref(null)
+const communityLeftMinHeight = ref('')
 const showAll = ref(false)
 const hotPostsDisplay = computed(() => {
     return showAll.value ? hotPosts : hotPosts.slice(0, 10);
@@ -117,6 +120,55 @@ const formatStats = (stats) => {
     }
 }
 
+const componentMap = {
+    '话题': PostCard,
+    '求助': PostCard,
+    '文章': ArticleCard,
+    '教程': ArticleCard
+};
+onMounted(() => {
+    // communityLeftMinHeight.value = communityRightRef.value.getBoundingClientRect().height + 'px'
+})
+
+// 直接监听 community-right 高度变化
+watch(() => communityRightRef.value, (newVal) => {
+    if (newVal) {
+        nextTick(() => {
+            const rightHeight = newVal.getBoundingClientRect().height;
+            communityLeftMinHeight.value = rightHeight + 'px';
+        });
+    }
+}, { immediate: true });
+// 监听右侧内容变化（showAll 和 postFilterData）
+watch([showAll], () => {
+    if (communityRightRef.value) {
+        nextTick(() => {
+            const rightHeight = communityRightRef.value.getBoundingClientRect().height;
+            communityLeftMinHeight.value = rightHeight + 'px';
+        });
+    }
+});
+
+const getComponentByTag = (tagName) => {
+    return componentMap[tagName] || PostCard;
+};
+
+const currentItem = ref('全部')
+
+const handleNavActiveItem = (item) => {
+    console.log(item);
+
+    currentItem.value = item
+    console.log(currentItem.value);
+
+}
+
+const postFilterData = computed(() => {
+    if (currentItem.value === '全部') {
+        return postData
+    }
+    return postData.filter(item => item.tag.name === currentItem.value)
+})
 </script>
 <style lang="scss" scoped>
 .community-index {
@@ -124,13 +176,17 @@ const formatStats = (stats) => {
     @include flex;
     padding: 25px 0;
     position: relative;
-
     align-items: flex-start;
 
     .community-left {
-        @include wh(70p, 100p);
+
+        @include wh(70p, n);
         @include flex(n, t, c);
         margin-right: 20px;
+
+        @include c-t {
+            background-color: color(c-g);
+        }
     }
 
     .community-right {
@@ -138,6 +194,7 @@ const formatStats = (stats) => {
         @include flex(n, c, c);
         position: sticky;
         top: $header-height;
+
 
         .right-content-wrapper {
             @include flex (n, c, c);

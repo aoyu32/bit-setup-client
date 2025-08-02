@@ -1,5 +1,5 @@
 <template>
-    <div class="post-card">
+    <div class="article-card">
         <div class="card-header">
             <div class="user-info">
                 <div class="avatar">
@@ -17,20 +17,22 @@
                 </div>
             </div>
             <div class="tag">
-                <span><i class="iconfont" :class="postData.tag.icon"></i></span>
+                <span> <i class="iconfont" :class="postData.tag.icon"></i></span>
                 <span>{{ postData.tag.name }}</span>
             </div>
         </div>
         <div class="card-main">
-            <div class="title">
-                <span>{{ postData.title }}</span>
+            <div class="card-main-left">
+                <div class="title">
+                    <span>{{ postData.title }}</span>
+                </div>
+                <div class="content">
+                    {{ postData.content }}
+                </div>
             </div>
-            <div class="content">
-                {{ postData.content }}
-            </div>
-            <div class="imgs" v-if="postData.images && postData.images.length > 0">
-                <div class="img-item" v-for="(image, index) in postData.images" :key="index">
-                    <img :src="image">
+            <div class="card-main-right">
+                <div class="img">
+                    <img :src="postData.images[0]" alt="">
                 </div>
             </div>
         </div>
@@ -61,7 +63,6 @@
         </div>
     </div>
 </template>
-
 <script setup>
 // 定义props
 const props = defineProps({
@@ -94,7 +95,6 @@ const props = defineProps({
     }
 })
 </script>
-
 <style scoped lang="scss">
-@use '@/assets/styles/community/index/_post-card.scss' as *;
+@use '@/assets/styles/community/index/_article-card.scss' as *;
 </style>

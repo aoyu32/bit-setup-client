@@ -6,7 +6,6 @@
             </div>
             <div class="header-right">
                 <slot name="more">
-
                 </slot>
             </div>
         </div>

@@ -1,9 +1,9 @@
 @use '@/assets/styles/common/main.scss' as *;
 
-.post-card {
+.article-card {
+
     @include wh(100p, n);
     padding: 25px 20px 0 20px;
-
 
     @include c-t {
         background-color: color(c-g);
@@ -82,55 +82,67 @@
                 color: color(c-g8, 0.6);
             }
 
-            span{
-                @include flex(c,c);
+            .iconfont {
+                font-size: 16px;
             }
         }
     }
 
     .card-main {
+        @include wh;
+        @include flex(n, s-b);
         padding: 10px 0;
+        gap: 20px;
 
-        .title {
-            margin-bottom: 12px;
+        .card-main-left {
+            @include wh;
+            @include flex(n, n, c);
 
-            span {
-                font-size: 16px;
-                font-weight: 550;
-                display: block;
+            .title {
+                margin-bottom: 12px;
+
+                span {
+                    font-size: 16px;
+                    font-weight: 550;
+                    display: block;
+
+                    @include c-t {
+                        color: color(c-g9);
+                    }
+
+                }
+            }
+
+            .content {
+                @include wh;
+                font-size: 14px;
+                line-height: 1.7;
+                margin-bottom: 15px;
 
                 @include c-t {
-                    color: color(c-g9);
+                    color: color(c-g9, 0.6);
                 }
-
             }
+
         }
 
-        .content {
-            font-size: 14px;
-            line-height: 1.7;
-            margin-bottom: 15px;
+        .card-main-right {
+            @include wh(n, 100p);
+            @include flex;
 
-            @include c-t {
-                color: color(c-g9, 0.6);
-            }
-        }
-
-        .imgs {
-            gap: 12px;
-            @include wh;
-            flex-wrap: wrap;
-            @include grid(3, 1fr);
-            max-height: 200px;
-
-            .img-item {
-                flex: 1;
+            .img {
                 @include b-r($b-r);
                 @include img($b-r);
-                max-height: 200px;
+                max-height: 150px;
+                max-width: 300px;
+
             }
+
         }
+
+
     }
+
 
     .card-footer {
         padding: 5px 0 25px 0;
@@ -194,81 +206,5 @@
         }
 
 
-    }
-}
-
-// 响应式设计
-@media (max-width: 768px) {
-    .post-card {
-        .card-header {
-            padding: 12px 16px;
-
-            .user-info {
-                gap: 8px;
-
-                .avatar {
-                    width: 36px;
-                    height: 36px;
-                }
-
-                .info {
-                    .name span {
-                        font-size: 14px;
-                    }
-
-                    .level {
-                        gap: 6px;
-
-                        span {
-                            font-size: 11px;
-                            padding: 1px 6px;
-                        }
-                    }
-                }
-            }
-
-            .tag span {
-                font-size: 11px;
-            }
-        }
-
-        .card-main {
-            padding: 16px;
-
-            .title span {
-                font-size: 16px;
-            }
-
-            .content {
-                font-size: 13px;
-            }
-
-            .imgs {
-                gap: 8px;
-
-                .img-item {
-                    height: 100px;
-                    min-width: 100px;
-                }
-            }
-        }
-
-        .card-footer {
-            padding: 12px 16px;
-
-            .post-stats {
-                .status {
-                    gap: 16px;
-
-                    .status-item {
-                        font-size: 12px;
-
-                        .iconfont {
-                            font-size: 14px;
-                        }
-                    }
-                }
-            }
-        }
     }
 }

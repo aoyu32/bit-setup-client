@@ -1,8 +1,8 @@
 <template>
     <div class="community-nav">
         <div class="nav-wrapper">
-            <div class="nav-item" v-for="(item, index) in navList" :key="index" :class="{ active: index === currentIndex }"
-                @click="handleNavItem(index)">{{ item }}</div>
+            <div class="nav-item" v-for="(item, index) in navList" :key="index"
+                :class="{ active: index === currentIndex }" @click="handleNavItem(index)">{{ item }}</div>
         </div>
     </div>
 </template>
@@ -17,8 +17,10 @@ const navList = ref([
 ])
 
 const currentIndex = ref(0)
+const emit = defineEmits(['active-item'])
 const handleNavItem = (index) => {
     currentIndex.value = index
+    emit('active-item', navList.value[index])
 }
 
 </script>
