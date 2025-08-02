@@ -30,7 +30,7 @@
             </div>
             <div class="imgs" v-if="postData.images && postData.images.length > 0">
                 <div class="img-item" v-for="(image, index) in postData.images" :key="index">
-                    <img :src="image" :alt="`图片${index + 1}`">
+                    <img :src="image">
                 </div>
             </div>
         </div>

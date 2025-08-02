@@ -12,7 +12,8 @@ const navList = ref([
     '全部',
     '话题',
     '求助',
-    '教程'
+    '教程',
+    '文章'
 ])
 
 const currentIndex = ref(0)

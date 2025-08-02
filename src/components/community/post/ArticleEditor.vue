@@ -11,6 +11,7 @@ import AoEditor from '../../common/AoEditor.vue';
 <style scoped lang="scss">
 .article-editor {
     @include wh;
+    height: 1000px;
     background-color: color(c-g);
 }
 </style>

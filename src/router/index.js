@@ -7,6 +7,7 @@ import CommunityPost from '@/views/community/CommunityPost.vue'
 import ai from '@/views/ai/ai.vue'
 import Layout from '@/views/layout/Layout.vue'
 import CommunityIndex from '@/views/community/CommunityIndex.vue'
+import CommunityDetail from '@/views/community/CommunityDetail.vue'
 
 
 
@@ -51,6 +52,10 @@ const router = createRouter({
                         {
                             path: 'post',
                             component: CommunityPost
+                        },
+                        {
+                            path:'detail',
+                            component:CommunityDetail
                         }
                     ]
                 }

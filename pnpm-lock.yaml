@@ -26,6 +26,9 @@ importers:
       highlight.js:
         specifier: ^11.11.1
         version: 11.11.1
+      juejin-markdown-themes:
+        specifier: ^1.34.0
+        version: 1.34.0
       marked:
         specifier: ^16.1.1
         version: 16.1.1
@@ -670,6 +673,9 @@ packages:
   is-what@4.1.16:
     resolution: {integrity: sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A==}
     engines: {node: '>=12.13'}
+
+  juejin-markdown-themes@1.34.0:
+    resolution: {integrity: sha512-oislBW4mmMLfLFNLO+ywtcRd9eWBs8A9wE9w4ENqAkbRquSJKaBQX+4m6r3P+gLft4bvAMUhD+6ASRf2AWPL8A==}
 
   kleur@4.1.5:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
@@ -1602,6 +1608,8 @@ snapshots:
   is-plain-obj@4.1.0: {}
 
   is-what@4.1.16: {}
+
+  juejin-markdown-themes@1.34.0: {}
 
   kleur@4.1.5: {}
 
