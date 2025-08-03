@@ -1,0 +1,5 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.article-content {
+    @include wh;
+}

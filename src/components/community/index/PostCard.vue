@@ -21,19 +21,21 @@
                 <span>{{ postData.tag.name }}</span>
             </div>
         </div>
-        <div class="card-main">
-            <div class="title">
-                <span>{{ postData.title }}</span>
-            </div>
-            <div class="content">
-                {{ postData.content }}
-            </div>
-            <div class="imgs" v-if="postData.images && postData.images.length > 0">
-                <div class="img-item" v-for="(image, index) in postData.images" :key="index">
-                    <img :src="image">
+        <router-link to="/community/detail">
+            <div class="card-main">
+                <div class="title">
+                    <span>{{ postData.title }}</span>
+                </div>
+                <div class="content">
+                    {{ postData.content }}
+                </div>
+                <div class="imgs" v-if="postData.images && postData.images.length > 0">
+                    <div class="img-item" v-for="(image, index) in postData.images" :key="index">
+                        <img :src="image">
+                    </div>
                 </div>
             </div>
-        </div>
+        </router-link>
         <div class="card-footer">
             <div class="post-stats">
                 <div class="status">

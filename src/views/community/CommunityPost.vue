@@ -1,10 +1,12 @@
 <template>
     <div class="community-post">
         <div class="community-post-header">
-            <div class="header-left">
-                <span><i class="iconfont icon-xiangzuo-1"></i></span>
-                <span>发帖中心</span>
-            </div>
+            <router-link to="/community/index">
+                <div class="header-left">
+                    <span><i class="iconfont icon-xiangzuo-1"></i></span>
+                    <span>发帖中心</span>
+                </div>
+            </router-link>
             <div class="header-right">
                 <button>保存草稿</button>
                 <button>发布</button>

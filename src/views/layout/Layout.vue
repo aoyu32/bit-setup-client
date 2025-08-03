@@ -10,18 +10,18 @@
     </footer>
 </template>
 <script setup>
-import { ref, computed,onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import Header from '@/components/common/Header.vue';
 import Footer from '@/components/common/Footer.vue'
-onMounted(()=>{
-    document.documentElement.setAttribute('data-theme','light')
+onMounted(() => {
+    document.documentElement.setAttribute('data-theme', 'light')
 })
 
 
 </script>
 <style lang="scss" scoped>
 header {
-    @include wh(100p,$header-height);
+    @include wh(100p, $header-height);
     position: fixed;
     top: 0;
     left: 0;
@@ -48,6 +48,7 @@ footer {
 @media (max-width:768px) {
     main {
         width: 90%;
+        margin-bottom: 470px;
     }
 }
 </style>

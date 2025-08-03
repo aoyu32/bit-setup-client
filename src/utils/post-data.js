@@ -89,7 +89,8 @@ const postData = [
         content: '经过一年的使用测试，我整理出了这些真正好用的安卓应用：1. 效率类：TickTick、Notion；2. 工具类：Solid Explorer、MX Player；3. 社交类：Telegram、Discord；4. 摄影类：Snapseed、Lightroom...',
         images: [
             'https://pic.code-nav.cn/post_picture/1608440217629360130/cqRSiVL5LE8D64UC.webp',
-            'https://pic.code-nav.cn/post_cover/1759828016537657346/thumbnail/WIRSHD3Dh1h89WJk.png'
+            'https://pic.code-nav.cn/post_cover/1759828016537657346/thumbnail/WIRSHD3Dh1h89WJk.png',
+            'https://pic.code-nav.cn/post_picture/1802686804244934657/eyILiIQ8Knr7gnjU.webp',
         ],
         stats: {
             likes: 156,

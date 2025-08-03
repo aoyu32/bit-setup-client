@@ -2,6 +2,7 @@
 
 .post-card {
     @include wh(100p, n);
+    
     padding: 25px 20px 0 20px;
 
 
@@ -121,7 +122,6 @@
             @include wh;
             flex-wrap: wrap;
             @include grid(3, 1fr);
-            max-height: 200px;
 
             .img-item {
                 flex: 1;

@@ -14,7 +14,6 @@
 </template>
 <script setup>
 import { ref, computed } from 'vue'
-import { marked } from 'marked';
 import AoMarkdwon from '../common/AoMarkdwon.vue';
 const props = defineProps({
     messageData: {
@@ -25,16 +24,6 @@ const props = defineProps({
                 content: ''
             }
         }
-    }
-})
-
-const parseMessage = computed(() => {
-    const message = props.messageData
-    if (message.role === 'user') {
-        return props.messageData.content
-    }
-    if (message.role === 'ai') {
-        return marked.parse(message.content)
     }
 })
 

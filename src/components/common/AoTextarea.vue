@@ -20,23 +20,26 @@ onMounted(() => {
 .ao-textarea {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    border-radius: 8px;
 
     textarea {
         // 基础样式
         width: 100%;
         height: 100%;
         padding: 15px;
+        max-height: 200px;
         font-size: 14px;
         line-height: 1.6;
         color: #333;
+        border-radius: 8px;
         background-color: #fff;
         border: 1px solid #e0e0e0;
-        border-radius: 8px;
+
         outline: none;
         transition: all 0.3s ease;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         resize: none;
-        overflow: hidden;
 
 
         letter-spacing: 0.2px;
@@ -50,7 +53,6 @@ onMounted(() => {
         /* 聚焦状态 */
         &:focus {
             border-color: #4d90fe;
-            box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.2);
         }
 
     }
