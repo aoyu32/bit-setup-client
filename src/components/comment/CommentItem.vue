@@ -19,7 +19,17 @@
             <div class="comment-main">
                 <div class="comment-content">
                     <div class="content">
-                        <p v-if="!isEdit">嘿嘿，给我点个赞呗😀</p>
+                        <div class="content-wrapper" v-if="!isEdit">
+                            <div class="content-text">
+                                <p v-if="!isEdit">嘿嘿，给我点个赞呗😀</p>
+                            </div>
+                            <div class="content-img">
+                                <div class="img-item">
+                                    <img
+                                        src="https://pic.code-nav.cn/post_cover/1759828016537657346/thumbnail/WIRSHD3Dh1h89WJk.png">
+                                </div>
+                            </div>
+                        </div>
                         <div class="edit-comment" v-else>
                             <textarea name="" id=""></textarea>
                         </div>
@@ -77,7 +87,7 @@ import CommentInput from './CommentInput.vue'
 import CommentReplyItem from './CommentReplyItem.vue'
 const isEdit = ref(false)
 const isMyComment = ref(false)
-const isShowMoreMenu = ref(true)
+const isShowMoreMenu = ref(false)
 const isReplying = ref(false)
 
 </script>
@@ -209,6 +219,34 @@ const isReplying = ref(false)
             margin: 10px 0;
             font-size: 15px;
             @include wh;
+
+            .content-wrapper {
+                @include wh;
+                @include flex(n, n, c);
+                gap: 10px;
+
+                .content-text{
+                    @include wh;
+
+                }
+
+
+                .content-img {
+                    @include wh(100p, n);
+                    gap: 15px;
+                    @include flex(l,n);
+                    flex-wrap: wrap;
+
+                    .img-item {
+                        max-width: 100px;
+                        img {
+                            @include wh;
+                            object-fit: cover;
+                        }
+                    }
+
+                }
+            }
         }
 
         .reply-input {
@@ -286,8 +324,8 @@ const isReplying = ref(false)
                     @include wh(90, n);
                     padding: 5px 0;
                     position: absolute;
-                    right: 10px;
-                    top: 20px;
+                    right: 15px;
+                    top: 0px;
                     @include b-r($b-r);
 
                     @include c-t {
