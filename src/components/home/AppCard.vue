@@ -1,5 +1,7 @@
 <template>
     <div class="app-card" @mousemove="handleMouseMove" @mouseleave="handleMouseLeave" ref="appCardRef">
+        <router-link to="/detail" class="link-bottom" :class="{ 'left-link': isDraw }"></router-link>
+        <router-link to="/detail" class="link-top" :class="{ 'left-link': isDraw }"></router-link>
         <div id="card-content-front" class="card-content" :class="{ 'is-flipped': isDraw }" v-if="cardSide === 'front'">
             <div class="card-draw" v-if="isShowCardDraw" @mouseenter="handleDrawMouseEnter"
                 @mouseleave="handleDrawMouseLeave" @click="handleDrawClick">
@@ -44,6 +46,7 @@
                 </div>
             </div>
         </div>
+
         <div id="card-content-back" class="card-content" ref="cardContentRef" v-else>
             <div class="card-draw" v-if="isShowCardDraw" @mouseenter="handleDrawMouseEnter"
                 @mouseleave="handleDrawMouseLeave" @click="handleDrawClick">
@@ -70,20 +73,23 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
-
+import { ref, onMounted, computed, watch } from 'vue';
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const props = defineProps(['app'])
 const appCardRef = ref(null)
 const cardContentRef = ref(null)
 
-onMounted(() => {
-})
 const isShowCardDraw = ref(false)
 const isHoveringDraw = ref(false) // 新增：标记是否悬浮在card-draw上
 const isDraw = ref(false)
 const cardSide = ref('front')
 
-const handleDrawClick = () => {
+const handleDrawClick = (e) => {
+    // 阻止事件冒泡，防止触发卡片点击
+    e.stopPropagation()
+    e.preventDefault()
+
     appCardRef.value.style.transition = 'transform 0.3s ease-out'
     isDraw.value = !isDraw.value
     if (isDraw.value) {
@@ -173,9 +179,9 @@ const handleMouseLeave = (e) => {
 const handleDrawMouseEnter = (e) => {
     isHoveringDraw.value = true
     // 应用轻微的3D效果
+    console.log();
     const card = e.currentTarget.parentElement.parentElement;
     if (isDraw.value) {
-
         card.style.transform = 'perspective(1000px) rotateX(2deg) rotateY(182deg) translateZ(10px)';
         card.style.boxShadow = '2px 2px 15px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(74, 145, 226, 0.05)';
     } else {
@@ -191,5 +197,5 @@ const handleDrawMouseLeave = (e) => {
 </script>
 
 <style scoped lang="scss">
- @use '@/assets/styles/home/_app-card.scss' as *;
+@use '@/assets/styles/home/_app-card.scss' as *;
 </style>

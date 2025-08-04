@@ -5,6 +5,7 @@ import Suite from '@/views/suite/Suite.vue'
 import Community from '@/views/community/Community.vue'
 import CommunityPost from '@/views/community/CommunityPost.vue'
 import ai from '@/views/ai/ai.vue'
+import Detail from '@/views/detail/Detail.vue'
 import Layout from '@/views/layout/Layout.vue'
 import CommunityIndex from '@/views/community/CommunityIndex.vue'
 import CommunityDetail from '@/views/community/CommunityDetail.vue'
@@ -22,6 +23,13 @@ const router = createRouter({
                 {
                     path: '/home',
                     component: Home,
+                    meta: { keepScroll: true }
+                },
+                {
+                    path: '/detail',
+                    component: Detail,
+                    meta: { keepScroll: false }
+
                 },
                 {
                     path: '/category',
@@ -45,26 +53,39 @@ const router = createRouter({
                             redirect: '/community/index'
                         },
                         {
-                            name:'communityIndex',
+                            name: 'communityIndex',
                             path: 'index',
-                            component: CommunityIndex
+                            component: CommunityIndex,
+                            meta: { keepScroll: true }
 
                         },
                         {
-                            name:'communityPost',
+                            name: 'communityPost',
                             path: 'post',
                             component: CommunityPost
                         },
                         {
-                            name:'communityDetail',
-                            path:'detail/:type',
-                            component:CommunityDetail
+                            name: 'communityDetail',
+                            path: 'detail/:type',
+                            component: CommunityDetail
                         }
                     ]
                 }
             ]
         }
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        // 如果有保存的位置且不是返回操作，则使用保存的位置
+        if (savedPosition && to.meta.keepScroll) {
+            return savedPosition
+        }
+        // 如果是返回操作且有保存的位置，则使用保存的位置
+        if (savedPosition && from.meta.keepScroll) {
+            return savedPosition
+        }
+        // 其他情况滚动到顶部
+        return { top: 0 }
+    }
 })
 
 export default router

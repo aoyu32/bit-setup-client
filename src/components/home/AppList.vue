@@ -6,7 +6,11 @@
 <script setup>
 import AppCard from './AppCard.vue';
 import appListData from '@/utils/app-data.js'
-
+import { useRouter } from 'vue-router';
+const router = useRouter()
+const handleApp = () => {
+    router.push('/detail')
+}
 </script>
 <style lang="scss" scoped>
 .app-list {

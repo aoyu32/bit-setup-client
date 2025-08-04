@@ -11,7 +11,7 @@
             </div>
             <div class="post-comment">
                 <div class="post-comment-header">
-                    <div class="comment-lable">
+                    <div class="comment-label">
                         <span>评论</span>
                     </div>
                     <div class="comment-order">

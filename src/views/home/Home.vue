@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="home-bottom">
-            <div class="list-lable">
+            <div class="list-label">
                 <span><i class="iconfont icon-shendusikao"></i></span>
                 <h3>发现APP</h3>
             </div>

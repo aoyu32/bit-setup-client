@@ -67,12 +67,10 @@
                 @include c-t {
                     border: 1px solid adjust-color(c-g, 20%);
                     color: color(c-s);
-                    // @include gradient-color(color(c-g), adjust-color(c-p, 38%), 135deg);
                 }
 
                 &:hover {
                     @include c-t {
-                        // @include gradient-color(adjust-color(c-p, 35%), adjust-color(c-p, 25%), 135deg);
                         color: color(c-p);
                         border-color: color(c-p);
                     }
@@ -109,73 +107,69 @@
             width: 100%;
         }
 
-        .themes-wrapper {
+        .themes-selector {
             width: 100%;
             padding: 10px 15px;
             border-radius: 0px 0px 6px 6px;
 
-            @include c-t {
-                border: 1px solid adjust-color(c-g1, 15%);
-                // @include gradient-color(color(c-g), adjust-color(c-p, 40%), 135deg);
-                box-shadow: inset 0 1px 3px shadow(l);
-            }
-        }
+            .left-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
 
-        .theme-select {
-            width: 100%;
-            padding: 10px;
-            border-radius: $b-r;
-            cursor: pointer;
-            transition: all 0.3s ease;
-
-            @include c-t {
-                border: 1px solid adjust-color(c-g, 20%);
-                // @include gradient-color(color(c-g), adjust-color(c-p, 38%), 135deg);
-                box-shadow: shadow(l);
-            }
-
-            &:hover {
-                @include c-t {
-                    border-color: color(c-p);
-                    box-shadow: shadow(m);
-                }
-            }
-
-            .select-header {
-                @include wh(100p);
-                @include flex(c, s-b);
-                font-size: 15px;
-
-                @include c-t {
-                    color: color(c-s);
-                }
-
-                span {
-                    @include flex(c, c);
-                }
-
-                .select-value .iconfont {
-                    font-size: 20px;
-                    margin-right: 5px;
+                .iconfont {
+                    font-size: 19px;
 
                     @include c-t {
                         color: color(c-p-dark);
                     }
                 }
+            }
 
-                .arrow-icon .iconfont {
+
+            :deep(.select-header) {
+                padding: 10px;
+                background-color: transparent;
+
+                @include c-t {
+                    border: 1px solid adjust-color(c-g, 20%);
+                    color: color(c-s);
+                    color: color(c-s);
+                }
+
+                box-shadow: shadow(m);
+
+                &:hover {
                     @include c-t {
-                        color: adjust-color(c-p, -10%);
+                        color: color(c-p);
+                        border-color: color(c-p);
                     }
 
-                    transition: color 0.3s ease;
+                    box-shadow: shadow(s);
+
+
                 }
             }
 
-            &:hover .arrow-icon .iconfont {
-                @include c-t {
-                    color: color(c-p);
+            :deep(.select-options) {
+                ul {
+                    li {
+                        &:hover {
+                            @include c-t {
+                                background-color: color(c-g5,0.1);
+                                color: color(c-s-light);
+                            }
+                        }
+                    }
                 }
+            }
+
+            :deep(.select-value) {
+                @include c-t {
+                    color: color(c-s);
+                }
+
+
             }
         }
     }

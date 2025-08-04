@@ -13,7 +13,7 @@
                     <span>Lv0</span>
                     <span>VIP</span>
                 </div>
-                <div class="author-lable">
+                <div class="author-label">
                     <span>作者</span>
                 </div>
             </div>
@@ -175,7 +175,7 @@ const replyTo = ref('aoyu')
                 }
             }
 
-            .author-lable {
+            .author-label {
                 @include flex(c, c);
 
                 span {

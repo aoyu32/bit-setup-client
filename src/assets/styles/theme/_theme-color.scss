@@ -1,0 +1,236 @@
+$theme: (
+    dark: (  // 对应"深邃黑夜"
+        // 主品牌色 (Dark Teal)
+        c-p: #004d4d,
+        c-p-light: #006666,
+        c-p-lighter: #008080,
+        c-p-lightest: #00b3b3,
+        c-p-dark: #003333,
+        c-p-darker: #001a1a,
+        c-p-darkest: #000d0d,
+
+        // 辅助品牌色 (Dark Coral)
+        c-s: #b33e3e,
+        c-s-light: #cc4d4d,
+        c-s-lighter: #e55c5c,
+        c-s-lightest: #ff8080,
+        c-s-dark: #992e2e,
+        c-s-darker: #801f1f,
+        c-s-darkest: #661414,
+
+        // 中性色 (Dark theme greys)
+        c-g: #121212,
+        c-g0: #1e1e1e,
+        c-g1: #252525,
+        c-g2: #2e2e2e,
+        c-g3: #3d3d3d,
+        c-g4: #525252,
+        c-g5: #6e6e6e,
+        c-g6: #8e8e8e,
+        c-g7: #b3b3b3,
+        c-g8: #d9d9d9,
+        c-g9: #e8e8e8,
+        c-g10: #ffffff,
+
+        // 功能色
+        success: #218838,
+        warning: #e0a800,
+        error: #c82333,
+        info: #138496
+    ),
+    light: (  // 对应"极简至白"
+        // 主品牌色 (Light Teal)
+        c-p: #008080,
+        c-p-light: #00a3a3,
+        c-p-lighter: #00cccc,
+        c-p-lightest: #b2f5f5,
+        c-p-dark: #006666,
+        c-p-darker: #004d4d,
+        c-p-darkest: #003333,
+
+        // 辅助品牌色 (Light Coral)
+        c-s: #ff6b6b,
+        c-s-light: #ff8e8e,
+        c-s-lighter: #ffb3b3,
+        c-s-lightest: #ffe5e5,
+        c-s-dark: #e05555,
+        c-s-darker: #c23e3e,
+        c-s-darkest: #a32929,
+
+        // 中性色 (Light theme greys)
+        c-g: #ffffff,
+        c-g0: #f8f9fa,
+        c-g1: #e9ecef,
+        c-g2: #dee2e6,
+        c-g3: #ced4da,
+        c-g4: #adb5bd,
+        c-g5: #6c757d,
+        c-g6: #495057,
+        c-g7: #343a40,
+        c-g8: #212529,
+        c-g9: #1a1e21,
+        c-g10: #000000,
+
+        // 功能色
+        success: #28a745,
+        warning: #ffc107,
+        error: #dc3545,
+        info: #17a2b8
+    ),
+    red: (  // 对应"红色燎原"
+        // 主品牌色 (Red)
+        c-p: #d94d00,
+        c-p-light: #ff661a,
+        c-p-lighter: #ff884d,
+        c-p-lightest: #ffc2a3,
+        c-p-dark: #b34100,
+        c-p-darker: #8c3300,
+        c-p-darkest: #662500,
+
+        // 辅助品牌色 (Purple)
+        c-s: #6b3e99,
+        c-s-light: #8355b3,
+        c-s-lighter: #9e74cc,
+        c-s-lightest: #d4bee6,
+        c-s-dark: #5c3480,
+        c-s-darker: #4c2a68,
+        c-s-darkest: #3d204f,
+
+        // 中性色
+        c-g: #ffffff,
+        c-g0: #f8f9fa,
+        c-g1: #e9ecef,
+        c-g2: #dee2e6,
+        c-g3: #ced4da,
+        c-g4: #adb5bd,
+        c-g5: #6c757d,
+        c-g6: #495057,
+        c-g7: #343a40,
+        c-g8: #212529,
+        c-g9: #1a1e21,
+        c-g10: #000000,
+
+        // 功能色
+        success: #28a745,
+        warning: #ffc107,
+        error: #dc3545,
+        info: #17a2b8
+    ),
+    starry: (  // 对应"繁星之夜"
+        // 主品牌色 (Deep Blue)
+        c-p: #004aad,
+        c-p-light: #006cd9,
+        c-p-lighter: #3391ff,
+        c-p-lightest: #b3d4ff,
+        c-p-dark: #003c8c,
+        c-p-darker: #002e6b,
+        c-p-darkest: #001f4a,
+
+        // 辅助品牌色 (Twinkle Gold)
+        c-s: #ffd700,
+        c-s-light: #ffe033,
+        c-s-lighter: #ffea66,
+        c-s-lightest: #fff5b3,
+        c-s-dark: #e6c300,
+        c-s-darker: #ccad00,
+        c-s-darkest: #b39700,
+
+        // 中性色 (Dark theme with blue tint)
+        c-g: #0a0f1a,
+        c-g0: #121a2b,
+        c-g1: #1a2540,
+        c-g2: #243056,
+        c-g3: #344477,
+        c-g4: #4a5a8f,
+        c-g5: #6677aa,
+        c-g6: #8a9ac2,
+        c-g7: #b3c0d9,
+        c-g8: #d9e0f0,
+        c-g9: #e8edf7,
+        c-g10: #ffffff,
+
+        // 功能色
+        success: #28a745,
+        warning: #ffc107,
+        error: #dc3545,
+        info: #17a2b8
+    ),
+    green: (  // 对应"绿意盎然"
+        // 主品牌色 (Forest Green)
+        c-p: #2a7043,
+        c-p-light: #3d8b55,
+        c-p-lighter: #53a76b,
+        c-p-lightest: #a8d5b2,
+        c-p-dark: #225c36,
+        c-p-darker: #1a482a,
+        c-p-darkest: #12341e,
+
+        // 辅助品牌色 (Warm Brown)
+        c-s: #8b5523,
+        c-s-light: #a6692d,
+        c-s-lighter: #c27e3a,
+        c-s-lightest: #e8b897,
+        c-s-dark: #74471e,
+        c-s-darker: #5d3918,
+        c-s-darkest: #462b12,
+
+        // 中性色
+        c-g: #ffffff,
+        c-g0: #f8f9fa,
+        c-g1: #e9ecef,
+        c-g2: #dee2e6,
+        c-g3: #ced4da,
+        c-g4: #adb5bd,
+        c-g5: #6c757d,
+        c-g6: #495057,
+        c-g7: #343a40,
+        c-g8: #212529,
+        c-g9: #1a1e21,
+        c-g10: #000000,
+
+        // 功能色
+        success: #28a745,
+        warning: #ffc107,
+        error: #dc3545,
+        info: #17a2b8
+    ),
+    blue: (  // 对应"冷酷之蓝"
+        // 主品牌色 (Deep Ocean Blue)
+        c-p: #005b96,
+        c-p-light: #0077c2,
+        c-p-lighter: #0095e8,
+        c-p-lightest: #b3e0ff,
+        c-p-dark: #004a7a,
+        c-p-darker: #00385d,
+        c-p-darkest: #002641,
+
+        // 辅助品牌色 (Ice Blue)
+        c-s: #7fb3d5,
+        c-s-light: #99c6e0,
+        c-s-lighter: #b3d9eb,
+        c-s-lightest: #e6f2f9,
+        c-s-dark: #6699c2,
+        c-s-darker: #4d80a8,
+        c-s-darkest: #33668f,
+
+        // 中性色 (Cool greys)
+        c-g: #ffffff,
+        c-g0: #f5f7fa,
+        c-g1: #e1e5eb,
+        c-g2: #d1d6de,
+        c-g3: #b8c0cc,
+        c-g4: #96a0b5,
+        c-g5: #74839e,
+        c-g6: #536687,
+        c-g7: #3a4d6e,
+        c-g8: #253555,
+        c-g9: #1a2845,
+        c-g10: #0d1a33,
+
+        // 功能色
+        success: #28a745,
+        warning: #ffc107,
+        error: #dc3545,
+        info: #17a2b8
+    )
+);

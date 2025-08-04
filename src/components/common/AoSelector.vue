@@ -1,17 +1,22 @@
 <template>
-    <div class="selector">
+    <div class="ao-selector">
         <div class="selector-wrapper">
             <div class="select-header" @click="handleDropDown">
-                <span class="select-value"><i class="iconfont icon-tiaosepan"></i>{{ selectedValue }}</span>
-                <span class="arrow-icon"><i class="iconfont icon-xiangxia-1"></i></span>
+                <div class="select-left">
+                    <slot name="left-icon"></slot>
+                    <span class="select-value">{{ selectOption }}</span>
+                </div>
+                <div class="select-right">
+                    <slot name="right-icon">
+                        <span class="right-icon"><i class="iconfont icon-xiangxia-1"></i></span>
+                    </slot>
+                </div>
             </div>
-            <div class="select-options">
-                <transition name="fade">
-                    <ul v-if="dropDwon">
-                        <li v-for="(item, index) in options" :key="index" @click="handleSelect(index, item)">{{ item }}
-                        </li>
-                    </ul>
-                </transition>
+            <div class="select-options" v-if="dropDwon && options.length > 0">
+                <ul>
+                    <li v-for="(item, index) in options" :key="index" @click="handleSelect(item)">{{ item.label }}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -19,29 +24,31 @@
 <script setup>
 import { ref } from 'vue'
 const props = defineProps({
+    modelValue: {
+        type: [String, Number, Boolean, Array, Object],
+        required: true
+    },
     options: {
         type: Array,
         default: []
     }
 })
-const selectedValue = ref(props.options.length === 0 ? '无选项': props.options[0] )
 
+const emit = defineEmits(['update:modelValue'])
+const selectOption = ref(props.options.length === 0 ? '无选项' : props.options[0].label)
 const dropDwon = ref(false)
-
 const handleDropDown = () => {
     dropDwon.value = !dropDwon.value
-
 }
-
-const handleSelect = (index, item) => {
-    selectedValue.value = item
+const handleSelect = (item) => {
+    selectOption.value = item.label
     dropDwon.value = false
+    emit('update:modelValue', item.value)
 }
-
 
 </script>
 <style lang="scss" scoped>
-.selector {
+.ao-selector {
     width: 100%;
     height: 100%;
     position: relative;
@@ -66,36 +73,59 @@ const handleSelect = (index, item) => {
         cursor: pointer;
         transition: border-color 0.2s ease;
 
+
         &:hover {
             border-color: #c0c4cc;
         }
 
-        .select-value {
-            flex: 1;
+
+        .select-left {
             display: flex;
+            gap: 10px;
+
+            .left-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .iconfont {
+                    font-size: 19px;
+                    color: #909399;
+                }
+            }
+
+            .select-value {
+                flex: 1;
+                display: flex;
+                align-items: center;
+
+                color: #606266;
+                font-size: 13px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+
+
+            }
+        }
+
+        .select-right {
+            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 6px;
-            color: #606266;
-            font-size: 14px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
 
-            .iconfont {
-                font-size: 16px;
-                color: #909399;
+            .arrow-icon {
+                margin-left: 8px;
+                transition: transform 0.2s ease;
+
+                .iconfont {
+                    font-size: 12px;
+                    color: #c0c4cc;
+                }
             }
+
         }
 
-        .arrow-icon {
-            margin-left: 8px;
-            transition: transform 0.2s ease;
-
-            .iconfont {
-                font-size: 12px;
-                color: #c0c4cc;
-            }
-        }
     }
 
     .select-options {
@@ -103,24 +133,25 @@ const handleSelect = (index, item) => {
         top: calc(100% + 5px);
         left: 0;
         width: 100%;
+        height: auto;
         z-index: 1000;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
         border-radius: 4px;
         background-color: #fff;
 
         ul {
-            margin: 0;
-            padding: 6px 0;
+            width: 100%;
+            height: auto;
+            padding: 10px;
             list-style: none;
-            max-height: 200px;
             display: flex;
             align-self: center;
             justify-content: center;
             flex-direction: column;
-            overflow-y: auto;
 
             li {
-                padding: 8px 16px;
+                padding: 10px 16px;
+                border-radius: 4px;
                 font-size: 14px;
                 color: #606266;
                 cursor: pointer;
@@ -134,16 +165,6 @@ const handleSelect = (index, item) => {
         }
     }
 
-    /* 过渡动画 */
-    .v-enter-active,
-    .v-leave-active {
-        transition: all 0.3s ease;
-    }
 
-    .v-enter-from,
-    .v-leave-to {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
 }
 </style>

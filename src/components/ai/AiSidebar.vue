@@ -19,7 +19,7 @@
                 </button>
             </div>
             <div class="history-chat">
-                <div class="history-lable">
+                <div class="history-label">
                     <span><i class="iconfont icon-time-rewind"></i>历史对话</span>
                 </div>
                 <div class="history-list" @scroll="handleHistoryListScroll($event)">

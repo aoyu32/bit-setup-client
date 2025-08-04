@@ -1,407 +1,435 @@
 @use '@/assets/styles/common/main.scss' as *;
 
- .app-card {
-     height: $app-card-w;
-     @include b-r(10);
-     position: relative;
-     transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-     box-shadow: shadow(m);
-     cursor: pointer;
-     user-select: none;
-
-     @include c-t {
-         background-color: color(c-g0);
-     }
-
-     .card-content {
-         @include wh(100p);
-         @include flex(c, c, c);
-         transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-         @include b-r($app-card-br);
-         transform-style: preserve-3d;
-         overflow: hidden;
-
-         .card-draw {
-             @include wh(45);
-             position: absolute;
-             z-index: 99;
-             @include b-r($app-card-br);
-             @include flex(t, r);
-
-             button {
-                 @include wh(30);
-                 @include b-r($app-card-br);
-
-                 @include c-t {
-                     color: color(c-g);
-                 }
-
-                 cursor: pointer;
-                 margin: 5px;
-                 transition: all 0.2s ease-out;
-
-                 &:hover {
-                     transform: scale(1.1);
-
-                     @include c-t {
-                         background-color: color(c-g1, 0.3);
-                     }
-                 }
-             }
-         }
-
-     }
-
-     #card-content-front {
-
-         &:hover {
-             .app-img {
-                 transform: perspective(1000px) translateZ(30px) scale(1.05);
-             }
-
-             .app-name {
-                 transform: perspective(1000px) translateZ(30px);
-             }
-
-             .app-category {
-                 transform: perspective(1000px) translateZ(30px);
-             }
-
-             .app-download {
-                 transform: perspective(1000px) translateZ(10px);
-             }
-         }
-
-         .is-flipped {
-
-             .app-img,
-             .app-name,
-             .app-category,
-             .app-download,
-             .app-mark,
-             .iconfont {
-                 transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-             }
-         }
-
-         .card-top {
-             @include wh;
-             flex: 1;
-             @include flex(c, c);
-             position: relative;
-
-             @include c-t {
-                 background: color(c-p-light);
-             }
-
-             @include b-r($app-card-br, $app-card-br);
-
-             .app-img {
-                 @include wh(50);
-                 z-index: 99;
-                 transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-
-                 img {
-                     @include wh;
-                     object-fit: contain;
-                 }
-             }
-
-             &::before {
-                 content: '';
-                 position: absolute;
-                 bottom: 0;
-                 left: 0;
-                 @include p-a(b0, l0);
-                 width: 100%;
-                 height: 70px;
-
-                 @include c-t {
-                     background-color: color(c-g0);
-                 }
-             }
-
-             &::after {
-                 content: '';
-                 @include p-a(b0, l0);
-                 @include wh(100p, 70);
-
-                 @include c-t {
-                     background: color(c-p-light);
-                 }
-
-                 @include b-r(0, 0, 0, 100);
-             }
-         }
-
-         .card-bottom {
-             @include wh;
-             flex: 1;
-             @include flex(c, n, c);
-             position: relative;
-
-             @include c-t {
-                 background: color(c-g0);
-             }
-
-             gap: 5px;
-
-             @include b-r(0, 0, $app-card-br, $app-card-br);
-
-             .app-name {
-                 z-index: 99;
-                 font-size: 17px;
-                 font-weight: 550;
-                 padding-top: 20px;
-
-                 @include c-t {
-                     color: color(c-g7);
-                 }
-
-                 transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-             }
-
-             .app-category {
-                 z-index: 89;
-                 padding: 5px;
-                 font-size: 14px;
-                 border-radius: $b-r;
-
-                 @include c-t {
-                     background-color: color(c-p-lightest);
-                     color: color(c-p-dark);
-                 }
-
-                 transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-             }
-
-             .app-download {
-                 font-size: 12px;
-
-                 @include c-t {
-                     color: color(c-g6);
-                 }
-
-                 z-index: 99;
-                 transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-
-                 span {
-                     @include flex(c, c, c);
-                 }
-
-                 .iconfont {
-                     font-size: 13px;
-                 }
-             }
-
-             &::before {
-                 content: '';
-                 @include p-a(t0, l0);
-                 @include wh(100p, 70);
-
-                 @include c-t {
-                     background: color(c-p-light);
-                 }
-             }
-
-             &::after {
-                 content: '';
-                 @include p-a(t0, l0);
-
-                 @include c-t {
-                     background: color(c-p-light);
-                     background-color: color(c-g0);
-                 }
-
-                 @include wh(100p, 70);
-                 @include b-r(0, 70, 0, 0);
-             }
-         }
-
-         &::before {
-             content: '';
-             @include p-a(t0, l0);
-             @include wh(50p, 100p);
-             z-index: 90;
-
-             @include c-t {
-                 background: rgba(color(c-p), 0.185);
-             }
-
-             border-bottom-left-radius: 10px; // 底部左侧圆角              
-             border-top-left-radius: 10px; // 顶部左侧圆角    
-             @include b-r(0, $app-card-br)
-         }
-
-         .card-draw {
-             right: 0px;
-             top: 0px;
-             @include p-a(t0, r0);
-
-             button {
-                 transform: translateY(-180deg);
-             }
-
-         }
-
-         .mark-wrapper {
-             font-size: 9px;
-
-             @include c-t {
-                 color: color(c-g, 0.7);
-             }
-
-             @include flex(c, c, c);
-             z-index: 99;
-             gap: 10px;
-             position: absolute;
-
-             .app-mark {
-                 @include c-t {
-                     background-color: color(c-g, 0.2);
-                 }
-
-                 padding: 2px;
-             }
-         }
-
-         .left-mark {
-             align-items: start;
-             top: 10px;
-             left: 0;
-         }
-
-         .right-mark {
-             align-items: end;
-             top: 50px;
-             right: 0;
-         }
-     }
-
-     #card-content-back {
-         position: relative;
-
-         .card-draw {
-             z-index: 100;
-             @include p-a(t0, l0);
-         }
-
-         .app-rating {
-             position: absolute;
-             @include wh(40, n);
-             @include p-a(t10, r0);
-             z-index: 99;
-             transform: scaleX(-1);
-             @include flex(c, c);
-             font-size: 12px;
-             padding: 2px 0;
-
-             @include c-t {
-                 color: color(c-g);
-                 background: color(error);
-             }
-
-             gap: 3px;
-
-             span {
-                 @include flex(c, c);
-
-                 .iconfont {
-                     font-size: 14px
-                 }
-             }
-
-         }
-
-         .card-top {
-             @include wh;
-             flex: 1;
-             @include flex(c, c);
-             position: relative;
-
-             @include c-t {
-                 background: color(c-p-light);
-             }
-
-             @include b-r($app-card-br, $app-card-br, 0, 0);
-
-             .app-bio {
-                 @include wh(100p);
-                 @include flex(c, c);
-                 z-index: 99;
-                 padding: 20px;
-                 font-size: 14px;
-                 text-align: center;
-                 transform: scaleX(-1);
-
-                 @include c-t {
-                     color: color(c-g, 0.9);
-                 }
-             }
-
-             &::before {
-                 content: '';
-                 @include p-a(b0, l0);
-                 @include wh(100p, 70);
-
-                 @include c-t {
-                     background-color: color(c-g0);
-                 }
-             }
-
-             &::after {
-                 content: '';
-                 @include p-a(b0, l0);
-                 @include wh(100p, 70);
-
-                 @include c-t {
-                     background: color(c-p-light);
-                 }
-             }
-         }
-
-         .card-bottom {
-             @include wh(100p);
-             flex: 1;
-             @include flex(c, n, c);
-             position: relative;
-
-             @include c-t {
-                 background: color(c-g0);
-             }
-
-             gap: 10px;
-             border-bottom-left-radius: 10px; // 底部左侧圆角                  
-             border-bottom-right-radius: 10px; // 底部右侧圆角               
-
-             .card-logo {
-                 @include wh(100p);
-                 z-index: 99;
-                 @include flex(c, c);
-                 transform: scaleX(-1);
-             }
-
-             &::before {
-                 content: '';
-                 @include p-a(t0, l0);
-                 @include wh(100p, 70);
-
-                 @include c-t {
-                     background: color(c-p-light);
-                 }
-             }
-
-             &::after {
-                 content: '';
-                 @include p-a(t0, l0);
-                 @include wh(100p, 70);
-                 @include b-r(70,70,0,0);
-
-                 @include c-t {
-                     background-color: color(c-g0);
-                 }
-             }
-         }
-     }
-
- }
+.app-card {
+    height: $app-card-w;
+    @include b-r(10);
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    box-shadow: shadow(m);
+    cursor: pointer;
+    user-select: none;
+
+    @include c-t {
+        background-color: color(c-g0);
+    }
+
+    .link-top {
+        @include wh(n, 45px);
+        width: calc(100% - 45px);
+        @include p-a(t0, l0);
+        z-index: 99;
+
+        &.left-link {
+            right: 0;
+            left: auto;
+        }
+    }
+
+    .link-bottom {
+        @include wh(100p, n);
+        height: calc(100% - 45px);
+        @include p-a(b0, n);
+        z-index: 99;
+
+        &.left-link {
+            left: auto;
+            right: 0;
+        }
+    }
+
+    .card-content {
+        @include wh(100p);
+        @include flex(c, c, c);
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+        @include b-r($app-card-br);
+        transform-style: preserve-3d;
+        overflow: hidden;
+
+        .card-draw {
+            @include wh(45);
+            @include p-a(t0, r0);
+            z-index: 99;
+            @include b-r($app-card-br);
+
+
+            button {
+                @include wh(30);
+                @include b-r($app-card-br);
+
+                @include c-t {
+                    color: color(c-g);
+                }
+
+                cursor: pointer;
+                margin: 5px;
+                transition: all 0.2s ease-out;
+
+                &:hover {
+                    transform: scale(1.1);
+
+                    @include c-t {
+                        background-color: color(c-g1, 0.3);
+                    }
+                }
+            }
+        }
+
+    }
+
+    #card-content-front {
+
+        .card-draw {
+
+            @include flex(t, r);
+        }
+
+        &:hover {
+            .app-img {
+                transform: perspective(1000px) translateZ(30px) scale(1.05);
+            }
+
+            .app-name {
+                transform: perspective(1000px) translateZ(30px);
+            }
+
+            .app-category {
+                transform: perspective(1000px) translateZ(30px);
+            }
+
+            .app-download {
+                transform: perspective(1000px) translateZ(10px);
+            }
+        }
+
+        .is-flipped {
+
+            .app-img,
+            .app-name,
+            .app-category,
+            .app-download,
+            .app-mark,
+            .iconfont {
+                transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            }
+        }
+
+        .card-top {
+            @include wh;
+            flex: 1;
+            @include flex(c, c);
+            position: relative;
+
+            @include c-t {
+                background: color(c-p-lighter);
+            }
+
+            @include b-r($app-card-br, $app-card-br);
+
+            .app-img {
+                @include wh(50);
+                z-index: 99;
+                transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+
+                img {
+                    @include wh;
+                    object-fit: contain;
+                }
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                @include p-a(b0, l0);
+                width: 100%;
+                height: 70px;
+
+                @include c-t {
+                    background: color(c-p-lighter);
+                }
+            }
+
+            &::after {
+                content: '';
+                @include p-a(b0, l0);
+                @include wh(100p, 70);
+
+                @include c-t {
+                    background: color(c-p-lighter);
+                }
+
+                @include b-r(0, 0, 0, 100);
+            }
+        }
+
+        .card-bottom {
+            @include wh;
+            flex: 1;
+            @include flex(c, n, c);
+            position: relative;
+
+            @include c-t {
+                background: color(c-g0);
+            }
+
+            gap: 5px;
+
+            @include b-r(0, 0, $app-card-br, $app-card-br);
+
+            .app-name {
+                z-index: 99;
+                font-size: 17px;
+                font-weight: 550;
+                padding-top: 20px;
+
+                @include c-t {
+                    color: color(c-g7);
+                }
+
+                transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            }
+
+            .app-category {
+                z-index: 89;
+                padding: 5px;
+                font-size: 14px;
+                border-radius: $b-r;
+
+                @include c-t {
+                    background-color: color(c-p-lightest);
+                    color: color(c-p-dark);
+                }
+
+                transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            }
+
+            .app-download {
+                font-size: 12px;
+
+                @include c-t {
+                    color: color(c-g6);
+                }
+
+                z-index: 99;
+                transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+
+                span {
+                    @include flex(c, c, c);
+                }
+
+                .iconfont {
+                    font-size: 13px;
+                }
+            }
+
+            &::before {
+                content: '';
+                @include p-a(t0, l0);
+                @include wh(100p, 70);
+
+                @include c-t {
+                    background: color(c-p-light);
+                    background: color(c-p-lighter);
+                }
+            }
+
+            &::after {
+                content: '';
+                @include p-a(t0, l0);
+
+                @include c-t {
+                    background: color(c-p-lighter);
+                    background-color: color(c-g0);
+                }
+
+                @include wh(100p, 70);
+                @include b-r(0, 70, 0, 0);
+            }
+        }
+
+        &::before {
+            content: '';
+            @include p-a(t0, l0);
+            @include wh(50p, 100p);
+            z-index: 90;
+
+            @include c-t {
+                background: rgba(color(c-p), 0.185);
+            }
+
+            border-bottom-left-radius: 10px; // 底部左侧圆角              
+            border-top-left-radius: 10px; // 顶部左侧圆角    
+            @include b-r(0, $app-card-br)
+        }
+
+        .card-draw {
+            @include p-a(t0, r0);
+
+            button {
+                transform: translateY(-180deg);
+            }
+
+        }
+
+        .mark-wrapper {
+            font-size: 9px;
+
+            @include c-t {
+                color: color(c-g, 0.7);
+            }
+
+            @include flex(c, c, c);
+            z-index: 99;
+            gap: 10px;
+            position: absolute;
+
+            .app-mark {
+                @include c-t {
+                    background-color: color(c-g, 0.2);
+                }
+
+                padding: 2px;
+            }
+        }
+
+        .left-mark {
+            align-items: start;
+            top: 10px;
+            left: 0;
+        }
+
+        .right-mark {
+            align-items: end;
+            top: 50px;
+            right: 0;
+        }
+    }
+
+    #card-content-back {
+        position: relative;
+
+        .card-draw {
+            z-index: 100;
+            @include p-a(t0, l0);
+        }
+
+        .app-rating {
+            position: absolute;
+            @include wh(40, n);
+            @include p-a(t10, r0);
+            z-index: 99;
+            transform: scaleX(-1);
+            @include flex(c, c);
+            font-size: 12px;
+            padding: 2px 0;
+
+            @include c-t {
+                color: color(c-g);
+                background: color(error);
+            }
+
+            gap: 3px;
+
+            span {
+                @include flex(c, c);
+
+                .iconfont {
+                    font-size: 14px
+                }
+            }
+
+        }
+
+        .card-top {
+            @include wh;
+            flex: 1;
+            @include flex(c, c);
+            position: relative;
+
+            @include c-t {
+                background: color(c-p-light);
+            }
+
+            @include b-r($app-card-br, $app-card-br, 0, 0);
+
+            .app-bio {
+                @include wh(100p);
+                @include flex(c, c);
+                z-index: 99;
+                padding: 20px;
+                font-size: 14px;
+                text-align: center;
+                transform: scaleX(-1);
+
+                @include c-t {
+                    color: color(c-g, 0.9);
+                }
+            }
+
+            &::before {
+                content: '';
+                @include p-a(b0, l0);
+                @include wh(100p, 70);
+
+                @include c-t {
+                    background-color: color(c-g0);
+                }
+            }
+
+            &::after {
+                content: '';
+                @include p-a(b0, l0);
+                @include wh(100p, 70);
+
+                @include c-t {
+                    background: color(c-p-light);
+                }
+            }
+        }
+
+        .card-bottom {
+            @include wh(100p);
+            flex: 1;
+            @include flex(c, n, c);
+            position: relative;
+
+            @include c-t {
+                background: color(c-g0);
+            }
+
+            gap: 10px;
+            border-bottom-left-radius: 10px; // 底部左侧圆角                  
+            border-bottom-right-radius: 10px; // 底部右侧圆角               
+
+            .card-logo {
+                @include wh(100p);
+                z-index: 99;
+                @include flex(c, c);
+                transform: scaleX(-1);
+            }
+
+            &::before {
+                content: '';
+                @include p-a(t0, l0);
+                @include wh(100p, 70);
+
+                @include c-t {
+                    background: color(c-p-light);
+                }
+            }
+
+            &::after {
+                content: '';
+                @include p-a(t0, l0);
+                @include wh(100p, 70);
+                @include b-r(70, 70, 0, 0);
+
+                @include c-t {
+                    background-color: color(c-g0);
+                }
+            }
+        }
+    }
+
+}

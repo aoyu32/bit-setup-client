@@ -21,12 +21,12 @@
                     <PostCard :postData="postCardData" />
                 </div>
             </div>
-            <div class="article-lable">
-                <div class="lable-left">
+            <div class="article-label">
+                <div class="label-left">
                     <span><i class="iconfont icon-dengji"></i></span>
                     <span>编辑文章</span>
                 </div>
-                <div class="lable-right">
+                <div class="label-right">
                     <div class="upload-document">
                         <input type="file" ref="uploadDocumentRef" accept=".md" @change="handleFileChange">
                         <button @click="triggerUploadDocument">上传文档</button>
@@ -155,12 +155,12 @@ const handleFileChange = (e) => {
             }
         }
 
-        .article-lable {
+        .article-label {
             @include wh;
             @include flex(c, s-b);
             margin-bottom: 20px;
 
-            .lable-left {
+            .label-left {
                 @include flex(b, c);
                 font-size: 19px;
                 font-weight: 550;
@@ -175,7 +175,7 @@ const handleFileChange = (e) => {
                 }
             }
 
-            .lable-right {
+            .label-right {
                 .upload-document {
                     font-size: 14px;
 

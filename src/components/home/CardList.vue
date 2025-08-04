@@ -38,12 +38,15 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps(['cardApp'])
 const scrollContainer = ref(null)
-
+const router = useRouter()
 const handleItemClick = (item) => {
     console.log('点击了应用:', item.name);
+    router.push('/detail')
+    
 }
 
 onMounted(() => {

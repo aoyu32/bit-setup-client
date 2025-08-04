@@ -13,8 +13,8 @@
         background-color: color(c-g);
     }
 
-    .category-lable,
-    .option-lable {
+    .category-label,
+    .option-label {
         @include wh(120, n);
         font-size: 14px;
         font-weight: 550;
