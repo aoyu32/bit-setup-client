@@ -181,7 +181,7 @@ const postFilterData = computed(() => {
     .community-left {
 
         @include wh(70p, n);
-        @include flex(n, t, c);
+        @include flex(n, n, c);
         margin-right: 20px;
 
         @include c-t {
@@ -213,9 +213,8 @@ const postFilterData = computed(() => {
     .hot-list-container {
         margin-top: 20px;
         @include wh;
-        position: relative; // 添加相对定位
-        transition: transform 0.3s ease; // 添加过渡效果
-
+        position: relative;
+        transition: transform 0.3s ease;
         .content-wrapper {
             @include flex;
             gap: 20px;
@@ -242,7 +241,7 @@ const postFilterData = computed(() => {
     .author-list-container {
         margin-top: 20px;
         @include wh;
-        transition: transform 0.3s ease; // 添加过渡效果
+        transition: transform 0.3s ease;
 
         .content-wrapper {
             @include flex(c, c);

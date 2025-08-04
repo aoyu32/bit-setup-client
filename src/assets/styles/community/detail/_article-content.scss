@@ -2,4 +2,176 @@
 
 .article-content {
     @include wh;
+    @include flex(n, c, c);
+    padding: 0 20px;
+
+    .article-header {
+        @include wh;
+        @include flex(n, n, c);
+
+        .title {
+            @include wh;
+            padding-top: 20px;
+
+            h1 {
+                font-size: 27px;
+            }
+        }
+
+        .info {
+            @include wh;
+            @include flex(c, l);
+            gap: 40px;
+            padding: 15px 0;
+            font-size: 14px;
+
+            .info-item {
+                @include flex(c, c);
+                gap: 7px;
+
+                span {
+                    @include flex(c, c);
+                }
+            }
+
+            .date {
+                padding: 0 40px;
+
+                @include c-t {
+                    border-left: 1px solid color(c-g9, 0.1);
+                    border-right: 1px solid color(c-g9, 0.1);
+                }
+            }
+
+            @include c-t {
+                color: color(c-g7, 0.5);
+            }
+        }
+    }
+
+    .article-main {
+        @include wh;
+        padding: 20px 0;
+
+
+    }
+
+    .article-footer {
+        @include wh;
+        padding: 20px 0;
+
+        @include flex(c, s-b);
+
+        .status {
+            @include flex(c, c);
+            gap: 24px;
+
+            .status-item {
+                @include flex(c, c);
+                gap: 5px;
+                font-size: 13px;
+                cursor: pointer;
+                transition: color 0.3s ease;
+
+                @include c-t {
+                    color: color(c-g9, 0.5);
+                }
+
+                &:hover {
+                    color: #667eea;
+                }
+
+                .iconfont {
+                    font-size: 16px;
+                }
+
+                &.like:hover {
+                    color: #ff4757;
+                }
+
+                &.comment:hover {
+                    color: #3742fa;
+                }
+
+                &.views:hover {
+                    color: #2ed573;
+                }
+
+                &.saves:hover {
+                    color: #ffa502;
+                }
+            }
+        }
+
+        .action {
+            transition: color 0.3s ease;
+            cursor: pointer;
+            position: relative;
+
+            @include c-t {
+                color: color(c-g9, 0.5);
+            }
+
+            &:hover {
+                .more-menu {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                }
+            }
+
+            .more-menu {
+                @include wh(90, n);
+                padding: 5px 0;
+                position: absolute;
+                right: 15px;
+                bottom: -13px;
+                font-size: 13px;
+                display: block;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(5px);
+                transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+            }
+
+            .report {
+                padding: 5px;
+                @include wh;
+                @include flex(c, c);
+                transition: all 0.3s ease-in-out;
+                cursor: pointer;
+                gap: 5px;
+                @include b-r($b-r);
+
+                @include c-t {
+                    background-color: color(c-g1);
+                }
+
+                @include c-t {
+                    color: color(c-g7);
+                }
+
+                .iconfont {
+                    font-size: 13px;
+                }
+
+                &:hover {
+                    @include c-t {
+                        background-color: color(c-g2);
+                    }
+                }
+
+            }
+
+            &:hover {
+                color: #667eea;
+            }
+        }
+
+    }
+
+
+
+
 }

@@ -95,7 +95,7 @@ import CommentInput from './CommentInput.vue'
 const isEdit = ref(false)
 const isMyComment = ref(false)
 const isReplying = ref(false)
-
+const replyTo = ref('aoyu')
 </script>
 <style lang="scss" scoped>
 .comment-reply-item {

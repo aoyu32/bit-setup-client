@@ -45,16 +45,19 @@ const router = createRouter({
                             redirect: '/community/index'
                         },
                         {
+                            name:'communityIndex',
                             path: 'index',
                             component: CommunityIndex
 
                         },
                         {
+                            name:'communityPost',
                             path: 'post',
                             component: CommunityPost
                         },
                         {
-                            path:'detail',
+                            name:'communityDetail',
+                            path:'detail/:type',
                             component:CommunityDetail
                         }
                     ]

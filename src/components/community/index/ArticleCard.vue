@@ -21,21 +21,26 @@
                 <span>{{ postData.tag.name }}</span>
             </div>
         </div>
-        <div class="card-main">
-            <div class="card-main-left">
-                <div class="title">
-                    <span>{{ postData.title }}</span>
+        <router-link :to="{
+            name:'communityDetail',
+            params:{type:'article'}
+        }">
+            <div class="card-main">
+                <div class="card-main-left">
+                    <div class="title">
+                        <span>{{ postData.title }}</span>
+                    </div>
+                    <div class="content">
+                        {{ postData.content }}
+                    </div>
                 </div>
-                <div class="content">
-                    {{ postData.content }}
+                <div class="card-main-right">
+                    <div class="img">
+                        <img :src="postData.images[0]" alt="">
+                    </div>
                 </div>
             </div>
-            <div class="card-main-right">
-                <div class="img">
-                    <img :src="postData.images[0]" alt="">
-                </div>
-            </div>
-        </div>
+        </router-link>
         <div class="card-footer">
             <div class="post-stats">
                 <div class="status">

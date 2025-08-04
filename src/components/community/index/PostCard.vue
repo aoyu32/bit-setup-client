@@ -21,7 +21,10 @@
                 <span>{{ postData.tag.name }}</span>
             </div>
         </div>
-        <router-link to="/community/detail">
+        <router-link :to="{
+            name: 'communityDetail',
+            params: { type: 'post' }
+        }">
             <div class="card-main">
                 <div class="title">
                     <span>{{ postData.title }}</span>
