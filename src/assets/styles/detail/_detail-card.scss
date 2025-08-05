@@ -1,0 +1,185 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.detail-card {
+    @include wh;
+    @include flex(n, n, c);
+    box-shadow: shadow(m);
+
+    @include c-t {
+        background-color: color(c-g);
+    }
+
+    padding: 20px;
+
+    .card-top {
+        @include wh(100p, n);
+        @include flex(n, s-b);
+        gap: 40px;
+
+        .top-left {
+            @include flex(c, n, c);
+            gap: 10px;
+
+
+            .app-icon {
+                @include b-r($b-r);
+                @include wh(64);
+                @include img($b-r);
+                box-shadow: shadow(l);
+            }
+
+            .app-rating {
+                @include wh(100p, n);
+                @include flex(c, c);
+                font-size: 14px;
+                gap: 5px;
+
+                .iconfont {
+                    font-size: 15px;
+                }
+            }
+
+        }
+
+        .top-right {
+            font-size: 15px;
+            @include wh;
+
+
+            .top-right-header {
+                @include wh;
+                @include flex(c, s-b);
+
+                .app-name {
+                    font-size: 20px;
+                    font-weight: 550;
+                }
+            }
+
+            .top-right-main {
+                @include wh;
+
+
+                .app-info-items {
+                    padding-top: 25px;
+                    @include wh;
+                    @include grid(auto-fit, minmax(200px, 1fr));
+                    gap: 30px;
+
+                    span {
+                        white-space: nowrap;
+                        display: inline-block;
+                    }
+
+                    .info-item {
+                        @include flex;
+                        gap: 10px;
+
+
+                        .label {
+                            font-size: 14px;
+                            @include flex(c, c);
+
+                            @include c-t {
+                                color: color(c-g9, 0.5);
+                            }
+                        }
+
+                        .item-content {
+                            @include flex(c, c);
+                            gap: 5px;
+
+
+                            span {
+                                @include flex(c, c);
+                                font-size: 13px;
+                                padding: 3px 5px;
+
+                                @include c-t {
+                                    color: color(c-9);
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+
+                .app-download {
+                    @include flex(c, r);
+                    @include wh;
+                    gap: 20px;
+
+                    .link {
+                        padding: 30px 0;
+                    }
+
+                    a {
+                        padding: 10px 20px;
+                        @include b-r($b-r);
+
+                        @include c-t {
+                            background-color: color(c-p-lighter);
+                            color: color(c-g);
+                        }
+                    }
+                }
+
+            }
+
+
+
+
+
+        }
+
+        .top-right {
+            .download-link {
+                @include flex(n, n, c);
+                gap: 20px;
+
+                .direct-link a {
+                    @include flex;
+                }
+
+            }
+
+        }
+    }
+
+    .card-bottom {
+        @include wh;
+        @include flex(c, s-b);
+        font-size: 13px;
+        margin-top: 20px;
+
+        .app-stats {
+            @include flex(c, c);
+            gap: 20px;
+
+            .stats-item {
+                @include flex;
+                gap: 5px;
+            }
+
+        }
+
+        .app-actions {
+            @include flex;
+            gap: 20px;
+
+            .like {
+                @include flex;
+                gap: 5px;
+            }
+
+            .save {
+                @include flex;
+                gap: 5px;
+            }
+        }
+
+    }
+
+
+}

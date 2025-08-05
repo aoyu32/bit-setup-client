@@ -6,7 +6,6 @@
 
 @use '@/assets/styles/theme/_theme-color.scss' as *;
 $currentTheme : light;
-
 @mixin c-t() {
     @each $key, $value in $theme {
         $currentTheme : $key !global;

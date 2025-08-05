@@ -56,19 +56,19 @@ const themeOptions = ref([
     },
     {
         label: "红色燎原",
-        value: "red"
+        value: "flame"
     },
     {
         label: "繁星之夜",
-        value: "starry"
+        value: "cosmos"
     },
     {
         label: "绿意盎然",
-        value: "green"
+        value: "forest"
     },
     {
         label: "冷酷之蓝",
-        value: "blue"
+        value: "ocean"
     }
 ]);
 const actionList = ref([

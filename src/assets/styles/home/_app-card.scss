@@ -146,7 +146,7 @@
                 height: 70px;
 
                 @include c-t {
-                    background: color(c-p-lighter);
+                    background-color: color(c-g0);
                 }
             }
 
@@ -157,6 +157,7 @@
 
                 @include c-t {
                     background: color(c-p-lighter);
+
                 }
 
                 @include b-r(0, 0, 0, 100);
@@ -229,7 +230,6 @@
                 @include wh(100p, 70);
 
                 @include c-t {
-                    background: color(c-p-light);
                     background: color(c-p-lighter);
                 }
             }
@@ -239,7 +239,6 @@
                 @include p-a(t0, l0);
 
                 @include c-t {
-                    background: color(c-p-lighter);
                     background-color: color(c-g0);
                 }
 
