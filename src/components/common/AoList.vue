@@ -1,6 +1,32 @@
-@use '@/assets/styles/common/main.scss' as *;
-
-.ranking-list {
+<template>
+    <div class="ao-list">
+        <div class="ao-header">
+            <div class="header-left">
+                <slot name="title"></slot>
+            </div>
+            <div class="header-right">
+                <slot name="more">
+                </slot>
+            </div>
+        </div>
+        <div class="ao-main">
+            <template v-if="!list || list.length === 0">
+                <div class="no-data">
+                    <slot name="empty">暂无数据</slot>
+                </div>
+            </template>
+            <a v-for="(item, index) in list" v-else>
+                <slot name="item" :item="item" :index="index">
+                </slot>
+            </a>
+        </div>
+    </div>
+</template>
+<script setup>
+const props = defineProps(['list'])
+</script>
+<style lang="scss" scoped>
+.ao-list {
     @include wh;
     @include flex(n, c, c);
     padding: 20px 15px 5px 15px;
@@ -11,7 +37,7 @@
 
     box-shadow: shadow(m);
 
-    .ranking-header {
+    .ao-header {
         @include flex(c, s-b);
 
         .header-left {
@@ -19,7 +45,8 @@
             gap: 5px;
             font-size: 15px;
             font-weight: 550;
-            @include c-t{
+
+            @include c-t {
                 color: color(c-p-lighter);
             }
 
@@ -31,6 +58,7 @@
         .header-right {
             font-size: 12px;
             cursor: pointer;
+
             @include c-t {
                 color: color(c-p-lighter);
             }
@@ -38,13 +66,13 @@
     }
 
 
-    .ranking-main {
+    .ao-main {
         @include wh;
         @include flex(n, n, c);
         margin-top: 10px;
 
-        .no-data{
-            @include flex(c,c,c);
+        .no-data {
+            @include flex(c, c, c);
             padding: 20px 15px 25px 15px;
             font-size: 14px;
         }
@@ -60,8 +88,8 @@
                 color: color(c-g7);
             }
 
-            &:hover{
-                @include c-t{
+            &:hover {
+                @include c-t {
                     color: color(c-p-lighter);
                 }
             }
@@ -69,3 +97,4 @@
     }
 
 }
+</style>

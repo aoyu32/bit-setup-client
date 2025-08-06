@@ -1,0 +1,85 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.detail-sidebar {
+
+    @include wh;
+    position: relative;
+
+   
+
+    .sidebar-top {
+        @include wh;
+        @include flex(n, n, c);
+        gap: 20px;
+
+        :deep(.ao-list) {
+            @include b-r($b-r);
+        }
+
+        .tip {
+            @include flex(c, c);
+
+            span:first-child {
+                display: block;
+                padding-right: 10px;
+
+                @include c-t {
+                    border-right: 1px solid color(c-g5, 0.1);
+                }
+            }
+
+            span:last-child {
+                display: block;
+                padding-left: 10px;
+
+                @include c-t {
+                    border-left: 1px solid color(c-g5, 0.1);
+                }
+            }
+        }
+
+        .list-item {
+            @include wh;
+            @include flex(n, s-b);
+
+            .item-left {
+                @include flex(c, c);
+                gap: 15px;
+            }
+
+            .app-icon {
+                @include wh(40);
+                padding: 5px;
+                box-shadow: shadow(m);
+                @include b-r($b-r);
+                @include img($b-r);
+            }
+
+            .item-right {
+                @include flex(c, c);
+                gap: 15px;
+                font-size: 10px;
+
+                .info {
+                    @include flex(c, c);
+                    gap: 5px;
+
+                    @include c-t {
+                        color: color(c-g9, 0.6);
+                    }
+
+                    .iconfont {
+                        font-size: 13px;
+                    }
+                }
+            }
+
+            .app-category {
+                font-size: 12px;
+            }
+        }
+    }
+
+
+
+}

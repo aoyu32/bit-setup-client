@@ -1,8 +1,39 @@
 @use '@/assets/styles/common/main.scss' as *;
 
+@keyframes smoothBrandShadow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 8px 24px color(c-p, 0.35),
+            0 12px 32px color(c-p-lightest, 0.2);
+    }
+
+    25% {
+        box-shadow:
+            0 10px 28px color(c-p-light, 0.4),
+            0 14px 36px color(c-p-lightest, 0.25);
+    }
+
+    50% {
+        box-shadow:
+            0 12px 32px color(c-p-lighter, 0.45),
+            0 16px 40px color(c-s-lightest, 0.3);
+    }
+
+    75% {
+        box-shadow:
+            0 14px 36px color(c-s-light, 0.35),
+            0 18px 44px color(c-s-lightest, 0.25);
+    }
+}
+
+
+
 .detail-card {
     @include wh;
     @include flex(n, n, c);
+    @include b-r($b-r);
     box-shadow: shadow(m);
 
     @include c-t {
@@ -18,21 +49,30 @@
 
         .top-left {
             @include flex(c, n, c);
-            gap: 10px;
+            gap: 20px;
 
 
             .app-icon {
                 @include b-r($b-r);
                 @include wh(64);
                 @include img($b-r);
-                box-shadow: shadow(l);
+                // animation: smoothBrandShadow 10s infinite ease-in-out;
+                // 初始阴影（确保无动画时仍有效果）
+                box-shadow: 0 6px 20px color(c-p, 0.3);
             }
 
             .app-rating {
                 @include wh(100p, n);
                 @include flex(c, c);
                 font-size: 14px;
+                padding: 2px 0;
                 gap: 5px;
+                @include b-r($b-r);
+
+                @include c-t {
+                    background-color: color(c-p-lighter, 0.2);
+                    color: color(c-s-dark);
+                }
 
                 .iconfont {
                     font-size: 15px;
@@ -54,6 +94,17 @@
                     font-size: 20px;
                     font-weight: 550;
                 }
+
+                .app-official {
+                    a {
+                        @include flex(c, c);
+                        gap: 5px;
+
+                        @include c-t {
+                            color: color(c-s-light);
+                        }
+                    }
+                }
             }
 
             .top-right-main {
@@ -61,44 +112,67 @@
 
 
                 .app-info-items {
-                    padding-top: 25px;
+                    padding-top: 15px;
                     @include wh;
-                    @include grid(auto-fit, minmax(200px, 1fr));
-                    gap: 30px;
+                    gap: 10px;
+                    font-size: 13px;
+
 
                     span {
                         white-space: nowrap;
                         display: inline-block;
                     }
 
+                    .info-group {
+                        @include flex;
+                        gap: 10px 20px;
+                        padding: 5px 0;
+                        flex-wrap: wrap;
+                    }
+
                     .info-item {
                         @include flex;
-                        gap: 10px;
 
 
                         .label {
-                            font-size: 14px;
+                            padding: 4px 7px 4px 7px;
                             @include flex(c, c);
+                            @include b-r(3px, 0px, 0px, 3px);
 
                             @include c-t {
+                                background-color: color(c-g2);
                                 color: color(c-g9, 0.5);
                             }
                         }
 
                         .item-content {
                             @include flex(c, c);
-                            gap: 5px;
+                            gap: 6px;
+                            font-size: 12px;
+                            padding: 4px 7px 4px 7px;
+                            @include b-r(0, 3px, 3px, 0);
 
+
+                            @include c-t {
+                                background-color: color(c-g9, 0.1);
+                                color: color(c-g9, 0.5);
+                            }
 
                             span {
-                                @include flex(c, c);
-                                font-size: 13px;
-                                padding: 3px 5px;
 
-                                @include c-t {
-                                    color: color(c-9);
+                                border-radius: 2px;
+                                padding: 2px 8px;
+
+                                // 循环使用这组背景色
+                                @for $i from 1 through 10 {
+                                    &:nth-child(#{$i}) {
+                                        background-color: hsl($i * 72, 75%, 95%); // 使用HSL色轮生成不同颜色
+                                        color: color(c-g7, 0.5);
+                                    }
                                 }
                             }
+
+
                         }
                     }
 
@@ -106,27 +180,72 @@
                 }
 
                 .app-download {
-                    @include flex(c, r);
                     @include wh;
+                    @include flex;
                     gap: 20px;
+                    margin: 20px 0;
 
-                    .link {
-                        padding: 30px 0;
-                    }
+                    .direct-link {
+                        font-size: 12px;
 
-                    a {
-                        padding: 10px 20px;
-                        @include b-r($b-r);
+                        a {
+                            @include flex(c, c);
+                            @include b-r($b-r);
 
-                        @include c-t {
-                            background-color: color(c-p-lighter);
-                            color: color(c-g);
+
+                        }
+
+                        .text {
+
+                            @include b-r($b-r, 0, 0, $b-r);
+                            padding: 8px 10px 8px 15px;
+
+                            @include c-t {
+                                background-color: color(c-s-lighter);
+                                color: color(c-g);
+                                // border-right: 1px solid color(c-p-lighter);
+                            }
+                        }
+
+                        .down-fee {
+                            font-size: 12px;
+                            padding: 8px 15px 8px 10px;
+                            @include flex(c, c);
+                            gap: 3px;
+                            @include b-r(0, $b-r, $b-r, 0);
+
+                            @include c-t {
+                                background-color: color(c-s-light);
+                                color: color(c-g);
+                            }
+
+                            img {
+                                @include wh(14);
+                            }
                         }
                     }
+
+                    .cloud-disk-link {
+                        @include flex(c, c);
+
+                        a {
+                            font-size: 12px;
+                            @include b-r($b-r);
+                            padding: 8px 15px;
+
+                            @include c-t {
+                                background-color: color(c-g2);
+                                color: color(c-g9, 0.5);
+
+                            }
+                        }
+
+                    }
+
                 }
 
-            }
 
+            }
 
 
 
@@ -152,6 +271,9 @@
         @include flex(c, s-b);
         font-size: 13px;
         margin-top: 20px;
+        @include c-t{
+            color: color(c-g9,0.5);
+        }
 
         .app-stats {
             @include flex(c, c);

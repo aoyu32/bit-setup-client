@@ -1,0 +1,24 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.detail-docs{
+    @include wh;
+    padding: 20px;
+    box-shadow: shadow(m);
+    @include b-r($b-r);
+    @include c-t{
+        background-color: color(c-g);
+    }
+
+    .detail-docs-header{
+        padding-bottom: 20px;
+        @include c-t{
+            border-bottom: 1px solid color(c-g9,0.1);
+        }
+
+    }
+
+    .detail-docs-main{
+        padding: 20px 30px;
+
+    }
+}

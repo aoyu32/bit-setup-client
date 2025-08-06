@@ -2,7 +2,7 @@
     <div class="home">
         <div class="home-top">
             <div class="banner-container">
-                <HomeBanner />
+                <AoBanner />
             </div>
             <div class="control-panel-container">
                 <ControlPanel />
@@ -26,7 +26,7 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import HomeBanner from '@/components/home/HomeBanner.vue';
+import AoBanner from '@/components/common/AoBanner.vue';
 import ControlPanel from '@/components/home/ControlPanel.vue';
 import AppList from '@/components/home/AppList.vue';
 import AppPage from '@/components/home/AppPage.vue';

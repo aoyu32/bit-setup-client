@@ -18,82 +18,100 @@
                     <div class="app-official">
                         <a href="">
                             <span>官方网站</span>
+                            <span><i class="iconfont icon-export"></i></span>
                         </a>
                     </div>
                 </div>
                 <div class="top-right-main">
                     <div class="app-info-items">
-                        <div class="app-category info-item">
-                            <div class="label">
-                                <span>类别：</span>
+                        <div class="info-group">
+                            <div class="app-category info-item">
+                                <div class="label">
+                                    <span>类别</span>
+                                </div>
+                                <div class="item-content">
+                                    <span>系统工具</span>
+                                    <span>浏览器</span>
+                                </div>
                             </div>
-                            <div class="item-content">
-                                <span>系统工具</span>
-                                <span>浏览器</span>
+                            <div class="app-version info-item">
+                                <div class="label">
+                                    <span>版本</span>
+                                </div>
+                                <div class="item-content">
+                                    <span>V1.0.0</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="app-version info-item">
-                            <div class="label">
-                                <span>版本：</span>
-                            </div>
-                            <div class="item-content">
-                                <span>v1.0.0</span>
-                            </div>
-                        </div>
-                        <div class="app-size info-item">
-                            <div class="label">
-                                <span>大小：</span>
-                            </div>
-                            <div class="item-content">
-                                <span>100MB</span>
-                            </div>
-                        </div>
-                        <div class="app-platform info-item">
-                            <div class="label">
-                                <span>支持平台:</span>
-                            </div>
-                            <div class="item-content">
-                                <span>window</span>
-                                <span>mac</span>
-                                <span>linux</span>
+                            <div class="app-size info-item">
+                                <div class="label">
+                                    <span>大小</span>
+                                </div>
+                                <div class="item-content">
+                                    <span>100MB</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="app-paywall info-item">
-                            <div class="label">
-                                <span>付费制度：</span>
+                        <div class="info-group">
+                            <div class="app-platform info-item">
+                                <div class="label">
+                                    <span>支持平台</span>
+                                </div>
+                                <div class="item-content">
+                                    <span>window</span>
+                                    <span>mac</span>
+                                    <span>linux</span>
+                                </div>
                             </div>
-                            <div class="item-content">
-                                <span>付费</span>
+                            <div class="app-paywall info-item">
+                                <div class="label">
+                                    <span>付费制度</span>
+                                </div>
+                                <div class="item-content">
+                                    <span>付费</span>
+                                </div>
+                            </div>
+                            <div class="app-developer info-item">
+                                <div class="label">
+                                    <span>开发商</span>
+                                </div>
+                                <div class="item-content">
+                                    <span>腾讯</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="app-developer info-item">
-                            <div class="label">
-                                <span>开发商：</span>
-                            </div>
-                            <div class="item-content">
-                                <span>腾讯</span>
+                        <div class="info-group">
+                            <div class="app-tag info-item">
+                                <div class="label">
+                                    <span>标签</span>
+                                </div>
+                                <div class="item-content">
+                                    <span>轻量</span>
+                                    <span>使用简单</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="app-tag info-item">
-                            <div class="label">
-                                <span>标签：</span>
-                            </div>
-                            <div class="item-content">
-                                <span>轻量</span>
-                                <span>使用简单</span>                                
+                    </div>
+                    <div class="app-download">
+                        <div class="direct-link">
+                            <a href="">
+                                <div class="text">
+                                    直链下载
+                                </div>
+                                <div class="down-fee">
+                                    <span>10</span>
+                                    <img src="../../assets/imgs/coin.svg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="cloud-disk-link">
+                            <!-- <div class="cloud-disk-selector">
+                                <AoSelector :options="cloudDiskOptions" />
+                            </div> -->
+                            <div class="cloud-disk-url">
+                                <a href="">网盘下载</a>
                             </div>
                         </div>
 
-                    </div>
-                    <div class="app-download">
-                        <div class="direct-link link">
-                            <a href="">
-                                <span>直链下载</span>
-                            </a>
-                        </div>
-                        <div class="cloud-link link">
-                            <a><span>网盘下载</span></a>
-                        </div>
                     </div>
                 </div>
 
@@ -134,6 +152,18 @@
     </div>
 </template>
 <script setup>
+import { ref } from 'vue'
+import AoSelector from '../common/AoSelector.vue';
+const cloudDiskOptions = ref([
+    {
+        label: '百度网盘',
+        value: 'baidu'
+    },
+    {
+        label: '夸克',
+        value: 'quark'
+    }
+])
 
 </script>
 <style lang="scss" scoped>

@@ -1,0 +1,79 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.other-version {
+    @include wh;
+    @include flex(n, n, c);
+    padding: 0 20px;
+
+    .other-version-header {
+        @include wh;
+
+
+    }
+
+    .version-selector {
+        @include wh;
+
+        .app-img {
+            @include flex(c, c);
+        }
+
+        :deep(.select-options) {
+            li {
+                padding: 15px 16px;
+            }
+        }
+
+        .version-info {
+            @include flex(c, c);
+            gap: 20px;
+            font-size: 13px;
+
+            @include c-t {
+                color: color(c-g9, 0.4);
+            }
+        }
+
+        .arrow-icon {
+            margin-left: 20px;
+        }
+
+    }
+
+
+    .other-version-main {
+        padding: 20px 0;
+        @include wh;
+        @include flex(n, n, c);
+
+        .label {
+            padding-bottom: 20px;
+        }
+    }
+
+    .other-version-footer {
+        @include flex(n, n, c);
+        gap: 20px;
+        margin-bottom: 20px;
+
+
+        .links {
+            @include wh;
+            @include flex;
+            gap: 20px;
+
+            a {
+                padding: 10px 15px;
+                @include b-r($b-r);
+
+                @include c-t {
+                    background-color: color(c-s-lighter);
+                    color: color(c-g);
+                }
+            }
+        }
+
+
+    }
+
+}

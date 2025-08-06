@@ -18,7 +18,7 @@
                     <StatsCard />
                 </div>
                 <div class="hot-list-container">
-                    <RankingList :rankingList="hotPostsDisplay">
+                    <aoList :list="hotPostsDisplay">
                         <template #title>
                             <span><i class="iconfont icon-huo"></i></span>
                             <span>热帖榜</span>
@@ -33,10 +33,10 @@
                             </div>
                             <div class="views"><i class="iconfont icon-fire"></i>{{ item.views }}</div>
                         </template>
-                    </RankingList>
+                    </aoList>
                 </div>
                 <div class="author-list-container">
-                    <RankingList :rankingList="goodAuthorsList">
+                    <AoList :list="goodAuthorsList">
                         <template #title>
                             <span><i class="iconfont icon-xunzhang"></i></span>
                             <span>优秀创作者</span>
@@ -69,7 +69,7 @@
 
                             </div>
                         </template>
-                    </RankingList>
+                    </AoList>
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@ import PostCard from '@/components/community/index/PostCard.vue';
 import ArticleCard from '@/components/community/index/ArticleCard.vue';
 import postData from '../../utils/post-data';
 import StatsCard from '@/components/community/index/StatsCard.vue';
-import RankingList from '../../components/community/index/RankingList.vue';
+import AoList from '../../components/common/AoList.vue';
 import goodAuthorsList from '../../utils/good-author';
 const hotPosts = [
     { id: 1, title: '2023安卓应用商店排行榜TOP10', views: 5420 },

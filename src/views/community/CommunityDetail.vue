@@ -29,7 +29,7 @@
                 <AuthorCard />
             </div>
             <div class="recommend-list-container">
-                <RankingList :ranking-list="hotPosts">
+                <AoList :list="hotPosts">
                     <template #title>
                         <span><i class="iconfont icon-huo"></i></span>
                         <span>推荐内容</span>
@@ -41,7 +41,7 @@
                             <div class="content">{{ item.title }}</div>
                         </div>
                     </template>
-                </RankingList>
+                </AoList>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@ import { ref } from 'vue'
 import { useRoute } from 'vue-router';
 import PostContent from '@/components/community/detail/PostContent.vue';
 import Comment from '@/components/comment/Comment.vue';
-import RankingList from '../../components/community/index/RankingList.vue';
+import AoList from '@/components/common/aoList.vue';
 import ArticleContent from '@/components/community/detail/ArticleContent.vue';
 import AuthorCard from '@/components/community/detail/AuthorCard.vue';
 const hotPosts = [
