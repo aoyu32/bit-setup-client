@@ -1,0 +1,59 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.search-input {
+    @include wh(100p,n);
+
+
+    :deep(.ao-search) {
+        .input-wrapper {
+            height: 45px;
+            padding: 0 15px;
+
+            input {
+                font-size: 15px;
+                padding: 0 13px;
+            }
+        }
+
+        .search-panel{
+            margin-top: 5px;
+        }
+
+    }
+
+    .left-search-icon {
+        @include c-t {
+            color: color(c-p-light);
+        }
+    }
+
+    .clear-icon {
+        padding: 0 15px;
+        cursor: pointer;
+        transition: all 0.2s ease-out;
+
+        &:hover {
+            @include c-t {
+                color: lighten(color(c-p), 50%);
+            }
+        }
+    }
+
+    .search-button {
+        font-size: 13px;
+        padding-left: 15px;
+        transition: all 0.2s ease-out;
+
+        @include c-t {
+            border-left: 1px solid color(c-p-lighter, 0.5);
+            color: color(c-p-lighter);
+        }
+
+        &:hover {
+            @include c-t {
+                color: lighten(color(c-p), 50%);
+            }
+        }
+    }
+
+}

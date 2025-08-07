@@ -11,8 +11,8 @@
 </template>
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import Header from '@/components/common/Header.vue';
-import Footer from '@/components/common/Footer.vue'
+import Header from '@/components/layout/Header.vue';
+import Footer from '@/components/layout/Footer.vue'
 onMounted(() => {
     getTheme()
 })
@@ -34,7 +34,7 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
 main {

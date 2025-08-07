@@ -9,6 +9,7 @@ import Detail from '@/views/detail/Detail.vue'
 import Layout from '@/views/layout/Layout.vue'
 import CommunityIndex from '@/views/community/CommunityIndex.vue'
 import CommunityDetail from '@/views/community/CommunityDetail.vue'
+import Search from '@/views/search/Search.vue'
 
 
 
@@ -70,6 +71,10 @@ const router = createRouter({
                             component: CommunityDetail
                         }
                     ]
+                },
+                {
+                    path: '/search',
+                    component: Search
                 }
             ]
         }

@@ -1,8 +1,135 @@
-@use '@/assets/styles/common/main.scss' as *;
+<template>
+    <div class="ao-search">
+        <div class="search-container" ref="searchContainer">
+            <div class="input-wrapper" :class="{ focus: isShowPanel }">
+                <div class="input-left">
+                    <slot name="left"></slot>
+                </div>
+                <input type="text" :value="modelValue" @focus="handleFocus" @blur="handleBlur"
+                    @keyup.enter="handleSearch" placeholder="请输入搜索内容" ref="inputRef" @input="handleInput($event)" />
+                <div class="clear">
+                    <slot name="clear" :onClear="handleClearInput" v-if="modelValue !== ''">
+                        <div class="clear-input" @mousedown.prevent @click="handleClearInput">
+                            <i class="iconfont icon-close"></i>
+                        </div>
+                    </slot>
+                </div>
+                <div class="input-right">
+                    <slot name="right" :onSearch="handleSearch">
+                        <div class="search-icon" @click="handleSearch" @mousedown.prevent>
+                            <i class="iconfont icon-sousuo"></i>
+                        </div>
+                    </slot>
+                </div>
 
-.header-search {
+            </div>
+
+            <!-- 搜索历史/建议面板 -->
+            <div class="search-panel" v-show="isShowPanel" @mousedown.prevent>
+                <!-- 搜索历史 -->
+                <div class="search-history" v-if="isShowHistory">
+                    <div class="history-header">
+                        <div class="history-label">
+                            <span>搜索历史</span>
+                        </div>
+                        <div class="history-clear">
+                            <span>清空</span>
+                            <span><i class="iconfont icon-qingchu"></i></span>
+                        </div>
+                    </div>
+                    <div class="history-main">
+                        <div class="history-items" v-if="history.length > 0">
+                            <div class="history-item" v-for="(item, index) in history" :key="index">
+                                <span>{{ item }}</span>
+                                <div class="delete-icon">
+                                    <i class="iconfont icon-close"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="no-history" v-else>
+                            <span><i class="iconfont icon-expression"></i></span>
+                            <span>你目前没有搜索历史~</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 搜索建议 -->
+                <div class="search-suggestion" v-else>
+                    <ul>
+                        <li v-for="(item, index) in suggestion" :key="index">{{ item }}</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script setup>
+import { ref, computed, watch } from 'vue'
+const emit = defineEmits(['update:modelValue', 'clear', 'search'])
+const inputRef = ref(null)
+const isShowPanel = ref(false)
+const isShowHistory = ref(true)
+
+const props = defineProps({
+    modelValue: {
+        type: String,
+        default: ''
+    },
+    suggestion: {
+        type: Array,
+        default: []
+    },
+    history: {
+        type: Array,
+        default: []
+    }
+})
+
+
+
+// 处理聚焦
+const handleFocus = () => {
+    isShowPanel.value = true
+}
+
+
+
+const handleClearInput = () => {
+    inputRef.value.focus()
+    emit('clear')
+}
+
+const handleInput = (e) => {
+    emit('update:modelValue', e.target.value)
+}
+
+
+// 处理失去焦点
+const handleBlur = () => {
+    isShowPanel.value = false
+}
+
+// 处理搜索
+const handleSearch = () => {
+    if (!props.modelValue.trim()) {
+        return
+    }
+    emit('search')
+}
+
+watch(() => props.modelValue, (newValue) => {
+    if (!newValue.trim()) {
+        isShowHistory.value = true
+    } else {
+        isShowHistory.value = false
+    }
+})
+
+</script>
+<style lang="scss" scoped>
+.ao-search {
     width: 100%;
-    max-width: 400px;
     position: relative;
 
     .search-container {
@@ -290,3 +417,4 @@
         }
     }
 }
+</style>

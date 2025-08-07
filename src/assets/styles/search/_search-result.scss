@@ -1,0 +1,27 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.search-result{
+    @include wh;
+    padding: 20px;
+
+    :deep(.app-list){
+        gap: 50px;
+    }
+
+    .void-result-wrapper{
+        @include wh;
+        @include flex(c,n,c);
+        margin-top: 5%;
+        .no-data-img{
+            @include wh(15p);
+            @include img(0)
+        }
+        p{
+            font-size: 16px;
+            @include c-t{
+                color:color(c-g9,0.5);
+            }
+        }
+    }
+
+}

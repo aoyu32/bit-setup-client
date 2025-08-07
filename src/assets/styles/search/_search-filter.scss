@@ -1,0 +1,110 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.search-filter {
+    @include wh;
+    @include flex(n, s-b);
+    padding: 20px;
+    padding-bottom: 0;
+
+    .filter-wrapper {
+        @include wh;
+        @include flex(n, s-b);
+        padding: 20px 0;
+
+        @include c-t {
+            border-bottom: 1px solid color(c-g9, 0.1);
+        }
+
+    }
+
+    .filter-main {
+        @include flex(n, n, c);
+        gap: 20px;
+
+        .filter-group {
+            @include wh(100p, n);
+            @include flex;
+            gap: 25px
+        }
+
+
+        .filter-label {
+            font-size: 14px;
+            @include flex(c, c);
+            padding: 8px 15px;
+            @include b-r(3);
+            white-space: nowrap;
+
+            @include c-t {
+                background-color: color(c-g2, 0.5);
+                color: color(c-g9, 0.5);
+            }
+        }
+
+
+        ul {
+            @include wh(100p, n);
+            @include flex;
+            gap: 10px 20px;
+            font-size: 14px;
+            flex-wrap: wrap;
+
+            @include c-t {
+                color: color(c-g9, 0.5);
+            }
+
+            li {
+                @include b-r(3);
+                padding: 8px 15px;
+
+                @include c-t {
+                    background-color: color(c-p-lighter, 0.1);
+                }
+
+                &:hover {
+                    @include c-t {
+                        color: color(c-s-light);
+                        background-color: color(c-p-lighter);
+                    }
+                }
+            }
+        }
+    }
+
+
+    .more-filter {
+        button {
+            @include flex(c, c);
+            padding: 5px;
+            @include b-r(3);
+
+            @include c-t {
+                background: color(c-g1);
+                color: color(c-g6);
+            }
+        }
+    }
+
+}
+
+@media (max-width:768px) {
+    .search-filter {
+        padding: 20px 20px;
+
+        .filter-wrapper {
+            gap: 10px;
+
+            .filter-group {
+                gap: 10px;
+
+                ul {
+                    gap: 5px 10px;
+
+                    li {
+                        padding: 5px 10px;
+                    }
+                }
+            }
+        }
+    }
+}

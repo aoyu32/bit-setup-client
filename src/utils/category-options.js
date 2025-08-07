@@ -165,7 +165,7 @@ const categoryOptionData = [
             },
             {
                 name: "热门",
-                value: "1m ~ 100m"
+                value: "1m ~ 10m"
             },
             {
                 name: "爆款",
