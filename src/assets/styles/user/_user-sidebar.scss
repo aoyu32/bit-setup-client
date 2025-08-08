@@ -1,0 +1,104 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.user-sidebar {
+
+    @include b-r($b-r);
+    @include wh;
+    padding: 20px;
+    box-shadow: shadow(m);
+
+    @include c-t {
+        background-color: color(c-g);
+    }
+
+    .sidebar-wrapper {
+        @include wh;
+        @include flex(n, c, c);
+        gap: 25px;
+    }
+
+    .sidebar-nav-group {
+        @include wh;
+        @include flex(n, c, c);
+        gap: 10px;
+    }
+
+    .nav-label {
+        @include wh;
+        @include flex(c, n);
+        font-size: 16px;
+        font-weight: 550;
+
+        .iconfont {
+            font-size: 21px;
+
+            @include c-t {
+                color: color(c-p-light);
+            }
+        }
+
+        .label-icon {
+            @include flex(c, c);
+            padding: 5px 5px 5px 10px;
+            @include b-r(4, 0, 0, 4);
+
+            @include c-t {
+                background-color: darken(color(c-s-lighter), 20%);
+            }
+        }
+
+        .label-value {
+            @include flex(c, n);
+            @include b-r(0, 4, 4, 0);
+            flex: 1;
+            padding: 5px 0 5px 5px;
+
+            @include c-t {
+                background: linear-gradient(to right, darken(color(c-s-lighter), 17%), color(c-s-lightest));
+                color: color(c-g9, 0.8);
+            }
+        }
+
+
+
+
+    }
+
+    .sidebar-nav {
+        @include wh;
+
+        @include c-t {
+            color: color(c-g9, 0.6);
+        }
+
+        ul {
+            @include b-r($b-r);
+            padding: 20px 15px;
+            font-size: 14px;
+
+            @include c-t {
+                background-color: color(c-p-lightest, 0.2);
+            }
+
+            li {
+                a {
+                    @include flex(c, c);
+                    padding: 15px 15px;
+                    @include wh;
+                    gap: 5px;
+                    transition: all 0.2s ease-out;
+
+                    &:hover {
+                        @include b-r(10);
+
+                        @include c-t {
+                            background-color: color(c-s-lighter);
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+}

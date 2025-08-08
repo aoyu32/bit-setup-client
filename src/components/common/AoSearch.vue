@@ -91,6 +91,11 @@ const props = defineProps({
 // 处理聚焦
 const handleFocus = () => {
     isShowPanel.value = true
+    if (!props.modelValue.trim()) {
+        isShowHistory.value = true
+    } else {
+        isShowHistory.value = false
+    }
 }
 
 

@@ -25,7 +25,10 @@
 <script setup>
 import { ref } from 'vue'
 import AoSearch from '@/components/common/AoSearch.vue';
-const searchValue = ref(null)
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const searchValue = ref(route.query.all)
 // 模拟搜索建议数据
 const mockSuggestions = [
     'Vue3',

@@ -1,0 +1,265 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.user-card {
+
+    @include wh;
+    padding: 25px 30px;
+    @include b-r($b-r);
+    box-shadow: shadow(m);
+
+
+    @include c-t {
+        background-color: color(c-g);
+    }
+
+    .card-top {
+        @include wh;
+        @include flex;
+        gap: 30px;
+
+        .avatar {
+            @include b-r(50);
+            @include wh(100);
+            @include img;
+
+            @include c-t {
+                border: 2px solid color(c-p-lighter);
+            }
+        }
+    }
+
+
+    .base-info {
+        @include flex(n, c, c);
+        gap: 15px;
+        width: 35%;
+
+        .name-vip {
+            @include flex(c, n);
+            gap: 20px;
+
+            .nickname {
+                @include flex;
+                font-size: 20px;
+                font-weight: 550;
+
+                @include c-t {
+                    color: color(c-g9, 0.7);
+                }
+            }
+
+            .vip {
+                @include flex(c, c);
+                @include wh(n, n);
+                gap: 5px;
+                font-size: 13px;
+
+                @include c-t {
+                    color: color(c-g9, 0.3);
+                }
+
+                .vip-img {
+                    @include wh(n, 25);
+
+                    img {
+                        @include wh;
+                        object-fit: contain;
+                    }
+                }
+            }
+        }
+
+        .level-progress {
+            @include wh(100p);
+            @include flex(n, n, c);
+            gap: 5px;
+
+            .level {
+                @include flex(c, n);
+                gap: 10px;
+                font-size: 13px;
+
+                span {
+                    padding: 3px 7px;
+                    @include b-r($b-r);
+                }
+
+                span:first-child {
+                    @include c-t {
+                        background-color: color(c-p-lighter, 0.5);
+                        color: color(c-g);
+                    }
+                }
+
+                span:last-child {
+                    @include c-t {
+                        background-color: color(c-s-lighter);
+                        color: color(c-g);
+                    }
+                }
+            }
+
+            .progress {
+                @include flex(n, c, c);
+                gap: 5px;
+
+                .exp {
+                    font-size: 12px;
+                    @include flex(c, s-b);
+
+                    @include c-t {
+                        color: color(c-g9, 0.3);
+                    }
+                }
+            }
+
+
+        }
+
+        .bio {
+            @include wh;
+            min-height: 40px;
+            @include flex(c, n);
+            padding: 10px;
+            font-size: 14px;
+            @include b-r($b-r);
+
+            @include c-t {
+                background-color: color(c-g0);
+                color: color(c-g9, 0.6);
+            }
+
+        }
+    }
+
+    .other-info {
+        @include wh(30p, n);
+        @include flex(n, c, c);
+        gap: 15px;
+        margin-left: 20px;
+
+
+        .other-info-group {
+            @include wh(100p, n);
+            @include flex(c, n);
+            gap: 10px;
+
+        }
+
+        .other-info-item {
+            @include flex(c, c);
+            font-size: 12px;
+
+            .item-label {
+                .iconfont {
+                    font-size: 13px;
+                    margin-right: 3px;
+                }
+
+                padding: 5px 10px;
+                @include b-r(5, 0, 0, 0);
+
+
+                @include c-t {
+                    background-color: color(c-g9, 0.2);
+                    color: color(c-g);
+                }
+
+            }
+
+            .item-value {
+                padding: 5px 10px;
+                @include b-r(0, 0, 5, 0);
+
+                .iconfont {
+                    font-size: 13px;
+                    color: color(error, 0.7);
+                    margin-right: 2px;
+                }
+
+                @include c-t {
+                    background-color: color(c-p-lighter, 0.5);
+                    color: color(c-g);
+                }
+
+            }
+        }
+
+
+    }
+
+    .logout {
+        @include flex(t, r);
+        flex: 1;
+
+        button {
+            @include flex(c, c);
+            gap: 5px;
+            transition: all 0.2s ease-out;
+
+            span {
+                @include flex(c, c);
+
+            }
+
+            .iconfont {
+                font-size: 15px;
+                color: color(c-s);
+            }
+
+            @include c-t {
+                font-size: 13px;
+                color: color(c-g9, 0.5);
+
+            }
+
+            &:hover {
+                @include c-t {
+                    font-size: 13px;
+                    color: color(c-p);
+
+                }
+                .iconfont{
+                    @include c-t{
+                        color:color(c-s-dark);
+                    }
+                }
+
+            }
+        }
+    }
+
+    .card-bottom{
+        @include wh;
+        @include flex(c,s-b);
+        margin-top: 30px;
+        font-size: 13px;
+        .stats{
+            @include wh(n,100p);
+            @include flex(c,n);
+            gap: 20px;
+            @include c-t{
+                color: color(c-g9,0.6);
+            }
+
+        }
+
+        .stats-item{
+            @include flex(c,c);
+            gap: 5px;
+            span{
+                @include flex(c,c);
+            }
+        }
+
+        .user-id{
+            @include flex(c,c);
+            gap: 5px;
+            font-size: 12px;
+            @include c-t{
+                color: color(c-g9,0.5);
+            }
+        }
+    }
+
+}

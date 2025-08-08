@@ -2,7 +2,7 @@
     <div class="search-filter">
         <div class="filter-wrapper">
             <div class="filter-main">
-                <div class="filter-group" v-for="(item, index) in filterItem" :key="index">
+                <div class="filter-group" v-for="(item, index) in filterItems" :key="index">
                     <div class="filter-label">
                         <span>{{ item.label }}</span>
                     </div>
@@ -14,14 +14,19 @@
                 </div>
             </div>
             <div class="more-filter">
-                <button><i class="iconfont icon-down"></i></button>
+                <button @click="isShowMoreFilter = !isShowMoreFilter" :class="{ arrow: isShowMoreFilter }"><i
+                        class="iconfont icon-down"></i></button>
             </div>
         </div>
     </div>
 </template>
 <script setup>
-import { ref } from 'vue'
-const filterItem = ref([
+import { ref, computed } from 'vue'
+const isShowMoreFilter = ref(false)
+const filterItems = computed(() => {
+    return isShowMoreFilter.value ? filterItemList.value : filterItemList.value.slice(0, 1);
+})
+const filterItemList = ref([
     {
         label: '结果排序',
         items: [
@@ -62,6 +67,7 @@ const filterItem = ref([
 
 
 ])
+
 </script>
 <style lang="scss" scoped>
 @use '@/assets/styles/search/_search-filter.scss' as *;

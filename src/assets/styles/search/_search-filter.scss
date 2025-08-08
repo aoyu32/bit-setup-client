@@ -17,6 +17,8 @@
 
     }
 
+
+
     .filter-main {
         @include flex(n, n, c);
         gap: 20px;
@@ -77,11 +79,17 @@
             @include flex(c, c);
             padding: 5px;
             @include b-r(3);
+            transition: transform 0.2s ease-out;
 
             @include c-t {
                 background: color(c-g1);
                 color: color(c-g6);
             }
+        }
+
+        .arrow {
+            transform: rotate(180deg);
+
         }
     }
 

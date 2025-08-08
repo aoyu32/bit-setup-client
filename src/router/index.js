@@ -10,6 +10,20 @@ import Layout from '@/views/layout/Layout.vue'
 import CommunityIndex from '@/views/community/CommunityIndex.vue'
 import CommunityDetail from '@/views/community/CommunityDetail.vue'
 import Search from '@/views/search/Search.vue'
+import User from '@/views/user/User.vue'
+import UserDownload from '@/views/user/app/UserDownload.vue'
+import UserRecharge from '@/views/user/app/UserRecharge.vue'
+import UserAppCollect from '@/views/user/app/UserAppCollect.vue'
+import UserUpload from '@/views/user/app/UserUpload.vue'
+import UserEdit from '@/views/user/account/UserEdit.vue'
+import UserDelete from '@/views/user/account/UserDelete.vue'
+import UserSecurity from '@/views/user/account/UserSecurity.vue'
+import UserFans from '@/views/user/community/UserFans.vue'
+import UserFollow from '@/views/user/community/UserFollow.vue'
+import UserPost from '@/views/user/community/UserPost.vue'
+import UserPostCollect from '@/views/user/community/UserPostCollect.vue'
+
+
 
 
 
@@ -75,6 +89,56 @@ const router = createRouter({
                 {
                     path: '/search',
                     component: Search
+                },
+                {
+                    path: '/user',
+                    component: User,
+                    children: [
+                        {
+                            path: 'dl',
+                            component: UserDownload
+                        },
+                        {
+                            path: 'recharge',
+                            component: UserRecharge
+                        },
+                        {
+                            path: 'collect/app',
+                            component: UserAppCollect
+                        },
+                        {
+                            path: 'upload',
+                            component: UserUpload
+                        },
+                        {
+                            path: 'post',
+                            component: UserPost
+                        },
+                        {
+                            path: 'fans',
+                            component: UserFans
+                        },
+                        {
+                            path: 'follow',
+                            component: UserFollow
+                        },
+                        {
+                            path: 'collect/post',
+                            component: UserPostCollect
+                        },
+                        {
+                            path: 'security',
+                            component: UserSecurity
+                        },
+                        {
+                            path: 'edit',
+                            component: UserEdit
+                        },
+                        {
+                            path: 'delete',
+                            component: UserDelete
+                        }
+                    ]
                 }
             ]
         }

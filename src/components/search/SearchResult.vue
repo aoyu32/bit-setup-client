@@ -14,7 +14,7 @@
 <script setup>
 import { ref } from 'vue'
 import AppList from '@/components/home/AppList.vue';
-const hasResult = ref(false)
+const hasResult = ref(true)
 </script>
 <style lang="scss" scoped>
 @use '@/assets/styles/search/_search-result.scss' as *;

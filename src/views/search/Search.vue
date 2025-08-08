@@ -73,11 +73,7 @@ onUnmounted(() => {
         z-index: 101;
 
         &.scrolled {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
-            @include c-t {
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            }
+            box-shadow: shadow(l);
         }
 
         .slogan {

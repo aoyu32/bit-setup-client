@@ -43,25 +43,33 @@
             </div>
             <div class="profile">
                 <div class="profile-container">
-                    <div class="coin">
-                        <span>{{ myCoin }}</span>
-                        <div class="coin-icon">
-                            <img :src="coinIcon" alt="">
+                    <div class="profile-left">
+                        <div class="coin">
+                            <span>{{ myCoin }}</span>
+                            <div class="coin-icon">
+                                <img :src="coinIcon" alt="">
+                            </div>
+                        </div>
+                        <div class="vip" v-if="isMember">
+                            <img :src="vipImgUrl" alt="">
+                        </div>
+                        <div class="message">
+                            <i class="iconfont icon-xiaoxi"></i>
                         </div>
                     </div>
-                    <div class="vip" v-if="isMember">
-                        <img :src="vipImgUrl" alt="">
-                    </div>
-                    <div class="user-info" @click="showMenu = !showMenu">
-                        <div class="avatar">
-                            <img :src="avatarUrl || defaultAvatar" alt="用户头像">
+                    <div class="user-info" :style="{ marginTop: userInfoMarginTop }">
+                        <div class="user-info-wrapper">
+                            <div class="avatar">
+                                <img :src="avatarUrl || defaultAvatar" alt="用户头像">
+                            </div>
+                            <span class="username">{{ username }}</span>
                         </div>
-                        <span class="username">{{ username }}</span>
-                        <div class="user-menu" v-if="isShowProfileMenu">
+                        <div class="user-menu">
                             <ul>
-                                <li><i class="iconfont icon-user"></i>个人中心</li>
-                                <li><i class="iconfont icon-settings"></i>设置</li>
-                                <li><i class="iconfont icon-logout"></i>退出登录</li>
+                                <router-link to="/user">
+                                    <li><i class="iconfont icon-user"></i><span>个人中心</span></li>
+                                </router-link>
+                                <li><i class="iconfont icon-tuichu"></i><span>退出登录</span></li>
                             </ul>
                         </div>
                     </div>
@@ -77,11 +85,17 @@ import vipImgUrl from '@/assets/imgs/vip.svg'
 import coinIcon from '@/assets/imgs/coin.svg'
 import HeaderSearch from '@/components/layout/HeaderSearch.vue'
 import AoSearch from '@/components/common/AoSearch.vue'
-import { useRouter,useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
 const searchValue = ref('')
 
+const userInfoMarginTop = ref('')
+onMounted(() => {
+    const profileHeight = document.querySelector('.profile-container').offsetHeight
+    const userInfoHeight = document.querySelector('.user-info-wrapper').offsetHeight
+    userInfoMarginTop.value = `${(profileHeight - userInfoHeight) / 2}px`
+})
 //头部导航项
 const navItems = ref([
     {
@@ -111,7 +125,7 @@ const navItems = ref([
     }
 ])
 
-const isSearchPage = computed(()=>{
+const isSearchPage = computed(() => {
     return route.path === '/search'
 })
 

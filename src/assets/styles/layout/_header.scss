@@ -16,7 +16,7 @@
     height: 100%;
     display: flex;
     padding: 10px 0;
-    gap: 50px;
+    gap: 40px;
 
     .trigger {
         display: none;
@@ -118,6 +118,7 @@
                     content: "";
                     width: 100%;
                     bottom: -5px;
+                    height: 2px;
                     left: 0;
                     position: absolute;
                     transform: scaleX(0);
@@ -175,6 +176,11 @@
             align-items: center;
             justify-content: flex-end;
             gap: 15px;
+
+            .profile-left {
+                @include flex(c, c);
+                gap: 15px;
+            }
 
             // A币样式
             .coin {
@@ -252,16 +258,23 @@
                 }
             }
 
+            .message {
+                .iconfont {
+                    font-size: 22px;
+
+                    @include c-t {
+                        color: color(c-p);
+                    }
+                }
+            }
+
             // 用户信息
             .user-info {
-                position: relative;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                padding: 5px 10px 5px 5px;
+                @include wh(n, n);
+                @include flex(n, n, c);
                 border-radius: 20px;
-                cursor: pointer;
-                transition: all 0.3s ease;
+                overflow: hidden;
+                align-self: flex-start;
 
                 @include c-t {
                     background-color: color(c-p, 0.2);
@@ -269,36 +282,50 @@
 
                 &:hover {
                     @include c-t {
-                        background-color: color(c-p, 0.4);
+                        background-color: color(c-g);
+                    }
+
+                    box-shadow: shadow(l);
+
+                    .user-menu {
+                        margin-top: 5px;
+                        max-height: 200px;
+                        // padding: 8px 0;
                     }
                 }
 
-                .avatar {
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                    overflow: hidden;
+                .user-info-wrapper {
+                    @include wh(n, n);
+                    @include flex(c, c);
+                    gap: 8px;
+                    padding: 5px 10px 5px 5px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    flex-shrink: 0; // 防止被压缩
 
-                    @include c-t {
-                        border: 2px solid color(c-p-lighter);
+                    .avatar {
+                        @include wh(32);
+                        @include flex(c, c);
+                        border-radius: 50%;
+                        overflow: hidden;
+                        @include img;
+
+                        @include c-t {
+                            border: 2px solid color(c-p-lighter);
+                        }
                     }
 
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
-                }
+                    .username {
+                        font-size: 14px;
+                        font-weight: 500;
+                        max-width: 75px;
+                        @include t-e;
 
-                .username {
-                    font-size: 14px;
-                    font-weight: 500;
-                    max-width: 80px;
-                    @include t-e;
-
-                    @include c-t {
-                        color: color(c-g9);
+                        @include c-t {
+                            color: color(c-g9);
+                        }
                     }
+
                 }
 
                 .icon-arrow-down {
@@ -316,29 +343,42 @@
 
                 // 用户菜单
                 .user-menu {
-                    position: absolute;
-                    top: 100%;
-                    right: 0;
-                    width: 160px;
-                    border-radius: 8px;
-                    box-shadow: shadow(m);
-                    padding: 8px 0;
-                    z-index: 100;
+                    width: 100%;
 
+                    // 初始状态 - 完全收起
+                    max-height: 0;
+                    padding: 0; // 初始无padding
+                    // overflow: hidden;
+
+                    // 动画过渡
+                    transition: all 0.3s ease;
+
+                    // 背景色与user-info保持一致，形成整体
                     @include c-t {
-                        background-color: color(c-g0);
+                        background-color: color(c-g);
                     }
 
                     ul {
                         list-style: none;
+                        margin: 0;
+                        padding: 5px;
+
+                        @include c-t {
+                            border-top: 1px solid color(c-g9, 0.1);
+                        }
 
                         li {
-                            padding: 8px 16px;
-                            display: flex;
-                            align-items: center;
+                            padding: 10px 15px;
                             gap: 8px;
-                            font-size: 14px;
+                            @include b-r(20);
+                            @include flex(c, c);
+                            font-size: 12px;
                             transition: all 0.2s ease;
+                            cursor: pointer;
+
+                            .iconfont {
+                                margin-top: auto 0;
+                            }
 
                             @include c-t {
                                 color: color(c-g7);
@@ -346,7 +386,7 @@
 
                             &:hover {
                                 @include c-t {
-                                    background-color: color(c-p-light, 0.2);
+                                    background-color: color(c-p, 0.6);
                                     color: color(c-g9);
                                 }
                             }
@@ -411,6 +451,8 @@
                             transition: background-color 0.3s ease;
 
                             a {
+                                @include flex(n, l);
+
                                 &.active {
                                     @include c-t {
                                         color: color(c-p);
@@ -443,21 +485,64 @@
             }
 
             .profile {
+                .profile-container {
+                    gap: 5px;
+                }
+
+                .profile-left {
+                    @include flex(c, c);
+                    gap: 10px;
+                }
+
                 .username {
                     display: none;
                 }
 
                 .user-info {
-                    padding: 0;
+                    @include c-t {
+                        background-color: color(c-g);
+                    }
+
+                    .user-info-wrapper {
+                        padding: 5px;
+
+                        @include c-t {
+                            background-color: color(c-g);
+                        }
+                    }
+
+                    .user-menu {
+                        ul {
+                            
+                            li {
+                                padding: 10px;
+
+                                span {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
                 }
+
+
+
             }
 
+
+        }
+    }
+}
+
+@media (max-width:900px) {
+    .header {
+        .header-container {
             .search {
-                display: none;
+                display: flex;
             }
 
             .search-trigger {
-                display: flex;
+                display: none;
             }
         }
     }
@@ -467,6 +552,14 @@
     .header {
         .header-container {
             width: 90%;
+
+            .search {
+                display: none;
+            }
+
+            .search-trigger {
+                display: flex;
+            }
         }
     }
 }
