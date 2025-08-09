@@ -38,8 +38,8 @@
                         </div>
                     </div>
                     <div class="history-main">
-                        <div class="history-items" v-if="history.length > 0">
-                            <div class="history-item" v-for="(item, index) in history" :key="index">
+                        <div class="search-history-items" v-if="history.length > 0">
+                            <div class="search-history-item" v-for="(item, index) in history" :key="index">
                                 <span>{{ item }}</span>
                                 <div class="delete-icon">
                                     <i class="iconfont icon-close"></i>
@@ -293,14 +293,14 @@ watch(() => props.modelValue, (newValue) => {
                 @include wh;
                 padding: 20px 0;
 
-                .history-items {
+                .search-history-items {
                     @include wh;
                     @include flex(n, n);
                     flex-wrap: wrap;
                     font-size: 12px;
                     gap: 15px;
 
-                    .history-item {
+                    .search-history-item {
                         padding: 5px 9px;
                         @include b-r($b-r);
                         position: relative;

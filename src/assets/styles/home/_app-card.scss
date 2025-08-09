@@ -259,7 +259,7 @@
 
             border-bottom-left-radius: 10px; // 底部左侧圆角              
             border-top-left-radius: 10px; // 顶部左侧圆角    
-            @include b-r(0, $app-card-br)
+            @include b-r(0, 0, 0, $app-card-br)
         }
 
         .card-draw {

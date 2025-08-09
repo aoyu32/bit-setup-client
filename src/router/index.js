@@ -95,6 +95,11 @@ const router = createRouter({
                     component: User,
                     children: [
                         {
+                            path: '',
+                            component: UserDownload,
+                            redirect: '/user/dl'
+                        },
+                        {
                             path: 'dl',
                             component: UserDownload
                         },

@@ -1,0 +1,93 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.user-post-collect {
+
+    @include wh;
+
+    .delete-post {
+        @include p-a(t25, r20);
+        font-size: 14px;
+
+        button {
+            @include wh;
+            @include flex(c, c);
+            gap: 5px;
+
+            @include c-t {
+                color: color(error);
+            }
+        }
+    }
+
+    .actions {
+        font-size: 12px;
+        @include flex(c, c);
+        gap: 10px;
+
+        @include c-t {
+            color: color(c-p);
+        }
+
+        button {
+            @include flex(c, c);
+
+            .iconfont {
+                margin-right: 5px;
+            }
+
+            span {
+                @include flex(c, c);
+            }
+        }
+
+        .clear {
+            @include c-t {
+                color: color(error);
+            }
+        }
+    }
+
+    .post-collect-list {
+        @include wh;
+        @include flex(l, n, c);
+        gap: 20px;
+        padding: 15px;
+        overflow-y: auto;
+        max-height: 786px;
+
+        @include c-t {
+            background-color: color(c-g0);
+        }
+    }
+
+    .post-collect-item {
+        position: relative;
+        @include wh;
+    }
+
+    :deep(.post-card) {
+        .card-header {
+            .tag {
+                display: none;
+            }
+        }
+
+        .card-main {
+            .imgs {
+                @include grid(4, 1fr);
+
+                .img-item {
+                    max-height: 150px;
+                }
+            }
+        }
+    }
+
+    :deep(.article-card) {
+        .card-header {
+            .tag {
+                display: none;
+            }
+        }
+    }
+}

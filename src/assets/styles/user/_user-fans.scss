@@ -1,0 +1,144 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.user-fans {
+
+    @include wh;
+
+    .user-fans-list {
+        @include wh;
+        @include flex(l, n, c);
+        gap: 20px;
+        padding: 15px;
+        overflow-y: auto;
+        max-height: 786px;
+
+        @include c-t {
+            background-color: color(c-g0);
+        }
+    }
+
+
+    .user-fans-item {
+        position: relative;
+        padding: 10px 20px;
+        @include flex(c, n);
+        gap: 10px;
+        @include b-r($b-r);
+        cursor: pointer;
+        transition: all 0.2s ease-out;
+
+        &:hover {
+            box-shadow: shadow(l);
+        }
+
+        @include c-t {
+            background-color: color(c-s-lighter, 0.3);
+        }
+
+        .fans-item-left {
+            @include wh(n, 100p);
+            @include flex(n, c);
+
+            .fans-avatar {
+                @include wh(45);
+                @include img;
+            }
+        }
+
+        .fans-item-center {
+            .fans-info {
+                @include flex(n, c, c);
+                gap: 5px;
+
+            }
+
+            .fans-name-level {
+                @include flex(c, n);
+                gap: 15px;
+
+                .fans-name {
+                    font-size: 14px;
+                    font-weight: 550;
+                }
+
+                .fans-level {
+                    @include flex(c, c);
+                    gap: 5px;
+                    font-size: 10px;
+                    padding-top: 1px;
+
+
+                    span {
+                        @include b-r(5);
+                        @include flex(c, c);
+                        padding: 2px 5px;
+                    }
+
+                    span:first-child {
+                        @include c-t {
+                            color: color(c-g1);
+                            background-color: color(c-p-lighter);
+                        }
+                    }
+
+                    span:last-child {
+                        @include c-t {
+                            color: color(c-g1);
+                            background-color: color(c-p-light);
+                        }
+                    }
+                }
+
+                .fans-vip {
+                    @include wh(n, 23);
+                    @include img;
+                }
+            }
+
+            .fans-bio {
+                font-size: 14px;
+
+                @include c-t {
+                    color: color(c-g9, 0.5);
+                }
+
+                p {
+                    max-width: 650px;
+                    // @include t-e;
+                }
+            }
+        }
+    }
+
+    .fans-item-right {
+        @include flex(c, c);
+        margin-left: auto;
+        font-size: 12px;
+        gap: 15px;
+
+
+        .iconfont {
+            font-size: 12px;
+        }
+
+        @include c-t {
+            color: color(c-g9, 0.5);
+        }
+
+        button {
+            min-width: 75px;
+            @include b-r($b-r);
+            @include flex(c, c);
+            padding: 5px 7px;
+            gap: 3px;
+
+
+            @include c-t {
+                color: color(c-g0);
+                background-color: color(c-s-light);
+            }
+
+        }
+
+    }
+}

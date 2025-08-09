@@ -26,6 +26,7 @@ import UserSidebar from '@/components/user/UserSidebar.vue';
     // background-color: color(c-g);
     margin-top: 20px;
     min-height: 100vh;
+    position: relative;
 
     .user-top {
         @include wh;
@@ -33,26 +34,42 @@ import UserSidebar from '@/components/user/UserSidebar.vue';
 
     .user-bottom {
         @include wh;
+
         margin-top: 20px;
         gap: 20px;
         @include flex;
+        position: sticky;
+        top: 72px;
 
         .user-sidebar-container {
-            @include wh(20p, n);
-
+            @include wh(20p, 100p);
         }
 
         .user-views {
+
+            position: relative;
+
+            position: sticky;
+            top: 72px;
             flex: 1;
             padding: 20px;
             bottom: shadow(m);
             @include b-r($b-r);
-            @include c-t{
+
+            @include c-t {
                 background-color: color(c-g);
             }
-            
+
         }
 
+    }
+}
+
+@media (max-width:900px) {
+    .user {
+        .user-sidebar-container {
+            display: none;
+        }
     }
 }
 </style>

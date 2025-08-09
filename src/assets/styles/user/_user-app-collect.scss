@@ -1,0 +1,164 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.user-app-collect {
+    @include wh;
+
+
+
+    .actions {
+        font-size: 12px;
+        @include flex(c, c);
+        gap: 10px;
+
+        @include c-t {
+            color: color(c-p);
+        }
+
+        button {
+            @include flex(c, c);
+
+            .iconfont {
+                margin-right: 5px;
+            }
+
+            span {
+                @include flex(c, c);
+            }
+        }
+
+        .clear {
+            @include c-t {
+                color: color(error);
+            }
+        }
+    }
+
+
+    .app-collect {
+        padding: 15px;
+        @include wh(100p, 100p);
+        @include grid(auto-fill, minmax(150px, 1fr), 30px);
+        max-height: 786px;
+        overflow-y: auto;
+        position: relative;
+        @include b-r(0, 0, $b-r, $b-r);
+
+        @include c-t {
+            background-color: color(c-g0);
+        }
+
+        .app-collect-item {
+            position: relative;
+            @include wh(100p, 210);
+
+
+            .cancel-collect {
+                position: absolute;
+                @include b-r($app-card-br);
+                top: 0;
+                left: 0;
+                backdrop-filter: blur(2px);
+
+                @include c-t {
+                    background-color: color(c-g6, 0.6);
+                }
+
+                @include flex(c, c);
+                @include wh;
+                z-index: 105;
+
+                button {
+                    @include wh;
+                    @include flex(c, c);
+
+                    .iconfont {
+                        font-size: 25px;
+                        transition: all 0.2s ease-in-out;
+
+                        @include c-t {
+                            color: darken(color(error), 20%);
+                        }
+                    }
+
+                    &:hover {
+                        .iconfont {
+                            font-size: 30px;
+                        }
+                    }
+                }
+            }
+
+
+            :deep(.app-card) {
+                height: 210px;
+
+                #card-content-front {
+                    .card-top {
+                        .app-img {
+                            @include wh(40);
+                        }
+                    }
+
+                    .card-bottom {
+                        .app-name {
+                            font-size: 14px;
+                            padding-top: 15px;
+                        }
+
+                        .app-category {
+                            font-size: 12px;
+                            padding: 2px 5px;
+                        }
+
+                        .app-download {
+                            font-size: 10px;
+
+                            .iconfont {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+
+                    .mark-wrapper {
+                        font-size: 9px;
+                        gap: 7px;
+                    }
+
+                    .left-mark {
+                        top: 7px;
+                    }
+
+                    .right-mark {
+                        top: 40px;
+                    }
+                }
+
+                #card-content-back {
+                    .app-rating {
+                        top: 6px;
+                        font-size: 10px;
+                    }
+
+                    .card-top {
+                        .app-bio {
+                            font-size: 12px;
+                            padding: 20px;
+                        }
+                    }
+
+                    .card-bottom {
+                        .card-logo {
+                            @include flex(c, c);
+
+                            img {
+                                @include wh(n, 50px);
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+    }
+}

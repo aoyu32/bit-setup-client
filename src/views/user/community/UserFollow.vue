@@ -1,7 +1,19 @@
 <template>
     <div class="user-follow">
-        我的关注
+        <AoTabs :tabs="tabs">
+
+        </AoTabs>
     </div>
 </template>
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+import AoTabs from '../../../components/common/AoTabs.vue';
+
+const tabs = ref([
+    {
+        key: 'follow',
+        label: '我的关注'
+    }
+])
+</script>
 <style scoped lang="scss"></style>

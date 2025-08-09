@@ -1,9 +1,14 @@
 <template>
     <div class="ao-tabs">
-        <div class="tabs">
-            <div class="tabs-item" v-for="item in tabs" :key="item.key" @click="handleSwitchTab(item.key)"
-                :class="{ active: activeTab === item.key }">
-                <span>{{ item.label }}</span>
+        <div class="tabs-header">
+            <div class="tabs">
+                <div class="tabs-item" v-for="item in tabs" :key="item.key" @click="handleSwitchTab(item.key)"
+                    :class="{ active: activeTab === item.key }">
+                    <span>{{ item.label }}</span>
+                </div>
+            </div>
+            <div class="actions">
+                <slot name="action"></slot>
             </div>
         </div>
         <div class="tab-pane">
@@ -59,20 +64,29 @@ onMounted(() => {
 </script>
 <style scoped lang="scss">
 .ao-tabs {
+    @include flex(n, n, c);
     @include b-r($b-r);
 
+    @include wh;
 
 
-    .tabs {
-        @include wh;
-        @include flex(c, n);
-        padding: 5px 15px;
-        gap: 10px;
+    .tabs-header {
+        @include wh(100p, n);
+        @include flex(c, s-b);
+        padding: 0 15px;
 
         @include c-t {
             background-color: color(c-p-lighter, 0.5);
-            @include b-r($b-r);
+            @include b-r($b-r, $b-r, 0, 0);
         }
+    }
+
+    .tabs {
+        @include flex(c, n);
+        padding: 5px 0;
+        gap: 10px;
+
+
 
         .tabs-item {
             @include b-r($b-r);
@@ -86,12 +100,12 @@ onMounted(() => {
         }
     }
 
-    .tab-pane{
+    .tab-pane {
         @include wh;
-        min-height: 200px;
-        @include flex(c,c);
-        margin: 10px 0;
-        
+        flex: 1;
+        @include flex(c, c);
+        // margin-top: 10px;
+
     }
 
     .active {

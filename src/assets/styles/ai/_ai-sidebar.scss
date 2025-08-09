@@ -4,7 +4,6 @@
 
     @include wh(250, 100vh);
     @include flex(n, n, c);
-    background-color: antiquewhite;
     gap: 20px;
 
     @include c-t {

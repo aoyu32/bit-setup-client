@@ -1,0 +1,311 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.user-download {
+    @include wh;
+
+
+    .actions {
+        font-size: 12px;
+        @include flex(c, c);
+        gap: 10px;
+
+        @include c-t {
+            color: color(c-p);
+        }
+
+        button {
+            @include flex(c, c);
+
+            .iconfont {
+                margin-right: 5px;
+            }
+
+            span {
+                @include flex(c, c);
+            }
+        }
+
+        .clear {
+            @include c-t {
+                color: color(error);
+            }
+        }
+    }
+
+    .dl-history {
+        @include wh;
+
+        @include c-t {
+            background-color: color(c-g0);
+        }
+
+        @include b-r($b-r);
+        @include flex(n, c);
+    }
+
+    .app-history,
+    .suite-history {
+        @include wh;
+    }
+
+    .app-history-list,
+    .suite-history-list {
+        @include wh;
+        @include flex(l, n, c);
+        gap: 20px;
+        padding: 15px;
+        overflow-y: auto;
+        max-height: 780px;
+
+    }
+
+    .delete-item {
+        @include p-a(t0, r3);
+
+        button {
+            @include wh(17);
+            // padding: 2px;
+            @include b-r(50);
+
+            .iconfont {
+                @include flex(c, c);
+                font-size: 13px;
+
+                @include c-t {
+                    color: color(c-g);
+                }
+            }
+
+            @include c-t {
+                background-color: color(c-g9, 0.2);
+
+            }
+        }
+    }
+
+    .app-history-item {
+        position: relative;
+        padding: 10px 20px;
+        @include flex(c, n);
+        gap: 10px;
+        @include b-r($b-r);
+        cursor: pointer;
+        transition: all 0.2s ease-out;
+
+        &:hover {
+            box-shadow: shadow(l);
+        }
+
+        @include c-t {
+            background-color: color(c-s-lighter, 0.3);
+        }
+
+        .app-item-left {
+            @include wh(45);
+
+            .app-icon {
+                @include wh(45);
+                @include img($b-r);
+            }
+        }
+
+        .app-item-center {
+            @include flex(c, c);
+            gap: 10px;
+
+            .app-name {
+                font-weight: 550;
+                font-size: 14px;
+
+                @include c-t {
+                    color: color(c-g9, 0.7);
+                }
+            }
+
+            .app-version {
+                @include c-t {
+                    background-color: color(c-p-lighter, 0.4);
+                    color: color(c-g9, 0.4);
+                }
+
+                font-size: 10px;
+                padding: 2px 4px;
+                @include b-r(3);
+            }
+
+            .app-category {
+                font-size: 10px;
+
+                @include c-t {
+                    background-color: color(c-s, 0.4);
+                    color: color(c-g9, 0.4);
+                }
+
+                padding: 2px 4px;
+                @include b-r(3);
+            }
+        }
+
+        .app-item-right {
+            @include flex(c, c);
+            margin-left: auto;
+            font-size: 12px;
+            gap: 15px;
+
+            @include c-t {
+                color: color(c-g9, 0.5);
+            }
+        }
+    }
+
+    .suite-history-item {
+        @include wh(100p,n);
+        @include flex(n, n);
+        padding: 15px 20px;
+        @include b-r($b-r);
+        position: relative;
+
+        @include c-t {
+            background-color: color(c-s-lighter, 0.3);
+        }
+
+        .delete-item {
+            @include p-a(t0, r3);
+
+            button {
+                @include wh(17);
+                // padding: 2px;
+                @include b-r(50);
+
+                .iconfont {
+                    @include flex(c, c);
+                    font-size: 13px;
+
+                    @include c-t {
+                        color: color(c-g);
+                    }
+                }
+
+                @include c-t {
+                    background-color: color(c-g9, 0.2);
+
+                }
+            }
+        }
+
+        gap: 15px;
+
+        .suite-item-left {
+            @include flex(n, c);
+
+            .suite-avatar {
+                @include wh(45);
+                @include img($b-r);
+            }
+        }
+
+        .suite-item-right {
+            @include flex(n, n, c);
+            flex: 1;
+            gap: 16px;
+
+            .item-info {
+                @include flex(c, s-b);
+            }
+
+            .info-left {
+                @include flex(c, c);
+                gap: 10px;
+
+                .suite-name {
+                    font-weight: 550;
+                    font-size: 15px;
+                }
+
+                .suite-issuer {
+                    font-size: 13px;
+                }
+            }
+
+            .info-right {
+                @include flex(c, c);
+                font-size: 13px;
+                gap: 15px;
+
+                @include c-t {
+                    color: color(c-g9, 0.5);
+                }
+            }
+
+            .item-apps {
+                @include flex(c, n);
+                gap: 20px;
+                @include wh;
+                flex-wrap: wrap;
+
+                .app-item {
+                    width: 90px;
+                    @include flex(c, c, c);
+                    padding: 15px 0;
+                    gap: 5px;
+                    @include b-r($b-r);
+                    font-size: 10px;
+
+
+                    @include c-t {
+                        color: color(c-g8, 0.6);
+                        background-color: color(c-g0);
+                    }
+
+                    img {
+                        @include wh(30);
+                    }
+
+                    .item-category {
+                        @include b-r($b-r);
+                        padding: 2px 5px;
+
+                        @include c-t {
+                            background-color: color(c-p-lightest);
+                        }
+                    }
+
+                    .app-name {
+                        width: 100%;
+                        padding: 0 3px;
+                        text-align: center;
+                        font-size: 12px;
+                        font-weight: 550;
+                        @include t-e;
+                    }
+                }
+            }
+
+        }
+    }
+
+}
+
+@media (max-width:768px) {
+    .user-download {
+        .app-history-item {
+            .app-item-right {
+                display: none;
+            }
+
+            .delete-item{
+                position: absolute;
+                transform: translateY(100%);
+                right: 10px;
+            }
+        }
+
+        .suite-history-item {
+            .suite-item-right {
+                .info-right {
+                    display: none;
+                }
+            }
+        }
+    }
+}

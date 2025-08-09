@@ -91,12 +91,23 @@ const handleMore = (index, event) => {
 
     historyItems.forEach((el, elIndex) => {
         if (index === elIndex) {
+            console.log(elIndex);
+            
             // 获取点击项的位置和尺寸
             const itemRect = el.getBoundingClientRect()
             const sidebarRect = aiSidebar.getBoundingClientRect()
             // 计算相对于侧边栏容器的位置
             const relativeTop = itemRect.top - sidebarRect.top
+            console.log(el);
+            console.log(aiSidebar);
+            
+            
+            console.log(itemRect.top);
+            console.log(sidebarRect.top);
+            
             // 设置菜单位置
+            console.log(relativeTop);
+            
             moreMenuRef.value.style.top = `${relativeTop}px`
             showMoreMenu.value = true
         }
