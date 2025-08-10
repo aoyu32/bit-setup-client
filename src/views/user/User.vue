@@ -65,7 +65,7 @@ import UserSidebar from '@/components/user/UserSidebar.vue';
     }
 }
 
-@media (max-width:900px) {
+@media (max-width:950px) {
     .user {
         .user-sidebar-container {
             display: none;

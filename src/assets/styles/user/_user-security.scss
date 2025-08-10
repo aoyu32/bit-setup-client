@@ -1,0 +1,247 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.user-security {
+
+    @include wh;
+
+    .user-security-top {
+        margin-bottom: 20px;
+
+        .security-label {
+            @include wh;
+            @include b-r($b-r);
+
+            @include flex(c, n);
+            padding: 5px 10px;
+            gap: 5px;
+
+            @include c-t {
+                background: linear-gradient(to right, color(c-p-lighter), color(c-p-lightest));
+                color: color(c-g0);
+            }
+
+            .iconfont {
+                padding-top: 5px;
+                font-size: 22px;
+            }
+        }
+    }
+
+    .user-security-bottom {
+        @include wh(100p, n);
+        @include flex(n, n, c);
+        gap: 15px;
+
+        .login-info-label,
+        .email-binding-label,
+        .change-password-label {
+            @include flex(c, n);
+            gap: 5px;
+
+            @include c-t {
+                color: color(c-s-dark);
+            }
+
+            .iconfont {
+                font-size: 19px;
+            }
+
+        }
+
+        .login-info,
+        .email-binding,
+        .change-password {
+            @include flex(n, n, c);
+            gap: 15px;
+            padding: 20px;
+            @include b-r($b-r);
+
+
+
+            @include c-t {
+                background-color: color(c-g0);
+            }
+
+        }
+
+        .info-items {
+            @include wh;
+            @include flex(c, n);
+
+        }
+
+        .login-username {
+            gap: 50px;
+
+            @include c-t {
+                color: color(c-g5);
+            }
+        }
+
+        .last-ip,
+        .current-ip {
+            padding: 0 25px 0 0;
+        }
+
+        .info-label {
+            font-weight: 550;
+
+            @include c-t {
+                color: color(c-g7);
+            }
+        }
+
+        .last-login-time,
+        .current-login-time {
+            padding: 0 0 0 25px;
+
+            @include c-t {
+                border-left: 2px solid color(c-g5, 0.2);
+            }
+        }
+
+        .item {
+            @include flex;
+            gap: 15px;
+            font-size: 15px;
+
+            @include c-t {
+                color: color(c-g5);
+            }
+        }
+
+        :deep(.ao-input){
+            input{
+                padding: 7px 10px;
+                font-size: 12px;
+            }
+        }
+
+        .email-info {
+            @include wh;
+
+            .has-bound {
+                @include flex;
+
+                .change-binding {
+                    @include c-t {
+                        color: color(c-s);
+                    }
+                }
+
+            }
+
+            .binding {
+                @include wh;
+                @include flex(n, n, c);
+                gap: 10px;
+
+                .binding-form {
+                    @include flex(n, n, c);
+                    gap: 10px;
+                    max-width: 45%;
+
+                    .vcode-input-wrapper {
+                        @include flex(c, n);
+                        gap: 20px;
+
+                        .vcode-input {
+                            flex: 1;
+                        }
+
+                        .vcode-btn {
+                            @include flex(c, c);
+
+                            button {
+                                padding: 6px 15px;
+                                font-size: 12px;
+                                @include b-r($b-r);
+
+                                @include c-t {
+                                    color: color(c-g0);
+                                    background-color: color(c-s, 0.7);
+                                    border: 1px solid color(c-s);
+                                }
+                            }
+                        }
+                    }
+
+                    .submit-binding {
+                        @include flex;
+                        gap: 10px;
+
+                        .cancel-binding {
+                            @include c-t {
+                                color: color(c-g9,0.5);
+                            }
+                        }
+
+                        .confirm-binding{
+
+                            @include c-t{
+                                background-color: color(c-s, 0.7);
+                            }
+                        }
+                        button {
+
+                            padding: 5px 0;
+                            @include wh(100p, n);
+
+                            font-size: 12px;
+                            @include b-r($b-r);
+
+                            @include c-t {
+                                color: color(c-g0); 
+                                border: 1px solid color(c-s);
+                            }
+                        }
+
+
+                    }
+                }
+
+            }
+        }
+
+        .password-form {
+            @include wh(45p, n);
+            gap: 10px;
+
+            .pwd-input-wrapper {
+                @include flex(n, n, c);
+                gap: 5px;
+            }
+
+            .input-item {
+                @include flex(n, n, c);
+                gap: 3px;
+
+                p {
+                    font-size: 10px;
+                }
+            }
+
+            .submit-btn {
+                margin-top: 5px;
+
+                button {
+                    padding: 5px 0;
+                    @include wh(100p, n);
+                    font-size: 12px;
+                    @include b-r($b-r);
+
+                    @include c-t {
+                        color: color(c-g0);
+                        background-color: color(c-p, 0.7);
+                        border: 1px solid color(c-p);
+                    }
+                }
+            }
+        }
+
+
+    }
+
+
+
+}

@@ -3,7 +3,7 @@
         <AoTabs :tabs="tabs">
             <template #content>
                 <div class="user-fans-list">
-                    <div class="user-fans-item" v-for="(fansItem,index) in fansData">
+                    <div class="user-fans-item" v-for="(fansItem, index) in fansData">
                         <div class="fans-item-left">
                             <div class="fans-avatar">
                                 <img :src="fansItem.avatar" alt="">
@@ -30,7 +30,7 @@
                         </div>
                         <div class="fans-item-right">
                             <div class="fans-follow">
-                                <button>
+                                <button :class="{ followed: fansItem.isFollowed }">
                                     <span v-if="!fansItem.isFollowed"><i class="iconfont icon-plus"></i></span>
                                     <span>{{ fansItem.isFollowed ? '已关注' : '互关' }}</span>
                                 </button>

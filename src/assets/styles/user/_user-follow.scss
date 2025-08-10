@@ -1,10 +1,38 @@
 @use '@/assets/styles/common/main.scss' as *;
 
-.user-fans {
+.user-follow {
 
     @include wh;
 
-    .user-fans-list {
+    .actions {
+        font-size: 12px;
+        @include flex(c, c);
+        gap: 10px;
+
+        @include c-t {
+            color: color(c-p);
+        }
+
+        button {
+            @include flex(c, c);
+
+            .iconfont {
+                margin-right: 5px;
+            }
+
+            span {
+                @include flex(c, c);
+            }
+        }
+
+        .clear {
+            @include c-t {
+                color: color(error);
+            }
+        }
+    }
+
+    .user-follow-list {
         @include wh;
         @include flex(l, n, c);
         gap: 20px;
@@ -18,7 +46,7 @@
     }
 
 
-    .user-fans-item {
+    .user-follow-item {
         position: relative;
         padding: 10px 20px;
         @include flex(c, n);
@@ -35,33 +63,33 @@
             background-color: color(c-s-lighter, 0.3);
         }
 
-        .fans-item-left {
+        .follow-item-left {
             @include wh(n, 100p);
             @include flex(n, c);
 
-            .fans-avatar {
+            .follow-avatar {
                 @include wh(45);
                 @include img;
             }
         }
 
-        .fans-item-center {
-            .fans-info {
+        .follow-item-center {
+            .follow-info {
                 @include flex(n, c, c);
                 gap: 5px;
 
             }
 
-            .fans-name-level {
+            .follow-name-level {
                 @include flex(c, n);
                 gap: 15px;
 
-                .fans-name {
+                .follow-name {
                     font-size: 14px;
                     font-weight: 550;
                 }
 
-                .fans-level {
+                .follow-level {
                     @include flex(c, c);
                     gap: 5px;
                     font-size: 10px;
@@ -89,13 +117,13 @@
                     }
                 }
 
-                .fans-vip {
+                .follow-vip {
                     @include wh(n, 23);
                     @include img;
                 }
             }
 
-            .fans-bio {
+            .follow-bio {
                 font-size: 14px;
 
                 @include c-t {
@@ -103,18 +131,27 @@
                 }
 
                 p {
-                    max-width: 650px;
-                    // @include t-e;
+                    max-width: 300px;
                 }
             }
         }
     }
 
-    .fans-item-right {
+    .follow-item-right {
         @include flex(c, c);
         margin-left: auto;
         font-size: 12px;
         gap: 15px;
+
+        .follow-stats {
+            @include flex;
+            gap: 15px;
+
+            .stats-label {
+                padding: 0 7px 0 3px;
+            }
+
+        }
 
 
         .iconfont {
@@ -141,13 +178,15 @@
 
         }
 
-        .followed {
-            @include c-t {
-                color: color(c-g9, 0.3);
-                background-color: color(c-g0);
+    }
+}
+
+@media (max-width:768px) {
+    .user-follow {
+        .follow-item-right {
+            .follow-stats {
+                display: none;
             }
         }
-
-
     }
 }

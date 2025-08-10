@@ -1,0 +1,24 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.user-edit {
+    margin-bottom: 20px;
+
+    .edit-label {
+        @include wh;
+        @include b-r($b-r);
+
+        @include flex(c, n);
+        padding: 5px 10px;
+        gap: 5px;
+
+        @include c-t {
+            background: linear-gradient(to right, color(c-s-lighter), color(c-s-lightest));
+            color: color(c-g0);
+        }
+
+        .iconfont {
+            padding-top: 5px;
+            font-size: 22px;
+        }
+    }
+}
