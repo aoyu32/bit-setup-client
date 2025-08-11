@@ -1,0 +1,184 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.user-delete {
+    .user-delete-top {
+        margin-bottom: 20px;
+
+        .delete-label {
+            @include wh;
+            @include b-r($b-r);
+            @include flex(c, n);
+            padding: 5px 10px;
+            gap: 5px;
+
+            @include c-t {
+                background: linear-gradient(to right, color(c-s-darkest), color(c-s-dark));
+                color: color(c-g0);
+            }
+
+            .iconfont {
+                font-size: 22px;
+            }
+        }
+    }
+
+    .user-delete-bottom {
+        .delete-account {
+            @include b-r($b-r);
+            background: color(c-g0);
+            padding: 24px;
+            box-shadow: shadow(l);
+
+            .tip {
+                .warning-content {
+                    margin-bottom: 24px;
+                    padding: 16px;
+                    @include b-r($b-r);
+
+                    @include c-t {
+                        background: color(error, 0.2);
+                        border-left: 4px solid color(warning, 0.5);
+                    }
+
+                    .warning-header {
+                        @include flex(c, c);
+                        gap: 8px;
+                        margin-bottom: 10px;
+
+                        .iconfont {
+                            color: color(error);
+                            font-size: 20px;
+                        }
+
+                        .warning-title {
+                            font-weight: 600;
+                            color: color(error);
+                        }
+                    }
+
+                    .warning-list {
+                        p {
+                            margin: 6px 0;
+                            color: color(c-g7);
+                            font-size: 14px;
+                            line-height: 1.5;
+                        }
+                    }
+                }
+
+                .confirm-section {
+                    margin-bottom: 20px;
+
+                    .input-group {
+                        margin-bottom: 15px;
+
+                        label {
+                            display: block;
+                            margin-bottom: 8px;
+                            font-weight: 500;
+                            color: color(c-g8);
+                        }
+
+                        .password-input {
+                            width: 100%;
+                            padding: 12px 16px;
+                            border: 1px solid color(c-g3);
+                            @include b-r(6px);
+                            font-size: 14px;
+                            transition: all 0.3s ease;
+
+                            &:focus {
+                                outline: none;
+                                border-color: color(c-p);
+                                box-shadow: 0 0 0 3px rgba(color(c-p), 0.1);
+                            }
+
+                            &::placeholder {
+                                color: color(c-g5);
+                            }
+                        }
+                    }
+
+                    .checkbox-group {
+                        @include flex(c, c);
+                        gap: 5px;
+                        font-size: 14px;
+                        cursor: pointer;
+
+                        @include c-t {
+                            color: color(c-g9, 0.7);
+                        }
+
+
+                        span {
+                            @include flex(c, c);
+                        }
+                    }
+
+                    .checked {
+                        @include c-t {
+                            color: color(c-s);
+                        }
+                    }
+                }
+
+                .action-buttons {
+                    @include flex(fe, c);
+                    gap: 12px;
+
+                    .btn-cancel,
+                    .btn-delete {
+                        padding: 10px 90p9;
+                        border: none;
+                        @include b-r(6px);
+                        font-size: 14px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        min-width: 100px;
+                    }
+
+                    .btn-cancel {
+                        @include c-t {
+                            background: color(c-g2);
+                            color: color(c-g7);
+
+                        }
+
+                        &:hover {
+                            @include c-t {
+                                background: color(c-g3);
+                            }
+                        }
+                    }
+
+                    .btn-delete {
+
+                        @include c-t {
+                            background: color(error);
+                            color: color(c-g0);
+                        }
+
+                        &:hover:not(:disabled) {
+                            @include c-t {
+                                background: color(error);
+                            }
+
+                            transform: translateY(-1px);
+                        }
+
+                        &:disabled {
+                            @include c-t {
+                                background: color(c-g4);
+                                color: color(c-g6);
+                            }
+
+                            cursor: not-allowed;
+                            transform: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

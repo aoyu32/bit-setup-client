@@ -1,9 +1,10 @@
 @use '@/assets/styles/common/main.scss' as *;
 
+
 .user-card {
 
     @include wh;
-    padding: 25px 30px;
+
     @include b-r($b-r);
     box-shadow: shadow(m);
 
@@ -11,6 +12,63 @@
     @include c-t {
         background-color: color(c-g);
     }
+
+
+    .card-folded {
+        padding: 10px 20px;
+        @include wh;
+        @include flex(c, s-b);
+
+        .card-left {
+            @include flex;
+            gap: 20px;
+
+            .avatar {
+                @include b-r(50);
+                @include wh(45);
+                @include img;
+
+                @include c-t {
+                    border: 2px solid color(c-p-lighter);
+                }
+            }
+
+            .name-vip {
+                @include flex(c,c);
+                .nickname {
+                    font-size: 16px;
+                }
+
+                .vip {
+                    @include flex(c, c);
+                    @include wh(n, n);
+                    gap: 5px;
+                    font-size: 13px;
+
+                    @include c-t {
+                        color: color(c-g9, 0.3);
+                    }
+
+                    .vip-img {
+                        @include wh(n, 25);
+
+                        img {
+                            @include wh;
+                            object-fit: contain;
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    .card-unfold {
+        padding: 25px 30px;
+    }
+
+
 
     .card-top {
         @include wh;
@@ -28,46 +86,47 @@
         }
     }
 
+    .name-vip {
+        @include flex(c, n);
+        gap: 20px;
+
+        .nickname {
+            @include flex;
+            font-size: 20px;
+            font-weight: 550;
+
+            @include c-t {
+                color: color(c-g9, 0.7);
+            }
+        }
+
+        .vip {
+            @include flex(c, c);
+            @include wh(n, n);
+            gap: 5px;
+            font-size: 13px;
+
+            @include c-t {
+                color: color(c-g9, 0.3);
+            }
+
+            .vip-img {
+                @include wh(n, 25);
+
+                img {
+                    @include wh;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
 
     .base-info {
         @include flex(n, c, c);
         gap: 15px;
         width: 35%;
 
-        .name-vip {
-            @include flex(c, n);
-            gap: 20px;
 
-            .nickname {
-                @include flex;
-                font-size: 20px;
-                font-weight: 550;
-
-                @include c-t {
-                    color: color(c-g9, 0.7);
-                }
-            }
-
-            .vip {
-                @include flex(c, c);
-                @include wh(n, n);
-                gap: 5px;
-                font-size: 13px;
-
-                @include c-t {
-                    color: color(c-g9, 0.3);
-                }
-
-                .vip-img {
-                    @include wh(n, 25);
-
-                    img {
-                        @include wh;
-                        object-fit: contain;
-                    }
-                }
-            }
-        }
 
         .level-progress {
             @include wh(100p);
@@ -188,12 +247,13 @@
 
     }
 
-    .logout {
+    .fold-logout {
         @include flex(t, r);
         flex: 1;
+        gap: 15px;
 
         button {
-            @include flex(c, c);
+            @include flex(c, r);
             gap: 5px;
             transition: all 0.2s ease-out;
 
@@ -219,45 +279,52 @@
                     color: color(c-p);
 
                 }
-                .iconfont{
-                    @include c-t{
-                        color:color(c-s-dark);
+
+                .iconfont {
+                    @include c-t {
+                        color: color(c-s-dark);
                     }
                 }
 
             }
         }
+
+        
     }
 
-    .card-bottom{
+    .card-bottom {
         @include wh;
-        @include flex(c,s-b);
+        @include flex(c, s-b);
         margin-top: 30px;
         font-size: 13px;
-        .stats{
-            @include wh(n,100p);
-            @include flex(c,n);
+
+        .stats {
+            @include wh(n, 100p);
+            @include flex(c, n);
             gap: 20px;
-            @include c-t{
-                color: color(c-g9,0.6);
+
+            @include c-t {
+                color: color(c-g9, 0.6);
             }
 
         }
 
-        .stats-item{
-            @include flex(c,c);
+        .stats-item {
+            @include flex(c, c);
             gap: 5px;
-            span{
-                @include flex(c,c);
+
+            span {
+                @include flex(c, c);
             }
         }
 
-        .user-id{
-            @include flex(c,c);
+        .user-id {
+            @include flex(c, c);
             gap: 5px;
             font-size: 12px;
-            @include c-t{
-                color: color(c-g9,0.5);
+
+            @include c-t {
+                color: color(c-g9, 0.5);
             }
         }
     }

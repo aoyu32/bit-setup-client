@@ -6,9 +6,18 @@
                 <h3>修改资料</h3>
             </div>
         </div>
+        <div class="user-edit-bottom">
+            <div class="form-container">
+                <UserEditForm />
+            </div>
+        </div>
     </div>
 </template>
-<script setup></script>
+<script setup>
+import UserEditForm from '../../../components/user/UserEditForm.vue';
+
+
+</script>
 <style scoped lang="scss">
 @use '@/assets/styles/user/_user-edit.scss' as *;
 </style>

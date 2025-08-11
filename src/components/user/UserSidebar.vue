@@ -44,7 +44,7 @@ const navGroups = ref([
             },
             {
                 icon: 'icon-cloud-upload',
-                name: '上传历史',
+                name: '投稿历史',
                 route: '/user/upload'
             }
         ]

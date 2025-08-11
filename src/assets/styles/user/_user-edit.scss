@@ -1,12 +1,13 @@
 @use '@/assets/styles/common/main.scss' as *;
 
 .user-edit {
+    @include wh;
     margin-bottom: 20px;
+    @include flex(n, n, c);
 
     .edit-label {
         @include wh;
         @include b-r($b-r);
-
         @include flex(c, n);
         padding: 5px 10px;
         gap: 5px;
@@ -17,8 +18,39 @@
         }
 
         .iconfont {
-            padding-top: 5px;
             font-size: 22px;
+        }
+    }
+
+    .user-edit-bottom {
+        @include wh(100p, 100p);
+        @include flex(n, c);
+        padding: 20px;
+
+        @include c-t {
+            background-color: color(c-g0);
+        }
+
+        .form-container {
+            @include wh(70p, n);
+
+            @include c-t {
+                background-color: color(c-g1);
+            }
+        }
+    }
+
+
+}
+
+@media (max-width:768px) {
+    .user-edit {
+        .user-edit-bottom {
+            padding: 10px;
+
+            .form-container {
+                @include wh(100p, n);
+            }
         }
     }
 }

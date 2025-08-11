@@ -84,7 +84,7 @@ const actionList = ref([
     },
     {
         icon: 'icon-cloud-upload',
-        name: '我要上传',
+        name: '应用投稿',
         route: 'submit'
     },
     {

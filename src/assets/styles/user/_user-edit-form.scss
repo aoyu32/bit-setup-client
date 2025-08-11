@@ -1,0 +1,104 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.user-edit-form {
+    @include wh;
+    padding: 20px;
+
+    form {
+        @include flex(n, n, c);
+        gap: 15px;
+    }
+
+    .avatar {
+        @include flex(c, n, c);
+        gap: 5px;
+
+        .avatar-label {
+            font-size: 12px;
+        }
+
+
+        .img-wrapper {
+            @include wh(90);
+            @include img;
+            @include b-r(50);
+            position: relative;
+            cursor: pointer;
+            transition: all 0;
+
+            @include c-t {
+                border: 1px solid color(c-p);
+            }
+
+            &:hover {
+                .upload {
+                    opacity: 1;
+                }
+            }
+
+            .upload {
+                @include flex(c, c, c);
+                @include wh;
+                opacity: 0;
+                font-size: 10px;
+                @include b-r(50);
+                @include p-a(t0, r0);
+                backdrop-filter: blur(1px);
+
+                @include c-t {
+                    color: color(c-s);
+                    background-color: color(c-g8, 0.5);
+                }
+            }
+
+
+        }
+
+
+        .avatar-upload {
+            display: none;
+        }
+
+    }
+
+
+    .form-item {
+        @include wh;
+        @include flex(n, n, c);
+        gap: 5px;
+        font-size: 14px;
+    }
+
+    .gender {
+        @include wh;
+
+        .gender-radio {
+            box-shadow: shadow(m);
+            @include b-r($b-r);
+            @include flex(c, n);
+            gap: 15px;
+            @include wh;
+            padding: 10px 10px;
+            font-size: 13px;
+            @include c-t {
+                background-color: color(c-g);
+                color: color(c-g9,0.5);
+            }
+        }
+    }
+
+    .submit-button{
+        @include wh(100p,n);
+        margin-top: 20px;
+        button{
+            @include wh(100p,n);
+            padding: 10px 0;
+            @include b-r($b-r);
+            @include c-t{
+                background-color: color(c-s-lighter);
+                color: color(c-g);
+            }
+        }
+    }
+}
+
