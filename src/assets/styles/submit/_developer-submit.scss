@@ -1,0 +1,65 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.developer-submit {
+    padding-bottom: 20px;
+
+    @include c-t {
+        background-color: color(c-g);
+    }
+
+    .form-content {
+        margin-top: 10px;
+    }
+
+    .app-icon {
+        @include flex(c, c);
+
+        .form-content {
+            @include wh(70);
+            margin-top: 0;
+        }
+    }
+
+    .app-file-upload {
+        @include flex(n, n, c);
+        flex: 1;
+
+        .form-content {
+            height: 79px;
+
+        }
+
+    }
+
+    .app-prove {
+        flex: 1;
+
+        .form-content {
+            @include flex;
+            gap: 10px;
+            height: 150px;
+        }
+    }
+
+    .submit-button {
+        @include wh;
+        @include flex(c, r);
+        gap: 20px;
+        padding: 0 20px;
+
+        button {
+            padding: 7px 50px;
+            @include b-r($b-r);
+
+            font-size: 14px;
+            @include c-t {
+                background-color: color(c-s);
+                color: color(c-g);
+            }
+        }
+
+        @include c-t {
+            background-color: color(c-g);
+        }
+    }
+}

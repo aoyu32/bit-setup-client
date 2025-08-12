@@ -1,0 +1,122 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.submit-form {
+    @include wh;
+    padding: 20px;
+    @include flex(n, n, c);
+    gap: 20px;
+
+    @include c-t {
+        background-color: color(c-g);
+
+    }
+
+    :deep(.ao-selector) {
+        .select-header {
+            padding: 10px 15px;
+        }
+    }
+
+
+
+    :deep(.ao-upload) {
+        min-height: 0;
+    }
+
+    .form-top {
+        @include wh;
+        @include flex(c, n);
+        gap: 35px;
+        flex-wrap: wrap;
+    }
+
+    .form-label {
+        font-size: 14px;
+    }
+
+    .form-content {
+        margin-top: 10px;
+    }
+
+    .form-center {
+        @include wh;
+        @include flex;
+        gap: 30px;
+
+        .app-official,
+        .app-download {
+            flex: 1;
+        }
+    }
+
+    .form-bottom {
+        @include wh;
+        @include flex(n, n, c);
+        gap: 20px;
+
+        .bio-file {
+            @include flex;
+            gap: 30px;
+
+        }
+
+        .app-bio {
+            @include flex(n, n, c);
+            flex: 1;
+
+            .form-content {
+                height: 79px;
+
+            }
+
+        }
+
+        .screenshot {
+            @include wh(100p, n);
+            @include flex;
+            gap: 30px;
+
+            .app-interface,
+            .app-prove {
+                flex: 1;
+
+                .form-content {
+                    @include flex;
+                    gap: 10px;
+                    height: 150px;
+                }
+            }
+        }
+    }
+
+    .app-icon {
+        @include flex(c, c);
+
+
+
+        .form-content {
+            @include wh(70);
+            margin-top: 0;
+        }
+    }
+
+    // .app-name {}
+
+    .app-category {
+        min-width: 300px;
+
+        .form-content {
+            @include flex;
+            gap: 10px;
+        }
+
+
+    }
+
+    .app-fee {
+        flex: 1;
+    }
+
+
+
+}

@@ -1,0 +1,57 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.note-card {
+    padding: 20px;
+    @include wh(100p,n);
+    @include b-r($b-r);
+    box-shadow: shadow(m);
+
+    @include c-t {
+        color: color(c-g9, 0.7);
+        background-color: color(c-g);
+    }
+}
+
+.welcome {
+    margin-bottom: 20px;
+
+    p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 0;
+        text-align: justify;
+    }
+}
+
+.recommend-standard,
+.developer-standard {
+    ul {
+        list-style-type: disc;
+        padding-left: 20px;
+        margin: 0;
+
+        li {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+
+            @include c-t {
+                color: color(c-g9,0.6);
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .note-card {
+        padding: 15px;
+    }
+
+    .welcome p {
+        font-size: 14px;
+    }
+
+    ul li {
+        font-size: 13px;
+    }
+}

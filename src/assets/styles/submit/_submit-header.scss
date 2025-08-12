@@ -1,0 +1,66 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.submit-header {
+    @include wh;
+    padding: 10px 15px;
+    @include b-r($b-r);
+    @include flex(c, s-b);
+    box-shadow: shadow(m);
+
+    @include c-t {
+        background-color: color(c-g);
+    }
+
+    .header-left {
+        @include flex(c, c);
+        gap: 20px;
+
+        .submit-item {
+            @include b-r($b-r);
+            font-size: 14px;
+
+            @include c-t {
+                background-color: color(c-p-lighter, 0.7);
+                color: color(c-g0);
+            }
+
+            a {
+                padding: 7px 15px;
+                @include flex(c, c);
+                gap: 5px;
+            }
+
+            .iconfont {
+                font-size: 15px;
+            }
+        }
+
+        .active {
+            @include c-t {
+                background-color: color(c-p-light);
+            }
+        }
+    }
+
+    .header-right {
+        @include flex(c, c);
+        gap: 20px;
+
+        .slogan{
+            font-size: 13px;
+            @include c-t{
+                color: color(c-g9,0.5);
+            }
+        }
+
+        .check-out-history{
+            font-size: 14px;
+            a{
+                padding: 7px;
+                @include c-t{
+                    color: color(c-s-dark);
+                }
+            }
+        }
+    }
+}
