@@ -75,7 +75,7 @@ const actionList = ref([
     {
         icon: 'icon-xiaoxi',
         name: '系统通知',
-        route: '/notice'
+        route: '/message/system'
     },
     {
         icon: 'icon-rili',

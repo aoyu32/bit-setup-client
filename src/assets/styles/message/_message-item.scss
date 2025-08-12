@@ -1,0 +1,53 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.msg-item {
+    padding: 15px;
+    @include flex;
+    @include b-r($b-r);
+    gap: 15px;
+
+    @include c-t {
+        background-color: color(c-g1, 0.7);
+    }
+
+    .user-avatar {
+        @include wh(45);
+        @include img;
+    }
+
+    .item-center {
+        @include flex(n, n, c);
+        gap: 7px;
+    }
+
+    .item-info {
+        @include flex(c, n);
+        gap: 10px;
+
+        .username {
+            font-size: 15px;
+        }
+
+        .type {
+            font-size: 14px;
+
+            @include c-t {
+                color: color(c-g5);
+            }
+        }
+
+        .date {
+            font-size: 13px;
+            @include c-t{
+                color: color(c-g9,0.5);
+            }
+        }
+    }
+
+
+    .item-right {
+        margin-left: auto;
+        @include flex(c, c);
+        gap: 10px;
+    }
+}

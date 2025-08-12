@@ -54,7 +54,9 @@
                             <img :src="vipImgUrl" alt="">
                         </div>
                         <div class="message">
-                            <i class="iconfont icon-xiaoxi"></i>
+                            <router-link to='/message'>
+                                <i class="iconfont icon-xiaoxi"></i>
+                            </router-link>
                         </div>
                     </div>
                     <div class="user-info" :style="{ marginTop: userInfoMarginTop }">

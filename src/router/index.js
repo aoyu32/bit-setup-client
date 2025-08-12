@@ -14,7 +14,7 @@ import User from '@/views/user/User.vue'
 import UserDownload from '@/views/user/app/UserDownload.vue'
 import UserRecharge from '@/views/user/app/UserRecharge.vue'
 import UserAppCollect from '@/views/user/app/UserAppCollect.vue'
-import UserUpload from '@/views/user/app/UserUpload.vue'
+import UserSubmit from '@/views/user/app/UserSubmit.vue'
 import UserEdit from '@/views/user/account/UserEdit.vue'
 import UserDelete from '@/views/user/account/UserDelete.vue'
 import UserSecurity from '@/views/user/account/UserSecurity.vue'
@@ -22,7 +22,14 @@ import UserFans from '@/views/user/community/UserFans.vue'
 import UserFollow from '@/views/user/community/UserFollow.vue'
 import UserPost from '@/views/user/community/UserPost.vue'
 import UserPostCollect from '@/views/user/community/UserPostCollect.vue'
-
+import Submit from '@/views/submit/Submit.vue'
+import RecommendSubmit from '@/views/submit/RecommendSubmit.vue'
+import DeveloperSubmit from '@/views/submit/DeveloperSubmit.vue'
+import Message from '@/views/message/Message.vue'
+import SystemMessage from '@/views/message/SystemMessage.vue'
+import CommentReply from '@/views/message/CommentReply.vue'
+import LikeCollect from '@/views/message/LikeCollect.vue'
+import NewFollower from '@/views/message/NewFollower.vue'
 
 
 
@@ -112,8 +119,8 @@ const router = createRouter({
                             component: UserAppCollect
                         },
                         {
-                            path: 'upload',
-                            component: UserUpload
+                            path: 'submit',
+                            component: UserSubmit
                         },
                         {
                             path: 'post',
@@ -142,6 +149,52 @@ const router = createRouter({
                         {
                             path: 'delete',
                             component: UserDelete
+                        }
+                    ]
+                },
+                {
+                    path: '/submit',
+                    component: Submit,
+                    children: [
+                        {
+                            path: '',
+                            component: RecommendSubmit,
+                            redirect: '/submit/recommend'
+                        },
+                        {
+                            path: 'recommend',
+                            component: RecommendSubmit
+                        },
+                        {
+                            path: 'developer',
+                            component: DeveloperSubmit
+                        }
+                    ]
+                },
+                {
+                    path: 'message',
+                    component: Message,
+                    children: [
+                        {
+                            path: '',
+                            component: SystemMessage,
+                            redirect: '/message/comment'
+                        },
+                        {
+                            path: 'system',
+                            component: SystemMessage
+                        },
+                        {
+                            path: 'like',
+                            component: LikeCollect
+                        },
+                        {
+                            path: 'follow',
+                            component: NewFollower
+                        },
+                        {
+                            path: 'comment',
+                            component: CommentReply
                         }
                     ]
                 }

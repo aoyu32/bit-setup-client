@@ -1,0 +1,41 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.msg-sidebar {
+    @include wh;
+    @include b-r($b-r);
+    box-shadow: shadow(m);
+
+    @include c-t {
+        background-color: color(c-g);
+    }
+
+    ul {
+        @include wh;
+        padding: 20px;
+        @include flex(n, n, c);
+        gap: 20px;
+
+
+        a {
+            padding: 10px 15px;
+            @include wh;
+            font-size: 13px;
+            @include b-r($b-r);
+            @include flex(c, c);
+            gap: 5px;
+
+            @include c-t {
+                color: color(c-g1);
+                background-color: color(c-p-lighter,0.6);
+            }
+        }
+
+        .active {
+            @include c-t {
+                color: color(c-g);
+                background-color: color(c-p-lighter);
+            }
+        }
+
+    }
+}
