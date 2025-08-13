@@ -11,6 +11,9 @@
         <div class="home-center">
             <div class="card-list-container">
                 <CardList v-for="(item, index) in cardAppList" :key="index" :cardApp="item" />
+                 <!-- <ListCard v-for="(item,index) in cardAppList" :data="item">
+
+                 </ListCard> -->
             </div>
         </div>
         <div class="home-bottom">
@@ -32,6 +35,7 @@ import AppList from '@/components/home/AppList.vue';
 import AppPage from '@/components/home/AppPage.vue';
 import CardList from '@/components/home/CardList.vue';
 import cardAppList from '../../utils/data';
+import ListCard from '../../components/home/ListCard.vue';
 
 
 

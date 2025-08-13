@@ -30,6 +30,7 @@ import SystemMessage from '@/views/message/SystemMessage.vue'
 import CommentReply from '@/views/message/CommentReply.vue'
 import LikeCollect from '@/views/message/LikeCollect.vue'
 import NewFollower from '@/views/message/NewFollower.vue'
+import Signin from '@/views/signin/Signin.vue'
 
 
 
@@ -197,6 +198,10 @@ const router = createRouter({
                             component: CommentReply
                         }
                     ]
+                },
+                {
+                    path: 'signin',
+                    component: Signin
                 }
             ]
         }
