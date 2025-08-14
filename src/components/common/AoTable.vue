@@ -1,71 +1,90 @@
 <template>
-  <div class="simple-table-container">
-    <table class="simple-table">
-      <thead>
-        <tr>
-          <th v-for="column in columns" :key="column.key">
-            {{ column.title }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(row, rowIndex) in data" :key="rowIndex">
-          <td v-for="column in columns" :key="column.key">
-            {{ row[column.key] }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="ao-table">
+    <div class="table-container">
+      <table class="table-main">
+        <thead>
+          <tr>
+            <th v-for="column in columns" :key="column.key">
+              {{ column.title }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(row, rowIndex) in data" :key="rowIndex">
+            <td v-for="column in columns" :key="column.key">
+              {{ row[column.key] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'SimpleTable',
-  props: {
-    columns: {
-      type: Array,
-      required: true,
-      validator: (value) => {
-        return value.every(col => col.key && col.title)
-      }
-    },
-    data: {
-      type: Array,
-      required: true
+<script setup>
+import { ref } from 'vue'
+const props = defineProps({
+  columns: {
+    type: Array,
+    required: true,
+    validator: (value) => {
+      return value.every(col => col.key && col.title)
     }
+  },
+  data: {
+    type: Array,
+    required: true
   }
-}
+})
+
+
 </script>
 
-<style scoped>
-.simple-table-container {
-  overflow-x: auto;
-}
+<style scoped lang="scss">
+.ao-table {
+  @include wh;
 
-.simple-table {
-  width: 100%;
-  border-collapse: collapse;
-  /* margin: 1rem 0; */
-}
+  .table-container {
+    @include wh;
 
-.simple-table th,
-.simple-table td {
-  padding: 0.75rem;
-  text-align: left;
-  border: 1px solid #ddd;
-}
+  }
 
-.simple-table th {
-  background-color: #f5f5f5;
-  font-weight: bold;
-}
+  .table-main {
+    @include wh;
+    border-collapse: collapse;
+  }
 
-.simple-table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
+  .table-main th{
+    @include c-t{
+      background-color: color(c-g1);
+      color: color(c-g10,0.7);
+    }
+  }
 
-.simple-table tr:hover {
-  background-color: #f1f1f1;
+  .table-main td{
+    @include c-t{
+      color: color(c-g10,0.5);
+    }
+  }
+
+  .table-main th,
+  .table-main td {
+    padding: 0.75rem;
+    text-align: center;
+    font-size: 14px;
+  }
+
+
+  .table-main tr {
+    border-spacing: 0px;
+  }
+
+  .table-main tr:nth-child(even) {
+
+    @include c-t {
+      background-color: color(c-g0);
+    }
+  }
+
 }
 </style>

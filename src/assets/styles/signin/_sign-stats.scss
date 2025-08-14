@@ -1,0 +1,88 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.sign-stats {
+    @include flex(n, n, c);
+    @include b-r($b-r);
+    box-shadow: shadow(m);
+    @include wh(100p, 100p);
+
+    @include c-t {
+        background-color: color(c-g);
+    }
+
+    padding: 20px;
+
+    .sign-btn {
+        margin-bottom: 20px;
+
+        button {
+            @include b-r($b-r);
+            @include wh;
+            padding: 10px 15px;
+            font-size: 14px;
+
+            @include c-t {
+                color: color(c-g);
+                background-color: color(c-p-lighter);
+            }
+        }
+    }
+
+    .level {
+        @include wh;
+        @include flex(n, n, c);
+        margin-bottom: 20px;
+
+        .level-data {
+            margin-bottom: 10px;
+            @include flex(c, n);
+            gap: 5px;
+
+            span {
+                @include b-r(4);
+                font-size: 12px;
+                padding: 3px 5px;
+
+                @include c-t {
+                    color: color(c-g);
+                    background-color: color(c-s);
+                }
+            }
+        }
+
+        .level-progress {
+            @include wh;
+        }
+
+        .exp {
+            @include flex(c, s-b);
+            margin-top: 10px;
+            font-size: 12px;
+
+            @include c-t {
+                color: color(c-g9, 0.5);
+            }
+        }
+
+
+    }
+
+    .stats-data {
+        padding-top: 20px;
+        
+        @include wh;
+        @include flex(n, n, c);
+        gap: 20px;
+        font-size: 14px;
+
+        @include c-t {
+            color: color(c-g9, 0.5);
+            border-top: 1px solid color(c-g9,0.1);
+        }
+
+        .stats-item {
+            @include flex(c, s-b);
+
+        }
+    }
+}

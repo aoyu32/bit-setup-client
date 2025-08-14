@@ -2,7 +2,10 @@
     <div class="sign-calendar">
         <div class="calendar-header">
             <div class="calendar-label">
-                <span>每日签到</span>
+                <span>
+                    <i class="iconfont icon-start-date"></i>
+                    每日签到
+                </span>
             </div>
             <!-- <div class="today">
                 {{ today }}
@@ -19,7 +22,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="calendar-main">
             <div class="calendar-weekdays">
                 <div class="weekdays" v-for="day in weekdays" :key="day">
@@ -27,22 +30,16 @@
                 </div>
             </div>
             <div class="calendar-days">
-                <div 
-                    class="day" 
-                    v-for="(item, index) in calendarDays" 
-                    :key="index"
-                    :class="{
-                        'prev-month': item.isPrevMonth,
-                        'next-month': item.isNextMonth,
-                        'current-month': item.isCurrentMonth,
-                        'today': item.isToday,
-                        'signed': item.isSigned,
-                        'can-sign': item.canSign
-                    }"
-                    @click="handleDayClick(item)"
-                >
+                <div class="day" v-for="(item, index) in calendarDays" :key="index" :class="{
+                    'prev-month': item.isPrevMonth,
+                    'next-month': item.isNextMonth,
+                    'current-month': item.isCurrentMonth,
+                    'today': item.isToday,
+                    'signed': item.isSigned,
+                    'can-sign': item.canSign
+                }" @click="handleDayClick(item)">
                     <span class="day-number">{{ item.day }}</span>
-                    <span v-if="item.isSigned" class="sign-mark">已签</span>
+                    <!-- <span v-if="item.isSigned" class="sign-mark">已签</span> -->
                 </div>
             </div>
         </div>
@@ -65,7 +62,7 @@ const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
 const initializeSignData = () => {
     const today = new Date()
     const currentDateStr = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`
-    
+
     // 示例：本月已签到的日期
     const exampleSignDates = [
         `${today.getFullYear()}-${today.getMonth()}-5`,
@@ -73,7 +70,7 @@ const initializeSignData = () => {
         `${today.getFullYear()}-${today.getMonth()}-12`,
         `${today.getFullYear()}-${today.getMonth()}-15`,
     ]
-    
+
     exampleSignDates.forEach(dateStr => {
         signRecords.value.set(dateStr, true)
     })
@@ -98,16 +95,16 @@ const currentMonthSignCount = computed(() => {
     const year = currentYear.value
     const month = currentMonth.value
     let count = 0
-    
+
     // 获取当前月的天数
     const daysInMonth = getDaysInMonth(year, month)
-    
+
     for (let day = 1; day <= daysInMonth; day++) {
         if (isDateSigned(year, month, day)) {
             count++
         }
     }
-    
+
     return count
 })
 
@@ -120,8 +117,8 @@ const todayIsSigned = computed(() => {
 // 检查今天是否可以签到（只能签当天，且未签到）
 const canSignToday = computed(() => {
     const now = new Date()
-    const isCurrentMonthAndYear = currentYear.value === now.getFullYear() && 
-                                 currentMonth.value === now.getMonth()
+    const isCurrentMonthAndYear = currentYear.value === now.getFullYear() &&
+        currentMonth.value === now.getMonth()
     return isCurrentMonthAndYear && !todayIsSigned.value
 })
 
@@ -229,7 +226,7 @@ const calendarDays = computed(() => {
 // 处理签到
 const handleSignIn = () => {
     if (!canSignToday.value) return
-    
+
     const now = new Date()
     const dateStr = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`
     signRecords.value.set(dateStr, true)

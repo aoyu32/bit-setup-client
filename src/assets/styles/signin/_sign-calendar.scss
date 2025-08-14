@@ -2,7 +2,7 @@
 
 .sign-calendar {
     @include wh;
-    padding: 10px 20px;
+    padding: 20px;
     @include b-r($b-r);
     box-shadow: shadow(m);
 
@@ -14,17 +14,42 @@
         @include wh;
         @include flex(c, s-b);
 
+        .calendar-label {
+            @include flex(c, c);
+
+            span {
+                @include flex(c, c);
+                gap: 5px;
+            }
+
+            font-size: 17px;
+
+            i {
+                padding-top: 1px;
+                font-size: 21px;
+                font-weight: 600;
+            }
+
+            @include c-t {
+                color: color(c-p-lighter);
+            }
+
+            font-weight: 550;
+        }
+
         .switch-month {
             @include flex(c, c);
             gap: 15px;
+            font-size: 14px;
+
 
             .current-month-title {
                 min-width: 80px;
                 text-align: center;
-                font-weight: 500;
+
 
                 @include c-t {
-                    color: color(c-g7);
+                    color: color(c-g5);
                 }
             }
 
@@ -60,7 +85,7 @@
             @include b-r($b-r);
 
             .weekdays {
-                padding: 10px 0;
+                padding: 15px 0;
                 @include wh;
                 text-align: center;
 
@@ -89,21 +114,29 @@
 
             .day {
                 text-align: center;
-                padding: 12px 0;
+                padding: 15px 0;
                 cursor: pointer;
                 transition: all 0.2s ease;
+                @include flex(c, c);
+
+
+                .day-number {
+                    @include flex(c, c);
+                    @include wh(25);
+                    @include b-r(4);
+                    font-size: 13px;
+
+                    @include c-t {
+                        color: color(c-g);
+                        background-color: color(c-s-lighter);
+                    }
+                }
 
                 @include c-t {
                     color: color(c-g5);
                     background-color: color(c-s-lighter, 0.1);
                     // border-right: 1px solid color(c-g2, 0.5);
                     // border-bottom: 1px solid color(c-g2, 0.5);
-                }
-
-                &:hover {
-                    @include c-t {
-                        background-color: color(c-p-lighter, 0.2);
-                    }
                 }
 
                 // 非当前月的日期样式
@@ -122,15 +155,16 @@
 
                 // 今天的特殊样式
                 &.today {
-                    font-weight: bold;
-
-                    @include c-t {
-                        color: color(c-p);
-                        background-color: color(c-p-lighter, 0.3);
-                        border-color: color(c-p, 0.3);
+                    .day-number {
+                        @include c-t {
+                            color: color(c-g);
+                            background-color: color(c-p-lighter);
+                        }
                     }
                 }
             }
+
+
         }
     }
 }
