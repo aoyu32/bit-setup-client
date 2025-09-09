@@ -31,7 +31,10 @@ import CommentReply from '@/views/message/CommentReply.vue'
 import LikeCollect from '@/views/message/LikeCollect.vue'
 import NewFollower from '@/views/message/NewFollower.vue'
 import Signin from '@/views/signin/Signin.vue'
-
+import Feedback from '@/views/feedback/Feedback.vue'
+import Login from '@/views/auth/Login.vue'
+import Register from '@/views/auth/Register.vue'
+import Resest from '@/views/auth/Resest.vue'
 
 
 
@@ -200,10 +203,27 @@ const router = createRouter({
                     ]
                 },
                 {
-                    path: 'signin',
+                    path: '/signin',
                     component: Signin
-                }
+                },
+                {
+                    path: '/feedback',
+                    component: Feedback
+                },
+
             ]
+        },
+        {
+            path: '/login',
+            component: Login
+        },
+        {
+            path: '/register',
+            component: Register
+        },
+        {
+            path: '/reset',
+            component: Resest
         }
     ],
     scrollBehavior(to, from, savedPosition) {

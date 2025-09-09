@@ -59,12 +59,14 @@
                             </router-link>
                         </div>
                     </div>
-                    <div class="user-info" :style="{ marginTop: userInfoMarginTop }">
+                    <div class="user-info" :style="{ marginTop: userInfoMarginTop }" v-show="isLogin">
                         <div class="user-info-wrapper">
                             <div class="avatar">
                                 <img :src="avatarUrl || defaultAvatar" alt="用户头像">
                             </div>
-                            <span class="username">{{ username }}</span>
+                            <div class="username">
+                                <span>{{ username }}</span>
+                            </div>
                         </div>
                         <div class="user-menu">
                             <ul>
@@ -73,6 +75,14 @@
                                 </router-link>
                                 <li><i class="iconfont icon-tuichu"></i><span>退出登录</span></li>
                             </ul>
+                        </div>
+                    </div>
+                    <div class="user-login-reg" v-show="!isLogin">
+                        <div class="login">
+                            <router-link to="/login">登录</router-link>
+                        </div>
+                        <div class="register">
+                            <router-link to="/register">注册</router-link>
                         </div>
                     </div>
                 </div>
@@ -91,6 +101,7 @@ import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
 const searchValue = ref('')
+const isLogin = ref(false)
 
 const userInfoMarginTop = ref('')
 onMounted(() => {

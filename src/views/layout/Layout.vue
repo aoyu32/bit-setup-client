@@ -13,18 +13,7 @@
 import { ref, computed, onMounted } from 'vue'
 import Header from '@/components/layout/Header.vue';
 import Footer from '@/components/layout/Footer.vue'
-onMounted(() => {
-    getTheme()
-})
 
-const getTheme = () => {
-    const localTheme = localStorage.getItem('th')
-    let setTheme = 'light'
-    if (localTheme) {
-        setTheme = localTheme
-    }
-    document.documentElement.setAttribute('data-theme', setTheme)
-}
 
 
 </script>

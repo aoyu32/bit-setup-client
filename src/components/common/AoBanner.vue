@@ -178,7 +178,7 @@ const handleToNext = () => {
             }
 
             &.clone {
-                pointer-events: none; // 克隆的图片不响应点击事件
+                pointer-events: none;
             }
         }
 

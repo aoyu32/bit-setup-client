@@ -1,0 +1,60 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.reset-form {
+    @include wh;
+    @include flex(n, c, c);
+    padding: 0 50px;
+    gap: 20px;
+
+    .reset-label {
+        font-size: 20px;
+        @include flex(c, s-b);
+
+        @include c-t {
+            color: color(c-g5);
+        }
+
+        .iconfont {
+            font-size: 20px;
+        }
+    }
+
+    form {
+        @include wh;
+        @include flex(n, c, c);
+        gap: 20px;
+    }
+
+    .vcode {
+        @include flex(c, s-b);
+        gap: 10px;
+
+        .send-code {
+            button {
+                @include b-r($b-r);
+                padding: 12px;
+                font-size: 12px;
+
+                @include c-t {
+                    background-color: color(c-s-light);
+                    color: color(c-g);
+                }
+            }
+        }
+    }
+
+    .reset-btn {
+        button {
+            @include c-t {
+                background-color: color(c-s-light);
+                color: color(c-g);
+            }
+
+            font-size: 14px;
+            @include b-r($b-r);
+            padding: 10px 0;
+            letter-spacing: 10px;
+            @include wh;
+        }
+    }
+}

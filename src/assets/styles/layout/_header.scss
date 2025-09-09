@@ -398,6 +398,33 @@
                     }
                 }
             }
+
+            .user-login-reg {
+                @include flex(c, c);
+                font-size: 15px;
+
+
+
+                .login {
+                    padding-right: 10px;
+                    border-right: 1px solid color(c-g2, 0.5);
+                    transition: all 0.3s ease-out;
+
+                    &:hover {
+                        color: color(c-p-lighter);
+                    }
+                }
+
+                .register {
+                    padding-left: 10px;
+                    border-left: 1px solid color(c-g2, 0.5);
+                    transition: all 0.3s ease-out;
+
+                    &:hover {
+                        color: color(c-p-light);
+                    }
+                }
+            }
         }
     }
 }
@@ -513,7 +540,7 @@
 
                     .user-menu {
                         ul {
-                            
+
                             li {
                                 padding: 10px;
 

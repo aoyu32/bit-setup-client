@@ -20,7 +20,6 @@ const props = defineProps({
     height: 100%;
 
     input {
-        /* 基础样式 */
         width: 100%;
         height: 100%;
         padding: 10px 15px;
