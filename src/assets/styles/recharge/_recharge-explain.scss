@@ -1,0 +1,191 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.recharge-explain {
+    @include wh;
+    box-sizing: border-box;
+
+    .explain-container {
+        padding: 20px;
+        @include b-r($b-r);
+        @include flex(n, c, c);
+        gap: 20px;
+
+        @include c-t {
+            background: color(c-g);
+        }
+
+        .rules-list {
+            @include flex(n,n,c);
+            gap: 13px;
+            .rule-item {
+                @include flex(c, c);
+                gap: 10px;
+                line-height: 1.6;
+                transition: all 0.2s ease;
+
+                .bullet {
+                    @include wh(5px);
+                    border-radius: 50%;
+
+                    @include c-t {
+                        background-color: color(c-s-light);
+                    }
+
+                }
+
+                .text {
+                    font-size: 14px;
+
+                    @include c-t {
+                        color: color(c-g9, 0.5);
+                    }
+
+                    flex: 1;
+
+                    :deep(.highlight) {
+                        color: #e74c3c;
+                        font-weight: 600;
+                        background: linear-gradient(120deg, #e74c3c, #c0392b);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                    }
+
+                    :deep(.time) {
+                        color: #27ae60;
+                        font-weight: 500;
+                        padding: 2px 6px;
+                        background-color: #d5f4e6;
+                        border-radius: 3px;
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+
+        .exchange-info {
+            .exchange-card {
+                text-align: center;
+                padding: 10px;
+                @include b-r($b-r);
+                transition: transform 0.2s ease;
+
+                @include c-t {
+                    color: color(c-g);
+                    background-color: color(c-s-lighter);
+                }
+
+                .exchange-rate {
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+
+                .exchange-desc {
+                    font-size: 12px;
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}
+
+// 响应式适配
+@media (max-width: 768px) {
+    .recharge-explain {
+        padding: 15px;
+
+        .explain-container {
+            .title {
+                font-size: 16px;
+                padding: 14px 16px;
+            }
+
+            .rules-list {
+                padding: 16px;
+
+                .rule-item {
+                    margin-bottom: 10px;
+
+                    .text {
+                        font-size: 13px;
+                    }
+                }
+            }
+
+            .exchange-info {
+                padding: 0 16px 16px;
+
+                .exchange-card {
+                    padding: 16px;
+
+                    .exchange-title {
+                        font-size: 14px;
+                    }
+
+                    .exchange-rate {
+                        font-size: 20px;
+                    }
+
+                    .exchange-desc {
+                        font-size: 11px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .recharge-explain {
+        padding: 10px;
+
+        .explain-container {
+            border-radius: 6px;
+
+            .title {
+                font-size: 15px;
+                padding: 12px 14px;
+            }
+
+            .rules-list {
+                padding: 14px;
+
+                .rule-item {
+                    margin-bottom: 8px;
+
+                    .bullet {
+                        font-size: 14px;
+                        margin-right: 8px;
+                    }
+
+                    .text {
+                        font-size: 12px;
+                        line-height: 1.5;
+                    }
+                }
+            }
+
+            .exchange-info {
+                padding: 0 14px 14px;
+
+                .exchange-card {
+                    padding: 14px;
+                    border-radius: 6px;
+
+                    .exchange-title {
+                        font-size: 13px;
+                    }
+
+                    .exchange-rate {
+                        font-size: 18px;
+                    }
+
+                    .exchange-desc {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,336 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.recharge-panel {
+    @include wh;
+    @include b-r($b-r);
+
+    padding: 20px;
+
+    @include c-t {
+        background-color: color(c-g0);
+    }
+}
+
+.panel-header {
+    @include wh;
+    @include flex(c, s-b);
+    margin-bottom: 24px;
+
+    .panel-label {
+        h3 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+
+            @include c-t {
+                color: color(c-g9);
+            }
+        }
+    }
+
+    .my-balance {
+        font-size: 15px;
+        @include flex(c, c);
+        color: color(c-g6);
+    }
+
+    .balance-num {
+        @include flex;
+        gap: 5px;
+        font-weight: 600;
+
+        @include c-t {
+            color: color(c-s);
+        }
+
+        .coin {
+            @include flex(c, c);
+
+            img {
+                @include wh(16px);
+            }
+        }
+    }
+}
+
+.panel-main {
+    margin-bottom: 32px;
+
+    .amount-input {
+        margin-bottom: 20px;
+
+        .amount-input-wrapper {
+            position: relative;
+            @include flex(c, c);
+            gap: 10px;
+
+            @include c-t {
+                border: 2px solid color(c-g2);
+            }
+
+            @include b-r($b-r);
+            padding: 0 16px;
+            transition: border-color 0.3s ease;
+
+            &:focus-within {
+                @include c-t {
+                    border-color: color(c-s-lighter);
+                }
+
+                box-shadow: shadow(m);
+            }
+
+            input {
+                flex: 1;
+                border: none;
+                outline: none;
+                padding: 10px 0;
+                font-size: 14px;
+                background: transparent;
+
+                &::placeholder {
+                    @include c-t {
+                        color: color(c-g4);
+                    }
+                }
+            }
+
+            // .adjust-amount {
+            //     margin-right: 12px;
+            //     @include flex(c, c, c);
+
+            //     .add,
+            //     .subtract {
+            //         @include flex(c, c);
+            //         cursor: pointer;
+            //         transition: all 0.2s ease;
+
+            //         i {
+            //             font-size: 12px;
+            //             transition: all 0.2s ease-in;
+
+            //             color: color(c-g5);
+            //         }
+
+            //         &:hover {
+            //             i {
+            //                 @include c-t {
+            //                     color: color(c-s-lighter);
+            //                 }
+            //             }
+            //         }
+            //     }
+
+
+            // }
+
+            .unit {
+                font-size: 14px;
+
+                @include c-t {
+                    color: color(c-g9);
+                }
+
+                font-weight: 500;
+            }
+        }
+    }
+
+    .amount-number {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+
+        .number-item {
+            padding: 20px 16px;
+            text-align: center;
+
+            @include c-t {
+                border: 2px solid color(c-g2);
+                background: color(c-g);
+                color: color(c-g9);
+            }
+
+            @include b-r($b-r);
+            font-size: 16px;
+            font-weight: 500;
+
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+
+            &:hover {
+                transform: translateY(-2px);
+
+                @include c-t {
+                    border-color: color(c-s-lighter);
+                    color: color(c-s-lighter);
+
+                }
+
+                box-shadow: shadow(m);
+            }
+
+            &.active {
+                @include c-t {
+                    border-color: color(c-s-lighter);
+                    background-color: color(c-s-lighter);
+                    color: color(c-g0);
+
+                }
+
+            }
+        }
+    }
+}
+
+
+.settle-accounts {
+    @include flex(b, s-b);
+    padding: 10px 20px;
+    @include b-r($b-r);
+
+    @include c-t {
+        background-color: color(c-g1);
+    }
+}
+
+.recharge-info {
+
+    .quantity,
+    .discount,
+    .payment-amount {
+        @include flex(n, n);
+        margin-bottom: 12px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .label {
+            font-size: 14px;
+            @include flex(c, c);
+
+            @include c-t {
+                color: color(c-g5);
+            }
+        }
+
+        .value {
+            @include flex(c, c);
+            font-size: 15px;
+
+            color: #333;
+        }
+
+        .unit {
+            @include flex(c, c);
+            margin-left: 5px;
+            font-size: 15px;
+        }
+
+        .pay {
+            font-size: 16px;
+            font-weight: 550;
+
+            @include c-t {
+                color: color(warning);
+            }
+        }
+    }
+
+    .payment-amount {
+        .value {
+            font-size: 18px;
+
+            @include c-t {
+                color: color(warning);
+            }
+        }
+    }
+}
+
+.submit-recharge {
+    button {
+        padding: 10px 25px;
+
+        @include c-t {
+            background: linear-gradient(135deg, color(c-p-light) 0%, color(c-p-lighter) 100%);
+            color: color(c-g);
+        }
+
+        box-shadow: shadow(m);
+
+        border: none;
+        @include b-r($b-r);
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+
+            @include c-t {
+                box-shadow: 0 6px 20px color(c-s-lighter);
+            }
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+
+        &:disabled {
+            @include c-t {
+                background-color: color(c-g3);
+            }
+
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+    }
+}
+
+
+// 响应式设计
+@media (max-width: 768px) {
+    .recharge-panel {
+        padding: 16px;
+    }
+
+    .panel-header {
+        .panel-label h3 {
+            font-size: 18px;
+        }
+
+        .my-balance {
+            font-size: 14px;
+        }
+    }
+
+    .panel-main {
+        .amount-number {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+
+            .number-item {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .panel-footer {
+        .settle-accounts {
+            flex-direction: column;
+            gap: 16px;
+            align-items: stretch;
+
+            .submit-recharge button {
+                width: 100%;
+                min-width: auto;
+            }
+        }
+    }
+}

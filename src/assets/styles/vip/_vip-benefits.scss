@@ -1,0 +1,56 @@
+@use "@/assets/styles/common/main.scss" as *;
+
+.vip-benefits {
+    @include wh;
+    @include flex(n, c, c);
+    gap: 20px;
+
+    @include c-t {
+        background-color: color(c-g0);
+    }
+
+    padding: 20px;
+    box-shadow: shadow(m);
+    @include b-r($b-r);
+
+}
+
+.benefits-header {
+    margin-bottom: 10px;
+
+    h2 {
+        margin-bottom: 10px
+    }
+}
+
+.benefits-list {
+    @include wh;
+    @include grid(3, 1fr);
+    gap: 20px;
+
+
+}
+
+.benefit-item {
+    @include flex(c, c, c);
+    padding: 20px 10px;
+    @include b-r($b-r);
+    gap: 10px;
+    box-shadow: shadow(s);
+    @include c-t {
+        background-color: color(warning, 0.3);
+    }
+    
+
+    .benefit-icon {
+        @include flex(c, c);
+        .iconfont {
+            font-size: 27px;
+        }
+    }
+
+    .benefit-content{
+        font-size: 14px;
+    }
+
+}

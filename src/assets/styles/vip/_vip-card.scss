@@ -1,0 +1,108 @@
+@use '@/assets/styles/common/main.scss' as *;
+
+.vip-card {
+
+    @include flex(n, n, c);
+    @include wh;
+    gap: 20px;
+    @include c-t {
+        background-color: color(c-g0);
+    }
+    box-shadow: shadow(m);
+    @include b-r($b-r);
+    padding: 20px;
+
+}
+
+.card-top {
+    @include flex(c, n);
+    gap: 20px;
+    .vip-img {
+        @include wh(70px, 35px);
+
+        img {
+            @include wh;
+            object-fit: cover;
+        }
+    }
+
+    .vip-text {
+        font-size: 30px;
+        font-weight: 550;
+        @include c-t {
+            color: color(warning);
+        }
+    }
+}
+
+.card-center {
+    @include wh;
+    @include flex(n, n, c);
+    gap: 20px;
+    .price {
+        @include flex(c, n);
+        gap: 20px;
+    }
+
+    .vip-price {
+        font-size: 27px;
+        font-weight: 550;
+    }
+
+    .vip-origin-price {
+        @include c-t {
+            color: color(c-g6);
+        }
+    }
+
+    .vip-content{
+        font-size: 16px;
+        color: color(c-g7);
+    }
+
+    .limited-offer {
+        @include wh(50p, n);
+        text-align: center;
+        padding: 5px 10px;
+        @include b-r($b-r);
+        @include c-t {
+            background-color: color(warning, 0.5);
+            color: color(c-g);
+        }
+    }
+}
+
+.card-bottom {
+    @include flex(c, r, c);
+    @include wh;
+    gap: 10px;
+
+    .active-button {
+        @include wh(100p,n);
+    }
+
+
+
+    button {
+        padding: 10px 20px;
+        @include wh(100p,n);
+        @include b-r($b-r);
+        @include c-t {
+            color: color(c-g);
+            background-color: color(warning, 0.7);
+        }
+    }
+
+    .protocol {
+        font-size: 14px;
+        @include c-t {
+            color: color(c-g9, 0.5);
+        }
+        span {
+            @include c-t{
+                color: color(c-p);
+            }
+        }
+    }
+
+}

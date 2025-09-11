@@ -35,6 +35,8 @@ import Feedback from '@/views/feedback/Feedback.vue'
 import Login from '@/views/auth/Login.vue'
 import Register from '@/views/auth/Register.vue'
 import Resest from '@/views/auth/Resest.vue'
+import Vip from '@/views/vip/Vip.vue'
+import Recharge from '@/views/recharge/Recharge.vue'
 
 
 
@@ -210,7 +212,14 @@ const router = createRouter({
                     path: '/feedback',
                     component: Feedback
                 },
-
+                {
+                    path: '/vip',
+                    component: Vip
+                },
+                {
+                    path: '/recharge',
+                    component: Recharge
+                }
             ]
         },
         {

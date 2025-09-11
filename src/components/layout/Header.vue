@@ -44,20 +44,24 @@
             <div class="profile">
                 <div class="profile-container">
                     <div class="profile-left">
-                        <div class="coin">
-                            <span>{{ myCoin }}</span>
-                            <div class="coin-icon">
-                                <img :src="coinIcon" alt="">
+                        <router-link to="/recharge">
+                            <div class="coin">
+                                <span>{{ myCoin }}</span>
+                                <div class="coin-icon">
+                                    <img :src="coinIcon" alt="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="vip" v-if="isMember">
-                            <img :src="vipImgUrl" alt="">
-                        </div>
-                        <div class="message">
-                            <router-link to='/message'>
+                        </router-link>
+                        <router-link to="/vip">
+                            <div class="vip" v-if="isMember">
+                                <img :src="vipImgUrl" alt="">
+                            </div>
+                        </router-link>
+                        <router-link to='/message'>
+                            <div class="message">
                                 <i class="iconfont icon-xiaoxi"></i>
-                            </router-link>
-                        </div>
+                            </div>
+                        </router-link>
                     </div>
                     <div class="user-info" :style="{ marginTop: userInfoMarginTop }" v-show="isLogin">
                         <div class="user-info-wrapper">
@@ -73,7 +77,7 @@
                                 <router-link to="/user">
                                     <li><i class="iconfont icon-user"></i><span>个人中心</span></li>
                                 </router-link>
-                                <li><i class="iconfont icon-tuichu"></i><span>退出登录</span></li>
+                                <li @click="isLogin = false"><i class="iconfont icon-tuichu"></i><span>退出登录</span></li>
                             </ul>
                         </div>
                     </div>
@@ -101,7 +105,7 @@ import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
 const searchValue = ref('')
-const isLogin = ref(false)
+const isLogin = ref(true)
 
 const userInfoMarginTop = ref('')
 onMounted(() => {

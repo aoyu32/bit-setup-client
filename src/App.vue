@@ -3,8 +3,13 @@
 </template>
 <script setup>
 import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 onMounted(() => {
     getTheme()
+    if (route.path === '/vip') {
+      
+    }
 })
 
 const getTheme = () => {
