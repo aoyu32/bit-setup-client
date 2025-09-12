@@ -57,7 +57,7 @@ import UserSidebar from '@/components/user/UserSidebar.vue';
             @include b-r($b-r);
 
             @include c-t {
-                background-color: color(c-g);
+                background-color: color(c-g0);
             }
 
         }

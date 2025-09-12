@@ -4,6 +4,7 @@
             <div class="actions">
                 <div class="title">
                     <span>快捷操作</span>
+                    <div class="shortcuts">CTRL+SHIFT+X</div>
                 </div>
                 <div class="actions-wrapper">
                     <router-link class="action-item" v-for="(item, index) in actionList" :to="item.route" :key="index">

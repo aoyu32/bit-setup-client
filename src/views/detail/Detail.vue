@@ -157,7 +157,7 @@ onMounted(() => {
             @include b-r($b-r);
 
             @include c-t {
-                background-color: color(c-g);
+                background-color: color(c-g0);
             }
         }
 
@@ -168,7 +168,7 @@ onMounted(() => {
             @include b-r($b-r);
 
             @include c-t {
-                background-color: color(c-g);
+                background-color: color(c-g0);
             }
 
         }
@@ -185,7 +185,7 @@ onMounted(() => {
 
 
             @include c-t {
-                background-color: color(c-g);
+                background-color: color(c-g0);
             }
         }
 

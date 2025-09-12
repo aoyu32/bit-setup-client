@@ -1,5 +1,6 @@
 const cardAppList = [
     {
+        icon:'icon-huo',
         label: '热门APP',
         appList: [
             {
@@ -80,6 +81,7 @@ const cardAppList = [
         ]
     },
     {
+        icon:'icon-xunzhang',
         label: '推荐',
         appList: [
             {
@@ -160,6 +162,7 @@ const cardAppList = [
         ]
     },
     {
+        icon:'icon-asset-monitor',
         label: '必备',
         appList: [
             {

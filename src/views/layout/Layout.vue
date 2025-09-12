@@ -32,6 +32,7 @@ main {
     width: 100%;
     height: 100%;
     margin-bottom: 250px;
+    
 }
 
 .main {
@@ -42,6 +43,7 @@ footer {
     @include wh(100p, n);
     @include p-a(b0);
 }
+
 
 @media (max-width:768px) {
     main {

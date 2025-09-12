@@ -8,7 +8,7 @@
     box-shadow: shadow(m);
 
     @include c-t {
-        background-color: color(c-g);
+        background-color: color(c-g0);
     }
 
     .sidebar-wrapper {
@@ -39,11 +39,12 @@
 
         .label-icon {
             @include flex(c, c);
-            padding: 5px 5px 5px 10px;
+            padding: 5px 10px 5px 10px;
             @include b-r(4, 0, 0, 4);
 
             @include c-t {
-                background-color: darken(color(c-s-lighter), 20%);
+                // background-color: darken(color(c-s-lighter), 20%);
+                background-color: color(c-g3)
             }
         }
 
@@ -54,7 +55,8 @@
             padding: 5px 0 5px 5px;
 
             @include c-t {
-                background: linear-gradient(to right, darken(color(c-s-lighter), 17%), color(c-s-lightest));
+                // background: linear-gradient(to right, darken(color(c-s-lighter), 17%), color(c-s-lightest));
+                background-color: color(c-g3,0.5);
                 color: color(c-g9, 0.8);
             }
         }
@@ -77,7 +79,7 @@
             font-size: 14px;
 
             @include c-t {
-                background-color: color(c-p-lightest, 0.2);
+                background-color: color(c-g3, 0.3);
             }
 
             li {

@@ -2,10 +2,11 @@
     <div class="card-list">
         <div class="card-header">
             <div class="header-content">
+                <div class="card-icon"><i :class="['iconfont',cardApp.icon]"></i></div>
                 <h3 class="card-title">{{ cardApp.label }}</h3>
                 <div class="title-underline"></div>
             </div>
-            <div class="item-badge">{{ cardApp.appList.length }}</div>
+            <div class="item-badge">TOP {{ cardApp.appList.length }}</div>
         </div>
         <div class="card-content" ref="scrollContainer">
             <div 

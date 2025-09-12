@@ -37,7 +37,7 @@
     box-shadow: shadow(m);
 
     @include c-t {
-        background-color: color(c-g);
+        background-color: color(c-g0);
     }
 
     padding: 20px;
@@ -93,6 +93,9 @@
                 .app-name {
                     font-size: 20px;
                     font-weight: 550;
+                    @include c-t{
+                        color: color(c-g9);
+                    }
                 }
 
                 .app-official {

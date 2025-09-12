@@ -8,7 +8,7 @@
     transition: all 0.3s ease;
 
     @include c-t {
-        background: color(c-g);
+        background: color(c-g0,0.7);
         border: 1px solid color(c-g2);
     }
 
@@ -25,27 +25,35 @@
         @include flex(c, s-b);
 
         @include c-t {
-            @include gradient-color(c-g, c-g0, to right);
+            background-color: color(c-p-lighter, 0.2);
             border-bottom: 1px solid color(c-g1);
         }
 
         .header-content {
             position: relative;
+            @include flex(c,c);
+            gap: 5px;
+            .iconfont{
+                font-size: 25px;
+                @include c-t{
+                    color: color(c-p-light);
+                }
+            }
 
             .card-title {
                 margin: 0;
-                font-size: 18px;
+                font-size: 20px;
                 font-weight: 700;
                 letter-spacing: -0.02em;
 
                 @include c-t {
-                    color: color(c-g9);
+                    color: color(c-p-lighter);
                 }
             }
 
             .title-underline {
-                @include p-a(b06,l0);
-                @include wh(32,3);
+                @include p-a(b06, l0);
+                @include wh(32, 3);
                 border-radius: 2px;
             }
         }

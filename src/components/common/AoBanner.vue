@@ -30,6 +30,7 @@ import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import img1 from '@/assets/1.png'
 import img2 from '@/assets/2.png'
 import img3 from '@/assets/3.png'
+import img4 from '@/assets/4.png'
 
 const carouselInnerRef = ref(null)
 const currentIndex = ref(1)
@@ -52,15 +53,7 @@ const carouselList = ref([
     },
     {
         to: '',
-        img: img1
-    },
-    {
-        to: '',
-        img: img2
-    },
-    {
-        to: '',
-        img: img3
+        img: img4
     }
 ])
 

@@ -76,7 +76,7 @@ onMounted(() => {
         padding: 0 15px;
 
         @include c-t {
-            background-color: color(c-p-lighter, 0.5);
+            background-color: color(c-g3, 0.5);
             @include b-r($b-r, $b-r, 0, 0);
         }
     }
