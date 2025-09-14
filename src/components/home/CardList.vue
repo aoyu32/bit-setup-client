@@ -1,37 +1,30 @@
 <template>
     <div class="card-list">
-        <div class="card-header">
+        <div class="card-header" :class="color">
             <div class="header-content">
-                <div class="card-icon"><i :class="['iconfont',cardApp.icon]"></i></div>
-                <h3 class="card-title">{{ cardApp.label }}</h3>
+                <div class="card-icon"><i :class="['iconfont', icon]" :style="{ color: icon.color }"></i></div>
+                <h3 class="card-title">{{ title }}</h3>
                 <div class="title-underline"></div>
             </div>
-            <div class="item-badge">TOP {{ cardApp.appList.length }}</div>
+            <div class="item-badge">TOP {{ data.length }}</div>
         </div>
-        <div class="card-content" ref="scrollContainer">
-            <div 
-                class="list-item" 
-                v-for="(item, index) in cardApp.appList" 
-                :key="index"
-                @click="handleItemClick(item)"
-            >
-                <div class="item-left">
-                    <div class="item-avatar">
-                        <img :src="item.img" :alt="item.name" />
-                        <div class="avatar-ring"></div>
-                    </div>
-                    <div class="item-content">
-                        <div class="item-title">{{ item.name }}</div>
-                        <div class="item-subtitle">{{ item.bio }}</div>
+        <div class="card-content" :class="bg" ref="scrollContainer">
+            <div class="list" v-if="data">
+                <div class="list-item" v-for="app in data" :key="app.id" @click="handleItemClick(app)">
+                    <div class="item-left">
+                        <div class="item-avatar">
+                            <img :src="app.iconUrl" :alt="app.appName" />
+                            <div class="avatar-ring"></div>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-title">{{ app.appName }}</div>
+                            <div class="item-subtitle">{{ app.brief }}</div>
+                        </div>
                     </div>
                 </div>
-                <div class="item-right">
-                    <div class="item-arrow">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 18l6-6-6-6"/>
-                        </svg>
-                    </div>
-                </div>
+            </div>
+            <div class="empty" v-else>
+                <p>暂无应用</p>
             </div>
         </div>
     </div>
@@ -41,22 +34,44 @@
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-const props = defineProps(['cardApp'])
+const props = defineProps({
+    data: {
+        type: Array,
+        default: []
+    },
+    icon: {
+        type: String,
+        default: 'icon-asset-monitor'
+    },
+    title: {
+        type: String,
+        default: '标题'
+    },
+    color: {
+        type: String,
+        default: 'color1'
+    },
+    bg: {
+        type: String,
+        default: 'a'
+    }
+
+})
+
+
 const scrollContainer = ref(null)
 const router = useRouter()
+
 const handleItemClick = (item) => {
     console.log('点击了应用:', item.name);
     router.push('/detail')
-    
+
 }
 
 onMounted(() => {
-    console.log(props.cardApp);
-    console.log(props.cardApp.appList);
-    
     // 确保滚动对齐到完整项目
     if (scrollContainer.value) {
-        const itemHeight = 72; // 每个项目的固定高度
+        const itemHeight = 82; // 每个项目的固定高度
         scrollContainer.value.addEventListener('scroll', () => {
             const scrollTop = scrollContainer.value.scrollTop;
             const remainder = scrollTop % itemHeight;
@@ -77,5 +92,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
- @use '@/assets/styles/home/_card-list.scss' as *;
+@use '@/assets/styles/home/_card-list.scss' as *;
 </style>

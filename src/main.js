@@ -5,9 +5,12 @@ import router from './router'
 import 'bytemd/dist/index.css';
 import { registerAnimateDirective } from './utils/gsap-animate';
 import clickOutside from './directives/click-outside';
+import { createPinia } from 'pinia';
+const pinia = createPinia()
 const app = createApp(App)
 app.directive('click-out', clickOutside);
 registerAnimateDirective(app)
 app.use(router)
+app.use(pinia)
 app.mount('#app')
 

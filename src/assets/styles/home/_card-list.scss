@@ -6,9 +6,10 @@
     overflow: hidden;
     box-shadow: shadow(s);
     transition: all 0.3s ease;
+    position: relative;
 
     @include c-t {
-        background: color(c-g0,0.7);
+        background: color(c-g0, 0.7);
         border: 1px solid color(c-g2);
     }
 
@@ -20,24 +21,47 @@
         }
     }
 
+    .color1 {
+        @include c-t {
+            background-color: color(success, 0.2);
+            border-bottom: 1px solid color(c-g1);
+            color: color(success);
+        }
+
+    }
+
+    .color2 {
+        @include c-t {
+            background-color: color(info, 0.2);
+            border-bottom: 1px solid color(c-g1);
+            color: color(info);
+        }
+
+    }
+
+    .color3 {
+        @include c-t {
+            background-color: color(warning, 0.2);
+            border-bottom: 1px solid color(c-g1);
+            color: color(warning);
+        }
+    }
+
+
+
     .card-header {
         padding: 22px 26px 18px;
         @include flex(c, s-b);
 
-        @include c-t {
-            background-color: color(c-p-lighter, 0.2);
-            border-bottom: 1px solid color(c-g1);
-        }
+
 
         .header-content {
             position: relative;
-            @include flex(c,c);
+            @include flex(c, c);
             gap: 5px;
-            .iconfont{
+
+            .iconfont {
                 font-size: 25px;
-                @include c-t{
-                    color: color(c-p-light);
-                }
             }
 
             .card-title {
@@ -46,9 +70,7 @@
                 font-weight: 700;
                 letter-spacing: -0.02em;
 
-                @include c-t {
-                    color: color(c-p-lighter);
-                }
+
             }
 
             .title-underline {
@@ -75,45 +97,64 @@
     }
 
     .card-content {
-        height: 432px; // 6个完整项目 (72px * 6)
+        height: 420px;
         overflow-y: auto;
         scroll-behavior: smooth;
+
+        .empty {
+            @include wh;
+            @include flex(c, c);
+            font-size: 20px;
+            font-weight: 550;
+
+            @include c-t {
+                color: color(c-g9, 0.5);
+            }
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            @include wh(120px);
+            border-radius: 50%;
+            left: -60px;
+            top: 100px;
+            z-index: 0;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            @include wh(60px);
+            border-radius: 50%;
+            right: 0px;
+            bottom: -30px;
+            z-index: 0;
+        }
 
         .list-item {
             height: 72px;
             @include flex(c, s-b);
-            padding: 0 26px;
+            padding: 0 20px;
+            box-shadow: shadow(m);
+            margin: 10px;
+            @include b-r($b-r);
             cursor: pointer;
             transition: all 0.2s ease;
-            border-bottom: 1px solid transparent;
             position: relative;
+            z-index: 200;
 
-            &:not(:last-child) {
-                @include c-t {
-                    border-bottom-color: color(c-g0);
-                }
-            }
 
-            &::before {
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 0;
-                height: 32px;
-                border-radius: 0 4px 4px 0;
-                transition: width 0.2s ease;
-
-                @include c-t {
-                    @include gradient-color(c-p, c-p-light, 135deg);
-                }
+            @include c-t {
+                border: 1px solid color(c-g);
+                background-color: color(c-g1, 0.7);
             }
 
             &:hover {
+                box-shadow: shadow(m);
+
                 @include c-t {
-                    background: color(c-p, 0.02);
-                    border-bottom-color: color(c-p, 0.1);
+                    background: color(c-g2);
                 }
 
                 &::before {
@@ -162,10 +203,6 @@
                     overflow: hidden;
                     flex-shrink: 0;
                     margin-right: 16px;
-
-                    @include c-t {
-                        background: color(c-g0);
-                    }
 
                     img {
                         @include wh(100p);
@@ -240,17 +277,46 @@
                 }
             }
         }
+    }
 
-        /* 空状态 */
-        &:empty::after {
-            content: '暂无应用';
-            @include flex(c, c);
-            height: 200px;
-            font-size: 15px;
-            font-weight: 500;
-
+    .a {
+        &::before {
             @include c-t {
-                color: color(c-g4);
+                background-color: color(info, 0.5);
+            }
+        }
+
+        &::after {
+            @include c-t {
+                background-color: color(info, 0.7);
+            }
+        }
+    }
+
+    .b {
+        &::before {
+            @include c-t {
+                background-color: color(warning, 0.5);
+            }
+        }
+
+        &::after {
+            @include c-t {
+                background-color: color(warning, 0.5);
+            }
+        }
+    }
+
+    .c {
+        &::before {
+            @include c-t {
+                background-color: color(success, 0.7);
+            }
+        }
+
+        &::after {
+            @include c-t {
+                background-color: color(success, 0.7);
             }
         }
     }
