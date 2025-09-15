@@ -147,7 +147,7 @@ watch(() => props.currentPageNum, (newValue) => {
 
   .page-button {
     button {
-      @include wh(25);
+      @include wh(35);
       @include b-r(3);
       @include flex(c, c);
       transition: all 0.3s ease-out;
@@ -157,14 +157,14 @@ watch(() => props.currentPageNum, (newValue) => {
 
       @include c-t {
         color: color(c-g);
-        background-color: color(c-g1);
+        background-color: color(c-s-lighter);
       }
 
       &:hover {
 
         @include c-t {
           color: color(c-g);
-          background-color: color(c-s-lighter);
+          background-color: color(c-s-light);
         }
       }
 
@@ -177,9 +177,9 @@ watch(() => props.currentPageNum, (newValue) => {
 
     .page-num-item {
       cursor: pointer;
-      @include wh(25);
+      @include wh(35);
       @include flex(c, c);
-      font-size: 11px;
+      font-size: 14px;
       @include b-r(3);
 
       @include c-t {
@@ -194,7 +194,7 @@ watch(() => props.currentPageNum, (newValue) => {
 
     .active {
       @include c-t {
-        color: color(c-s-light);
+        color: color(c-g);
         background-color: color(c-p-lighter);
       }
     }

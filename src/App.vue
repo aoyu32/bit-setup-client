@@ -44,10 +44,12 @@ const getTheme = () => {
     @include flex(c, c);
     background-color: color(c-g9, 0.9);
     top: 0;
+    z-index: 1000;
     bottom: 0;
 }
 
 .control-panel-container {
     @include wh(400px, n);
+    margin-bottom: 5%;
 }
 </style>

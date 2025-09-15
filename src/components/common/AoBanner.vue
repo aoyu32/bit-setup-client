@@ -188,7 +188,7 @@ const handleToNext = () => {
 
             .iconfont {
                 @include c-t {
-                    color: color(c-g);
+                    color: color(c-g1);
                 }
 
                 font-size: 20px;
@@ -208,12 +208,38 @@ const handleToNext = () => {
             left: 0;
             top: 0;
             opacity: 0;
+
+            &::before {
+                content: "";
+                @include wh(30px);
+                border-radius: 50%;
+                z-index: 0;
+
+                @include c-t {
+                    background-color: color(c-g5, 0.2);
+                }
+
+                @include p-a;
+            }
         }
 
         .next {
             right: 0;
             top: 0;
             opacity: 0;
+
+            &::before {
+                content: "";
+                @include wh(30px);
+                border-radius: 50%;
+                z-index: 0;
+
+                @include c-t {
+                    background-color: color(c-g5, 0.2);
+                }
+
+                @include p-a;
+            }
         }
 
         &:hover .carousel-control {

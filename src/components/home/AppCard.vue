@@ -11,38 +11,35 @@
             </div>
             <div class="mark-wrapper left-mark">
                 <div class="app-mark">
-                    <span>10A币</span>
+                    <span>{{ app.pointsRequired === 0 ? '免费下载' : `${app.pointsRequired}A币` }}</span>
                 </div>
-                <div class="app-mark">
-                    <span>免费</span>
+                <div class="app-mark" v-if="app.isNew">
+                    <span>最新</span>
                 </div>
             </div>
             <div class="mark-wrapper right-mark">
-                <div class="app-mark">
-                    <span>最新</span>
+                <div class="app-mark" v-if="app.isPersonalDevelop">
+                    <span>个人开发</span>
                 </div>
-                <div class="app-mark">
-                    <span>独立开发</span>
-                </div>
-                <div class="app-mark">
-                    <span>自动安装</span>
+                <div class="app-mark" v-if="app.isCracked">
+                    <span>已绿色</span>
                 </div>
             </div>
             <div class="card-top">
                 <div class="app-img">
-                    <img :src="app.img" alt="Chrome">
+                    <img :src="app.iconUrl" alt="Chrome">
                 </div>
             </div>
             <div class="card-bottom">
                 <div class="app-name">
-                    <span>{{ app.name }}</span>
+                    <span>{{ app.appName }}</span>
                 </div>
                 <div class="app-category">
                     <span>{{ app.category }}</span>
                 </div>
                 <div class="app-download">
                     <span><i class="iconfont icon-download"></i></span>
-                    <span>{{ app.downloads }}</span>
+                    <span>{{ appDownloadCount }}次下载</span>
                 </div>
             </div>
         </div>
@@ -60,7 +57,7 @@
             </div>
             <div class="card-top">
                 <div class="app-bio">
-                    <p>{{ app.bio }}</p>
+                    <p>{{ app.brief }}</p>
                 </div>
             </div>
             <div class="card-bottom">
@@ -100,6 +97,10 @@ const handleDrawClick = (e) => {
         cardSide.value = 'front'
     }
 }
+
+const appDownloadCount = computed(() => {
+    return props.app.downloadCount + Math.floor(Math.random() * 100) + 1 * 20
+})
 
 const handleMouseMove = (e) => {
     isShowCardDraw.value = true

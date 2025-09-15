@@ -3,7 +3,7 @@
 .control-panel {
     @include wh(100p);
     @include flex(c, s-b, c);
-    box-shadow: shadow(l);
+    // box-shadow: shadow(m);
     @include b-r($b-r);
     padding: 15px;
 
@@ -18,6 +18,7 @@
         border-radius: 6px 6px 0px 0px;
         font-size: 14px;
         font-weight: 600;
+        margin-bottom: 2px;
 
         @include c-t {
             // border: 1px solid adjust-color(c-g1, 15%);
@@ -52,6 +53,10 @@
 
         @include c-t {
             // background-color: color(c-g, 0.3);
+        }
+
+        .title{
+            padding-top: 0;
         }
 
         .actions-wrapper {

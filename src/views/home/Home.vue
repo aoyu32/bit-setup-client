@@ -23,11 +23,16 @@
         </div>
         <div class="home-bottom">
             <div class="list-label">
-                <span><i class="iconfont icon-shendusikao"></i></span>
-                <h3>发现APP</h3>
+                <div class="label-left">
+                    <span><i class="iconfont icon-shendusikao"></i></span>
+                    <h3>发现APP</h3>
+                </div>
+                <div class="label-right">
+                    <span>加载模式</span>
+                </div>
             </div>
             <div class="app-list-container">
-                <component :is="AppList" />
+                <AppList ref="appListRef" :list="homeStore.appList" @loadMore="handleLoadMore" />
             </div>
         </div>
     </div>
@@ -39,20 +44,42 @@ import ControlPanel from '@/components/home/ControlPanel.vue';
 import AppList from '@/components/home/AppList.vue';
 import AppPage from '@/components/home/AppPage.vue';
 import CardList from '@/components/home/CardList.vue';
-import cardAppList from '../../utils/data';
 import { useHomeStore } from '@/stores/home';
 
 const homeStore = useHomeStore()
+const appListRef = ref(null)
+
+// 处理加载更多
+const handleLoadMore = async () => {
+    try {
+        const newData = await homeStore.loadMoreAppList()
+
+        // 设置加载完成状态
+        if (appListRef.value) {
+            appListRef.value.setLoading(false)
+
+            // 如果没有更多数据，设置状态
+            if (!homeStore.hasMoreData) {
+                appListRef.value.setNoMoreData(true)
+            }
+        }
+    } catch (error) {
+        console.error('加载更多失败:', error)
+        if (appListRef.value) {
+            appListRef.value.setLoading(false)
+        }
+    }
+}
 
 //请求
 onMounted(() => {
     homeStore.fetchHotList()
     homeStore.fetchRecommendList()
     homeStore.fetchMustHaveList()
+    if (homeStore.appList.length === 0) {
+        homeStore.fetchAppList(1, 20) // 首次加载20条数据
+    }
 })
-
-
-
 </script>
 <style lang="scss" scoped>
 @use '@/assets/styles/home/home.scss' as *;

@@ -22,20 +22,29 @@
 
             </div>
             <div class="app-page-container">
-                <AppList />
+                <AppPage :list="homeStore.appList" @page-change="handlePageChange"/>
             </div>
         </div>
     </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import AppList from '@/components/home/AppList.vue';
 import CategoryOption from '@/components/category/CategoryOption.vue';
 import AoSwitch from '@/components/common/AoSwitch.vue';
+import AppPage from '../../components/home/AppPage.vue';
+import { useHomeStore } from '../../stores/home';
+const homeStore = useHomeStore()
 const appCount = ref(100)
 
 const sortOption = ref(['评分', '下载量', '上传日期', '名称', '随机'])
+onMounted(() => {
+    homeStore.fetchAppList(1, 20)
+})
 
+const handlePageChange = (pageNum)=>{
+    homeStore.fetchAppList(pageNum,20)
+}
 </script>
 <style lang="scss" scoped>
 .category {
@@ -61,7 +70,7 @@ const sortOption = ref(['评分', '下载量', '上传日期', '名称', '随机
                 @include flex(c, c);
 
                 ul {
-                    @include flex(c,c);
+                    @include flex(c, c);
                     gap: 10px;
 
                     li {

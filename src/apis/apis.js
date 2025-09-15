@@ -12,6 +12,15 @@ export const appApi = {
 
     getMustHaveList() {
         return service.get("/app/must")
+    },
+
+    getPageList(pageNum, pageSize) {
+        return service.get("/app/page", {
+            params: {
+                pageNum: pageNum,
+                pageSize: pageSize
+            }
+        })
     }
 
 

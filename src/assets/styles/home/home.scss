@@ -34,31 +34,46 @@
 
     .home-bottom {
         width: 100%;
-        padding: 10px 0;
-        margin-bottom: 20px;
 
         .list-label {
-            width: 100%;
-            @include flex(c, l);
-            padding: 20px 0;
+            @include flex(c, s-b);
+            padding: 10px;
+            margin: 25px 0;
             gap: 5px;
+            @include b-r($b-r);
 
             @include c-t {
-                color: color(c-s);
+                color: color(c-g9, 0.5);
+                background-color: color(c-g2, 0.5);
             }
 
-            span {
-                @include flex(c, c);
+        }
 
+        .label-left {
+            @include flex(c, c);
+            gap: 7px;
+            font-size: 17px;
+
+            span {
+                @include flex(c,c);
                 .iconfont {
                     font-size: 24px
                 }
             }
         }
 
+        .label-right{
+            font-size: 13px;
+            @include c-t{
+                color: color(c-g9,0.3);
+            }
+        }
+
         .app-list-container {
             width: 100%;
         }
+
+
     }
 }
 

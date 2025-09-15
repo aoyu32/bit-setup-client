@@ -1,9 +1,49 @@
 <template>
     <div class="app-page">
-        
+        <div class="list-wrapper">
+            <AppCard v-for="app in list" :key="app.id" :app="app" />
+        </div>
+        <div class="pagination">
+            <!-- <AoVPage/> -->
+            <AoPagination :current-page-num="currentPageNum" :page-size="20" :max-page-num="4" :total="65"
+                @page-change="handlePageChange" />
+        </div>
     </div>
 </template>
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import AppCard from './AppCard.vue';
+import AoLoadding from '../../components/common/AoLoadding.vue';
+import AoVPage from '../common/AoVPage.vue';
+import AoPagination from '../common/AoPagination.vue';
+const currentPageNum = ref(1)
 
+const props = defineProps({
+    list: {
+        type: Array,
+        default: []
+    }
+})
+const emit = defineEmits(["page-change"])
+const handlePageChange = (item) => {
+    currentPageNum.value = item
+    emit("page-change", currentPageNum.value)
+}
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.app-list {
+    @include wh;
+    @include flex(c, c, c);
+    gap: 50px;
+}
+
+.list-wrapper {
+    @include wh;
+    @include grid(auto-fill, minmax(200px, 1fr), 70px);
+}
+
+.pagination {
+    @include wh(100p, 100px);
+    margin: 20px 0;
+}
+</style>
