@@ -19,6 +19,11 @@
         font-size: 14px;
         font-weight: 550;
         padding: 5px 0;
+
+        @include c-t {
+            color: color(c-g9, 0.7);
+        }
+
         @include flex(t, l);
     }
 
@@ -26,9 +31,10 @@
     .option-item {
         @include wh;
         flex: 1;
+        font-size: 14px;
 
         @include c-t {
-            color: color(c-g10,0.6);
+            color: color(c-g10, 0.6);
         }
 
         ul {
@@ -37,15 +43,55 @@
             flex-wrap: wrap;
 
             li {
+                position: relative;
                 padding: 5px;
                 white-space: nowrap;
                 margin-right: 20px;
+                @include b-r($b-r);
+
+                &.active {
+                    @include c-t {
+                        color: color(c-p-lighter);
+                    }
+                }
+
 
                 &:hover {
                     @include c-t {
-                        background-color: color(c-p-lighter);
+                        color: color(c-p-lighter);
                     }
                 }
+            }
+        }
+    }
+
+    .option-item {
+        li {
+
+            &::after {
+                content: attr(data-tooltip);
+                position: absolute;
+                bottom: 125%; // 上方显示
+                left: 50%;
+                transform: translateX(-50%);
+
+                @include c-t {
+                    background-color: color(c-g9, 0.6);
+                    color: color(c-g);
+                }
+
+                padding: 5px 8px;
+                border-radius: 4px;
+                white-space: nowrap;
+                font-size: 12px;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s ease-in-out;
+                z-index: 1000;
+            }
+
+            &:hover::after {
+                opacity: 1;
             }
         }
     }
@@ -53,11 +99,34 @@
     // 分类
     .category-wrapper {
         @include wh(100p, n);
+        @include flex(n, n, c);
+
+        @include c-t {}
+
+        gap: 10px;
 
         .father-category,
         .child-category {
             @include wh;
             @include flex(l, c);
+        }
+
+        .category-item {
+            @include wh;
+            @include b-r(3);
+
+            @include c-t {
+                background-color: color(c-g2);
+            }
+        }
+
+        .child-category {
+            .category-item {
+                @include c-t {
+                    background-color: color(c-g3);
+                    color: color(c-g);
+                }
+            }
         }
     }
 
@@ -65,5 +134,14 @@
     .option-wrapper {
         @include wh(100p, n);
         @include flex(l, c);
+    }
+
+    .option-label {
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .option-item {
+        font-size: 13px;
     }
 }

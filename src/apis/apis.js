@@ -23,6 +23,21 @@ export const appApi = {
         })
     }
 
+}
 
 
+export const categoryApi = {
+    getFather(param = 1) {
+        return service.get(`/category/level/${param}`)
+    },
+    getChild(param) {
+        return service.get('/category/sub', {
+            params: {
+                categoryId: param
+            }
+        })
+    },
+    getAppByFilter(param) {
+        return service.post('/category/filter', param)
+    }
 }
