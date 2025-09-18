@@ -5,8 +5,17 @@
                 <div class="input-left">
                     <slot name="left"></slot>
                 </div>
-                <input type="text" :value="modelValue" @focus="handleFocus" @blur="handleBlur"
-                    @keyup.enter="handleSearch" placeholder="请输入搜索内容" ref="inputRef" @input="handleInput($event)" />
+                <input 
+                    type="text" 
+                    :value="modelValue" 
+                    @focus="handleFocus" 
+                    @blur="handleBlur"
+                    @keyup.enter="handleSearch" 
+                    @keydown="handleKeydown"
+                    placeholder="请输入搜索内容" 
+                    ref="inputRef" 
+                    @input="handleInput($event)" 
+                />
                 <div class="clear">
                     <slot name="clear" :onClear="handleClearInput" v-if="modelValue !== ''">
                         <div class="clear-input" @mousedown.prevent @click="handleClearInput">
@@ -21,7 +30,6 @@
                         </div>
                     </slot>
                 </div>
-
             </div>
 
             <!-- 搜索历史/建议面板 -->
@@ -32,16 +40,21 @@
                         <div class="history-label">
                             <span>搜索历史</span>
                         </div>
-                        <div class="history-clear">
+                        <div class="history-clear" @click="clearAllHistory">
                             <span>清空</span>
                             <span><i class="iconfont icon-qingchu"></i></span>
                         </div>
                     </div>
                     <div class="history-main">
                         <div class="search-history-items" v-if="history.length > 0">
-                            <div class="search-history-item" v-for="(item, index) in history" :key="index">
+                            <div 
+                                class="search-history-item" 
+                                v-for="(item, index) in history" 
+                                :key="index"
+                                @click="selectSuggestion(item)"
+                            >
                                 <span>{{ item }}</span>
-                                <div class="delete-icon">
+                                <div class="delete-icon" @click.stop="deleteHistoryItem(index)">
                                     <i class="iconfont icon-close"></i>
                                 </div>
                             </div>
@@ -54,22 +67,32 @@
                 </div>
 
                 <!-- 搜索建议 -->
-                <div class="search-suggestion" v-else>
+                <div class="search-suggestion" v-if="!isShowHistory && suggestion.length !== 0">
                     <ul>
-                        <li v-for="(item, index) in suggestion" :key="index">{{ item }}</li>
+                        <li 
+                            v-for="(item, index) in suggestion" 
+                            :key="index"
+                            :class="{ 'selected': index === selectedIndex }"
+                            @click="selectSuggestion(item)"
+                            @mouseover="selectedIndex = index"
+                        >
+                            <span v-html="highlightKeyword(item)"></span>
+                        </li>
                     </ul>
-
                 </div>
             </div>
         </div>
     </div>
 </template>
+
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
+
 const emit = defineEmits(['update:modelValue', 'clear', 'search'])
 const inputRef = ref(null)
 const isShowPanel = ref(false)
 const isShowHistory = ref(true)
+const selectedIndex = ref(-1)
 
 const props = defineProps({
     modelValue: {
@@ -82,11 +105,17 @@ const props = defineProps({
     },
     history: {
         type: Array,
-        default: []
+        default: () => []
     }
 })
 
-
+// 高亮关键字
+const highlightKeyword = (item) => {
+    if (!props.modelValue.trim()) return item;
+    const keyword = props.modelValue.trim();
+    const regex = new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return item.replace(regex, '<mark class="highlight">$1</mark>');
+}
 
 // 处理聚焦
 const handleFocus = () => {
@@ -96,23 +125,82 @@ const handleFocus = () => {
     } else {
         isShowHistory.value = false
     }
+    selectedIndex.value = -1
 }
 
+// 处理键盘事件
+const handleKeydown = (e) => {
+    if (!isShowPanel.value || isShowHistory.value || !props.suggestion.length) return
 
+    if (e.key === 'ArrowDown') {
+        e.preventDefault()
+        if (selectedIndex.value >= props.suggestion.length - 1) {
+            selectedIndex.value = 0 // 最后一个循环到第一个
+        } else {
+            selectedIndex.value += 1
+        }
+        updateInputDisplay()
+    } else if (e.key === 'ArrowUp') {
+        e.preventDefault()
+        if (selectedIndex.value <= 0) {
+            selectedIndex.value = props.suggestion.length - 1 // 第一个循环到最后一个
+        } else {
+            selectedIndex.value -= 1
+        }
+        updateInputDisplay()
+    } else if (e.key === 'Enter') {
+        if (selectedIndex.value >= 0) {
+            e.preventDefault()
+            selectSuggestion(props.suggestion[selectedIndex.value])
+        }
+    }
+}
+
+// 更新输入框显示值（不触发双向绑定）
+const updateInputDisplay = () => {
+    if (selectedIndex.value >= 0 && selectedIndex.value < props.suggestion.length) {
+        inputRef.value.value = props.suggestion[selectedIndex.value]
+    } else {
+        inputRef.value.value = props.modelValue
+    }
+}
+
+// 选择建议
+const selectSuggestion = (item) => {
+    emit('update:modelValue', item)
+    inputRef.value.value = item
+    inputRef.value.focus()
+    handleSearch()
+}
+
+// 清空所有历史
+const clearAllHistory = () => {
+    console.log('清空历史')
+}
+
+// 删除单个历史项
+const deleteHistoryItem = (index) => {
+    console.log('删除历史项', index)
+}
 
 const handleClearInput = () => {
     inputRef.value.focus()
     emit('clear')
+    selectedIndex.value = -1
 }
 
 const handleInput = (e) => {
     emit('update:modelValue', e.target.value)
+    selectedIndex.value = -1
 }
-
 
 // 处理失去焦点
 const handleBlur = () => {
-    isShowPanel.value = false
+    setTimeout(() => {
+        isShowPanel.value = false
+        selectedIndex.value = -1
+        inputRef.value.value = props.modelValue
+    }, 200)
 }
 
 // 处理搜索
@@ -129,9 +217,11 @@ watch(() => props.modelValue, (newValue) => {
     } else {
         isShowHistory.value = false
     }
+    selectedIndex.value = -1
+    inputRef.value.value = newValue
 })
-
 </script>
+
 <style lang="scss" scoped>
 .ao-search {
     width: 100%;
@@ -203,7 +293,6 @@ watch(() => props.modelValue, (newValue) => {
                         }
                     }
                 }
-
             }
 
             .search-icon {
@@ -240,13 +329,10 @@ watch(() => props.modelValue, (newValue) => {
                 background-color: color(c-g);
             }
 
-
             .search-history {
                 @include wh;
                 padding: 15px 20px;
                 @include flex(n, n, c);
-
-
             }
 
             .history-header {
@@ -283,11 +369,9 @@ watch(() => props.modelValue, (newValue) => {
 
                     .iconfont {
                         font-size: 15px;
-
                     }
                 }
             }
-
 
             .history-main {
                 @include wh;
@@ -325,8 +409,8 @@ watch(() => props.modelValue, (newValue) => {
 
                         .delete-icon {
                             position: absolute;
-                            top: -6px; // 向上微调，可根据需要调整
-                            right: -6px; // 向右微调，可根据需要调整
+                            top: -6px;
+                            right: -6px;
                             width: 15px;
                             height: 15px;
                             @include flex(c, c);
@@ -336,7 +420,6 @@ watch(() => props.modelValue, (newValue) => {
 
                             @include c-t {
                                 background-color: color(c-g7, 0.2);
-
                             }
 
                             &:hover {
@@ -357,8 +440,6 @@ watch(() => props.modelValue, (newValue) => {
                                     color: color(c-g5);
                                 }
                             }
-
-
                         }
                     }
                 }
@@ -379,7 +460,6 @@ watch(() => props.modelValue, (newValue) => {
                 }
             }
 
-
             .search-suggestion {
                 @include wh;
                 font-size: 13px;
@@ -397,7 +477,14 @@ watch(() => props.modelValue, (newValue) => {
                         padding: 10px;
                         @include b-r($b-r);
                         transition: all 0.2s ease-out;
+                        cursor: pointer;
 
+                        &.selected {
+                            @include c-t {
+                                background-color: color(c-s-lightest);
+                                color: color(c-s-lighter);
+                            }
+                        }
 
                         &:hover {
                             @include c-t {
@@ -406,19 +493,16 @@ watch(() => props.modelValue, (newValue) => {
                             }
                         }
 
+                        .highlight {
+                            background-color: color(c-s-lighter);
+                            color: color(c-s);
+                            padding: 2px 4px;
+                            border-radius: 3px;
+                            font-weight: 500;
+                        }
                     }
-
-
                 }
-
             }
-
-
-
-
-
-
-
         }
     }
 }

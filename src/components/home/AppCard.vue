@@ -1,7 +1,7 @@
 <template>
     <div class="app-card" @mousemove="handleMouseMove" @mouseleave="handleMouseLeave" ref="appCardRef">
-        <router-link to="/detail" class="link-bottom" :class="{ 'left-link': isDraw }"></router-link>
-        <router-link to="/detail" class="link-top" :class="{ 'left-link': isDraw }"></router-link>
+        <router-link :to="`/detail/${app.id}`"  target="_blank" class="link-bottom" :class="{ 'left-link': isDraw }"></router-link>
+        <router-link :to="`/detail/${app.id}`"  target="_blank" class="link-top" :class="{ 'left-link': isDraw }"></router-link>
         <div id="card-content-front" class="card-content" :class="{ 'is-flipped': isDraw }" v-if="cardSide === 'front'">
             <div class="card-draw" v-if="isShowCardDraw" @mouseenter="handleDrawMouseEnter"
                 @mouseleave="handleDrawMouseLeave" @click="handleDrawClick">
@@ -78,10 +78,10 @@ const appCardRef = ref(null)
 const cardContentRef = ref(null)
 
 const isShowCardDraw = ref(false)
-const isHoveringDraw = ref(false) // 新增：标记是否悬浮在card-draw上
+const isHoveringDraw = ref(false) 
 const isDraw = ref(false)
 const cardSide = ref('front')
-
+const emit = defineEmits(['app-click'])
 const handleDrawClick = (e) => {
     // 阻止事件冒泡，防止触发卡片点击
     e.stopPropagation()
@@ -96,6 +96,7 @@ const handleDrawClick = (e) => {
         appCardRef.value.style.transform = 'rotateY(0deg)'
         cardSide.value = 'front'
     }
+
 }
 
 const appDownloadCount = computed(() => {

@@ -17,7 +17,7 @@
                         <!-- <li v-for="(item, index) in sortOption" :key="index">{{ item }}</li> -->
                         <li style="font-size: 14px;">
                             <!-- <AoSwitch /> -->
-                            <span>第 {{ currentPageNum}} 页，</span>
+                            <span>第 {{ currentPageNum }} 页，</span>
                             <span>共 {{ categoryStore.appData.pages }} 页</span>
                         </li>
                     </ul>
@@ -56,10 +56,10 @@ onMounted(() => {
 })
 
 const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth' // 平滑滚动
-  })
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // 平滑滚动
+    })
 }
 
 const handlePageChange = (pageNum) => {
@@ -109,6 +109,7 @@ watch(() => fatherCategory.value, (newValue) => {
 
             @include c-t {
                 background-color: color(c-g);
+                color: color(c-g9);
             }
 
             @include b-r($b-r);

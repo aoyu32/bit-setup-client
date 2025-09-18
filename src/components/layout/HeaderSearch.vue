@@ -44,7 +44,7 @@
         <!-- 搜索建议 -->
         <div class="search-suggestion" v-else>
           <ul>
-            <li v-for="(item, index) in mockSuggestions">{{ item }}</li>
+            <li v-for="(item, index) in searchStore.searchTips" :key="index">{{ item }}</li>
           </ul>
 
         </div>
@@ -63,16 +63,6 @@ const searchText = ref('')
 const isShowPanel = ref(false)
 const isShowHistory = ref(true)
 
-// 模拟搜索建议数据
-const mockSuggestions = [
-  'Vue3',
-  'Vue3 教程',
-  'Vue3 组件',
-  'Vue3 源码',
-  'Vue3 实战',
-  'Vue3 组合式API',
-  'Vue3 响应式原理'
-]
 
 const searchHistory = ref([
   "vue3",
@@ -113,7 +103,6 @@ const handleClearInput = () => {
 // 处理失去焦点
 const handleBlur = () => {
   isShowPanel.value = false
-
 }
 
 // 处理搜索
@@ -131,8 +120,8 @@ const handleSearch = () => {
   window.open(route.href, '_blank');
 }
 
-watch(() => searchText.value, () => {
-  if (!searchText.value.trim()) {
+watch(() => searchText.value, (newValue) => {
+  if (!newValue.trim()) {
     isShowHistory.value = true
   } else {
     isShowHistory.value = false

@@ -58,7 +58,6 @@
                 @include img($b-r);
                 // animation: smoothBrandShadow 10s infinite ease-in-out;
                 // 初始阴影（确保无动画时仍有效果）
-                box-shadow: 0 6px 20px color(c-p, 0.3);
             }
 
             .app-rating {

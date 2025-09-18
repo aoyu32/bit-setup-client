@@ -10,7 +10,7 @@
         </div>
         <div class="card-content" :class="bg" ref="scrollContainer">
             <div class="list" v-if="data">
-                <div class="list-item" v-for="app in data" :key="app.id" @click="handleItemClick(app)">
+                <div class="list-item" v-for="app in data" :key="app.id" @click="handleItemClick(app.id)">
                     <div class="item-left">
                         <div class="item-avatar">
                             <img :src="app.iconUrl" :alt="app.appName" />
@@ -62,10 +62,9 @@ const props = defineProps({
 const scrollContainer = ref(null)
 const router = useRouter()
 
-const handleItemClick = (item) => {
-    console.log('点击了应用:', item.name);
-    router.push('/detail')
-
+const handleItemClick = (id) => {
+    const routeData = router.resolve(`/detail/${id}`)
+    window.open(routeData.href, '_blank')
 }
 
 onMounted(() => {

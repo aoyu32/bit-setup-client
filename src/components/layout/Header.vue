@@ -33,7 +33,7 @@
             </div>
             <div class="search" v-if="!isSearchPage">
                 <!-- <HeaderSearch /> -->
-                <AoSearch :suggestion="mockSuggestions" :history="searchHistory" v-model="searchValue"
+                <AoSearch :suggestion="searchStore.searchTips" :history="searchHistory" v-model="searchValue"
                     @clear="searchValue = ''" @search="handleSearch"></AoSearch>
             </div>
             <div class="search-trigger" v-if="!isSearchPage">
@@ -95,18 +95,18 @@
     </div>
 </template>
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import logoUrl from '@/assets/logo.svg'
 import vipImgUrl from '@/assets/imgs/vip.svg'
 import coinIcon from '@/assets/imgs/coin.svg'
-import HeaderSearch from '@/components/layout/HeaderSearch.vue'
 import AoSearch from '@/components/common/AoSearch.vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useSearchStore } from '@/stores/search'
 const router = useRouter()
 const route = useRoute()
 const searchValue = ref('')
 const isLogin = ref(true)
-
+const searchStore = useSearchStore()
 const userInfoMarginTop = ref('')
 onMounted(() => {
     const profileHeight = document.querySelector('.profile-container').offsetHeight
@@ -146,16 +146,12 @@ const isSearchPage = computed(() => {
     return route.path === '/search'
 })
 
-// 模拟搜索建议数据
-const mockSuggestions = [
-    'Vue3',
-    'Vue3 教程',
-    'Vue3 组件',
-    'Vue3 源码',
-    'Vue3 实战',
-    'Vue3 组合式API',
-    'Vue3 响应式原理'
-]
+watch(() => searchValue.value, (newValue) => {
+    if (!newValue) {
+        return
+    }
+    searchStore.fetchSearchTips(newValue)
+})
 
 const searchHistory = ref([
     "vue3",

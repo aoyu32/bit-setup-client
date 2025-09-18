@@ -284,6 +284,7 @@
             position: absolute;
 
             .app-mark {
+                color: color(c-g);
                 @include c-t {
                     background-color: color(c-g, 0.2);
                 }
@@ -323,8 +324,8 @@
             font-size: 12px;
             padding: 2px 0;
 
+            color: color(c-g);
             @include c-t {
-                color: color(c-g);
                 background: color(error);
             }
 
@@ -361,9 +362,7 @@
                 text-align: center;
                 transform: scaleX(-1);
 
-                @include c-t {
-                    color: color(c-g, 0.9);
-                }
+                color: color(c-g);
             }
 
             &::before {

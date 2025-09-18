@@ -2,40 +2,40 @@
     <div class="detail">
         <div class="detail-left">
             <div class="left-top">
-                <div class="detail-card-container">
-                    <DetailCard />
+                <div class="detail-card-container" ref="infoSection">
+                    <DetailCard :data="detailStore.detailData" />
                 </div>
             </div>
             <div class="left-center">
-                <div class="banner-container">
+                <div class="banner-container" ref="screenshotSection">
                     <div class="label">
                         <h3>应用截图</h3>
                     </div>
                     <AoBanner />
                 </div>
-                <div class="intro-container">
-                    <DetailDocs docs="public/docs/app-intro.md">
+                <div class="intro-container" ref="introSection">
+                    <DetailDocs :docs="detailStore.detailData.introductionText">
                         <template #left>
                             <h3>应用介绍</h3>
                         </template>
                     </DetailDocs>
                 </div>
-                <div class="course-container">
-                    <DetailDocs docs="public/docs/app-install.md">
+                <div class="course-container" ref="installSection">
+                    <DetailDocs :docs="detailStore.detailData.installGuide">
                         <template #left>
                             <h3>安装教程</h3>
                         </template>
                     </DetailDocs>
                 </div>
-                <div class="other-version-container">
+                <div class="other-version-container" ref="versionSection">
                     <div class="label">
                         <h3>其他版本</h3>
                     </div>
-                    <OtherVersion />
+                    <OtherVersion :data="detailStore.detailData.otherVersions" :app="appInfo" />
                 </div>
             </div>
             <div class="left-bottom">
-                <div class="detail-comment-container">
+                <div class="detail-comment-container" ref="commentSection">
                     <div class="label">
                         <h3>应用评论</h3>
                     </div>
@@ -45,19 +45,20 @@
         </div>
         <div class="detail-right">
             <div class="jumper-container top-jumper" v-show="isTopVisiable" ref="topJumperRef">
-                <Jumper :jumper-items="jumperItems" />
+                <Jumper :jumper-items="jumperItems" @jump-to="handleJumpToWithCustomOffset" />
             </div>
             <div class="sidebar-container">
-                <DetailSidebar />
+                <DetailSidebar :data="sidebarData" />
             </div>
             <div class="jumper-container bottom-jumper" v-show="!isTopVisiable" ref="bottomJumperRef">
-                <Jumper :jumper-items="jumperItems" />
+                <Jumper :jumper-items="jumperItems" @jump-to="handleJumpToWithCustomOffset" />
             </div>
         </div>
     </div>
 </template>
+
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, computed, onUnmounted, nextTick } from 'vue'
 import DetailCard from '@/components/detail/DetailCard.vue';
 import AoBanner from '../../components/common/AoBanner.vue';
 import DetailDocs from '../../components/detail/DetailDocs.vue';
@@ -65,37 +66,128 @@ import OtherVersion from '../../components/detail/OtherVersion.vue';
 import Comment from '@/components/comment/Comment.vue'
 import DetailSidebar from '../../components/detail/DetailSidebar.vue';
 import Jumper from '../../components/detail/Jumper.vue';
+import { useDetailStore } from '@/stores/detail.js'
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
+const detailStore = useDetailStore()
 const isTopVisiable = ref(true)
-const isBottomVisiable = ref(true)
 const topJumperRef = ref(null)
 const bottomJumperRef = ref(null)
+
+// 添加各个区域的引用
+const infoSection = ref(null)
+const screenshotSection = ref(null)
+const introSection = ref(null)
+const installSection = ref(null)
+const versionSection = ref(null)
+const commentSection = ref(null)
+
 const jumperItems = ref([
     {
         icon: 'icon-renwu',
-        name: '信息'
+        name: '信息',
+        target: 'info'
     },
     {
         icon: 'icon-tulie',
-        name: '截图'
+        name: '截图',
+        target: 'screenshot'
     },
     {
         icon: 'icon-fapiao',
-        name: '介绍'
+        name: '介绍',
+        target: 'intro'
     },
     {
         icon: 'icon-tool',
-        name: '安装'
+        name: '安装',
+        target: 'install'
     },
     {
         icon: 'icon-file-exe',
-        name: '版本'
+        name: '版本',
+        target: 'version'
     },
     {
         icon: 'icon-pinglun',
-        name: '评论'
+        name: '评论',
+        target: 'comment'
     }
 ])
+
+// 简化版：可配置偏移量 + 缓出滚动动画
+const scrollOffsetConfig = {
+    info: 100,
+    screenshot: 100,
+    intro: 100,
+    install: 100,
+    version: 100,
+    comment: 100
+}
+
+// 缓出效果：开始快，逐渐变慢
+const easeOut = (t) => {
+    return 1 - Math.pow(1 - t, 2)
+}
+
+const handleJumpToWithCustomOffset = (target) => {
+    const sectionMap = {
+        'info': infoSection,
+        'screenshot': screenshotSection,
+        'intro': introSection,
+        'install': installSection,
+        'version': versionSection,
+        'comment': commentSection
+    }
+
+    const targetRef = sectionMap[target]
+    if (targetRef?.value) {
+        const targetElement = targetRef.value
+        const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset
+        const offset = scrollOffsetConfig[target] || 100
+        const offsetPosition = elementTop - offset
+
+        // 自定义平滑滚动
+        const startPosition = window.pageYOffset
+        const distance = offsetPosition - startPosition
+        const duration = 500 // 滚动时长
+        let start = null
+
+        const step = (timestamp) => {
+            if (!start) start = timestamp
+            const progress = Math.min((timestamp - start) / duration, 1)
+            const ease = easeOut(progress)
+
+            window.scrollTo(0, startPosition + distance * ease)
+
+            if (progress < 1) {
+                requestAnimationFrame(step)
+            }
+        }
+
+        requestAnimationFrame(step)
+    }
+}
+const sidebarData = computed(() => ({
+    related: detailStore.relatedData,
+    guess: detailStore.guessLikeData
+}))
+
+const appInfo = computed(() => {
+    return {
+        appName: detailStore.detailData.appName,
+        icon: detailStore.detailData.iconUrl,
+        points: detailStore.detailData.points
+    }
+})
+
 onMounted(() => {
+    //请求详情数据
+    detailStore.fetchAppDetail(route.params.id);
+    detailStore.fetchRelated(route.params.id)
+    detailStore.fetchGuessLike()
+
     const observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
@@ -107,17 +199,15 @@ onMounted(() => {
             });
         },
         {
-            threshold: 0.5, // 50% 进入视口时触发
+            threshold: 0.5,
         }
     );
 
     observer.observe(topJumperRef.value);
     observer.observe(bottomJumperRef.value);
 });
-
-// 3. 停止监听（需要时）
-// observer.unobserve(targetElement);
 </script>
+
 <style lang="scss" scoped>
 .detail {
     @include wh(100p, 100p);
@@ -129,11 +219,9 @@ onMounted(() => {
         @include wh(70p, 100p);
         @include flex(n, n, c);
 
-
         .left-top {
             margin: 20px 0;
         }
-
 
         .left-center {
             @include flex(n, n, c);
@@ -148,8 +236,6 @@ onMounted(() => {
                 border-bottom: 1px solid color(c-g9, 0.1);
             }
         }
-
-
 
         .banner-container {
             padding: 20px;
@@ -170,7 +256,6 @@ onMounted(() => {
             @include c-t {
                 background-color: color(c-g0);
             }
-
         }
 
         .left-bottom {
@@ -183,12 +268,10 @@ onMounted(() => {
                 margin-bottom: 0;
             }
 
-
             @include c-t {
                 background-color: color(c-g0);
             }
         }
-
     }
 
     .detail-right {
@@ -201,8 +284,6 @@ onMounted(() => {
 
         .sidebar-container {
             @include wh(100p, 100p);
-
-
         }
 
         .top-jumper {
@@ -212,11 +293,6 @@ onMounted(() => {
         .bottom-jumper {
             margin-top: 20px;
         }
-
-
-
     }
-
-
 }
 </style>

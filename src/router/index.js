@@ -54,7 +54,7 @@ const router = createRouter({
                     meta: { keepScroll: true }
                 },
                 {
-                    path: '/detail',
+                    path: '/detail/:id',
                     component: Detail,
                     meta: { keepScroll: false }
 

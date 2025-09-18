@@ -8,6 +8,8 @@ export const useCategoryStore = defineStore('category', () => {
     const fetchFaterList = (param) => {
         categoryApi.getFather(param).then(resp => {
             fatherList.value = resp.data
+            console.log(fatherList.value);
+            
         })
     }
 

@@ -62,14 +62,61 @@
             @include flex;
             gap: 20px;
 
-            a {
-                padding: 10px 15px;
-                @include b-r($b-r);
+            .direct-link {
+                font-size: 12px;
 
-                @include c-t {
-                    background-color: color(c-s-lighter);
-                    color: color(c-g);
+                a {
+                    @include flex(c, c);
+                    @include b-r($b-r);
+
+
                 }
+
+                .text {
+
+                    @include b-r($b-r, 0, 0, $b-r);
+                    padding: 8px 10px 8px 15px;
+
+                    @include c-t {
+                        background-color: color(c-s-lighter);
+                        color: color(c-g);
+                        // border-right: 1px solid color(c-p-lighter);
+                    }
+                }
+
+                .down-fee {
+                    font-size: 12px;
+                    padding: 8px 15px 8px 10px;
+                    @include flex(c, c);
+                    gap: 3px;
+                    @include b-r(0, $b-r, $b-r, 0);
+
+                    @include c-t {
+                        background-color: color(c-s-light);
+                        color: color(c-g);
+                    }
+
+                    img {
+                        @include wh(14);
+                    }
+                }
+            }
+
+            .cloud-disk-link {
+                @include flex(c, c);
+
+                a {
+                    font-size: 12px;
+                    @include b-r($b-r);
+                    padding: 8px 15px;
+
+                    @include c-t {
+                        background-color: color(c-g2);
+                        color: color(c-g9, 0.5);
+
+                    }
+                }
+
             }
         }
 

@@ -41,3 +41,26 @@ export const categoryApi = {
         return service.post('/category/filter', param)
     }
 }
+
+export const detailApi = {
+    getAppDetail(param) {
+        return service.get(`/detail/info/${param}`)
+    },
+    getRelated(param) {
+        return service.get(`/detail/related/${param}`)
+    },
+    getGuessLike() {
+        return service.get('/detail/guess')
+    }
+
+}
+
+export const searchApi = {
+    getSearchTips(param) {
+        return service.get('/search/tips', {
+            params: {
+                keyword: param
+            }
+        })
+    }
+}

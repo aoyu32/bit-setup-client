@@ -3,7 +3,7 @@
 
         <div class="sidebar-top">
             <div class="related-list">
-                <AoList :list="relatedList">
+                <AoList :list="data.related">
                     <template #title>
                         <span><i class="iconfont icon-file-exe"></i></span>
                         <span>相关推荐</span>
@@ -15,23 +15,23 @@
                         </div>
                     </template>
                     <template #item="{ item }">
-                        <div class="list-item">
+                        <div class="list-item" @click="handleAppClick(item.appId)">
                             <div class="item-left">
                                 <div class="app-icon">
-                                    <img :src="item.icon" alt="">
+                                    <img :src="item.iconUrl" alt="">
                                 </div>
                                 <div class="app-name">
-                                    {{ item.name }}
+                                    {{ item.appName }}
                                 </div>
                             </div>
                             <div class="item-right">
                                 <div class="size info">
                                     <span><i class="iconfont icon-file-zip"></i></span>
-                                    <span>{{ item.size }}</span>
+                                    <span>{{ Math.floor(item.size / 1024) }}</span>
                                 </div>
                                 <div class="download info">
                                     <span><i class="iconfont icon-download"></i></span>
-                                    <span>{{ item.download }}</span>
+                                    <span>{{ item.downloadCount }}</span>
                                 </div>
                             </div>
 
@@ -40,7 +40,7 @@
                 </AoList>
             </div>
             <div class="related-list" ref="likeListRef">
-                <AoList :list="likeList">
+                <AoList :list="data.guess">
                     <template #title>
                         <span><i class="iconfont icon-xihuan"></i></span>
                         <span>猜你喜欢</span>
@@ -49,13 +49,13 @@
                         <span>类别</span>
                     </template>
                     <template #item="{ item }">
-                        <div class="list-item">
+                        <div class="list-item" @click="handleAppClick(item.appId)">
                             <div class="item-left">
                                 <div class="app-icon">
-                                    <img :src="item.icon" alt="">
+                                    <img :src="item.iconUrl" alt="">
                                 </div>
                                 <div class="app-name">
-                                    {{ item.name }}
+                                    {{ item.appName }}
                                 </div>
                             </div>
                             <div class="item-right">
@@ -73,11 +73,22 @@
     </div>
 </template>
 <script setup>
-import { ref,onMounted,onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import AoList from '../common/AoList.vue';
-import { likeList, relatedList } from '../../utils/detail-data';
+import { useRouter } from 'vue-router';
+const router = useRouter()
 // 在你的 Vue 组件中添加
-
+const props = defineProps({
+    data: {
+        type: Object,
+        default: () => {
+            return {
+                related: [],
+                guess: []
+            }
+        }
+    }
+})
 const likeListRef = ref(null)
 
 const handleScroll = () => {
@@ -95,7 +106,14 @@ const handleScroll = () => {
     }
 }
 
+const handleAppClick = (appId) => {
+    const routeData = router.resolve(`/detail/${appId}`)
+    window.open(routeData.href, '_blank')
+}
+
 onMounted(() => {
+    console.log(props.data);
+
     window.addEventListener('scroll', handleScroll)
 })
 

@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, nextTick } from 'vue'
 
 const props = defineProps({
     father: {
@@ -117,23 +117,41 @@ const initializeDefaultValues = () => {
 // 选择的数据状态
 const selectData = ref(initializeDefaultValues())
 
-// // 计算当前选中主分类的子分类
-// const currentSubCategories = computed(() => {
-//     if (!selectData.value.category) {
-//         return []
-//     }
-//     return props.child.filter(item => item.parentId === selectData.value.category) || []
-// })
+// 监听父分类数据变化，重新初始化默认值
+watch(() => props.father, (newFather) => {
+    if (newFather && newFather.length > 0 && selectData.value.category === 0) {
+        // 设置默认选中第一个父分类
+        selectData.value.category = newFather[0].id
+        // 这会触发下面的 category watch，自动处理子分类
+    }
+}, { immediate: true, deep: true })
+
+// 监听子分类数据变化，设置默认值
+watch(() => props.child, (newChild) => {
+    if (newChild && newChild.length > 0 && selectData.value.category > 0) {
+        // 找到当前父分类下的子分类
+        const currentSubCategories = newChild.filter(item => item.parentId === selectData.value.category)
+        if (currentSubCategories.length > 0 && selectData.value.subCategory === 0) {
+            selectData.value.subCategory = currentSubCategories[0].id
+            // 延迟发送事件，确保数据完全更新
+            nextTick(() => {
+                emitFilterChange()
+            })
+        }
+    }
+}, { immediate: true, deep: true })
 
 // 监听主分类变化，自动设置子分类默认值
 watch(() => selectData.value.category, (newCategoryId) => {
-    const subCategories = props.child.filter(item => item.parentId === newCategoryId)
-    if (subCategories && subCategories.length > 0) {
-        selectData.value.subCategory = subCategories[0].id
-    } else {
-        selectData.value.subCategory = 0
+    if (newCategoryId > 0) {
+        const subCategories = props.child.filter(item => item.parentId === newCategoryId)
+        if (subCategories && subCategories.length > 0) {
+            selectData.value.subCategory = subCategories[0].id
+        } else {
+            selectData.value.subCategory = 0
+        }
+        emitFilterChange()
     }
-    emitFilterChange()
 })
 
 // 处理分类选择
@@ -211,9 +229,14 @@ defineExpose({
     selectData: selectData.value
 })
 
-// 初始化时发送默认值
+// 组件挂载时，如果数据已经存在则发送初始值
 onMounted(() => {
-    emitFilterChange()
+    // 延迟执行，确保所有数据都已经初始化
+    nextTick(() => {
+        if (props.father && props.father.length > 0) {
+            emitFilterChange()
+        }
+    })
 })
 </script>
 

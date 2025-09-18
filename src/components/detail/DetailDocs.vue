@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="detail-docs-main">
-            <AoMarkdwon :markdownFile="docs"/>
+            <AoMarkdwon :markdownData="docs"/>
         </div>
     </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <div class="search-result">
         <div class="result-wrapper" v-if="hasResult">
-            <AppList />
+            <AppList :list="homeStore.appList"/>
         </div>
         <div class="void-result-wrapper" v-else>
             <div class="no-data-img">
@@ -12,9 +12,16 @@
     </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref,onMounted } from 'vue'
 import AppList from '@/components/home/AppList.vue';
 const hasResult = ref(true)
+import { useHomeStore } from '@/stores/home.js'
+const homeStore = useHomeStore()
+onMounted(()=>{
+    homeStore.fetchAppList()
+})
+
+
 </script>
 <style lang="scss" scoped>
 @use '@/assets/styles/search/_search-result.scss' as *;
