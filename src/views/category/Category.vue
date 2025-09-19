@@ -41,7 +41,7 @@ import CategoryOption from '@/components/category/CategoryOption.vue';
 import AoSwitch from '@/components/common/AoSwitch.vue';
 import AppPage from '@/components/home/AppPage.vue';
 import { useCategoryStore } from '@/stores/category';
-import filterOptions from '@/utils/filter-options.js'
+import { filterOptions } from '@/utils/filter-options.js'
 const appCount = ref(0)
 const sortOption = ref(['评分', '下载量', '上传日期', '名称', '随机'])
 const categoryStore = useCategoryStore()

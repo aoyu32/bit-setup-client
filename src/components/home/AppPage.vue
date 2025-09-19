@@ -5,8 +5,8 @@
         </div>
         <div class="pagination">
             <!-- <AoVPage/> -->
-            <AoPagination :current-page-num="currentPageNum" :page-size="data.pageSize" :max-page-num="7" :total="data.total"
-                @page-change="handlePageChange" />
+            <AoPagination :current-page-num="currentPageNum" :page-size="data.pageSize" :max-page-num="7"
+                :total="data.total" @page-change="handlePageChange" />
         </div>
     </div>
 </template>
@@ -19,9 +19,11 @@ const currentPageNum = ref(1)
 const props = defineProps({
     data: {
         type: Object,
-        default:()=>{
+        default: () => {
             return {
-
+                list: [],
+                pageSize: 0,
+                total: 0
             }
         }
     }
@@ -30,6 +32,8 @@ const emit = defineEmits(["page-change"])
 const handlePageChange = (item) => {
     currentPageNum.value = item
     emit("page-change", currentPageNum.value)
+    console.log("pageChange",currentPageNum.value);
+    
 }
 
 </script>

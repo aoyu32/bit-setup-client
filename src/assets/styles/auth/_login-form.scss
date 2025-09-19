@@ -4,7 +4,6 @@
     @include wh;
     @include flex(n, c, c);
     padding: 0 50px;
-    gap: 20px;
 
     .login-label {
         font-size: 20px;
@@ -20,16 +19,16 @@
     }
 
     form {
-        @include wh;
+        @include wh(100p, n);
         @include flex(n, c, c);
-        gap: 20px;
+        gap: 8px;
+        margin-top: 25px;
     }
-
-
 
     .remember-forget {
         @include flex(c, s-b);
         font-size: 14px;
+        margin-top: 5px;
 
         @include c-t {
             color: color(c-g9, 0.7);
@@ -54,6 +53,7 @@
     }
 
     .login-btn {
+        margin-top: 25px;
 
         button {
             @include c-t {

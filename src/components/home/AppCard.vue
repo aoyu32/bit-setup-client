@@ -100,7 +100,7 @@ const handleDrawClick = (e) => {
 }
 
 const appDownloadCount = computed(() => {
-    return props.app.downloadCount + Math.floor(Math.random() * 100) + 1 * 20
+    return props.app.downloadCount * 234 + 1435 
 })
 
 const handleMouseMove = (e) => {

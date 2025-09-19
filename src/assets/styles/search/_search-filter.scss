@@ -58,6 +58,7 @@
             li {
                 @include b-r(3);
                 padding: 8px 15px;
+                transition: background-color 0.3s ease-out;
 
                 @include c-t {
                     background-color: color(c-p-lighter, 0.1);
@@ -65,10 +66,18 @@
 
                 &:hover {
                     @include c-t {
-                        color: color(c-s-light);
-                        background-color: color(c-p-lighter);
+                        color: color(c-g0);
+                        background-color: color(c-p-lighter, 0.7);
                     }
                 }
+            }
+
+            .active {
+                @include c-t {
+                    color: color(c-g0);
+                    background-color: color(c-p-lighter);
+                }
+
             }
         }
     }

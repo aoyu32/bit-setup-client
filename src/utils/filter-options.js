@@ -1,4 +1,4 @@
-const filterOptions = [
+export const filterOptions = [
   {
     label: "评分",
     options: [
@@ -111,4 +111,43 @@ const filterOptions = [
   }
 ];
 
-export default filterOptions;
+export const searchFilterOptions = [
+  {
+    label: "结果排序",
+    options: [
+      { name: "综合排序", value: 0 },
+      { name: "最多下载", value: 1 },
+      { name: "最多评论", value: 2 },
+      { name: "最多收藏", value: 3 },
+      { name: "最新发布", value: 4 },
+      { name: "最高评分", value: 5 }
+    ]
+  },
+  {
+    label: "存储占用",
+    options: [
+      { name: "不限", value: "" },
+      { name: "< 1MB", value: "0-1024" },
+      { name: "1~10MB", value: "1024-10240" },
+      { name: "10~50MB", value: "10240-51200" },
+      { name: "50~200MB", value: "51200-204800" },
+      { name: "200~500MB", value: "204800-512000" },
+      { name: "500~1GB", value: "512000-1048576" },
+      { name: "1~5GB", value: "1048576-5242880" },
+      { name: "5GB+", value: ">5242880" }
+    ]
+  },
+  {
+    label: "付费制度",
+    options: [
+      { name: "不限", value: "" },
+      { name: "完全免费", value: "free" },
+      { name: "试用转付费", value: "trial" },
+      { name: "买断制", value: "one_time" },
+      { name: "订阅制", value: "subscription" },
+      { name: "内购制", value: "in_app_purchase" },
+      { name: "开源", value: "open_source" }
+    ]
+  }
+
+]

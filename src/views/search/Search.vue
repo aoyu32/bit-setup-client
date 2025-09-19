@@ -5,7 +5,7 @@
                 寻找你的app <i class="iconfont icon-expression"></i>
             </div>
             <div class="search-input-container">
-                <SearchInput />
+                <SearchInput v-model="searchValue" :tips="tipsList" @focus="handleFocus" @search="handleSearch" />
             </div>
             <div class="search-no-find slogan">
                 <span>没找到？</span>
@@ -14,25 +14,30 @@
         </div>
         <div class="search-center">
             <div class="search-filter-container">
-                <SearchFilter />
+                <SearchFilter @filter-change="handleFilterChange" />
             </div>
         </div>
         <div class="search-bottom">
             <div class="search-result-container">
-                <SearchResult />
+                <SearchResult :data="appList" @page-change="handlePageChange" />
             </div>
         </div>
     </div>
 </template>
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch, computed } from 'vue';
 import SearchFilter from '@/components/search/SearchFilter.vue';
 import SearchInput from '@/components/search/SearchInput.vue';
 import SearchResult from '@/components/search/SearchResult.vue';
+import { useSearchStore } from '../../stores/search';
+import { useRoute, useRouter } from 'vue-router';
 
-
-
+const route = useRoute();
+const router = useRouter()
+const searchValue = ref(route.query.keyword)
+const searchStore = useSearchStore()
 const searchTop = ref(null);
+const currentPageNum = ref(1)
 
 const handleScroll = () => {
     if (searchTop.value) {
@@ -41,13 +46,65 @@ const handleScroll = () => {
     }
 };
 
+const handlePageChange = (pageNum) => {
+    fetchAppList(pageNum, 20)
+    currentPageNum.value = pageNum
+}
+
+const handleFilterChange = (filterData) => {
+    console.log("过滤条件", filterData);
+    if (searchValue.value === '') {
+        return
+    }
+    filterData.keyword = searchValue.value
+    searchStore.fetchSearchApps(currentPageNum.value, 20, filterData)
+
+
+}
+
+const handleFocus = () => {
+    searchStore.fetchSearchTips(searchValue.value)
+}
+
+const handleSearch = () => {
+    router.push({
+        path: '/search',
+        query: {
+            keyword: searchValue.value
+        }
+    })
+    fetchAppList(1, 20)
+
+}
+
+const appList = computed(() => {
+    return searchStore.searchApps
+})
+
+const tipsList = computed(() => searchStore.searchTips)
+
 onMounted(() => {
+    fetchAppList(1, 20)
     window.addEventListener('scroll', handleScroll);
 });
 
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
 });
+
+watch(() => searchValue.value, (newValue) => {
+    searchStore.fetchSearchTips(newValue)
+})
+
+const fetchAppList = (pageNum, pageSize) => {
+    searchStore.fetchSearchApps(pageNum, pageSize, {
+        keyword: searchValue.value,
+        sortType: 0,
+        size: '',
+        pricingModel: ''
+    })
+}
+
 </script>
 <style scoped lang="scss">
 .search {

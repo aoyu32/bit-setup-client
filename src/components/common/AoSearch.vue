@@ -5,17 +5,9 @@
                 <div class="input-left">
                     <slot name="left"></slot>
                 </div>
-                <input 
-                    type="text" 
-                    :value="modelValue" 
-                    @focus="handleFocus" 
-                    @blur="handleBlur"
-                    @keyup.enter="handleSearch" 
-                    @keydown="handleKeydown"
-                    placeholder="请输入搜索内容" 
-                    ref="inputRef" 
-                    @input="handleInput($event)" 
-                />
+                <input type="text" :value="modelValue" @focus="handleFocus" @blur="handleBlur"
+                    @keyup.enter="handleSearch" @keydown="handleKeydown" placeholder="请输入搜索内容" ref="inputRef"
+                    @input="handleInput($event)" />
                 <div class="clear">
                     <slot name="clear" :onClear="handleClearInput" v-if="modelValue !== ''">
                         <div class="clear-input" @mousedown.prevent @click="handleClearInput">
@@ -47,12 +39,8 @@
                     </div>
                     <div class="history-main">
                         <div class="search-history-items" v-if="history.length > 0">
-                            <div 
-                                class="search-history-item" 
-                                v-for="(item, index) in history" 
-                                :key="index"
-                                @click="selectSuggestion(item)"
-                            >
+                            <div class="search-history-item" v-for="(item, index) in history" :key="index"
+                                @click="selectSuggestion(item)">
                                 <span>{{ item }}</span>
                                 <div class="delete-icon" @click.stop="deleteHistoryItem(index)">
                                     <i class="iconfont icon-close"></i>
@@ -69,14 +57,10 @@
                 <!-- 搜索建议 -->
                 <div class="search-suggestion" v-if="!isShowHistory && suggestion.length !== 0">
                     <ul>
-                        <li 
-                            v-for="(item, index) in suggestion" 
-                            :key="index"
-                            :class="{ 'selected': index === selectedIndex }"
-                            @click="selectSuggestion(item)"
-                            @mouseover="selectedIndex = index"
-                        >
-                            <span v-html="highlightKeyword(item)"></span>
+                        <li v-for="(item, index) in suggestion" :key="index"
+                            :class="{ 'selected': index === selectedIndex }" @click="selectSuggestion(item)"
+                            @mouseover="selectedIndex = index">
+                            <div v-html="highlightKeyword(item)"></div>
                         </li>
                     </ul>
                 </div>
@@ -88,7 +72,7 @@
 <script setup>
 import { ref, watch, computed } from 'vue'
 
-const emit = defineEmits(['update:modelValue', 'clear', 'search'])
+const emit = defineEmits(['update:modelValue', 'clear', 'search', 'focus'])
 const inputRef = ref(null)
 const isShowPanel = ref(false)
 const isShowHistory = ref(true)
@@ -114,7 +98,7 @@ const highlightKeyword = (item) => {
     if (!props.modelValue.trim()) return item;
     const keyword = props.modelValue.trim();
     const regex = new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-    return item.replace(regex, '<mark class="highlight">$1</mark>');
+    return item.replace(regex, '<span class="lk">$1</span>');
 }
 
 // 处理聚焦
@@ -126,6 +110,7 @@ const handleFocus = () => {
         isShowHistory.value = false
     }
     selectedIndex.value = -1
+    emit('focus')
 }
 
 // 处理键盘事件
@@ -151,7 +136,14 @@ const handleKeydown = (e) => {
     } else if (e.key === 'Enter') {
         if (selectedIndex.value >= 0) {
             e.preventDefault()
-            selectSuggestion(props.suggestion[selectedIndex.value])
+            const selectedItem = props.suggestion[selectedIndex.value]
+            // 关键修改：先更新 modelValue，再执行搜索
+            emit('update:modelValue', selectedItem)
+            // 使用 nextTick 确保 modelValue 更新后再执行搜索
+            nextTick(() => {
+                selectSuggestion(selectedItem)
+                handleBlur()
+            })
         }
     }
 }
@@ -171,6 +163,7 @@ const selectSuggestion = (item) => {
     inputRef.value.value = item
     inputRef.value.focus()
     handleSearch()
+    handleBlur()
 }
 
 // 清空所有历史
@@ -209,6 +202,7 @@ const handleSearch = () => {
         return
     }
     emit('search')
+    handleBlur()
 }
 
 watch(() => props.modelValue, (newValue) => {
@@ -219,6 +213,7 @@ watch(() => props.modelValue, (newValue) => {
     }
     selectedIndex.value = -1
     inputRef.value.value = newValue
+    handleFocus()
 })
 </script>
 
@@ -482,7 +477,7 @@ watch(() => props.modelValue, (newValue) => {
                         &.selected {
                             @include c-t {
                                 background-color: color(c-s-lightest);
-                                color: color(c-s-lighter);
+                                color: color(c-g6);
                             }
                         }
 
@@ -493,13 +488,13 @@ watch(() => props.modelValue, (newValue) => {
                             }
                         }
 
-                        .highlight {
-                            background-color: color(c-s-lighter);
-                            color: color(c-s);
-                            padding: 2px 4px;
-                            border-radius: 3px;
-                            font-weight: 500;
+                    }
+
+                    :deep(.lk) {
+                        @include c-t {
+                            color: color(error, 0.7);
                         }
+
                     }
                 }
             }

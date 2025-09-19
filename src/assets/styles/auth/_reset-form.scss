@@ -22,12 +22,16 @@
     form {
         @include wh;
         @include flex(n, c, c);
-        gap: 20px;
+        gap: 8px;
     }
 
     .vcode {
-        @include flex(c, s-b);
+        @include flex(n, s-b);
         gap: 10px;
+
+        .vcode-input{
+            flex: 1;
+        }
 
         .send-code {
             button {
@@ -44,6 +48,7 @@
     }
 
     .reset-btn {
+        margin-top: 10px;
         button {
             @include c-t {
                 background-color: color(c-s-light);

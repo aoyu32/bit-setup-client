@@ -8,7 +8,9 @@
                     </div>
                     <div class="filter-items">
                         <ul>
-                            <li v-for="(item, index) in item.items" :key="index">{{ item }}</li>
+                            <li v-for="(option, index) in item.options" :key="index"
+                                @click="handleOptionsSelect(item.label, option.value)"
+                                :class="{ active: isOptionActive(item.label, option.value) }">{{ option.name }}</li>
                         </ul>
                     </div>
                 </div>
@@ -22,51 +24,55 @@
 </template>
 <script setup>
 import { ref, computed } from 'vue'
+import { searchFilterOptions } from '@/utils/filter-options';
+const emit = defineEmits(['filter-change'])
 const isShowMoreFilter = ref(false)
 const filterItems = computed(() => {
-    return isShowMoreFilter.value ? filterItemList.value : filterItemList.value.slice(0, 1);
+    return isShowMoreFilter.value ? searchFilterOptions : searchFilterOptions.slice(0, 1);
 })
-const filterItemList = ref([
-    {
-        label: '结果排序',
-        items: [
-            "综合排序",
-            "最多下载",
-            "最多评论",
-            "最多收藏",
-            "最新发布",
-            "最高评分"
-        ],
 
-    },
-    {
-        label: '存储占用',
-        items: [
-            "< 1MB",
-            "1~10MB",
-            "10~50MB",
-            "50~200MB",
-            "200~50MB",
-            "500~1GB",
-            "1~5GB",
-            "5GB+"
-        ]
-    },
-    {
-        label: '付费制度',
-        items: [
-            "完全免费",
-            "试用转付费",
-            "买断制",
-            "订阅制",
-            "内购制",
-            "开源",
-        ]
+const filterMapping = {
+    "结果排序": 'sortType',
+    "存储占用": 'size',
+    "付费制度": 'pricingModel'
+}
 
+const initDefaultValues = () => {
+    const filterValue = {
+        sortType: 0,
+        size: '',
+        pricingModel: ''
     }
 
+    return filterValue
+}
 
-])
+const isOptionActive = (label, value) => {
+    const field = filterMapping[label]
+    return field ? selectData.value[field] === value : false
+}
+
+const handleOptionsSelect = (label, value) => {
+    const field = filterMapping[label]
+    const currentValue = selectData.value[field]
+
+    // 如果点击的是当前选中的选项，则取消选择（重置为默认值）
+    if (currentValue === value) {
+        if (field === 'sortType') {
+            selectData.value[field] = 0
+        } else {
+            selectData.value[field] = ''
+        }
+    } else {
+        // 否则选择新的选项
+        selectData.value[field] = value
+    }
+
+    emit('filter-change', selectData.value)
+}
+
+const selectData = ref(initDefaultValues())
+
 
 </script>
 <style lang="scss" scoped>

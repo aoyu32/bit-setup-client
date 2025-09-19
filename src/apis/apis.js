@@ -62,5 +62,13 @@ export const searchApi = {
                 keyword: param
             }
         })
+    },
+    getSearchApp(pageNum, pageSize, query) {
+        return service.post('/search/page', query, {
+            params: {
+                pageNum,
+                pageSize
+            }
+        })
     }
 }

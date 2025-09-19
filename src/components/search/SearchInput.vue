@@ -1,8 +1,8 @@
 <template>
     <div class="search-input">
         <div class="ao-search-container">
-            <AoSearch :suggestion="mockSuggestions" :history="searchHistory" v-model="searchValue"
-                @clear="searchValue = ''">
+            <AoSearch :suggestion="tips" :history="searchHistory" v-model="searchValue" @clear="searchValue = ''"
+                @focus="handleFocus" @search="handleSearch">
                 <template #left>
                     <div class="left-search-icon">
                         <span><i class="iconfont icon-sousuo"></i></span>
@@ -23,22 +23,22 @@
     </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import AoSearch from '@/components/common/AoSearch.vue';
-import { useRoute } from 'vue-router';
+const props = defineProps({
+    modelValue: {
+        type: String,
+        default: ''
+    },
+    tips: {
+        type: Array,
+        default: []
+    }
+})
 
-const route = useRoute();
-const searchValue = ref(route.query.all)
-// 模拟搜索建议数据
-const mockSuggestions = [
-    'Vue3',
-    'Vue3 教程',
-    'Vue3 组件',
-    'Vue3 源码',
-    'Vue3 实战',
-    'Vue3 组合式API',
-    'Vue3 响应式原理'
-]
+const emit = defineEmits(['update:modelValue', 'focus', 'search'])
+const searchValue = ref(props.modelValue)
+
 
 const searchHistory = ref([
     "vue3",
@@ -66,9 +66,20 @@ const searchHistory = ref([
 ])
 
 const handleSearch = () => {
-    console.log("搜索", searchValue.value);
-
+    emit('search')
 }
+
+watch(() => searchValue.value, (newValue) => {
+    if (!newValue) return
+    emit('update:modelValue', newValue)
+    console.log(newValue);
+
+})
+
+const handleFocus = () => {
+    emit('focus')
+}
+
 </script>
 <style lang="scss" scoped>
 @use '@/assets/styles/search/_search-input.scss' as *;

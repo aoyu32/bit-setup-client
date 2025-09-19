@@ -179,7 +179,7 @@ const getPaymentName = (value) => {
 }
 
 const appSize = computed(() => {
-    return Math.floor(props.data.size / 1024 / 1024)
+    return (props.data.size / 1024 / 1024).toFixed(2)
 })
 
 const releaseDate = computed(() => {

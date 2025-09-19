@@ -186,12 +186,12 @@ const isShowProfileMenu = ref(false)
 const isShowDropDownNav = ref(false)
 
 const handleSearch = () => {
-    console.log(searchValue.value);
+
 
     const route = router.resolve({
         path: '/search',
         query: {
-            all: searchValue.value
+            keyword: searchValue.value
         }
     })
     window.open(route.href, '_blank')
