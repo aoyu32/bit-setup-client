@@ -1,9 +1,12 @@
 <template>
     <div class="register">
+        <div class="loadding-container">
+            <AoLoadding :text="loaddingText" v-if="loadding" :full="true" />
+        </div>
         <div class="register-wrapper">
             <div class="register-left">
                 <div class="register-form-container">
-                    <RegisterForm />
+                    <RegisterForm @register="handleRegister" />
                 </div>
 
             </div>
@@ -25,10 +28,24 @@
     </div>
 </template>
 <script setup>
+import { ref, onMounted, computed } from 'vue'
 import AuthLogo from '@/components/auth/AuthLogo.vue';
 import RegisterForm from '@/components/auth/RegisterForm.vue';
+import AoLoadding from '../../components/common/AoLoadding.vue';
+import { useRouter } from 'vue-router';
 
+const loadding = ref(false)
+const loaddingText = ref("")
 
+const router = useRouter()
+const handleRegister = () => {
+    setTimeout(() => {
+        loadding.value = true
+        loaddingText.value = "登录中"
+        loadding.value = false
+        router.replace('/home')
+    }, 2000)
+}
 
 </script>
 <style lang="scss" scoped>
@@ -76,7 +93,7 @@ import RegisterForm from '@/components/auth/RegisterForm.vue';
         transition: all 0.2s ease-out;
 
         @include c-t {
-        background-color: color(c-s-lighter,0.7);
+            background-color: color(c-s-lighter, 0.7);
             color: color(c-g);
         }
 

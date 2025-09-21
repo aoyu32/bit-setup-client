@@ -1,5 +1,6 @@
 <template>
     <div class="login">
+        <AoLoadding text="登录中" :full="true" v-if="loadding" />
         <div class="login-wrapper">
             <div class="login-left">
                 <router-link class="back-home" to="/home">
@@ -17,15 +18,28 @@
             </div>
             <div class="login-right">
                 <div class="login-form-container">
-                    <LoginForm />
+                    <LoginForm @login="handleLogin" />
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script setup>
+import { ref } from 'vue';
 import AuthLogo from '../../components/auth/AuthLogo.vue';
 import LoginForm from '../../components/auth/LoginForm.vue';
+import AoLoadding from '../../components/common/AoLoadding.vue';
+import { useAuthStore } from '../../stores/auth'
+import { useRouter } from 'vue-router';
+const router = useRouter()
+const loadding = ref(false)
+const authStore = useAuthStore()
+const handleLogin = async (data) => {
+    const res = await authStore.fetchLogin(data)
+    if(res){
+        router.replace('/home')
+    }
+}
 
 
 </script>
@@ -74,7 +88,7 @@ import LoginForm from '../../components/auth/LoginForm.vue';
         transition: all 0.2s ease-out;
 
         @include c-t {
-            background-color: color(c-s-lighter,0.7);
+            background-color: color(c-s-lighter, 0.7);
             color: color(c-g);
         }
 

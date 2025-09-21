@@ -22,7 +22,8 @@
                         </AoInput>
                     </div>
                     <div class="send-code">
-                        <button type="button" :disabled="!isEmailValid" @click="sendCode">获取验证码</button>
+                        <AoTimeButton text="获取验证码" :countdown="60" @click="handleSendCode" :disabled="!isEmailValid"
+                            ref="codeButtonRef" />
                     </div>
                 </div>
                 <div class="password">
@@ -42,16 +43,28 @@
                     </AoInput>
                 </div>
                 <div class="register-btn">
-                    <button type="submit" @click="handleRegister">{{ regButton }}</button>
+                    <button type="submit" @click="handleRegister" :disabled="registerLoading">
+                        {{ regButton }}
+                    </button>
                 </div>
             </form>
+        </div>
+        <div class="verify-window-container" v-if="isShowVerify">
+            <VerifyWindow @on-success="handleVerifySuccess" @on-close="isShowVerify = false" />
         </div>
     </div>
 </template>
 
 <script setup>
-import { reactive, ref, computed } from 'vue'
+import { reactive, ref, watch } from 'vue'
+import message from '@/utils/message'
 import AoInput from '../common/AoInput.vue'
+import VerifyWindow from '../verifition/VerifyWindow.vue'
+import AoTimeButton from '../common/AoTimeButton.vue'
+import { useAuthStore } from '../../stores/auth'
+
+const authStore = useAuthStore()
+const isShowVerify = ref(false)
 
 const regForm = reactive({
     email: '',
@@ -62,22 +75,26 @@ const regForm = reactive({
 
 const regButton = ref('注册')
 
+// 定义 emit
+const emit = defineEmits(['register'])
+
 // 引用 AoInput 组件实例以手动触发校验
 const emailInput = ref(null)
 const codeInput = ref(null)
 const passwordInput = ref(null)
 const confirmPasswordInput = ref(null)
+const codeButtonRef = ref(null)
 
 // 邮箱验证：支持标准邮箱格式，包括QQ邮箱
 const validateEmail = (value) => {
-    if (!value) return
+    if (!value) return '邮箱不能为空'
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     return emailRegex.test(value) ? true : '请输入有效的邮箱地址'
 }
 
 // 验证码验证：6位数字
 const validateCode = (value) => {
-    if(!value) return 
+    if (!value) return '验证码不能为空'
     const codeRegex = /^\d{6}$/
     return codeRegex.test(value) ? true : '验证码必须为6位数字'
 }
@@ -111,31 +128,51 @@ const rules = reactive({
     ]
 })
 
-const isEmailValid = computed(() => {
-    return validateEmail(regForm.email)
+const isEmailValid = ref(false)
+
+watch(() => regForm.email, newValue => {
+    const validationResult = validateEmail(newValue)
+    isEmailValid.value = validationResult === true
 })
 
 const isFormValid = () => {
-    return (emailInput.value.validate() && codeInput.value.validate()
-        && passwordInput.value.validate() && confirmPasswordInput.value.validate())
+    return (emailInput.value?.validate() && codeInput.value?.validate()
+        && passwordInput.value?.validate() && confirmPasswordInput.value?.validate())
 }
 
-// 发送验证码逻辑（模拟）
-const sendCode = () => {
-    console.log('rerew');
 
+const handleSendCode = async () => {
+    if (!isEmailValid.value) return
+    
+    const success = await authStore.fetchCaptcha(regForm.email)
+    if (!success) {
+        codeButtonRef.value?.resetCountdown()
+    }
 }
 
-// 注册逻辑
+
+const handleVerifySuccess = async (param) => {
+    
+    const regData = {
+        verifyCode: param.captchaVerification,
+        account: regForm.email,
+        emailVerifyCode: regForm.code,
+        password: regForm.confirmPassword
+    }
+    
+    const success = await authStore.fetchRegister(regData)
+    if (success) {
+        emit("register", authStore.userData)
+    }
+}
+
 const handleRegister = () => {
-    console.log(isEmailValid.value);
-    console.log(!isFormValid());
-
     if (!isFormValid()) {
-        alert("表单不合格")
+        message.error('请填写完整且正确的信息')
         return
     }
-    alert("开始注册")
+
+    isShowVerify.value = true
 }
 </script>
 

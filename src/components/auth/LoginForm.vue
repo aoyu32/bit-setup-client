@@ -7,7 +7,7 @@
         <div class="form">
             <form @submit.prevent="handleLogin">
                 <div class="account">
-                    <AoInput placeholder="用户名/邮箱" type="text" v-model="loginForm.account" :rules="rules.account"
+                    <AoInput placeholder="邮箱" type="text" v-model="loginForm.account" :rules="rules.account"
                         ref="accountInput">
                         <template #icon>
                             <i class="iconfont icon-user"></i>
@@ -29,7 +29,7 @@
                                 <i class="iconfont icon-icon-check-square" v-if="!isChecked"></i>
                                 <i class="iconfont icon-check-square1" v-else></i>
                             </span>
-                            <span>记住密码</span>
+                            <span>自动登录</span>
                         </div>
                     </div>
                     <div class="forget-pwd">
@@ -41,17 +41,37 @@
                 </div>
             </form>
         </div>
+        <div class="verify-window-container" v-if="isShowVerify">
+            <VerifyWindow @on-success="handleVerifySuccess" @on-close="isShowVerify = false" />
+        </div>
     </div>
 </template>
 
 <script setup>
 import { ref, reactive, computed } from 'vue'
 import AoInput from '../common/AoInput.vue'
+import VerifyWindow from '../verifition/VerifyWindow.vue'
+import { message } from '../../utils/message'
+
+const isShowVerify = ref(false)
+const emit = defineEmits(['login'])
 
 const loginForm = reactive({
     account: '',
     password: ''
 })
+
+const handleVerifySuccess = async (param) => {
+    console.log("验证成功回调返回：", param);
+
+    const loginData = {
+        ...loginForm,
+        verifyCode: param.captchaVerification
+    }
+    console.log("登录表单:", loginData);
+
+    emit("login", loginData)
+}
 
 const isChecked = ref(false)
 
@@ -61,10 +81,12 @@ const passwordInput = ref(null)
 
 const validateAccount = (value) => {
 
-    return value ? true : `账号不能为空`
+    if (!value) return '邮箱不能为空'
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    return emailRegex.test(value) ? true : '请输入有效的邮箱地址'
 }
 const validatePassword = (value) => {
-    
+
     return value ? true : `密码不能为空`
 }
 
@@ -81,24 +103,23 @@ const rules = reactive({
 // 计算表单整体有效性（仅检查非空，用于按钮状态，如果需要）
 const isFormValid = computed(() => {
     return (
-        validateNotEmpty(loginForm.value.account) === true &&
-        validateNotEmpty(loginForm.value.password) === true
+        validateAccount(loginForm.account) === true &&
+        validatePassword(loginForm.password) === true
     )
 })
 
 // 登录逻辑
 const handleLogin = () => {
-    // 手动触发非空校验
-    accountInput.value.validate()
-    passwordInput.value.validate()
+    console.log("表单校验结果：", isFormValid.value);
 
-    // 检查非空验证结果
-    const isAccountNotEmpty = validateNotEmpty(loginForm.value.account) === true
-    const isPasswordNotEmpty = validateNotEmpty(loginForm.value.password) === true
 
-    if (isAccountNotEmpty && isPasswordNotEmpty) {
-
+    if (!isFormValid.value) {
+        message.warn("请正确填写完整信息")
+        return
     }
+
+    isShowVerify.value = true
+
 }
 </script>
 <style scoped lang="scss">

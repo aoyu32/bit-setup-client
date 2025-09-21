@@ -89,9 +89,9 @@ const actionList = ref([
         route: 'submit'
     },
     {
-        icon: 'icon-yaoqinghan',
-        name: '意见反馈',
-        route: '/feedback'
+        icon: 'icon-huiyuan',
+        name: '会员开通',
+        route: '/vip'
     }
 ])
 

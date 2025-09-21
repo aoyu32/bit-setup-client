@@ -46,14 +46,14 @@
                     <div class="profile-left">
                         <router-link to="/recharge">
                             <div class="coin">
-                                <span>{{ myCoin }}</span>
+                                <span>{{ user.points }}</span>
                                 <div class="coin-icon">
                                     <img :src="coinIcon" alt="">
                                 </div>
                             </div>
                         </router-link>
-                        <router-link to="/vip">
-                            <div class="vip" v-if="isMember">
+                        <router-link to="/vip" v-if="!authStore.isLogin || user.role === 'vip'">
+                            <div class="vip">
                                 <img :src="vipImgUrl" alt="">
                             </div>
                         </router-link>
@@ -63,13 +63,13 @@
                             </div>
                         </router-link>
                     </div>
-                    <div class="user-info" :style="{ marginTop: userInfoMarginTop }" v-show="isLogin">
+                    <div class="user-info" :style="{ marginTop: userInfoMarginTop }" v-show="authStore.isLogin">
                         <div class="user-info-wrapper">
                             <div class="avatar">
-                                <img :src="avatarUrl || defaultAvatar" alt="用户头像">
+                                <img :src="user.avatar" alt="用户头像">
                             </div>
                             <div class="username">
-                                <span>{{ username }}</span>
+                                <span>{{ user.nickname === '' ? "未知用户" : user.nickname}}</span>
                             </div>
                         </div>
                         <div class="user-menu">
@@ -77,11 +77,12 @@
                                 <router-link to="/user">
                                     <li><i class="iconfont icon-user"></i><span>个人中心</span></li>
                                 </router-link>
-                                <li @click="isLogin = false"><i class="iconfont icon-tuichu"></i><span>退出登录</span></li>
+                                <li @click="authStore.logout()"><i class="iconfont icon-tuichu"></i><span>退出登录</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="user-login-reg" v-show="!isLogin">
+                    <div class="user-login-reg" v-show="!authStore.isLogin">
                         <div class="login">
                             <router-link to="/login">登录</router-link>
                         </div>
@@ -102,12 +103,20 @@ import coinIcon from '@/assets/imgs/coin.svg'
 import AoSearch from '@/components/common/AoSearch.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useSearchStore } from '@/stores/search'
+import { useUserInfoStore } from '@/stores/user'
+import { useAuthStore } from '@/stores/auth'
+const userStore = useUserInfoStore()
+const authStore = useAuthStore()
 const router = useRouter()
 const route = useRoute()
 const searchValue = ref('')
-const isLogin = ref(true)
 const searchStore = useSearchStore()
 const userInfoMarginTop = ref('')
+
+const user = computed(() => {
+    return userStore.userData
+})
+
 onMounted(() => {
     const profileHeight = document.querySelector('.profile-container').offsetHeight
     const userInfoHeight = document.querySelector('.user-info-wrapper').offsetHeight

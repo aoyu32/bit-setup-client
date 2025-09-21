@@ -1,6 +1,6 @@
 <template>
     <div class="ao-loadding">
-        <div class="advanced-loader" :class="{ 'full-screen': fullScreen }">
+        <div class="advanced-loader" :class="{ 'full-screen': full }">
             <div class="loading-container">
                 <div class="loading-text">
                     <span v-for="(char, index) in loadingText" :key="index" :class="animationType"
@@ -24,7 +24,7 @@ const props = defineProps({
         default: '加载中'
     },
     // 是否全屏
-    fullScreen: {
+    full: {
         type: Boolean,
         default: false
     },
@@ -96,6 +96,7 @@ const getCharStyles = (index) => {
 
 .full-screen {
     position: fixed;
+    background-color: #3333339b;
     top: 0;
     left: 0;
     z-index: 9999;

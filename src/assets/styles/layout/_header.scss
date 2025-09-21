@@ -298,7 +298,7 @@
                     @include wh(n, n);
                     @include flex(c, c);
                     gap: 8px;
-                    padding: 5px 10px 5px 5px;
+                    padding: 5px 6px;
                     cursor: pointer;
                     transition: all 0.3s ease;
                     flex-shrink: 0; // 防止被压缩
@@ -322,7 +322,7 @@
                         @include t-e;
 
                         @include c-t {
-                            color: color(c-g9);
+                            color: color(c-g10,0.7);
                         }
                     }
 

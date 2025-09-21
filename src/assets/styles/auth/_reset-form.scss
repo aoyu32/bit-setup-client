@@ -29,7 +29,7 @@
         @include flex(n, s-b);
         gap: 10px;
 
-        .vcode-input{
+        .vcode-input {
             flex: 1;
         }
 
@@ -49,6 +49,7 @@
 
     .reset-btn {
         margin-top: 10px;
+
         button {
             @include c-t {
                 background-color: color(c-s-light);
@@ -61,5 +62,7 @@
             letter-spacing: 10px;
             @include wh;
         }
+
+
     }
 }

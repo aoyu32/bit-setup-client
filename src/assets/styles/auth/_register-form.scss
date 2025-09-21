@@ -31,21 +31,11 @@
         gap: 10px;
 
         .vcode-input {
-            flex: 1;
+            flex: 2;
         }
 
         .send-code {
-            button {
-                flex: 1;
-                @include b-r($b-r);
-                padding: 12px;
-                font-size: 12px;
-
-                @include c-t {
-                    background-color: color(c-s-light);
-                    color: color(c-g);
-                }
-            }
+            flex: 1;
         }
     }
 
@@ -59,7 +49,6 @@
             }
 
             font-size: 14px;
-
             @include b-r($b-r);
             padding: 10px 0;
             letter-spacing: 10px;

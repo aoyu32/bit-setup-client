@@ -72,3 +72,41 @@ export const searchApi = {
         })
     }
 }
+
+export const captchaApi = {
+    //获取验证图片  以及token
+    reqGet(data) {
+        return service({
+            url: '/captcha/get',
+            method: 'post',
+            data
+        })
+    },
+    //滑动或者点选验证
+    reqCheck(data) {
+        return service({
+            url: '/captcha/check',
+            method: 'post',
+            data
+        })
+    }
+}
+
+export const userAuthApi = {
+
+    register(param) {
+        return service.post('/auth/register', param)
+    },
+    getCaptcha(param) {
+        return service.get('/auth/code', {
+            params: {
+                email: param
+            }
+        })
+    },
+    login(param) {
+        return service.post('/auth/login', param)
+    }
+
+
+}
