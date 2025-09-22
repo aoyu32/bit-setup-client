@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { userAuthApi } from "../apis/apis";
+import { userInfoApi } from "../apis/apis";
 import { message } from "@/utils/message";
 import { ref } from "vue";
 
@@ -57,13 +57,13 @@ export const useUserInfoStore = defineStore('user-info', () => {
     };
 
 
-    const fetchUserInfo = async () => {
+    const fetchBaseInfo = async () => {
         try {
-            const resp = await userAuthApi.getUserInfo();
+            const resp = await userInfoApi.getBaseInfo();
             assignUserData(resp.data);
             return true;
         } catch (error) {
-            console.error('获取用户信息失败:', error);
+            message.error(error.message);
             return false;
         }
     };
@@ -105,7 +105,9 @@ export const useUserInfoStore = defineStore('user-info', () => {
     return {
         userData,
         assignUserData,
-        fetchUserInfo,
+        fetchBaseInfo,
         resetUserData
     };
-});
+}
+
+);

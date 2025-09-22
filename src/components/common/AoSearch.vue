@@ -71,6 +71,7 @@
 
 <script setup>
 import { ref, watch, computed } from 'vue'
+import AoInput from './AoInput.vue'
 
 const emit = defineEmits(['update:modelValue', 'clear', 'search', 'focus'])
 const inputRef = ref(null)

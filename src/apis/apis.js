@@ -1,5 +1,6 @@
+import message from "../utils/message";
 import service from "./request";
-
+import { fetchReq } from "../utils/fetch";
 export const appApi = {
 
     getHotList() {
@@ -108,5 +109,20 @@ export const userAuthApi = {
         return service.post('/auth/login', param)
     }
 
+}
 
+export const userInfoApi = {
+    getBaseInfo() {
+        return service.get(`/user/base`, {
+            withToken: true
+        })
+    }
+}
+
+// apis.js
+export const aiApi = {
+    async chat(param) {
+        const url = `${service.defaults.baseURL}/ai/chat?message=${encodeURIComponent(param)}`;
+        return await fetchReq(url, 'GET', null); // GET 请求不传递 body
+    }
 }

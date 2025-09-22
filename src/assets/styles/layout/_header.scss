@@ -11,6 +11,7 @@
     }
 }
 
+
 .header-container {
     width: $header-width;
     height: 100%;
@@ -322,7 +323,7 @@
                         @include t-e;
 
                         @include c-t {
-                            color: color(c-g10,0.7);
+                            color: color(c-g10, 0.7);
                         }
                     }
 
@@ -428,6 +429,12 @@
         }
     }
 }
+
+.full {
+    @include wh;
+    padding: 10px 20px;
+}
+
 
 @media (max-width:1265px) {
     .header {

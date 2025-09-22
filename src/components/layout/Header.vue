@@ -1,6 +1,7 @@
 <template>
     <div class="header">
-        <div class="header-container" :style="{ justifyContent: isSearchPage ? 'space-between' : 'none' }">
+        <div class="header-container" :style="{ justifyContent: isSearchPage ? 'space-between' : 'none' }"
+            :class="{ full: fullWidth }">
             <div class="nav">
                 <div class="nav-container">
                     <ul>
@@ -69,7 +70,7 @@
                                 <img :src="user.avatar" alt="用户头像">
                             </div>
                             <div class="username">
-                                <span>{{ user.nickname === '' ? "未知用户" : user.nickname}}</span>
+                                <span>{{ user.nickname === '' ? "未知用户" : user.nickname }}</span>
                             </div>
                         </div>
                         <div class="user-menu">
@@ -112,6 +113,11 @@ const route = useRoute()
 const searchValue = ref('')
 const searchStore = useSearchStore()
 const userInfoMarginTop = ref('')
+
+const fullWidth = computed(() => {
+    console.log(route.path==='/ai');
+    return route.path === '/ai'
+})
 
 const user = computed(() => {
     return userStore.userData

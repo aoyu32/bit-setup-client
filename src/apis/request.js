@@ -14,7 +14,11 @@ service.interceptors.request.use(
         if (config.withToken) {
             const authStore = useAuthStore()
             const token = authStore.token
+            console.log("token 值：", token);
+
             if (token) {
+                console.log("token：", token);
+
                 config.headers['Authorization'] = `Bearer ${token}`
             }
         }
