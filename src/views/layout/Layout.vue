@@ -2,10 +2,10 @@
     <header>
         <Header></Header>
     </header>
-    <main :class="{ main: $route.path === '/ai' }">
+    <main :class="{ main: isAiView }">
         <router-view />
     </main>
-    <footer v-if="$route.path !== '/ai'">
+    <footer v-if="!isAiView">
         <Footer></Footer>
     </footer>
     <div class="back-top">
@@ -17,6 +17,18 @@ import { ref, computed, onMounted } from 'vue'
 import Header from '@/components/layout/Header.vue';
 import Footer from '@/components/layout/Footer.vue'
 import BackTop from '@/components/layout/BackTop.vue';
+import { useUserInfoStore } from '../../stores/user';
+import { useRoute } from 'vue-router';
+const route = useRoute()
+const userStore = useUserInfoStore()
+onMounted(() => {
+    console.log(localStorage.getItem('uid'));
+    userStore.fetchBaseInfo()
+})
+
+const isAiView = computed(() => {
+    return route.name === 'aiChat' || route.name === 'aiChatWithId'
+})
 
 
 </script>
@@ -39,6 +51,12 @@ main {
 
 .main {
     margin-bottom: 0;
+    max-width: 100%;
+    
+
+    @include c-t {
+        background-color: color(c-g1);
+    }
 }
 
 footer {

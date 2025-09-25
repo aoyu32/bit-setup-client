@@ -15,19 +15,36 @@
             </div>
             <!-- 有聊天消息 -->
             <div class="has-message" v-else>
-                <div class="message-wrapper" v-for="(item, index) in messageList" :key="index">
-                    <AiMessage :message-data="item"/>
+                <div class="message-wrapper" v-for="(item, index) in messages" :key="index">
+                    <AiMessage :message-data="item" />
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import AiMessage from './AiMessage.vue'
-const props = defineProps(['isChatIn', 'messageList'])
+const props = defineProps({
+    messages: {
+        type: Array,
+        default: []
+    }
+})
+
+const isChatIn = computed(() => {
+    return props.messages.length !== 0
+})
+
+
+onMounted((()=>{
+    console.log("聊天数据:",props.messages);
+    
+}))
+
 const greet = ref('你好呀！我是Bit Boot！很高兴为您服务！')
 const introduce = ref('我可以帮你推荐你想要的应用，解答有关本站的APP各种问题，随时为您服务哦~')
+
 </script>
 <style scoped lang="scss">
 @use '@/assets/styles/ai/_ai-window.scss' as *;

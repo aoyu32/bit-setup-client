@@ -44,6 +44,9 @@ importers:
       pinia-plugin-persistedstate:
         specifier: ^4.5.0
         version: 4.5.0(pinia@3.0.3(vue@3.5.17))
+      sse.js:
+        specifier: ^2.7.1
+        version: 2.7.1
       v-page:
         specifier: ^3.3.0
         version: 3.3.0(vue@3.5.17)
@@ -1062,6 +1065,9 @@ packages:
   speakingurl@14.0.1:
     resolution: {integrity: sha512-1POYv7uv2gXoyGFpBCmpDVSNV74IfsWlDW216UPjbWufNf+bSU6GdbDsxdcxtfwb4xlI3yxzOTKClUosxARYrQ==}
     engines: {node: '>=0.10.0'}
+
+  sse.js@2.7.1:
+    resolution: {integrity: sha512-HIX6Z5vIS3fj17JiBXpJ7ZP0MvwzXLlxHPx7kI9UyzSGV7hMGDKyPrvgDYtSjxg3gUbnkcoUh0iM+F3basOC7g==}
 
   stringify-entities@4.0.4:
     resolution: {integrity: sha512-IwfBptatlO+QCJUo19AqvrPNqlVMpW9YEL2LIVY+Rpv2qsjCGxaDLNRgeGsQWJhfItebuJhsGSLjaBbNSQ+ieg==}
@@ -2305,6 +2311,8 @@ snapshots:
   space-separated-tokens@2.0.2: {}
 
   speakingurl@14.0.1: {}
+
+  sse.js@2.7.1: {}
 
   stringify-entities@4.0.4:
     dependencies:

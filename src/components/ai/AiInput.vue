@@ -14,17 +14,20 @@
         </div>
     </div>
 </template>
-<script setup>
-import { ref, computed } from 'vue'
-const textareaRef = ref(null)
-const inputValue = ref('');
-const emit = defineEmits(['send-message'])
-//输入框输入
-const handleTextInput = (event) => {
-    adjustHeight(event.target.value)
 
-}
-//调整输入框的高度的函数
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const textareaRef = ref(null);
+const inputValue = ref('');
+const emit = defineEmits(['send-message']);
+
+// 输入框输入
+const handleTextInput = (event) => {
+    adjustHeight(event.target.value);
+};
+
+// 调整输入框高度的函数
 const adjustHeight = (value) => {
     if (value === '') {
         textareaRef.value.style.height = '48px';
@@ -38,24 +41,43 @@ const adjustHeight = (value) => {
 
     // 控制是否显示滚动条
     textareaRef.value.style.overflowY = textareaRef.value.scrollHeight > textareaRef.value.clientHeight ? 'auto' : 'hidden';
-}
+};
 
-//重置高度
+// 重置高度
 const resetHeight = () => {
     textareaRef.value.style.height = '48px';
-    inputValue.value = ''
-}
+    inputValue.value = '';
+};
 
+// 处理发送消息
 const handleSendMessage = () => {
     if (!inputValue.value.trim()) {
-        return
+        return;
     }
-    emit('send-message', inputValue)
+    emit('send-message', inputValue.value);
     console.log("发送消息：", inputValue.value);
-    resetHeight()
-}
+    resetHeight();
+};
 
+// 处理键盘事件
+const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && e.ctrlKey) {
+        e.preventDefault();
+        console.log(inputValue.value);
+        
+        handleSendMessage();
+    }
+};
+
+onMounted(() => {
+    window.addEventListener('keydown', handleKeyDown);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('keydown', handleKeyDown);
+});
 </script>
+
 <style scoped lang="scss">
 @use '@/assets/styles/ai/_ai-input.scss' as *;
 </style>

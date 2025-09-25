@@ -1,6 +1,7 @@
 import message from "../utils/message";
 import service from "./request";
 import { fetchReq } from "../utils/fetch";
+import { SSEClient } from "./sse-client";
 export const appApi = {
 
     getHotList() {
@@ -119,10 +120,30 @@ export const userInfoApi = {
     }
 }
 
+
+
 // apis.js
 export const aiApi = {
-    async chat(param) {
-        const url = `${service.defaults.baseURL}/ai/chat?message=${encodeURIComponent(param)}`;
-        return await fetchReq(url, 'GET', null); // GET 请求不传递 body
+
+    newConversation() {
+        return service.get(`/ai/conversation/new`, {
+            withToken: true
+        })
+    },
+    getAllConversation() {
+        return service.get(`/ai/conversation/all`, {
+            withToken: true
+        })
+    },
+    getConversationTitle(param) {
+        return service.get(`/ai/title/${param}`, {
+            withToken: true
+        })
+    },
+    getMessageByConversationId(param){
+        return service.get(`/ai/message/all/${param}`,{
+            withToken:true
+        })
     }
+
 }

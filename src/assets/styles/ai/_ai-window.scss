@@ -3,12 +3,13 @@
 .ai-window {
     @include wh(100p, 100p);
     @include flex(c, c, c);
+    
 
     .window-wrapper {
         @include wh(100p, n);
         @include flex(c, c, c);
         max-width: 800px;
-        margin-bottom: 20px;
+        padding: 20px 0 20px 0;
 
         @include c-t {
             color: color(c-g6, 0.8);
@@ -43,7 +44,7 @@
 
         .has-message {
             @include wh;
-            @include flex(n,n,c);
+            @include flex(n, n, c);
             gap: 30px;
         }
     }

@@ -15,24 +15,27 @@
             <div class="new-chat">
                 <button @click="handleNewChat">
                     <i class="iconfont icon-plus"></i>
-                    新对话
+                    <span>新对话</span>
                 </button>
             </div>
             <div class="history-chat">
                 <div class="history-label">
                     <span><i class="iconfont icon-time-rewind"></i>历史对话</span>
                 </div>
-                <div class="history-list" @scroll="handleHistoryListScroll($event)">
-                    <div class="history-item" v-for="(item, index) in chatHistoryData" :key="index">
+                <div class="history-list" @scroll="handleHistoryListScroll($event)" v-if="history.length !== 0">
+                    <div class="history-item" v-for="(item, index) in history" :key="index"
+                        @click="handleHistory(item.conversationId)">
                         <div class="item-content">
                             <input type="text">
-                            <span>{{ item }}</span>
+                            <span>{{ item.title }}</span>
                         </div>
                         <div class="item-more" @click="handleMore(index, $event)">
                             <span><i class="iconfont icon-ellipsis"></i></span>
                         </div>
                     </div>
-
+                </div>
+                <div class="no-history" v-else>
+                    <p>您还没有对话历史~~</p>
                 </div>
             </div>
         </div>
@@ -61,11 +64,16 @@
 </template>
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import chatHistoryData from '@/utils/chat-history.js'
+const props = defineProps({
+    history: {
+        type: Array,
+        default: []
+    }
+})
 const isFoldSidebar = ref(true)
 const aiSidebarRef = ref(null)
 const sidebarWidth = computed(() => { return isFoldSidebar.value ? '250px' : '70px' })
-const emit = defineEmits(['fold-sidebar','new-chat'])
+const emit = defineEmits(['fold-sidebar', 'new-chat','conversation-change'])
 const moreMenuRef = ref(null)
 const showMoreMenu = ref(false)
 const showRenameInput = ref(false)
@@ -74,6 +82,10 @@ const currentItemIndex = ref(0)
 //创建新对话
 const handleNewChat = () => {
     emit('new-chat')
+}
+
+const handleHistory = (value) => {
+    emit('conversation-change',value)
 }
 
 //折叠侧边栏按钮点事件
@@ -92,7 +104,7 @@ const handleMore = (index, event) => {
     historyItems.forEach((el, elIndex) => {
         if (index === elIndex) {
             console.log(elIndex);
-            
+
             // 获取点击项的位置和尺寸
             const itemRect = el.getBoundingClientRect()
             const sidebarRect = aiSidebar.getBoundingClientRect()
@@ -100,14 +112,14 @@ const handleMore = (index, event) => {
             const relativeTop = itemRect.top - sidebarRect.top
             console.log(el);
             console.log(aiSidebar);
-            
-            
+
+
             console.log(itemRect.top);
             console.log(sidebarRect.top);
-            
+
             // 设置菜单位置
             console.log(relativeTop);
-            
+
             moreMenuRef.value.style.top = `${relativeTop}px`
             showMoreMenu.value = true
         }

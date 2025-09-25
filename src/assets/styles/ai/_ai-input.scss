@@ -9,7 +9,10 @@
     min-height: 110px;
     max-height: 250px;
     gap: 5px;
-    background-color: color(c-g1);
+
+    @include c-t {
+        background-color: color(c-g,0.7);
+    }
 
     .input-top {
         @include wh(100p, 100p);
@@ -35,10 +38,11 @@
             @include flex(c, c);
             @include wh(30);
             @include b-r($b-r);
-            border: 1px solid color(c-s-lighter,0.4);
+            border: 1px solid color(c-s-lighter, 0.4);
 
             &:hover {
-            border: 1px solid color(c-s-light,0.4);
+                border: 1px solid color(c-s-light, 0.4);
+
                 .iconfont {
 
                     @include c-t {
@@ -49,6 +53,7 @@
 
             .iconfont {
                 font-size: 20px;
+
                 @include c-t {
                     color: color(c-s-dark);
                 }

@@ -19,7 +19,7 @@
 
     .sidebar-header {
         @include flex(c, s-b);
-        padding: 15px 15px 0 15px;
+        padding: 15px 25px 0 25px;
 
         .ai-name {
             @include flex(l, c);
@@ -45,8 +45,7 @@
 
 
     .new-chat {
-
-        padding: 0 15px;
+        padding: 0 25px;
 
 
         button {
@@ -87,7 +86,7 @@
         .history-label {
             margin-bottom: 10px;
             font-size: 12px;
-            padding: 0 20px;
+            padding: 0 25px;
             flex-shrink: 0;
 
             .iconfont {
@@ -100,7 +99,7 @@
             @include flex(n, n, c);
             @include wh;
             overflow-y: hidden;
-            padding: 0 20px;
+            padding: 0 25px;
             min-height: 0;
             
 
@@ -178,9 +177,15 @@
     }
 
 
+    .no-history{
+        @include flex(c,c);
+        padding: 50px 0;
+        font-size: 14px;
+    }
+
     .fold-nav {
         @include wh;
-        @include flex(c, t, c);
+        @include flex(c, n, c);
         gap: 40px;
 
         .ai-logo {

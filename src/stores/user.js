@@ -33,6 +33,9 @@ export const useUserInfoStore = defineStore('user-info', () => {
         fansCount: 0
     });
 
+
+    const uid = ref(userData.value.uid)
+
     /**
      * 安全赋值函数 - 只更新后端返回的字段，保持其他字段不变
      * @param {Object} sourceData 后端返回的数据
@@ -104,6 +107,7 @@ export const useUserInfoStore = defineStore('user-info', () => {
 
     return {
         userData,
+        uid,
         assignUserData,
         fetchBaseInfo,
         resetUserData

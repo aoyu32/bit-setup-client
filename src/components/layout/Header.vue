@@ -6,14 +6,14 @@
                 <div class="nav-container">
                     <ul>
                         <li @click="activeNavItem(0)">
-                            <router-link :to="navItems[0].route">
+                            <router-link :to="navItems[0].getRoute()">
                                 <img :src="navItems[0].icon" alt="">
                                 {{ navItems[0].name }}
                             </router-link>
                         </li>
                         <li v-for="(item, index) in navItems.slice(1)" :key="index" class="nav-item"
                             @click="activeNavItem(index + 1)">
-                            <router-link :to="item.route" :class="{ active: activeNavIndex === index + 1 }">
+                            <router-link :to="item.getRoute ? item.getRoute() : item.route" :class="{ active: activeNavIndex === index + 1 }">
                                 <i :class="['iconfont', item.icon]"></i>
                                 {{ item.name }}
                             </router-link>
@@ -113,10 +113,20 @@ const route = useRoute()
 const searchValue = ref('')
 const searchStore = useSearchStore()
 const userInfoMarginTop = ref('')
+import { useAiStore } from '@/stores/ai'
+
+const aiStore = useAiStore()
+
+// 获取AI导航的动态路由
+const getAiRoute = () => {
+    // 如果有当前会话ID，则指向具体会话，否则指向新对话
+    return aiStore.currentConversation
+        ? `/ai/chat/${aiStore.currentConversation}`
+        : '/ai/chat'
+}
 
 const fullWidth = computed(() => {
-    console.log(route.path==='/ai');
-    return route.path === '/ai'
+    return route.name === 'aiChat' || route.name === 'aiChatWithId'
 })
 
 const user = computed(() => {
@@ -133,27 +143,32 @@ const navItems = ref([
     {
         icon: logoUrl,
         name: '比特聚合',
-        route: '/'
+        route: '/',
+        getRoute: () => '/'
     },
     {
         icon: 'icon-fenlei',
         name: '分类',
-        route: '/category'
+        route: '/category',
+        getRoute: () => '/category'
     },
     {
         icon: 'icon-pintu',
         name: '套件',
-        route: '/suite'
+        route: '/suite',
+        getRoute: () => '/suite'
     },
     {
         icon: 'icon-shejizhinengzhushou',
         name: '智能AI',
-        route: '/ai'
+        route: '/ai/chat',
+        getRoute: getAiRoute  // 使用动态路由
     },
     {
         icon: 'icon-shouye-wifi',
         name: '社区',
-        route: '/community'
+        route: '/community',
+        getRoute: () => '/community'
     }
 ])
 

@@ -45,39 +45,49 @@ const router = createRouter({
     routes: [
         {
             path: '/',
+            name: 'layout',
             component: Layout,
             redirect: '/home',
             children: [
                 {
                     path: '/home',
+                    name: 'home',
                     component: Home,
                     meta: { keepScroll: true }
                 },
                 {
                     path: '/detail/:id',
+                    name: 'detail',
                     component: Detail,
                     meta: { keepScroll: false }
-
                 },
                 {
                     path: '/category',
+                    name: 'category',
                     component: Category
                 },
                 {
                     path: '/suite',
+                    name: 'suite',
                     component: Suite
                 },
                 {
-                    path: '/ai',
+                    path: '/ai/chat',
+                    name: 'aiChat',
+                    component: ai
+                },
+                {
+                    path: '/ai/chat/:id',
+                    name: 'aiChatWithId',
                     component: ai
                 },
                 {
                     path: '/community',
+                    name: 'community',
                     component: Community,
                     children: [
                         {
                             path: '',
-                            component: CommunityIndex,
                             redirect: '/community/index'
                         },
                         {
@@ -85,7 +95,6 @@ const router = createRouter({
                             path: 'index',
                             component: CommunityIndex,
                             meta: { keepScroll: true }
-
                         },
                         {
                             name: 'communityPost',
@@ -101,137 +110,162 @@ const router = createRouter({
                 },
                 {
                     path: '/search',
+                    name: 'search',
                     component: Search
                 },
                 {
                     path: '/user',
+                    name: 'user',
                     component: User,
                     children: [
                         {
                             path: '',
-                            component: UserDownload,
                             redirect: '/user/dl'
                         },
                         {
                             path: 'dl',
+                            name: 'userDownload',
                             component: UserDownload
                         },
                         {
                             path: 'recharge',
+                            name: 'userRecharge',
                             component: UserRecharge
                         },
                         {
                             path: 'collect/app',
+                            name: 'userAppCollect',
                             component: UserAppCollect
                         },
                         {
                             path: 'submit',
+                            name: 'userSubmit',
                             component: UserSubmit
                         },
                         {
                             path: 'post',
+                            name: 'userPost',
                             component: UserPost
                         },
                         {
                             path: 'fans',
+                            name: 'userFans',
                             component: UserFans
                         },
                         {
                             path: 'follow',
+                            name: 'userFollow',
                             component: UserFollow
                         },
                         {
                             path: 'collect/post',
+                            name: 'userPostCollect',
                             component: UserPostCollect
                         },
                         {
                             path: 'security',
+                            name: 'userSecurity',
                             component: UserSecurity
                         },
                         {
                             path: 'edit',
+                            name: 'userEdit',
                             component: UserEdit
                         },
                         {
                             path: 'delete',
+                            name: 'userDelete',
                             component: UserDelete
                         }
                     ]
                 },
                 {
                     path: '/submit',
+                    name: 'submit',
                     component: Submit,
                     children: [
                         {
                             path: '',
-                            component: RecommendSubmit,
                             redirect: '/submit/recommend'
                         },
                         {
                             path: 'recommend',
+                            name: 'submitRecommend',
                             component: RecommendSubmit
                         },
                         {
                             path: 'developer',
+                            name: 'submitDeveloper',
                             component: DeveloperSubmit
                         }
                     ]
                 },
                 {
                     path: 'message',
+                    name: 'message',
                     component: Message,
                     children: [
                         {
                             path: '',
-                            component: SystemMessage,
                             redirect: '/message/comment'
                         },
                         {
                             path: 'system',
+                            name: 'messageSystem',
                             component: SystemMessage
                         },
                         {
                             path: 'like',
+                            name: 'messageLike',
                             component: LikeCollect
                         },
                         {
                             path: 'follow',
+                            name: 'messageFollow',
                             component: NewFollower
                         },
                         {
                             path: 'comment',
+                            name: 'messageComment',
                             component: CommentReply
                         }
                     ]
                 },
                 {
                     path: '/signin',
+                    name: 'signin',
                     component: Signin
                 },
                 {
                     path: '/feedback',
+                    name: 'feedback',
                     component: Feedback
                 },
                 {
                     path: '/vip',
+                    name: 'vip',
                     component: Vip
                 },
                 {
                     path: '/recharge',
+                    name: 'recharge',
                     component: Recharge
                 }
             ]
         },
         {
             path: '/login',
+            name: 'login',
             component: Login
         },
         {
             path: '/register',
+            name: 'register',
             component: Register
         },
         {
             path: '/reset',
+            name: 'reset',
             component: Resest
         }
     ],
