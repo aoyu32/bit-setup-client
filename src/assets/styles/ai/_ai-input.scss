@@ -2,7 +2,9 @@
 
 .ai-input {
     @include wh;
-    box-shadow: shadow(m);
+    box-shadow:
+        0 0 50px color(c-s-lightest, 0.2),
+        0 0 20px color(c-s-lighter, 0.1);
     @include b-r($b-r);
     padding: 15px 15px 12px 15px;
     @include flex(l, n, c);
@@ -11,7 +13,7 @@
     gap: 5px;
 
     @include c-t {
-        background-color: color(c-g,0.7);
+        background-color: color(c-g, 0.7);
     }
 
     .input-top {
@@ -26,8 +28,14 @@
             @include wh;
             font-size: 13px;
             resize: none;
+
+            @include c-t {
+                color: color(c-g9, 0.8);
+            }
         }
     }
+
+
 
     .input-bottom {
         @include wh(100p, n);
@@ -66,15 +74,36 @@
             @include b-r(50%);
             @include flex(c, c);
 
+            color: color(c-g);
+
             @include c-t {
-                color: color(c-g);
                 background-color: color(c-s-lighter);
             }
 
             &:hover {
                 @include c-t {
-                    background-color: color(c-s-light, 0.5);
+                    background-color: color(c-s-light);
                 }
+            }
+
+
+        }
+
+        .keyframe {
+            animation: zoom 2s infinite ease-in-out;
+        }
+
+        @keyframes zoom {
+            0% {
+                transform: scale(1.0);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1.0);
             }
         }
     }

@@ -3,7 +3,8 @@
         <div class="ai-left">
             <div class="ai-sidebar-container">
                 <AiSidebar @foldSidebar="handleFoldSidebar" @new-chat="handleNewChat" :history="aiStore.allConversation"
-                    @conversation-change="handleConversationChange" />
+                    @conversation-change="handleConversationChange" @rename="handleConversationRename"
+                    @delete="handleDeleteConversation" />
             </div>
         </div>
         <div class="ai-right" :style="{ marginLeft: aiRightMargin }" :class="{ 'chat-in': messagesList.length !== 0 }"
@@ -13,7 +14,7 @@
             </div>
             <div class="ai-input-container">
                 <div class="input-wrapper">
-                    <AiInput @send-message="handleSendMessage" />
+                    <AiInput @send-message="handleSendMessage" :chat="aiStore.isChatIn" @stop="handleStop" />
                 </div>
             </div>
         </div>
@@ -37,7 +38,6 @@ const aiStore = useAiStore()
 const aiWindowRef = ref(null)
 const isFoldSidebar = ref(true)
 const aiRightMargin = computed(() => isFoldSidebar.value ? '250px' : '70px')
-const isChatIn = ref(false)
 const aiRightRef = ref(null)
 const aiRef = ref(null)
 const exceedsViewport = ref(false)
@@ -57,6 +57,10 @@ const handleFoldSidebar = (value) => {
     isFoldSidebar.value = value
 }
 
+const handleStop = () => {
+    aiStore.isChatIn = false
+}
+
 
 //切换聊天会话事件
 const handleConversationChange = (conversationId) => {
@@ -66,6 +70,21 @@ const handleConversationChange = (conversationId) => {
 //创建新聊天事件
 const handleNewChat = () => {
     router.push(`/ai/chat`)
+}
+
+//删除会话
+const handleDeleteConversation = async (conversationId) => {
+    console.log("要删除的会话id:", conversationId);
+    const res = await aiStore.fetchDeleteConversation(conversationId)
+
+    if (res) {
+        aiStore.fetchAllConversation()
+    }
+}
+
+//重命名会话
+const handleConversationRename = (value) => {
+    console.log("要重命名的会话:", value);
 }
 
 // 监听路由变化
@@ -92,7 +111,7 @@ watch(() => route.params.id, (newId, oldId) => {
 const handleSendMessage = async (value) => {
     let conversationId = aiStore.currentConversation
     scrollTo('bottom', 150)
-
+    aiStore.isChatIn = true
     // 如果是新对话，先创建会话
     if (!conversationId) {
         const success = await aiStore.fetchNewConversation()
@@ -148,7 +167,6 @@ onMounted(() => {
 
     if (aiStore.currentConversation) {
         router.push(`/ai/chat/${aiStore.currentConversation}`)
-        // aiStore.fetchMessages(aiStore.currentConversation)
     }
 
     const observer = new ResizeObserver(checkContentHeight)

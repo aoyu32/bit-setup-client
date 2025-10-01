@@ -23,7 +23,7 @@
 
         .ai-name {
             @include flex(l, c);
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 550;
 
             @include c-t {
@@ -37,7 +37,7 @@
             }
 
             .iconfont {
-                font-size: 20px;
+                font-size: 24px;
                 font-weight: 600;
             }
         }
@@ -46,6 +46,7 @@
 
     .new-chat {
         padding: 0 25px;
+        margin-bottom: 5px;
 
 
         button {
@@ -88,6 +89,7 @@
             font-size: 12px;
             padding: 0 25px;
             flex-shrink: 0;
+            color: color(c-g10, 0.3);
 
             .iconfont {
                 font-size: 14px;
@@ -101,7 +103,7 @@
             overflow-y: hidden;
             padding: 0 25px;
             min-height: 0;
-            
+
 
             // 关键：始终允许滚动，但隐藏滚动条
             overflow-y: auto;
@@ -138,7 +140,7 @@
                     input {
                         @include wh;
                         border: 1px solid color(c-s-light);
-                        padding: 5px;
+                        padding: 10px;
                         display: none;
                         font-size: 13px;
                         @include b-r($b-r);
@@ -177,8 +179,8 @@
     }
 
 
-    .no-history{
-        @include flex(c,c);
+    .no-history {
+        @include flex(c, c);
         padding: 50px 0;
         font-size: 14px;
     }
@@ -221,9 +223,11 @@
         gap: 5px;
 
         @include c-t {
-            background-color: color(c-g9, 0.9);
+            background-color: color(c-g0);
             color: color(c-g5);
         }
+
+        box-shadow: shadow(m);
 
         @include b-r($b-r);
 
@@ -241,7 +245,7 @@
 
             &:hover {
                 @include c-t {
-                    background-color: color(c-g10);
+                    background-color: color(c-g1);
                 }
             }
         }
@@ -249,8 +253,14 @@
 
 
 
+
     }
 
 
+    .menu {
+        @include c-t {
+            background-color: color(c-s-light, 0.2);
+        }
+    }
 
 }

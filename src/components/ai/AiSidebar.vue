@@ -24,12 +24,13 @@
                 </div>
                 <div class="history-list" @scroll="handleHistoryListScroll($event)" v-if="history.length !== 0">
                     <div class="history-item" v-for="(item, index) in history" :key="index"
-                        @click="handleHistory(item.conversationId)">
+                        @click="handleHistory(item.conversationId)"
+                        :class="{ menu: showMoreMenu && currentItemIndex === index }">
                         <div class="item-content">
                             <input type="text">
                             <span>{{ item.title }}</span>
                         </div>
-                        <div class="item-more" @click="handleMore(index, $event)">
+                        <div class="item-more" @click="handleMore(index, item.conversationId, $event)">
                             <span><i class="iconfont icon-ellipsis"></i></span>
                         </div>
                     </div>
@@ -73,11 +74,11 @@ const props = defineProps({
 const isFoldSidebar = ref(true)
 const aiSidebarRef = ref(null)
 const sidebarWidth = computed(() => { return isFoldSidebar.value ? '250px' : '70px' })
-const emit = defineEmits(['fold-sidebar', 'new-chat','conversation-change'])
+const emit = defineEmits(['fold-sidebar', 'new-chat', 'conversation-change', 'rename', 'delete'])
 const moreMenuRef = ref(null)
 const showMoreMenu = ref(false)
-const showRenameInput = ref(false)
 const currentItemIndex = ref(0)
+const currentConversation = ref('')
 
 //创建新对话
 const handleNewChat = () => {
@@ -85,7 +86,7 @@ const handleNewChat = () => {
 }
 
 const handleHistory = (value) => {
-    emit('conversation-change',value)
+    emit('conversation-change', value)
 }
 
 //折叠侧边栏按钮点事件
@@ -94,13 +95,12 @@ const handleFoldButton = () => {
     emit('fold-sidebar', isFoldSidebar.value)
 }
 
-const handleMore = (index, event) => {
+const handleMore = (index, conversationId, event) => {
     event.stopPropagation()
     const historyItems = document.querySelectorAll('.history-item')
     const aiSidebar = aiSidebarRef.value
+    currentConversation.value = conversationId
     currentItemIndex.value = index
-    console.log(historyItems);
-
     historyItems.forEach((el, elIndex) => {
         if (index === elIndex) {
             console.log(elIndex);
@@ -110,16 +110,6 @@ const handleMore = (index, event) => {
             const sidebarRect = aiSidebar.getBoundingClientRect()
             // 计算相对于侧边栏容器的位置
             const relativeTop = itemRect.top - sidebarRect.top
-            console.log(el);
-            console.log(aiSidebar);
-
-
-            console.log(itemRect.top);
-            console.log(sidebarRect.top);
-
-            // 设置菜单位置
-            console.log(relativeTop);
-
             moreMenuRef.value.style.top = `${relativeTop}px`
             showMoreMenu.value = true
         }
@@ -147,27 +137,27 @@ const handleMoreMenuItem = (type) => {
             showMoreMenu.value = false
             input = el.querySelector('input')
             span = el.querySelector('span')
-
             spanValue = span.textContent
-            console.log(spanValue);
-            console.log(spanValue);
             more = el.querySelector('.item-more')
         }
     })
     if (type === 'rename') {
-        input.style.display = 'block'
+        input.style.display = 'flex'
         span.style.display = 'none'
-        more.style.display = 'none'
         input.focus()
         input.value = spanValue
         input.addEventListener('blur', () => {
             input.style.display = 'none'
             span.style.display = 'block'
             span.textContent = input.value
-            more.style.display = 'block'
         })
+
+  
     }
 
+    if (type === 'delete') {
+        emit('delete', currentConversation.value)
+    }
 }
 let scrollTimeout = null
 //监听滚动事件

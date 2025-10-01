@@ -11,6 +11,7 @@ export const useAiStore = defineStore('ai', () => {
     const allConversation = ref([])
     const historyMsg = ref([])
     const isNewConversation = ref(false)
+    const isChatIn = ref(false)
 
     const fetchNewConversation = async () => {
         try {
@@ -59,13 +60,19 @@ export const useAiStore = defineStore('ai', () => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
+
+
             const reader = response.body.getReader();
+
             const decoder = new TextDecoder();
 
             while (true) {
                 const { done, value } = await reader.read();
 
-                if (done) break;
+                if (done) {
+                    isChatIn.value = false
+                    break
+                }
 
                 const chunk = decoder.decode(value, { stream: true });
                 // 直接修改引用的对象，避免索引问题
@@ -84,6 +91,7 @@ export const useAiStore = defineStore('ai', () => {
             // 发生错误时移除添加的消息
             historyMsg.value.pop() // 移除助手消息
             historyMsg.value.pop() // 移除用户消息
+            isChatIn.value = false
             return false
         }
 
@@ -120,17 +128,31 @@ export const useAiStore = defineStore('ai', () => {
         }
     }
 
+    const fetchDeleteConversation = async (param) => {
+        try {
+            await aiApi.deleteConversation(param)
+            message.success("删除成功")
+            return true
+        } catch (error) {
+            message.error(message.error)
+            return false
+        }
+    }
+
 
     return {
         allConversation,
         historyMsg,
         currentConversation,
         isNewConversation,
+        isChatIn,
         fetchChat,
         fetchNewConversation,
         fetchConversationTitle,
         fetchAllConversation,
-        fetchMessages
+        fetchMessages,
+        fetchDeleteConversation
+
     }
 
 })

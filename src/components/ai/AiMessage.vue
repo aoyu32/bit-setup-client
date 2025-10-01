@@ -10,7 +10,10 @@
                 <AoMarkdwon :markdownData="messageData.content" />
             </div>
             <div class="loadding-container" v-else>
-                <AoLoadding text="BIT BOOT正在思考中" customColor="#e05555" :showDots="true" />
+                <div class="bit-icon">
+                    <i class="iconfont icon-shejizhinengzhushou"></i>
+                </div>
+                <AoLoadding text="思考中" customColor="#e05555" :showDots="true" animationType="zoom"/>
             </div>
         </div>
     </div>

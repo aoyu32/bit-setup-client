@@ -9,7 +9,8 @@
                 <i class="iconfont icon-lianjie"></i>
             </div>
             <div class="send-button" @click="handleSendMessage">
-                <i class="iconfont icon-up"></i>
+                <i class="iconfont icon-up" v-if="!chat"></i>
+                <i class="iconfont icon-shejizhinengzhushou" :class="{ keyframe: chat }" v-else></i>
             </div>
         </div>
     </div>
@@ -18,9 +19,16 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
+const props = defineProps({
+    chat: {
+        type: Boolean,
+        default: false
+    }
+})
+
 const textareaRef = ref(null);
 const inputValue = ref('');
-const emit = defineEmits(['send-message']);
+const emit = defineEmits(['send-message', 'stop']);
 
 // 输入框输入
 const handleTextInput = (event) => {
@@ -51,6 +59,12 @@ const resetHeight = () => {
 
 // 处理发送消息
 const handleSendMessage = () => {
+
+    if (props.chat) {
+        emit('stop')
+        return
+    }
+
     if (!inputValue.value.trim()) {
         return;
     }
@@ -64,7 +78,7 @@ const handleKeyDown = (e) => {
     if (e.key === 'Enter' && e.ctrlKey) {
         e.preventDefault();
         console.log(inputValue.value);
-        
+
         handleSendMessage();
     }
 };

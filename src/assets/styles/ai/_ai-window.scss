@@ -3,8 +3,6 @@
 .ai-window {
     @include wh(100p, 100p);
     @include flex(c, c, c);
-    
-
     .window-wrapper {
         @include wh(100p, n);
         @include flex(c, c, c);

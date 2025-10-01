@@ -140,9 +140,14 @@ export const aiApi = {
             withToken: true
         })
     },
-    getMessageByConversationId(param){
-        return service.get(`/ai/message/all/${param}`,{
-            withToken:true
+    getMessageByConversationId(param) {
+        return service.get(`/ai/message/all/${param}`, {
+            withToken: true
+        })
+    },
+    deleteConversation(param) {
+        return service.post(`/ai/conversation/delete/${param}`, null, {
+            withToken: true
         })
     }
 

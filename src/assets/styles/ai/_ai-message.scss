@@ -1,25 +1,44 @@
 @use '@/assets/styles/common/main.scss' as *;
-.ai-message{
+
+.ai-message {
     @include wh;
 
-    .user-ask{
+    .user-ask {
         @include wh;
-        @include flex(c,r);
+        @include flex(c, r);
 
-        .message-content{
+        .message-content {
             padding: 10px 15px;
-            @include c-t{
-                background-color: color(c-g3,0.5);
+
+            @include c-t {
+                background-color: color(c-g3, 0.5);
                 @include b-r($b-r);
             }
         }
     }
 
-    .ai-answer{
-        @include wh;
-        @include flex(c,l);
+    .loadding-container {
+        @include flex(c, c);
+        gap: 5px;
 
-        .message-content{
+
+        .iconfont {
+            font-size: 26px;
+            font-weight: 650;
+
+            @include c-t{
+                color: color(c-s);
+            }
+        }
+
+
+    }
+
+    .ai-answer {
+        @include wh;
+        @include flex(c, l);
+
+        .message-content {
             @include wh;
         }
     }
