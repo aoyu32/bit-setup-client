@@ -22,18 +22,59 @@
         }
     }
 
-    .form-main {
+    .form-main-th {
         @include wh;
         @include flex(n, n, c);
         gap: 20px;
 
-        .abstract {
-            @include wh(100p,n);
+        .upload-img {
+            @include wh;
+
+            .upload-list {
+                // display: grid;
+                @include flex(c, c, c);
+                // grid-template-columns: repeat(3, 1fr); // 每行3个
+                gap: 10px;
+
+                .add-upload-btn {
+                    @include wh(100%, 50px); // 和 AoUpload 高宽一致（这里你自己调成一致的高度）
+                    border: 2px dashed #ddd;
+                    border-radius: 12px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    background-color: #f9f9f9;
+                    color: #666;
+                    font-size: 14px;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        border-color: #4d90fe;
+                        background-color: #f0f7ff;
+                        color: #4d90fe;
+                    }
+                }
+            }
+
+
+
+        }
+    }
+
+    .form-main-jw {
+        @include wh;
+        @include flex(c, c, c);
+        gap: 20px;
+
+        .summary {
+            @include wh;
+            flex: 2;
         }
 
         .upload-img {
+            flex: 1;
             @include wh;
-            @include grid(3,1fr);
         }
     }
 

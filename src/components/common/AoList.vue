@@ -15,7 +15,7 @@
                     <slot name="empty">暂无数据</slot>
                 </div>
             </template>
-            <a v-for="(item, index) in list" v-else>
+            <a v-for="(item, index) in list" @click="handleItemClick(item)" v-else>
                 <slot name="item" :item="item" :index="index">
                 </slot>
             </a>
@@ -23,7 +23,17 @@
     </div>
 </template>
 <script setup>
-const props = defineProps(['list'])
+const props = defineProps({
+    list: Array
+})
+
+const emit = defineEmits(['item-click'])
+
+const handleItemClick = (item) => {
+    console.log(props.list);
+    
+    emit('item-click', item)
+}
 </script>
 <style lang="scss" scoped>
 .ao-list {

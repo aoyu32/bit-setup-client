@@ -3,11 +3,11 @@
         <div class="card-top">
             <div class="info">
                 <div class="avatar">
-                    <img src="https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=AppMaster" alt="">
+                    <img :src="data.avatar" alt="">
                 </div>
                 <div class="level">
-                    <span>无敌新手</span>
-                    <span>Lv0</span>
+                    <span>{{ data.levelTitle }}</span>
+                    <span>Lv{{ data.level }}</span>
                 </div>
             </div>
             <div class="post">
@@ -16,17 +16,37 @@
         </div>
         <div class="card-bottom">
             <div class="stats">
-                <div class="stats-item"><span>帖子：</span><span>100</span></div>
-                <div class="stats-item"><span>获赞：</span><span>230</span></div>
-                <div class="stats-item"><span>浏览：</span><span>2342</span></div>
-                <div class="stats-item"><span>评论：</span><span>324</span></div>
-                <div class="stats-item"><span>粉丝：</span><span>5</span></div>
-                <div class="stats-item"><span>关注：</span><span>10</span></div>
+                <div class="stats-item"><span>帖子：</span><span>{{ data.postCount }}</span></div>
+                <div class="stats-item"><span>获赞：</span><span>{{ data.likeCount }}</span></div>
+                <div class="stats-item"><span>浏览：</span><span>{{ data.viewCount }}</span></div>
+                <div class="stats-item"><span>评论：</span><span>{{ data.commentCount }}</span></div>
+                <div class="stats-item"><span>粉丝：</span><span>{{ data.fansCount }}</span></div>
+                <div class="stats-item"><span>关注：</span><span>{{ data.followCount }}</span></div>
             </div>
         </div>
     </div>
 </template>
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+const props = defineProps({
+    data: {
+        type: Object,
+        default: () => {
+            return {
+                avatar: '',
+                levelTitle: '',
+                level: 0,
+                postCount: 0,
+                likeCount: 0,
+                viewCount: 0,
+                commentCount: 0,
+                fansCount: 0,
+                followCount: 0
+            }
+        }
+    }
+})
+</script>
 <style scoped lang="scss">
 @use '@/assets/styles/community/index/_stats-card.scss' as *;
 </style>

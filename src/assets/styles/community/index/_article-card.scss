@@ -39,7 +39,7 @@
                 }
 
                 .level {
-                    @include flex(c, c);
+                    @include flex(c,n);
                     gap: 5px;
 
                     span {

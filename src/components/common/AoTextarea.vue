@@ -1,21 +1,44 @@
 <template>
     <div class="ao-textarea">
-        <textarea name="" id="" placeholder="请输入帖子摘要" ref="textareaRef" @input="adjustTextareaHeight"></textarea>
+        <textarea :value="modelValue" :placeholder="placeholder" ref="textareaRef" @input="onInput"></textarea>
     </div>
 </template>
+
 <script setup>
 import { ref, onMounted } from 'vue'
+
+const props = defineProps({
+    modelValue: {
+        type: String,
+        default: ''
+    },
+    placeholder: {
+        type: String,
+        default: '请输入内容'
+    }
+})
+
+const emit = defineEmits(['update:modelValue'])
+
 const textareaRef = ref(null)
+
 const adjustTextareaHeight = () => {
     const textarea = textareaRef.value
-    textarea.style.height = 'auto' // 先重置高度
-    textarea.style.height = `${textarea.scrollHeight}px` // 再设置为内容高度
+    if (!textarea) return
+    textarea.style.height = 'auto'
+    textarea.style.height = `${textarea.scrollHeight}px`
+}
+
+const onInput = (event) => {
+    emit('update:modelValue', event.target.value)
+    adjustTextareaHeight()
 }
 
 onMounted(() => {
-    adjustTextareaHeight() // 初始化时执行一次
+    adjustTextareaHeight()
 })
 </script>
+
 <style lang="scss" scoped>
 .ao-textarea {
     width: 100%;
@@ -24,7 +47,6 @@ onMounted(() => {
     border-radius: 8px;
 
     textarea {
-        // 基础样式
         width: 100%;
         height: 100%;
         padding: 15px;
@@ -35,26 +57,20 @@ onMounted(() => {
         border-radius: 8px;
         background-color: #fff;
         border: 1px solid #e0e0e0;
-
         outline: none;
         transition: all 0.3s ease;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         resize: none;
-
-
         letter-spacing: 0.2px;
 
-        // 占位符样式
         &::placeholder {
             color: #999;
             opacity: 1;
         }
 
-        /* 聚焦状态 */
         &:focus {
             border-color: #4d90fe;
         }
-
     }
 }
 </style>

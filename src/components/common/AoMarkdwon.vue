@@ -6,7 +6,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { marked } from 'marked'
-import 'juejin-markdown-themes/dist/cyanosis.min.css'
+import 'juejin-markdown-themes/dist/simple.css'
 
 const props = defineProps({
     markdownData: {

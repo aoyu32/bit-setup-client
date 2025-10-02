@@ -40,7 +40,7 @@
                 }
 
                 .level {
-                    @include flex(c, c);
+                    @include flex(c, n);
                     gap: 5px;
 
                     span {
@@ -123,7 +123,9 @@
             flex-wrap: wrap;
             @include grid(3, 1fr);
 
+
             .img-item {
+                box-shadow: shadow(s);
                 flex: 1;
                 @include b-r($b-r);
                 @include img($b-r);

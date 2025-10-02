@@ -103,7 +103,7 @@ const router = createRouter({
                         },
                         {
                             name: 'communityDetail',
-                            path: 'detail/:type',
+                            path: 'detail/:type/:id',
                             component: CommunityDetail
                         }
                     ]

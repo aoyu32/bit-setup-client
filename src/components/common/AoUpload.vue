@@ -1,14 +1,14 @@
 <template>
     <div class="ao-upload">
         <div class="upload-wrapper" @click="triggerFileInput">
-            <input ref="fileInput" type="file" class="file-input" accept="image/*" @change="handleFileChange">
+            <input ref="fileInput" type="file" class="file-input" accept="image/*" @change="handleFileChange" />
 
             <div v-if="!previewUrl" class="upload-area">
                 <i class="iconfont icon-picture"></i>
             </div>
 
             <div v-else class="preview-area">
-                <img :src="previewUrl" class="preview-image">
+                <img :src="previewUrl" class="preview-image" />
                 <div class="preview-overlay">
                     <button class="replace-btn" @click.stop="triggerFileInput">更换</button>
                     <button class="remove-btn" @click.stop="removeImage">删除</button>
@@ -19,34 +19,62 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch, onUnmounted } from 'vue'
 
-const fileInput = ref(null);
-const previewUrl = ref('');
+const fileInput = ref(null)
+const previewUrl = ref('')
+
+// 定义props接收外部传入的图片URL
+const props = defineProps({
+    imageUrl: {
+        type: String,
+        default: ''
+    }
+})
+
+const emit = defineEmits(['file-selected', 'file-removed'])
+
+// 监听外部传入的imageUrl变化
+watch(() => props.imageUrl, (newUrl) => {
+    previewUrl.value = newUrl
+}, { immediate: true })
 
 const triggerFileInput = () => {
-    fileInput.value.click();
-};
+    fileInput.value.click()
+}
 
 const handleFileChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     if (file) {
-        previewUrl.value = URL.createObjectURL(file);
+        // 不再使用本地预览，直接emit文件给父组件
+        // 父组件负责上传并返回URL，然后通过props传递回来
+        emit('file-selected', file)
+        
+        // 可选：显示本地预览作为临时效果
+        // previewUrl.value = URL.createObjectURL(file)
     }
-};
+}
 
 const removeImage = () => {
-    previewUrl.value = '';
-    fileInput.value.value = '';
-};
+    previewUrl.value = ''
+    fileInput.value.value = ''
+    emit('file-removed')
+}
+
+// 清理本地创建的Object URL（如果使用了临时预览）
+onUnmounted(() => {
+    if (previewUrl.value && previewUrl.value.startsWith('blob:')) {
+        URL.revokeObjectURL(previewUrl.value)
+    }
+})
 </script>
 
 <style scoped lang="scss">
+/* 样式保持不变 */
 .ao-upload {
     width: 100%;
     height: 100%;
     min-height: 120px;
-
 
     .upload-wrapper {
         width: 100%;

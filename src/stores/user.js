@@ -76,7 +76,7 @@ export const useUserInfoStore = defineStore('user-info', () => {
      */
     const resetUserData = () => {
         userData.value = {
-            uid: null,
+            uid: "",
             email: "",
             phone: "",
             role: "",

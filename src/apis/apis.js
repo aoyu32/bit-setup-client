@@ -152,3 +152,38 @@ export const aiApi = {
     }
 
 }
+
+export const communityApi = {
+
+    uploadImg(file, uid) {
+        const formData = new FormData();
+        formData.append('multipartFile', file);  // 参数名必须与后端一致
+        formData.append('uid', uid);             // 第二个参数
+
+        return service.post("/post/upload/img", formData, {
+            headers: {
+                'Content-Type': 'multipart-format-data'  // 重要：让浏览器自动设置正确的 Content-Type
+            },
+            withToken: true  // 如果需要认证
+        })
+    },
+    savePost(param) {
+        return service.post("/post/save", param, {
+            withToken: true
+        })
+    },
+    getPostList(param) {
+        return service.get(`/post/list/${param}`)
+    },
+    getPostDetail(param) {
+        return service.get(`/post/detail/${param}`)
+
+    },
+    getHotPost() {
+        return service.get("/post/hot")
+    },
+    getRecommend(){
+        return service.get("/post/recommend")
+    }
+
+}

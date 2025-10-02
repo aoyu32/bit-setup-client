@@ -53,7 +53,7 @@ const props = defineProps({
 })
 
 // 定义事件
-const emit = defineEmits(['update:modelValue', 'valid','invalid'])
+const emit = defineEmits(['update:modelValue', 'valid', 'invalid'])
 
 // 内部状态
 const internalType = ref(props.type)
@@ -222,6 +222,8 @@ defineExpose({
         color: #999;
         padding-right: 8px;
         user-select: none;
+
+ 
     }
 
     .right-icon {

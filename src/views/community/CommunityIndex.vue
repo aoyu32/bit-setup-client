@@ -6,8 +6,8 @@
             </div>
             <div class="post-list-container">
                 <PostList>
-                    <component v-for="(item, index) in postFilterData" :postData="item" :key="index"
-                        :is="getComponentByTag(item.tag.name)">
+                    <component v-for="(item, index) in communityStore.postList" :postData="item" :key="index"
+                        :is="getComponentByTag(item.category)">
                     </component>
                 </PostList>
             </div>
@@ -15,10 +15,10 @@
         <div class="community-right" ref="communityRightRef">
             <div class="right-content-wrapper" ref="rightContentWrapperRef">
                 <div class="stats-card-container">
-                    <StatsCard />
+                    <StatsCard :data="statsCardData" />
                 </div>
                 <div class="hot-list-container">
-                    <aoList :list="hotPostsDisplay">
+                    <aoList :list="communityStore.hotList" @item-click="handleHotItemClick">
                         <template #title>
                             <span><i class="iconfont icon-huo"></i></span>
                             <span>热帖榜</span>
@@ -31,11 +31,11 @@
                                 <div class="order">{{ index + 1 }}</div>
                                 <div class="content">{{ item.title }}</div>
                             </div>
-                            <div class="views"><i class="iconfont icon-fire"></i>{{ item.views }}</div>
+                            <div class="views"><i class="iconfont icon-fire"></i>{{ item.viewCount }}</div>
                         </template>
                     </aoList>
                 </div>
-                <div class="author-list-container">
+                <!-- <div class="author-list-container">
                     <AoList :list="goodAuthorsList">
                         <template #title>
                             <span><i class="iconfont icon-xunzhang"></i></span>
@@ -70,7 +70,7 @@
                             </div>
                         </template>
                     </AoList>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -85,23 +85,26 @@ import postData from '../../utils/post-data';
 import StatsCard from '@/components/community/index/StatsCard.vue';
 import AoList from '../../components/common/AoList.vue';
 import goodAuthorsList from '../../utils/good-author';
-const hotPosts = [
-    { id: 1, title: '2023安卓应用商店排行榜TOP10', views: 5420 },
-    { id: 2, title: '微信多开方法汇总（附防封号指南）', views: 4870 },
-    { id: 3, title: '最新版抖音国际版TikTok下载安装教程', views: 4650 },
-    { id: 4, title: '警惕！这些"清理大师"APP会窃取数据,这些"清理大师"APP会窃取数据', views: 4320 },
-    { id: 5, title: 'iOS17免越狱安装第三方应用教程', views: 3980 },
-    { id: 6, title: 'Chrome浏览器必备的12个扩展插件', views: 3760 },
-    { id: 7, title: '如何合法获取付费APP的免费试用', views: 3540 },
-    { id: 8, title: 'PUBG手游国际服延迟优化方案', views: 3320 },
-    { id: 9, title: 'Spotify会员正版低价订阅渠道', views: 3100 },
-    { id: 10, title: '2023年最稳定的5款VPN推荐', views: 2870 },
-    { id: 11, title: '华为手机安装Google服务全攻略', views: 2650 },
-    { id: 12, title: 'Adobe全家桶官方正版优惠购买指南', views: 2430 },
-    { id: 13, title: 'Telegram优质资源频道推荐清单', views: 2210 },
-    { id: 14, title: 'Windows11运行安卓APP完整教程', views: 1990 },
-    { id: 15, title: '替代迅雷的8款下载工具对比', views: 1770 },
-]
+import { useCommunityStore } from '../../stores/community';
+import { useUserInfoStore } from '../../stores/user';
+const communityStore = useCommunityStore()
+const userStore = useUserInfoStore()
+import { useRouter } from 'vue-router';
+const router = useRouter()
+
+const statsCardData = computed(() => {
+    return {
+        avatar: userStore.userData.avatar,
+        levelTitle: userStore.userData.levelTitle,
+        level: userStore.userData.level,
+        postCount: userStore.userData.postCount,
+        likeCount: userStore.userData.likeCount,
+        viewCount: userStore.userData.viewCount,
+        commentCount: userStore.userData.commentCount,
+        fansCount: userStore.userData.fansCount,
+        followCount: userStore.userData.followCount
+    }
+})
 
 const communityLeftRef = ref(null)
 const communityRightRef = ref(null)
@@ -111,6 +114,17 @@ const showAll = ref(false)
 const hotPostsDisplay = computed(() => {
     return showAll.value ? hotPosts : hotPosts.slice(0, 10);
 })
+
+const handleHotItemClick = (item) => {
+    const route = router.resolve({
+        name: 'communityDetail',
+        params: {
+            type: item.category === '话题' || item.category === '求助' ? 'post' : 'article',
+            id: item.pid
+        }
+    })
+    window.open(route.href, '_blank')
+}
 
 const formatStats = (stats) => {
     return {
@@ -128,6 +142,9 @@ const componentMap = {
 };
 onMounted(() => {
     // communityLeftMinHeight.value = communityRightRef.value.getBoundingClientRect().height + 'px'
+    communityStore.fetchPostListByCategory('all')
+    //获取热帖
+    communityStore.fetchHotPost()
 })
 
 // 直接监听 community-right 高度变化
@@ -153,13 +170,11 @@ const getComponentByTag = (tagName) => {
     return componentMap[tagName] || PostCard;
 };
 
-const currentItem = ref('全部')
+const currentItem = ref('all')
 
 const handleNavActiveItem = (item) => {
-    console.log(item);
 
-    currentItem.value = item
-    console.log(currentItem.value);
+    communityStore.fetchPostListByCategory(item)
 
 }
 
@@ -215,6 +230,7 @@ const postFilterData = computed(() => {
         @include wh;
         position: relative;
         transition: transform 0.3s ease;
+
         .content-wrapper {
             @include flex;
             gap: 20px;
@@ -260,6 +276,30 @@ const postFilterData = computed(() => {
             gap: 10px;
             font-size: 11px;
             @include t-e;
+        }
+    }
+
+
+}
+
+@media (max-width:1100px) {
+    .community-index {
+        @include wh;
+        padding: 25px 0;
+        position: relative;
+
+        .community-left {
+            @include wh(100p, n);
+            @include flex(n, n, c);
+             margin-right: 0px;
+
+            @include c-t {
+                background-color: color(c-g);
+            }
+        }
+
+        .community-right {
+            display: none;
         }
     }
 
