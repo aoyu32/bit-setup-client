@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
 import Home from '@/views/home/Home.vue'
 import Category from '@/views/category/Category.vue'
 import Suite from '@/views/suite/Suite.vue'
@@ -280,6 +281,57 @@ const router = createRouter({
         }
         // 其他情况滚动到顶部
         return { top: 0 }
+    }
+})
+
+// 需要登录才能访问的路由列表
+const authRequiredRoutes = [
+    '/user',
+    '/user/dl',
+    '/user/recharge',
+    '/user/collect/app',
+    '/user/submit',
+    '/user/post',
+    '/user/fans',
+    '/user/follow',
+    '/user/collect/post',
+    '/user/security',
+    '/user/edit',
+    '/user/delete',
+    '/submit',
+    '/submit/recommend',
+    '/submit/developer',
+    '/message',
+    '/message/system',
+    '/message/like',
+    '/message/follow',
+    '/message/comment',
+    '/signin',
+    '/vip',
+    '/recharge'
+]
+
+// 路由守卫
+router.beforeEach((to, from, next) => {
+    const { isLogin } = useAuthStore()
+    
+    // 检查当前路由是否需要登录
+    const requiresAuth = authRequiredRoutes.some(route => 
+        to.path.startsWith(route)
+    )
+    
+    if (requiresAuth && !isLogin) {
+        next({
+            path: '/login',
+            query: { redirect: to.fullPath } // 保存目标路由，登录后跳转
+        })
+    } else if (to.path === '/login' && isLogin) {
+        // 如果已登录但访问登录页，跳转到首页或redirect参数指定的页面
+        const redirect = from.query.redirect || '/home'
+        next(redirect)
+    } else {
+        // 其他情况正常放行
+        next()
     }
 })
 

@@ -12,23 +12,20 @@
     }
 
     .app-icon {
-        @include flex(c, c);
+        @include wh(n, 100p);
+        @include flex(n, c, c);
+        gap: 10px;
 
         .form-content {
-            @include wh(70);
+            @include wh(105);
             margin-top: 0;
         }
     }
 
     .app-file-upload {
+        @include wh;
         @include flex(n, n, c);
         flex: 1;
-
-        .form-content {
-            height: 79px;
-
-        }
-
     }
 
     .app-prove {
@@ -37,8 +34,12 @@
         .form-content {
             @include flex;
             gap: 10px;
-            height: 150px;
+            height: 250px;
         }
+    }
+
+    .form-label{
+        font-size: 14px;
     }
 
     .submit-button {
@@ -52,6 +53,7 @@
             @include b-r($b-r);
 
             font-size: 14px;
+
             @include c-t {
                 background-color: color(c-s);
                 color: color(c-g);

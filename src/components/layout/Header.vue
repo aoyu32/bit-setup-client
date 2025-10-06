@@ -13,7 +13,8 @@
                         </li>
                         <li v-for="(item, index) in navItems.slice(1)" :key="index" class="nav-item"
                             @click="activeNavItem(index + 1)">
-                            <router-link :to="item.getRoute ? item.getRoute() : item.route" :class="{ active: activeNavIndex === index + 1 }">
+                            <router-link :to="item.getRoute ? item.getRoute() : item.route"
+                                :class="{ active: activeNavIndex === index + 1 }">
                                 <i :class="['iconfont', item.icon]"></i>
                                 {{ item.name }}
                             </router-link>
@@ -35,7 +36,8 @@
             <div class="search" v-if="!isSearchPage">
                 <!-- <HeaderSearch /> -->
                 <AoSearch :suggestion="searchStore.searchTips" :history="searchHistory" v-model="searchValue"
-                    @clear="searchValue = ''" @search="handleSearch"></AoSearch>
+                    @clear="searchValue = ''" @search="handleSearch" @focus="handleSearchFocus"
+                    @delete-history="handleDeleteHistory"></AoSearch>
             </div>
             <div class="search-trigger" v-if="!isSearchPage">
                 <div class="search-icon">
@@ -134,6 +136,8 @@ const user = computed(() => {
 })
 
 onMounted(() => {
+
+
     const profileHeight = document.querySelector('.profile-container').offsetHeight
     const userInfoHeight = document.querySelector('.user-info-wrapper').offsetHeight
     userInfoMarginTop.value = `${(profileHeight - userInfoHeight) / 2}px`
@@ -176,6 +180,10 @@ const isSearchPage = computed(() => {
     return route.path === '/search'
 })
 
+const handleSearchFocus = async () => {
+    await searchStore.fetchSearchHistory()
+}
+
 watch(() => searchValue.value, (newValue) => {
     if (!newValue) {
         return
@@ -183,36 +191,10 @@ watch(() => searchValue.value, (newValue) => {
     searchStore.fetchSearchTips(newValue)
 })
 
-const searchHistory = ref([
-    "vue3",
-    "react hooks最佳实践",
-    "如何学习TypeScript",
-    "js",
-    "2023前端发展趋势",
-    "css动画效果",
-    "node.js性能优化",
-    "webpack配置",
-    "es6新特性",
-    "前端面试题",
-    "python",
-    "机器学习入门",
-    "rust vs go",
-    "docker部署前端项目",
-    "git高级用法",
-    "如何提高代码质量",
-    "前端性能优化技巧",
-    "小程序开发",
-    "nuxt.js服务端渲染",
-    "大前端技术栈",
-    "算法",
+const searchHistory = computed(()=>{
+    return searchStore.searchHistory
+})
 
-])
-
-const myCoin = ref(100)
-const isMember = ref(true)
-const username = ref('aoyufdsffdsfsd')
-const avatarUrl = ref('https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=Felix')
-const isShowProfileMenu = ref(false)
 const isShowDropDownNav = ref(false)
 
 const handleSearch = () => {
@@ -227,6 +209,13 @@ const handleSearch = () => {
     window.open(route.href, '_blank')
 }
 
+const handleDeleteHistory = async (sid) => {
+
+    console.log("删除sid为：",sid);
+    
+    await searchStore.fetchDeeleteHistoryItem(sid)
+
+}
 
 
 const activeNavIndex = ref(0);

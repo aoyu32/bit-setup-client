@@ -26,7 +26,12 @@
             .avatar {
                 @include b-r(50);
                 @include wh(45);
-                @include img;
+                flex-shrink: 0;
+
+                .img-wrapper {
+                    @include wh;
+                    @include img;
+                }
 
                 @include c-t {
                     border: 2px solid color(c-p-lighter);
@@ -34,7 +39,8 @@
             }
 
             .name-vip {
-                @include flex(c,c);
+                @include flex(c, c);
+
                 .nickname {
                     font-size: 16px;
                 }
@@ -57,11 +63,23 @@
                             object-fit: contain;
                         }
                     }
+
+
                 }
+
+
             }
+
+
         }
 
 
+    }
+
+    .gold {
+        @include c-t {
+            color: color(warning);
+        }
     }
 
     .card-unfold {
@@ -78,7 +96,13 @@
         .avatar {
             @include b-r(50);
             @include wh(100);
-            @include img;
+            flex-shrink: 0;
+
+            .img-wrapper {
+                @include wh;
+                @include img;
+            }
+
 
             @include c-t {
                 border: 2px solid color(c-p-lighter);
@@ -184,7 +208,7 @@
             @include b-r($b-r);
 
             @include c-t {
-                background-color: color(c-g0);
+                background-color: color(c-g1);
                 color: color(c-g9, 0.6);
             }
 
@@ -289,7 +313,7 @@
             }
         }
 
-        
+
     }
 
     .card-bottom {

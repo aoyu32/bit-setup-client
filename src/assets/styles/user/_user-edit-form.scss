@@ -4,7 +4,7 @@
     @include wh;
     padding: 20px;
 
-    form {
+    .form-wrapper {
         @include flex(n, n, c);
         gap: 15px;
     }
@@ -14,7 +14,15 @@
         gap: 5px;
 
         .avatar-label {
-            font-size: 12px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease-out;
+
+            &:hover {
+                @include c-t {
+                    color: color(c-p-light);
+                }
+            }
         }
 
 
@@ -71,6 +79,7 @@
 
     .gender {
         @include wh;
+        margin-top: 14px;
 
         .gender-radio {
             box-shadow: shadow(m);
@@ -80,25 +89,42 @@
             @include wh;
             padding: 10px 10px;
             font-size: 13px;
+
             @include c-t {
                 background-color: color(c-g);
-                color: color(c-g9,0.5);
+                color: color(c-g9, 0.5);
             }
         }
     }
 
-    .submit-button{
-        @include wh(100p,n);
+    .city{
+        margin-top: 15px;
+    }
+
+    .career{
+        margin-top: 15px;
+    }
+
+    .submit-button {
+        @include wh(100p, n);
         margin-top: 20px;
-        button{
-            @include wh(100p,n);
+
+        button {
+            @include wh(100p, n);
             padding: 10px 0;
             @include b-r($b-r);
-            @include c-t{
-                background-color: color(c-s-lighter);
+            transition: all 0.3s ease-out;
+            @include c-t {
+                background-color: color(c-s-light);
                 color: color(c-g);
+            }
+
+            &:hover {
+                @include c-t {
+                    background-color: color(c-s);
+                    color: color(c-g);
+                }
             }
         }
     }
 }
-

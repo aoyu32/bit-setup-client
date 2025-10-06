@@ -1,8 +1,8 @@
 <template>
     <div class="search-input">
         <div class="ao-search-container">
-            <AoSearch :suggestion="tips" :history="searchHistory" v-model="searchValue" @clear="searchValue = ''"
-                @focus="handleFocus" @search="handleSearch">
+            <AoSearch :suggestion="tips" :history="history" v-model="searchValue" @clear="searchValue = ''"
+                @focus="handleFocus" @search="handleSearch" @delete-history="handleDeleteHistory">
                 <template #left>
                     <div class="left-search-icon">
                         <span><i class="iconfont icon-sousuo"></i></span>
@@ -33,37 +33,15 @@ const props = defineProps({
     tips: {
         type: Array,
         default: []
+    },
+    history: {
+        type: Array,
+        default: []
     }
 })
 
-const emit = defineEmits(['update:modelValue', 'focus', 'search'])
+const emit = defineEmits(['update:modelValue', 'focus', 'search', 'delete-history'])
 const searchValue = ref(props.modelValue)
-
-
-const searchHistory = ref([
-    "vue3",
-    "react hooks最佳实践",
-    "如何学习TypeScript",
-    "js",
-    "2023前端发展趋势",
-    "css动画效果",
-    "node.js性能优化",
-    "webpack配置",
-    "es6新特性",
-    "前端面试题",
-    "python",
-    "机器学习入门",
-    "rust vs go",
-    "docker部署前端项目",
-    "git高级用法",
-    "如何提高代码质量",
-    "前端性能优化技巧",
-    "小程序开发",
-    "nuxt.js服务端渲染",
-    "大前端技术栈",
-    "算法",
-
-])
 
 const handleSearch = () => {
     emit('search')
@@ -75,6 +53,10 @@ watch(() => searchValue.value, (newValue) => {
     console.log(newValue);
 
 })
+
+const handleDeleteHistory = (sid) => {
+    emit('delete-history', sid)
+}
 
 const handleFocus = () => {
     emit('focus')

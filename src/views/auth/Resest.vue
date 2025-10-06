@@ -17,15 +17,31 @@
             </div>
             <div class="reset-right">
                 <div class="reset-form-container">
-                    <ResetForm />
+                    <ResetForm @reset-password="handleResetPassword" />
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script setup>
+import { ref, onMounted, computed } from 'vue'
 import AuthLogo from '@/components/auth/AuthLogo.vue';
 import ResetForm from '@/components/auth/ResetForm.vue';
+import { useAuthStore } from '../../stores/auth';
+import { useRouter } from 'vue-router';
+const authStore = useAuthStore()
+const router = useRouter()
+
+
+const handleResetPassword = async (formData) => {
+    console.log("重置密码表单：",formData);
+    
+    const resp = await authStore.fetchResetPwd(formData)
+    if (resp) {
+        router.replace('/login')
+    }
+}
+
 
 
 

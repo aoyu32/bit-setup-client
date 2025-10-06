@@ -43,7 +43,7 @@
                     </AoInput>
                 </div>
                 <div class="register-btn">
-                    <button type="submit" @click="handleRegister" :disabled="registerLoading">
+                    <button type="submit" @click="handleRegister">
                         {{ regButton }}
                     </button>
                 </div>
@@ -143,7 +143,7 @@ const isFormValid = () => {
 
 const handleSendCode = async () => {
     if (!isEmailValid.value) return
-    
+
     const success = await authStore.fetchCaptcha(regForm.email)
     if (!success) {
         codeButtonRef.value?.resetCountdown()
@@ -152,18 +152,15 @@ const handleSendCode = async () => {
 
 
 const handleVerifySuccess = async (param) => {
-    
+
     const regData = {
         verifyCode: param.captchaVerification,
         account: regForm.email,
         emailVerifyCode: regForm.code,
         password: regForm.confirmPassword
     }
-    
-    const success = await authStore.fetchRegister(regData)
-    if (success) {
-        emit("register", authStore.userData)
-    }
+
+    emit("register", regData)
 }
 
 const handleRegister = () => {

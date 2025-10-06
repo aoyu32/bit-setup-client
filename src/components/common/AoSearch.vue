@@ -32,7 +32,7 @@
                         <div class="history-label">
                             <span>搜索历史</span>
                         </div>
-                        <div class="history-clear" @click="clearAllHistory">
+                        <div class="history-clear" @click="deleteHistoryItem('')">
                             <span>清空</span>
                             <span><i class="iconfont icon-qingchu"></i></span>
                         </div>
@@ -40,9 +40,9 @@
                     <div class="history-main">
                         <div class="search-history-items" v-if="history.length > 0">
                             <div class="search-history-item" v-for="(item, index) in history" :key="index"
-                                @click="selectSuggestion(item)">
-                                <span>{{ item }}</span>
-                                <div class="delete-icon" @click.stop="deleteHistoryItem(index)">
+                                @click="selectSuggestion(item.keyword)">
+                                <span>{{ item.keyword }}</span>
+                                <div class="delete-icon" @click.stop="deleteHistoryItem(item.id)">
                                     <i class="iconfont icon-close"></i>
                                 </div>
                             </div>
@@ -70,10 +70,9 @@
 </template>
 
 <script setup>
-import { ref, watch, computed } from 'vue'
-import AoInput from './AoInput.vue'
+import { ref, watch, computed, nextTick } from 'vue'
 
-const emit = defineEmits(['update:modelValue', 'clear', 'search', 'focus'])
+const emit = defineEmits(['update:modelValue', 'clear', 'search', 'focus', 'delete-history'])
 const inputRef = ref(null)
 const isShowPanel = ref(false)
 const isShowHistory = ref(true)
@@ -167,14 +166,12 @@ const selectSuggestion = (item) => {
     handleBlur()
 }
 
-// 清空所有历史
-const clearAllHistory = () => {
-    console.log('清空历史')
-}
-
-// 删除单个历史项
-const deleteHistoryItem = (index) => {
-    console.log('删除历史项', index)
+// 删除历史项
+const deleteHistoryItem = (sid) => {
+    if (props.history.length === 0) {
+        return
+    }
+    emit('delete-history', sid)
 }
 
 const handleClearInput = () => {

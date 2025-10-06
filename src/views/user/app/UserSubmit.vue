@@ -1,7 +1,6 @@
 <template>
     <div class="user-upload">
         <AoTabs :tabs="tabs">
-
         </AoTabs>
     </div>
 </template>

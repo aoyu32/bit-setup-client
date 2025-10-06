@@ -2,10 +2,10 @@
     <div class="reset-form">
         <div class="reset-label">
             <h3>RESET</h3>
-            <span><i class="iconfont icon-dengji"></i></span>
+            <span><i class="iconfont icon-xinzengdan"></i></span>
         </div>
         <div class="form">
-            <form @submit.prevent="handleReset">
+            <form @submit.prevent>
                 <div class="email">
                     <AoInput placeholder="邮箱" v-model="resetForm.email" :rules="rules.email" ref="emailInput">
                         <template #icon>
@@ -22,7 +22,8 @@
                         </AoInput>
                     </div>
                     <div class="send-code">
-                        <button type="button" :disabled="!isEmailValid" @click="sendCode">获取验证码</button>
+                        <AoTimeButton text="获取验证码" :countdown="60" @click="handleSendCode" :disabled="!isEmailValid"
+                            ref="codeButtonRef" />
                     </div>
                 </div>
                 <div class="password">
@@ -42,38 +43,58 @@
                     </AoInput>
                 </div>
                 <div class="reset-btn">
-                    <button type="submit" :disabled="!isFormValid">重置密码</button>
+                    <button type="submit" @click="handleResetPassword">
+                        {{ resetButton }}
+                    </button>
                 </div>
             </form>
+        </div>
+        <div class="verify-window-container" v-if="isShowVerify">
+            <VerifyWindow @on-success="handleVerifySuccess" @on-close="isShowVerify = false" />
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { reactive, ref, watch } from 'vue'
+import message from '@/utils/message'
 import AoInput from '../common/AoInput.vue'
+import VerifyWindow from '../verifition/VerifyWindow.vue'
+import AoTimeButton from '../common/AoTimeButton.vue'
+import { useAuthStore } from '../../stores/auth'
 
-const resetForm = ref({
+const authStore = useAuthStore()
+const isShowVerify = ref(false)
+
+const resetForm = reactive({
     email: '',
     code: '',
     password: '',
     confirmPassword: ''
 })
 
+const resetButton = ref('重置密码')
+
+// 定义 emit
+const emit = defineEmits(['reset-password'])
+
 // 引用 AoInput 组件实例以手动触发校验
 const emailInput = ref(null)
 const codeInput = ref(null)
 const passwordInput = ref(null)
 const confirmPasswordInput = ref(null)
+const codeButtonRef = ref(null)
 
-// 邮箱验证：支持标准邮箱格式
+// 邮箱验证：支持标准邮箱格式，包括QQ邮箱
 const validateEmail = (value) => {
+    if (!value) return '邮箱不能为空'
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     return emailRegex.test(value) ? true : '请输入有效的邮箱地址'
 }
 
 // 验证码验证：6位数字
 const validateCode = (value) => {
+    if (!value) return '验证码不能为空'
     const codeRegex = /^\d{6}$/
     return codeRegex.test(value) ? true : '验证码必须为6位数字'
 }
@@ -88,64 +109,64 @@ const validatePassword = (value) => {
 // 确认密码验证：与密码一致
 const validateConfirmPass = (value) => {
     if (!value) return '确认密码不能为空'
-    return value === resetForm.value.password ? true : '两次密码输入不一致'
+    return value === resetForm.password ? true : '两次密码输入不一致'
 }
 
-// 校验规则：实时校验（input）和失焦校验（blur）
+// 校验规则：添加实时校验（input）和失焦校验（blur）
 const rules = reactive({
     email: [
         { validator: validateEmail, trigger: 'input' },
-        { validator: validateEmail, trigger: 'blur' }
     ],
     code: [
         { validator: validateCode, trigger: 'input' },
-        { validator: validateCode, trigger: 'blur' }
     ],
     password: [
         { validator: validatePassword, trigger: 'input' },
-        { validator: validatePassword, trigger: 'blur' }
     ],
     confirmPass: [
         { validator: validateConfirmPass, trigger: 'input' },
-        { validator: validateConfirmPass, trigger: 'blur' }
     ]
 })
 
-// 计算表单整体有效性
-const isFormValid = computed(() => {
-    return (
-        validateEmail(resetForm.value.email) === true &&
-        validateCode(resetForm.value.code) === true &&
-        validatePassword(resetForm.value.password) === true &&
-        validateConfirmPass(resetForm.value.confirmPassword) === true
-    )
+const isEmailValid = ref(false)
+
+watch(() => resetForm.email, newValue => {
+    const validationResult = validateEmail(newValue)
+    isEmailValid.value = validationResult === true
 })
 
-// 计算邮箱是否有效，用于控制“获取验证码”按钮
-const isEmailValid = computed(() => {
-    return validateEmail(resetForm.value.email) === true
-})
+const isFormValid = () => {
+    return (emailInput.value?.validate() && codeInput.value?.validate()
+        && passwordInput.value?.validate() && confirmPasswordInput.value?.validate())
+}
 
-// 发送验证码逻辑（模拟）
-const sendCode = () => {
-    if (isEmailValid.value) {
-        alert('验证码已发送至您的邮箱！')
-        // 这里可以添加实际的发送验证码逻辑
+const handleSendCode = async () => {
+    if (!isEmailValid.value) return
+
+    const success = await authStore.fetchCaptcha(resetForm.email)
+    if (!success) {
+        codeButtonRef.value?.resetCountdown()
     }
 }
 
-// 重置密码逻辑
-const handleReset = () => {
-    // 手动触发所有输入框的校验
-    emailInput.value.validate()
-    codeInput.value.validate()
-    passwordInput.value.validate()
-    confirmPasswordInput.value.validate()
-
-    if (isFormValid.value) {
-        alert('密码重置成功！')
-        // 这里可以添加实际的重置密码逻辑，比如调用 API
+const handleVerifySuccess = async (param) => {
+    const resetData = {
+        verifyCode: param.captchaVerification,
+        account: resetForm.email,
+        emailVerifyCode: resetForm.code,
+        password: resetForm.confirmPassword
     }
+
+    emit("reset-password", resetData)
+}
+
+const handleResetPassword = () => {
+    if (!isFormValid()) {
+        message.error('请填写完整且正确的信息')
+        return
+    }
+
+    isShowVerify.value = true
 }
 </script>
 <style scoped lang="scss">

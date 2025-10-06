@@ -4,7 +4,7 @@
             <AppCard v-for="app in list" :key="app.id" :app="app" />
         </div>
         <div class="load-more" ref="loadMoreRef">
-            <AoLoadding showDots="true" font-size="20px" intensity="0" v-if="loading" />
+            <AoLoadding :showDots="true" font-size="20px" :intensity="0" v-if="loading" />
             <div class="no-more" v-else-if="noMoreData">
                 <p>没有更多了</p>
             </div>

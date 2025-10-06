@@ -5,7 +5,8 @@
                 寻找你的app <i class="iconfont icon-expression"></i>
             </div>
             <div class="search-input-container">
-                <SearchInput v-model="searchValue" :tips="tipsList" @focus="handleFocus" @search="handleSearch" />
+                <SearchInput v-model="searchValue" :tips="tipsList" @focus="handleFocus" @search="handleSearch"
+                    :history="searchStore.searchHistory" @delete-history="handleDeleteHistory" />
             </div>
             <div class="search-no-find slogan">
                 <span>没找到？</span>
@@ -51,6 +52,13 @@ const handlePageChange = (pageNum) => {
     currentPageNum.value = pageNum
 }
 
+const handleDeleteHistory = async (sid) => {
+
+    console.log("删除sid为：",sid);
+    await searchStore.fetchDeeleteHistoryItem(sid)
+
+}
+
 const handleFilterChange = (filterData) => {
     console.log("过滤条件", filterData);
     if (searchValue.value === '') {
@@ -62,8 +70,10 @@ const handleFilterChange = (filterData) => {
 
 }
 
-const handleFocus = () => {
-    searchStore.fetchSearchTips(searchValue.value)
+const handleFocus = async () => {
+    await searchStore.fetchSearchTips(searchValue.value)
+    await searchStore.fetchSearchHistory()
+
 }
 
 const handleSearch = () => {
@@ -101,7 +111,7 @@ const fetchAppList = (pageNum, pageSize) => {
         keyword: searchValue.value,
         sortType: 0,
         size: '',
-        pricingModel: ''
+        pricingModel: '',
     })
 }
 

@@ -30,7 +30,6 @@
     .user-security-bottom {
         @include wh(100p, n);
         @include flex(n, n, c);
-        gap: 15px;
 
         .login-info-label,
         .email-binding-label,
@@ -53,7 +52,7 @@
         .change-password {
             @include flex(n, n, c);
             gap: 15px;
-            padding: 20px;
+            padding: 15px 20px;
             @include b-r($b-r);
 
 
@@ -85,6 +84,7 @@
 
         .info-label {
             font-weight: 550;
+            margin: 5px 0;
 
             @include c-t {
                 color: color(c-g7);
@@ -110,12 +110,11 @@
             }
         }
 
-        :deep(.ao-input){
-            input{
-                padding: 7px 10px;
-                font-size: 12px;
-            }
-        }
+        // :deep(.ao-input){
+        //     input{
+        //         font-size: 12px;
+        //     }
+        // }
 
         .email-info {
             @include wh;
@@ -124,12 +123,18 @@
                 @include flex;
 
                 .change-binding {
+                    @include flex(c,c);
                     @include c-t {
                         color: color(c-s);
                     }
                 }
 
             }
+
+            .email {
+                @include flex(c, c);
+            }
+
 
             .binding {
                 @include wh;
@@ -138,22 +143,23 @@
 
                 .binding-form {
                     @include flex(n, n, c);
-                    gap: 10px;
+                    gap: 5px;
                     max-width: 45%;
 
                     .vcode-input-wrapper {
-                        @include flex(c, n);
+                        @include flex(n, n);
                         gap: 20px;
 
                         .vcode-input {
-                            flex: 1;
+                            flex: 2;
                         }
 
                         .vcode-btn {
                             @include flex(c, c);
+                            flex: 1;
 
                             button {
-                                padding: 6px 15px;
+                                padding: 10px 15px;
                                 font-size: 12px;
                                 @include b-r($b-r);
 
@@ -169,29 +175,31 @@
                     .submit-binding {
                         @include flex;
                         gap: 10px;
+                        margin-top: 5px;
 
                         .cancel-binding {
                             @include c-t {
-                                color: color(c-g9,0.5);
+                                color: color(c-g9, 0.5);
                             }
                         }
 
-                        .confirm-binding{
+                        .confirm-binding {
 
-                            @include c-t{
+                            @include c-t {
                                 background-color: color(c-s, 0.7);
                             }
                         }
+
                         button {
 
-                            padding: 5px 0;
+                            padding: 10px 0;
                             @include wh(100p, n);
 
                             font-size: 12px;
                             @include b-r($b-r);
 
                             @include c-t {
-                                color: color(c-g0); 
+                                color: color(c-g0);
                                 border: 1px solid color(c-s);
                             }
                         }
@@ -222,10 +230,10 @@
             }
 
             .submit-btn {
-                margin-top: 5px;
+                margin-top: 10px;
 
                 button {
-                    padding: 5px 0;
+                    padding: 10px 0;
                     @include wh(100p, n);
                     font-size: 12px;
                     @include b-r($b-r);

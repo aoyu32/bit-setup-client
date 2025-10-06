@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
 import { userInfoApi } from "../apis/apis";
 import { message } from "@/utils/message";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 export const useUserInfoStore = defineStore('user-info', () => {
+    // 移除 uid 的单独定义，避免重复
     const userData = ref({
         uid: "",
         email: "",
@@ -13,10 +14,8 @@ export const useUserInfoStore = defineStore('user-info', () => {
         avatar: "",
         gender: 0,
         registerTime: "",
-        accessIp: "",
-        lastLoginTime: "",
         bio: "",
-        occupation: "",
+        career: "",
         level: 0,
         levelTitle: "",
         isDeveloper: 0,
@@ -33,12 +32,11 @@ export const useUserInfoStore = defineStore('user-info', () => {
         fansCount: 0
     });
 
-
-    const uid = ref(userData.value.uid)
+    // 使用 computed 来获取 uid
+    const uid = computed(() => userData.value.uid);
 
     /**
-     * 安全赋值函数 - 只更新后端返回的字段，保持其他字段不变
-     * @param {Object} sourceData 后端返回的数据
+     * 安全赋值函数
      */
     const assignUserData = (sourceData) => {
         if (!sourceData || typeof sourceData !== 'object') {
@@ -46,19 +44,17 @@ export const useUserInfoStore = defineStore('user-info', () => {
             return;
         }
 
-        // 创建目标对象的键列表
-        const targetKeys = Object.keys(userData.value);
-
-        // 只更新后端返回的且存在于userData中的字段
+        // 使用 Object.assign 确保响应式更新
         Object.keys(sourceData).forEach(key => {
-            if (targetKeys.includes(key) && sourceData[key] !== undefined) {
+            if (key in userData.value && sourceData[key] !== undefined) {
                 userData.value[key] = sourceData[key];
+                console.log(key, userData.value[key]);
+
             }
         });
 
         console.log('用户信息已更新:', userData.value);
     };
-
 
     const fetchBaseInfo = async () => {
         try {
@@ -71,47 +67,59 @@ export const useUserInfoStore = defineStore('user-info', () => {
         }
     };
 
-    /**
-     * 重置用户信息到默认值
-     */
     const resetUserData = () => {
-        userData.value = {
-            uid: "",
-            email: "",
-            phone: "",
-            role: "",
-            nickname: "",
-            avatar: "",
-            gender: 0,
-            lastLoginTime: "",
-            accessIp: "",
-            registerTime: "",
-            bio: "",
-            occupation: "",
-            level: 0,
-            levelTitle: "",
-            isDeveloper: 0,
-            experience: 0,
-            province: "",
-            city: "",
-            county: "",
-            points: 0,
-            postCount: 0,
-            viewCount: 0,
-            likeCount: 0,
-            commentCount: 0,
-            followCount: 0,
-            fansCount: 0
-        };
+        // 保持响应式，逐个重置字段
+        Object.keys(userData.value).forEach(key => {
+
+            if (typeof userData.value[key] === 'number') {
+                userData.value[key] = 0;
+            } else {
+                userData.value[key] = "";
+            }
+        });
     };
+
+    const fetchUploadAvatar = async (file) => {
+        try {
+            const resp = await userInfoApi.uploadAvatar(file, uid.value)
+            console.log("返回头像url", resp.data);
+            message.success("上传成功")
+            return resp.data
+
+        } catch (error) {
+            message.error(error.message)
+        }
+    }
+
+    const fetchUpdateUser = async (userInfo) => {
+        try {
+            const data = {
+                ...userInfo,
+                uid: uid.value
+            }
+            await userInfoApi.updateUserInfo(data)
+            message.success("信息修改成功")
+            fetchBaseInfo()
+        } catch (error) {
+            message.error("信息修改失败：" + error.message)
+        }
+    }
 
     return {
         userData,
         uid,
         assignUserData,
         fetchBaseInfo,
-        resetUserData
+        resetUserData,
+        fetchUploadAvatar,
+        fetchUpdateUser
     };
-}
-
+},
+    {
+        persist: {
+            enabled: true,
+            strategy: localStorage,
+            pick: ['userData.uid']
+        }
+    }
 );

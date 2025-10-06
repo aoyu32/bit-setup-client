@@ -72,6 +72,26 @@ export const searchApi = {
                 pageSize
             }
         })
+    },
+
+    getSearchHistory() {
+        return service.get('/search/history', {
+            withToken: true
+        })
+    },
+    deleteHistoryItem(sid) {
+        return service.post('/search/delete', {
+            sid: sid
+        }, {
+            withToken: true
+        })
+    },
+    saveSearchHistory(keyword) {
+        return service.post('/search/save/history', {
+            keyword
+        }, {
+            withToken: true
+        })
     }
 }
 
@@ -108,6 +128,32 @@ export const userAuthApi = {
     },
     login(param) {
         return service.post('/auth/login', param)
+    },
+    loginRecord(param) {
+        return service.get(`/auth/login/info`, {
+            params: {
+                uid: param
+            },
+            withToken: true
+        })
+    },
+    reset(param) {
+        return service.post('/auth/reset', param)
+    },
+    updateEmail(param) {
+        return service.post('/auth/email/update', param, {
+            withToken: true
+        })
+    },
+    updatePassword(param) {
+        return service.post('/auth/pwd/update', param, {
+            withToken: true
+        })
+    },
+    deleteAccount(param) {
+        return service.post('/auth/account/delete', param, {
+            withToken: true
+        })
     }
 
 }
@@ -115,6 +161,22 @@ export const userAuthApi = {
 export const userInfoApi = {
     getBaseInfo() {
         return service.get(`/user/base`, {
+            withToken: true
+        })
+    },
+    updateUserInfo(param) {
+        return service.post("/user/update", param, {
+            withToken: true
+        })
+    },
+    uploadAvatar(file, uid) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('uid', uid);
+        return service.post("/user/upload/avatar", formData, {
+            headers: {
+                'Content-Type': 'multipart-format-data'
+            },
             withToken: true
         })
     }
@@ -162,7 +224,7 @@ export const communityApi = {
 
         return service.post("/post/upload/img", formData, {
             headers: {
-                'Content-Type': 'multipart-format-data'  // 重要：让浏览器自动设置正确的 Content-Type
+                'Content-Type': 'multipart-format-data'
             },
             withToken: true  // 如果需要认证
         })
@@ -182,8 +244,73 @@ export const communityApi = {
     getHotPost() {
         return service.get("/post/hot")
     },
-    getRecommend(){
+    getRecommend() {
         return service.get("/post/recommend")
     }
 
 }
+
+export const submitApi = {
+    /**
+     * 上传截图
+     * @param {File} file 上传的图片文件
+     * @param {String|Number} uid 用户ID
+     */
+    uploadImg(file) {
+        const formData = new FormData();
+        formData.append('file', file);
+        return service.post("/submit/upload/img", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            withToken: true
+        });
+    },
+
+    /**
+     * 提交推荐应用
+     * @param {Object} data 推荐应用提交表单
+     */
+    submitRecommend(data) {
+        return service.post("/submit/recommend", data, {
+            withToken: true
+        });
+    },
+
+    /**
+     * 提交个人开发应用
+     * @param {Object} data 个人开发应用提交表单
+     */
+    submitDevelop(data) {
+        return service.post("/submit/develop", data, {
+            withToken: true
+        });
+    },
+
+    /**
+     * 获取暂存的投稿表单
+     * @param {String} type 投稿类型（recommend 或 dev）
+     */
+    getSubmitDraft(type) {
+        return service.get("/submit/draft", {
+            params: { type },
+            withToken: true
+        });
+    },
+
+    /**
+     * 上传投稿应用文件（应用安装包等）
+     * @param {File} file 上传文件
+     * @param {String|Number} uid 用户ID
+     */
+    uploadFile(file) {
+        const formData = new FormData();
+        formData.append('file', file);
+        return service.post("/submit/file", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            withToken: true
+        });
+    }
+};

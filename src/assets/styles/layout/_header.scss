@@ -271,7 +271,6 @@
 
             // 用户信息
             .user-info {
-                @include wh(n, n);
                 @include flex(n, n, c);
                 border-radius: 20px;
                 overflow: hidden;
@@ -296,10 +295,9 @@
                 }
 
                 .user-info-wrapper {
-                    @include wh(n, n);
-                    @include flex(c, c);
+                    @include flex(c, n);
                     gap: 8px;
-                    padding: 5px 6px;
+                    padding: 5px;
                     cursor: pointer;
                     transition: all 0.3s ease;
                     flex-shrink: 0; // 防止被压缩

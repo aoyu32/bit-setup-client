@@ -134,7 +134,7 @@ onUnmounted(() => {
 .select-header {
   width: 100%;
   height: 100%;
-  padding: 5px 12px;
+  padding: 10px 12px;
   background-color: #fff;
   border: 1px solid #dcdfe6;
   border-radius: 4px;

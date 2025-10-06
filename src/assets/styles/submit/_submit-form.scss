@@ -4,28 +4,36 @@
     @include wh;
     padding: 20px;
     @include flex(n, n, c);
-    gap: 20px;
+
 
     @include c-t {
         background-color: color(c-g);
 
     }
 
-    :deep(.ao-selector) {
-        .select-header {
-            padding: 10px 15px;
-        }
-    }
+    // :deep(.ao-selector) {
+    //     .select-header {
+    //         padding: 10px 15px;
+    //     }
+    // }
 
 
 
-    :deep(.ao-upload) {
-        min-height: 0;
+    // :deep(.ao-upload) {
+    //     min-height: 0;
+    // }
+
+    .icon-file-upload {
+        @include wh;
+        @include flex(t, n);
+        
+        gap: 50px;
+
     }
 
     .form-top {
         @include wh;
-        @include flex(c, n);
+        @include flex(n, n);
         gap: 35px;
         flex-wrap: wrap;
     }
@@ -38,10 +46,19 @@
         margin-top: 10px;
     }
 
+    .app-name,
+    .app-version,
+    .app-size {
+        .form-content {
+            width: 200px;
+        }
+    }
+
     .form-center {
         @include wh;
         @include flex;
         gap: 30px;
+        margin-bottom: 20px;
 
         .app-official,
         .app-download {
@@ -53,6 +70,7 @@
         @include wh;
         @include flex(n, n, c);
         gap: 20px;
+        margin-bottom: 20px;
 
         .bio-file {
             @include flex;
@@ -63,12 +81,6 @@
         .app-bio {
             @include flex(n, n, c);
             flex: 1;
-
-            .form-content {
-                height: 79px;
-
-            }
-
         }
 
         .screenshot {
@@ -83,7 +95,7 @@
                 .form-content {
                     @include flex;
                     gap: 10px;
-                    height: 150px;
+                    height: 250px;
                 }
             }
         }

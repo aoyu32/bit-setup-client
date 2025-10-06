@@ -33,18 +33,28 @@ import AuthLogo from '@/components/auth/AuthLogo.vue';
 import RegisterForm from '@/components/auth/RegisterForm.vue';
 import AoLoadding from '../../components/common/AoLoadding.vue';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '../../stores/auth'
+import message from '../../utils/message';
 
+const authStore = useAuthStore()
 const loadding = ref(false)
 const loaddingText = ref("")
 
 const router = useRouter()
-const handleRegister = () => {
-    setTimeout(() => {
-        loadding.value = true
-        loaddingText.value = "登录中"
-        loadding.value = false
-        router.replace('/home')
-    }, 2000)
+const handleRegister = async (regData) => {
+
+    //请求注册
+    const resp = await authStore.fetchRegister(regData)
+    if (resp) {
+        setTimeout(() => {
+            loadding.value = true
+            loaddingText.value = "登录中"
+            loadding.value = false
+            router.replace('/home')
+        }, 2000)
+    }
+
+
 }
 
 </script>

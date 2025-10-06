@@ -22,7 +22,7 @@
             </div>
         </div>
         <component :is="postData.pid ? 'router-link' : 'div'"
-            :to="postData.pid ? { name: 'communityDetail', params: { id: postData.pid, type: 'post' } } : null"
+            :to="postData.pid ? { name: 'communityDetail', params: { id: postData.pid, type: 'article' } } : null"
             class="card-main" target="_blank">
             <div class="card-main">
                 <div class="card-main-left">
