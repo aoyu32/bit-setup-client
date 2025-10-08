@@ -39,7 +39,7 @@
                     <div class="label">
                         <h3>应用评论</h3>
                     </div>
-                    <Comment />
+                    <Comment :commentList="commentStore.appCommentList"/>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, computed, onUnmounted, nextTick, provide } from 'vue'
 import DetailCard from '@/components/detail/DetailCard.vue';
 import AoBanner from '../../components/common/AoBanner.vue';
 import DetailDocs from '../../components/detail/DetailDocs.vue';
@@ -68,7 +68,9 @@ import DetailSidebar from '../../components/detail/DetailSidebar.vue';
 import Jumper from '../../components/detail/Jumper.vue';
 import { useDetailStore } from '@/stores/detail.js'
 import { useRoute } from 'vue-router';
-
+import { useCommentStore } from '../../stores/comment';
+import message from '../../utils/message';
+const commentStore = useCommentStore()
 const route = useRoute()
 const detailStore = useDetailStore()
 const isTopVisiable = ref(true)
@@ -83,6 +85,22 @@ const installSection = ref(null)
 const versionSection = ref(null)
 const commentSection = ref(null)
 
+
+const handleCommentSubmit = async (replyData) => {
+    console.log("发送的评论数据：", replyData);
+    const reqData = {
+        ...replyData,
+        targetId: appId.value,
+    }
+    const success = await commentStore.fetchAddComment('app',reqData)
+    if (success) {
+        return true
+    }else{
+        return false
+    }
+}
+
+provide('onSubmit', handleCommentSubmit)
 const jumperItems = ref([
     {
         icon: 'icon-renwu',
@@ -182,11 +200,17 @@ const appInfo = computed(() => {
     }
 })
 
-onMounted(() => {
+const appId = computed(() => {
+    return detailStore.detailData.appId
+})
+
+onMounted(async () => {
     //请求详情数据
-    detailStore.fetchAppDetail(route.params.id);
-    detailStore.fetchRelated(route.params.id)
-    detailStore.fetchGuessLike()
+    await detailStore.fetchAppDetail(route.params.id);
+    await detailStore.fetchRelated(route.params.id)
+    await detailStore.fetchGuessLike()
+    await commentStore.fetchCommentList("app",route.params.id)
+
 
     const observer = new IntersectionObserver(
         (entries) => {
@@ -206,6 +230,7 @@ onMounted(() => {
     observer.observe(topJumperRef.value);
     observer.observe(bottomJumperRef.value);
 });
+
 </script>
 
 <style lang="scss" scoped>

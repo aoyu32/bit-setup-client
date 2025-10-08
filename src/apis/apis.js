@@ -314,3 +314,63 @@ export const submitApi = {
         });
     }
 };
+
+
+export const commentApi = {
+    /**
+     * 上传截图
+     * @param {File} file 上传的图片文件
+     * @param {String|Number} uid 用户ID
+     */
+    uploadImg(type, file) {
+        const formData = new FormData();
+        formData.append('file', file);
+        if (type === 'app') {
+            return service.post("/comment/app/upload/img", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                withToken: true
+            });
+        } else if (type === 'community') {
+            return service.post("/comment/community/upload/img", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                withToken: true
+            });
+        }
+
+    },
+    addComment(type, data) {
+        if (type === 'app') {
+            return service.post("/comment/app/add", data, {
+                withToken: true
+            });
+        } else if (type === 'community') {
+            return service.post("/comment/community/add", data, {
+                withToken: true
+            });
+        }
+
+    },
+    getComment(type, uid, id) {
+        if (type === 'app') {
+
+            return service.get("/comment/app/list", {
+                params: {
+                    uid: uid,
+                    aid: id
+                }
+            })
+        } else if (type === 'community') {
+            return service.get("/comment/community/list", {
+                params: {
+                    uid: uid,
+                    postId: id
+                }
+            })
+        }
+    }
+
+}

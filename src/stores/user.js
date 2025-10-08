@@ -48,8 +48,6 @@ export const useUserInfoStore = defineStore('user-info', () => {
         Object.keys(sourceData).forEach(key => {
             if (key in userData.value && sourceData[key] !== undefined) {
                 userData.value[key] = sourceData[key];
-                console.log(key, userData.value[key]);
-
             }
         });
 

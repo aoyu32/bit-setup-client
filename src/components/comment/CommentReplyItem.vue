@@ -2,18 +2,18 @@
     <div class="comment-reply-item">
         <div class="reply-item-top">
             <div class="user-avatar">
-                <img src="https://api.dicebear.com/9.x/adventurer-neutral/svg?seed=TechExplorer" alt="">
+                <img :src="replyData.user.avatar" alt="">
             </div>
             <div class="user-info">
                 <div class="name">
-                    <span>科技探索者</span>
+                    <span>{{ replyData.user.nickname }}</span>
                 </div>
                 <div class="level">
-                    <span>无敌新手</span>
-                    <span>Lv0</span>
-                    <span>VIP</span>
+                    <span>{{ replyData.user.levelTitle }}</span>
+                    <span>L{{ replyData.user.level }}</span>
+                    <span v-if="replyData.user.role === 'vip'">VIP</span>
                 </div>
-                <div class="author-label">
+                <div class="author-label" v-if="false">
                     <span>作者</span>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                     <span>回复</span>
                 </div>
                 <div class="reply-user">
-                    <a>@{{ replyTo }}</a>
+                    <a>@{{ replyData.replyToNickname }}</a>
                 </div>
             </div>
         </div>
@@ -32,12 +32,11 @@
                     <div class="content">
                         <div class="content-wrapper" v-if="!isEdit">
                             <div class="content-text">
-                                <p v-if="!isEdit">嘿嘿，给我点个赞呗😀</p>
+                                <p v-if="!isEdit">{{ replyData.content }}</p>
                             </div>
                             <div class="content-img">
-                                <div class="img-item">
-                                    <img
-                                        src="https://pic.code-nav.cn/post_cover/1759828016537657346/thumbnail/WIRSHD3Dh1h89WJk.png">
+                                <div class="img-item" v-for="img in replyData.images">
+                                    <img :src="img">
                                 </div>
                             </div>
                         </div>
@@ -48,13 +47,13 @@
                     <div class="comment-actions">
                         <div class="action-left">
                             <div class="action-item date">
-                                <span>2025-09-01 09:54</span>
+                                <span>{{ replyData.createTime }}</span>
                             </div>
                             <div class="action-item like">
                                 <span><i class="iconfont icon-dianzan"></i></span>
-                                <span>1000</span>
+                                <span>{{ replyData.likeCount }}</span>
                             </div>
-                            <div class="action-item reply-button" @click="isReplying = !isReplying">
+                            <div class="action-item reply-button" @click="handleReplyClick">
                                 <span><i class="iconfont icon-pinglun"></i></span>
                                 <span>{{ isReplying ? '取消回复' : '回复' }}</span>
                             </div>
@@ -83,21 +82,91 @@
                     </div>
                 </div>
                 <div class="reply-input" v-if="isReplying">
-                    <CommentInput :isShowAvatar="false" />
+                    <CommentInput :isShowAvatar="false" @submit="handleSubmit" v-model="commentReplyForm.content" ref="commentInputRef"/>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
 <script setup>
-import { ref } from 'vue'
+import { ref, inject, computed } from 'vue'
 import CommentInput from './CommentInput.vue'
+import message from '../../utils/message'
+
 const isEdit = ref(false)
 const isMyComment = ref(false)
-const isReplying = ref(false)
-const replyTo = ref('aoyu')
+const onSubmit = inject('onSubmit')
+const commentInputRef = ref(null)
+
+// ===== 获取全局回复状态 =====
+const activeReplyId = inject('activeReplyId')
+const setActiveReply = inject('setActiveReply')
+const clearActiveReply = inject('clearActiveReply')
+
+const props = defineProps({
+    replyData: {
+        type: Object,
+        default: () => { }
+    },
+    rootId: {
+        type: String,
+        default: ''
+    }
+})
+
+// ===== 使用计算属性判断当前回复是否显示输入框 =====
+// 使用 `reply-${cid}` 格式区分评论和回复
+const isReplying = computed(() => activeReplyId.value === `reply-${props.replyData.cid}`)
+
+const commentReplyForm = ref({
+    content: '',
+    imageUrls: [],
+    parentId: props.replyData.cid,
+    replyUid: props.replyData.user.uid,
+    rootId: props.rootId
+})
+
+// ===== 处理回复按钮点击 =====
+const handleReplyClick = () => {
+    if (isReplying.value) {
+        clearActiveReply()
+    } else {
+        setActiveReply(`reply-${props.replyData.cid}`)
+    }
+}
+
+const handleSubmit = async (data) => {
+    // 验证评论内容
+    const isContentEmpty = !commentReplyForm.value.content.trim()
+    const isImagesEmpty = data.images.length === 0
+    
+    if (isContentEmpty && isImagesEmpty) {
+        message.warn("评论内容不能为空呀！")
+        return
+    }
+    commentReplyForm.value.imageUrls = data.images
+    const resp = await onSubmit(commentReplyForm.value)
+    if (resp) {
+        clearForm()
+    }
+}
+
+const clearForm = () => {
+    commentReplyForm.value = {
+        content: '',
+        imageUrls: [],
+        parentId: null,
+        replyUid: null,
+        rootId: null
+    }
+    clearActiveReply()
+       commentInputRef.value.clearImage()
+}
 </script>
+
 <style lang="scss" scoped>
+/* 保持原有样式不变 */
 .comment-reply-item {
     width: 100%;
     height: 100%;
@@ -120,7 +189,6 @@ const replyTo = ref('aoyu')
                 height: 100%;
                 object-fit: cover;
             }
-
         }
 
         .user-info {
@@ -171,7 +239,6 @@ const replyTo = ref('aoyu')
                         background: #f6ffed;
                         color: #52c41a;
                     }
-
                 }
             }
 
@@ -187,7 +254,6 @@ const replyTo = ref('aoyu')
                         color: red;
                         background-color: color(c-g4, 0.5);
                     }
-
                 }
             }
         }
@@ -208,7 +274,6 @@ const replyTo = ref('aoyu')
                     color: lighten(info, 10%);
                 }
             }
-
         }
     }
 
@@ -222,7 +287,6 @@ const replyTo = ref('aoyu')
         border-radius: 8px;
 
         textarea {
-            // 基础样式
             width: 100%;
             height: 100%;
             padding: 15px;
@@ -233,26 +297,20 @@ const replyTo = ref('aoyu')
             border-radius: 8px;
             background-color: #fff;
             border: 1px solid #e0e0e0;
-
             outline: none;
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             resize: none;
-
-
             letter-spacing: 0.2px;
 
-            // 占位符样式
             &::placeholder {
                 color: #999;
                 opacity: 1;
             }
 
-            /* 聚焦状态 */
             &:focus {
                 border-color: #4d90fe;
             }
-
         }
     }
 
@@ -272,9 +330,7 @@ const replyTo = ref('aoyu')
 
             .content-text {
                 @include wh;
-
             }
-
 
             .content-img {
                 @include wh(100p, n);
@@ -290,7 +346,6 @@ const replyTo = ref('aoyu')
                         object-fit: cover;
                     }
                 }
-
             }
         }
     }
@@ -321,7 +376,6 @@ const replyTo = ref('aoyu')
             }
 
             .like {
-
                 &:hover {
                     @include c-t {
                         color: color(c-s-light);
@@ -418,7 +472,6 @@ const replyTo = ref('aoyu')
                             background-color: color(c-g2);
                         }
                     }
-
                 }
             }
 
@@ -427,7 +480,6 @@ const replyTo = ref('aoyu')
                 opacity: 1;
                 visibility: visible;
                 transform: translateY(0);
-
             }
         }
     }
@@ -436,7 +488,7 @@ const replyTo = ref('aoyu')
         .comment-actions {
             .action-right {
                 .more {
-                    opacity: 1; // 鼠标悬停时显示
+                    opacity: 1;
                 }
             }
         }

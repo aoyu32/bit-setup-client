@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="comment-container">
-                    <Comment />
+                    <Comment :commentList="commentStore.communityCommentList" />
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch, provide } from 'vue'
 import { useRoute } from 'vue-router';
 import PostContent from '@/components/community/detail/PostContent.vue';
 import Comment from '@/components/comment/Comment.vue';
@@ -58,12 +58,30 @@ import ArticleContent from '@/components/community/detail/ArticleContent.vue';
 import AuthorCard from '@/components/community/detail/AuthorCard.vue';
 import { useCommunityStore } from '../../stores/community';
 import { useRouter } from 'vue-router';
+import { useCommentStore } from '../../stores/comment';
+import message from '../../utils/message';
+const commentStore = useCommentStore()
 const router = useRouter()
 const communityStore = useCommunityStore()
 const route = useRoute()
 const type = ref(route.params.type)
 
+const handleCommentSubmit = async (replyData) => {
+    console.log("发送的评论数据：", replyData);
+    const reqData = {
+        ...replyData,
+        targetId: route.params.id,
 
+    }
+    const success = await commentStore.fetchAddComment('community', reqData)
+    if (success) {
+        return true
+    } else {
+        return false
+    }
+}
+
+provide('onSubmit', handleCommentSubmit)
 // 安全的计算属性
 const hasAuthorData = computed(() => {
     return communityStore.postDetail &&
@@ -114,9 +132,10 @@ const authorData = computed(() => {
 })
 
 // 监听路由变化，加载数据
-onMounted(() => {
+onMounted(async () => {
     loadPostDetail()
     communityStore.fetchRecommendPost()
+    await commentStore.fetchCommentList("community", route.params.id)
 })
 
 watch(() => route.params.id, (newId) => {

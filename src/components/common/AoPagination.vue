@@ -158,7 +158,7 @@ watch(() => props.currentPageNum, (newValue) => {
 
       @include c-t {
         color: color(c-g);
-        background-color: color(c-s-lighter);
+        background-color: color(c-g9,0.2);
       }
 
       &:hover {

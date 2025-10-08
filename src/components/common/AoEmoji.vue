@@ -1,11 +1,14 @@
 <template>
     <div class="ao-emoji">
-        <div class="emoji-item" v-for="(item, index) in emojiList" :key="index" @click="handleClickEmoji">{{ item }}
+        <div class="emoji-item" v-for="(item, index) in emojiList" :key="index" @click="handleClickEmoji(item)">
+            {{ item }}
         </div>
     </div>
 </template>
+
 <script setup>
 import { ref } from 'vue'
+
 const emojiList = ref([
     // 笑脸和人物
     "😀", "😃", "😄", "😁", "😆",
@@ -52,8 +55,8 @@ const emojiList = ref([
 
 const emit = defineEmits(['input-emoji'])
 
-const handleClickEmoji = (index) => {
-    emit('input-emoji', emojiList.value[index])
+const handleClickEmoji = (emoji) => {
+    emit('input-emoji', emoji)
 }
 </script>
 
